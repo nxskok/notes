@@ -44,6 +44,14 @@ options(width=60)
 ```{r, child="inference_R.Rmd"}
 ```
 
+xxx from here
+
+# Writing reports
+
+```{r, child="reports_R.Rmd"}
+```
+
+
 
 # the end of the notes
 

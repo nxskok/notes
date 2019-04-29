@@ -60,7 +60,7 @@ attendance in all possible games based on this evidence?
   - Confidence interval
   - Hypothesis test.
   
-## Getting CI for mean attendance xxx
+## Getting CI for mean attendance 
 - `t.test` function does CI and test. Look at CI first:
 
 ```{r}
@@ -137,17 +137,14 @@ typically 0.05.
 (which would be a mistake).
 - Worry about type II errors later (when we consider power of test).
 
-## Why 0.05? This man.
+## Why 0.05? This man. 
 
-  \begin{multicols}{2}
-  
-  \begin{center}
-  \includegraphics[width=4in]{fisher}
-  \end{center}
-  
-  \vspace{0.5in}
-  
-  Responsible for:
+\begin{columns}
+  \begin{column}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{fisher}
+  \end{column}
+  \begin{column}{0.7\textwidth}
+    Responsible for:
   
   \begin{itemize}
   \item analysis of variance
@@ -157,9 +154,13 @@ typically 0.05.
   \item Fisher-Yates shuffle
   \item Behrens-Fisher problem
   \end{itemize}
+  
+   Sir Ronald A. Fisher, 1890--1962.
 
-  Sir Ronald A.\ Fisher, 1890--1962.
-  \end{multicols}
+  \end{column}
+\end{columns}
+
+
 
 ## Why 0.05? (2)
 - From The Arrangement of Field Experiments (1926): 
@@ -984,10 +985,11 @@ ci_median(irs,Time,conf.level=0.90)
 
 ## Matched pairs
 
-Some data: xxx
+Some data: 
 
-
-![](Screenshot_2019-04-26_13-41-29.png){height=200px}
+\centering{
+  \includegraphics[height=0.7\textheight]{Screenshot_2019-04-26_13-41-29}
+}
 
 
 ## Matched pairs data
@@ -1192,7 +1194,7 @@ sign_test(mydiff,0)
 
 
 
-## Comments xxx
+## Comments 
 
 - P-value 0.1460. No evidence that the drugs are different.
 - Since we are working in a pipeline, input data frame to `sign_test` is
@@ -1205,7 +1207,7 @@ sign_test(mydiff,0)
 kids %>% sample_n(12)
 ```
 
-## Where we are at xxx
+## Where we are at 
 
 - 21 kids in “treatment”, new reading method; 23 in “control”,
 standard reading method.
@@ -1468,7 +1470,7 @@ These are different too.
 instead of 1.
 - Thus $\alpha$ for this combined test is not 0.05.
 
-## John W. Tukey xxx
+## John W. Tukey 
 
   \begin{columns}
     \begin{column}{0.4\textwidth}
@@ -1574,14 +1576,19 @@ tab
 ```
 
 
-## Mood’s median test 2/4 xxx
+## Mood’s median test 2/4 
+
+```{r}
+tab
+```
+
 
 - All Highjump obs above overall median.
 - Most Control obs below overall
 median.
 - Suggests medians differ by group.
 
-## Mood’s median test 3/4 xxx
+## Mood’s median test 3/4 
 - Test whether association between group and being above/below
 overall median significant using chi-squared test for association:
 
@@ -1593,7 +1600,7 @@ chisq.test(tab,correct=F)
 depends on group.
 - That is, groups do not all have same median.
 
-## Mood’s median test 4/4 xxx
+## Mood’s median test 4/4 
 Or with `median_test` from `smmr`, same as before. 
 
 ```{r}
@@ -1603,8 +1610,8 @@ median_test(rats,density,group)
 
 
 ## Comments
-- No doubt that medians differ between groups (not all same). xxx
-- This test is equivalent of F -test, not of Tukey.
+- No doubt that medians differ between groups (not all same). 
+- This test is equivalent of $F$-test, not of Tukey. 
 - To determine which groups differ from which, can compare all possible
 pairs of groups via (2-sample) Mood’s median tests, then adjust
 P-values by multiplying by number of 2-sample Mood tests done (Bonferroni):
@@ -1613,7 +1620,7 @@ P-values by multiplying by number of 2-sample Mood tests done (Bonferroni):
 pairwise_median_test(rats,density,group)
 ```
 
-- Now, lowjump-highjump difference no longer significant.
+- Now, lowjump-highjump difference no longer significant. 
 
 ## Welch ANOVA
 - For these data, Mood’s median test probably best because we doubt
@@ -1633,12 +1640,10 @@ oneway.test(density~group,data=rats)
 - Lives in package `PMCMRplus` (also `userfriendlyscience`). Install
 first.
 
-xxx (no conclusion)
-
 ```{r games-howell, warning=F}
 library(PMCMRplus)
 gamesHowellTest(density~factor(group),data=rats)
 ```
 
-end of inference xxx
+
 

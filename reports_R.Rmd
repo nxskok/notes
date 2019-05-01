@@ -59,11 +59,10 @@ everything you need to refer to it.
 
 ## Abstract
 Journal articles typically begin with Abstract that summarizes question
-and gives highlights of results and conclusion:
+and gives highlights of results and conclusion, and tells you whether paper is worth your while to read. 
 
 \includegraphics[width=0.7\textwidth]{abstract}  
 
-Abstract tells you whether paper is worth reading.
 
 ## Introduction
 
@@ -76,10 +75,7 @@ brackets are references to what other people have said.
 
 \includegraphics[width=0.75\textwidth]{matmeth} 
 
-xxx
-
-The subjects. Experiments on humans require “ethical approval” and
-certain procedures need to be followed.
+The subjects. Experiments on humans require “ethical approval”. 
 
 ## Taking measurements
 
@@ -104,7 +100,7 @@ Results also shown in table.
 Graph showing that bone mass density has changed greatly as a result of
 the jumping. (Graphs are always good.)
 
-## Conclusions (selected) 1/2 xxx chat at bottom
+## Conclusions (selected) 1/2 
 
  \includegraphics[width=0.9\textwidth]{conc1}  
  
@@ -163,14 +159,15 @@ and re-knit.
 - Presentations of various flavours (makes suitable HTML/PDF out of the R
 Markdown).
 
-## Writing your own report (xxx write)  
+## Writing your own report
 
 - A complete report of an analysis has (at least) three parts:
-  - Introduction, where you talk about the context of your data, where it came from, and what you are hoping to learn
-  - Analysis, where you describe the steps you took to get the data into shape for your analysis, and what analysis you did *and why*.
-  - Conclusions, where you summarize what you learned about your data, and the implications for the world outside your data set.
+  - **Introduction**, where you talk about the context of your data, where it came from, and what you are hoping to learn
+    - you might also have a Literature Review where you talk about work that other people have done
+  - **Analysis**, where you describe the steps you took to get the data into shape for your analysis, what analysis you did *and why*, and your assessment of the assumptions for your analysis.
+  - **Conclusions**, where you summarize what you learned about your data, and the implications for the world outside your data set.
+    - if you have a Literature Review, you probably also want to discuss how your results are consistent (or inconsistent) with the literature.
   
 - Only a small part of this is actually doing Statistics. More of it is explanation, using your language skills. Much of the rest is typically getting the data into shape to do your chosen analysis.  
 
-xxx end of chapter
 

@@ -1,0 +1,12 @@
+\beamer@sectionintoc {1}{Course outline}{2}{0}{1}
+\beamer@sectionintoc {2}{Running R}{3}{0}{2}
+\beamer@sectionintoc {3}{Reading in data}{28}{0}{3}
+\beamer@sectionintoc {4}{Making graphs}{53}{0}{4}
+\beamer@sectionintoc {5}{Numerical summaries: more detailed}{69}{0}{5}
+\beamer@sectionintoc {6}{Statistical Inference}{78}{0}{6}
+\beamer@sectionintoc {7}{Writing reports}{231}{0}{7}
+\beamer@sectionintoc {8}{Tidying and organizing data}{249}{0}{8}
+\beamer@sectionintoc {9}{the end of the notes}{281}{0}{9}
+\beamer@sectionintoc {10}{template}{282}{0}{10}
+\beamer@sectionintoc {11}{The beginning}{283}{0}{11}
+\beamer@sectionintoc {12}{the end}{288}{0}{12}

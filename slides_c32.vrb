@@ -1,0 +1,11 @@
+\frametitle{Slide with Plot}
+\protect\hypertarget{slide-with-plot}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(pressure)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{slides_c32_files/figure-beamer/pressure-1.pdf}
+

@@ -58,6 +58,12 @@ options(width=55)
 
 xxx from here later 
 
+# Case study 1: the windmill data
+
+```{r, child="windmill.Rmd"}
+```
+
+
 # the end of the notes
 
 # template

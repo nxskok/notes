@@ -35,8 +35,8 @@ saying which feed that weight goes with.
 ## Reading in the pig data
 
 ```{r, message=F}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt"
-pigs1=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt"
+pigs1 <- read_delim(my_url, " ")
 pigs1
 ```
 
@@ -44,7 +44,7 @@ pigs1
 - This is a very common reorganization, and the magic “verb” is
 `gather`:
 ```{r}
-pigs1 %>% gather(feed,weight,feed1:feed4) -> pigs2
+pigs1 %>% gather(feed, weight, feed1:feed4) -> pigs2
 ```
 
 - `pigs2` is now in “long” format, ready for analysis. See next page.
@@ -61,7 +61,7 @@ pigs2
 ## ...and finally, the analysis
 - which is just what we saw before:
 ```{r}
-weight.1=aov(weight~feed,data=pigs2)
+weight.1 <- aov(weight ~ feed, data = pigs2)
 summary(weight.1)
 ```
 
@@ -83,7 +83,8 @@ To find the best and worst, get mean weight by
 feed group. I borrowed an idea from later to put the means in descending order:
 
 ```{r}
-pigs2 %>% group_by(feed) %>%
+pigs2 %>%
+  group_by(feed) %>%
   summarize(mean_weight = mean(weight)) %>%
   arrange(desc(mean_weight))
 ```
@@ -93,7 +94,7 @@ Feed 3 is best, feed 1 worst.
 ## Should we have any concerns about the ANOVA?  
 
 ```{r, fig.height=4.1}
-ggplot(pigs2,aes(x=feed,y=weight))+geom_boxplot()
+ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
 Feed 2 has an outlier, but there are only 5 pigs in each group, and the
@@ -106,8 +107,8 @@ various diseases, eg. tuberculosis.
 - Some data:
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/tb.csv"
-tb=read_csv(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/tb.csv"
+tb <- read_csv(my_url)
 ```
 
 - Variables (see over): country (abbreviated), year. Then number of
@@ -162,7 +163,8 @@ tb3
 a time, and when you have each step working, you use that step’s
 output as input to the next step, thus:
 ```{r}
-tb %>% gather(genage, freq, m04:fu, na.rm = T) %>%
+tb %>%
+  gather(genage, freq, m04:fu, na.rm = T) %>%
   separate(genage, c("gender", "age"), 1) -> tb3
 ```
 
@@ -173,7 +175,8 @@ each line is incomplete, so that R knows more is to come.
 ## Total tuberculosis cases by year (some of the years) 
 
 ```{r}
-tb3 %>% group_by(year) %>%
+tb3 %>%
+  group_by(year) %>%
   summarize(cases = sum(freq)) %>%
   filter(between(year, 1991, 1998))
 ```
@@ -183,8 +186,8 @@ tb3 %>% group_by(year) %>%
 ## Some weather data
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/weather.csv"
-weather=read_csv(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/weather.csv"
+weather <- read_csv(my_url)
 ```
 
 ## The data (some)
@@ -224,8 +227,8 @@ two different factors, handled by separate.
 
 ```{r}
 weather %>%
-gather(day,temperature,d1:d31,na.rm=T) %>%
-spread(element,temperature) -> d
+  gather(day, temperature, d1:d31, na.rm = T) %>%
+  spread(element, temperature) -> d
 ```
 
 ## So far
@@ -283,7 +286,7 @@ weather_tidy
 for max and min.
 - ggplot requires something like
 ```{r, eval=F}
-ggplot(...,aes(x=date,y=temperature))
+ggplot(..., aes(x = date, y = temperature)) + geom_point() + geom_line()
 ```
 
 only we have two temperatures, one a max and one a min, that we
@@ -295,7 +298,7 @@ untidy `weather`.) Are making `weather_tidy`
 untidy for purposes of drawing graph only.
 - Then can do something like
 ```{r, eval=F}
-ggplot(...,aes(x=date,y=temperature,colour=maxmin)
+ggplot(d, aes(x = date, y = temperature, colour = maxmin)) + geom_point() + geom_line()
 ```
 
 to distinguish max and min on graph.
@@ -310,10 +313,10 @@ is whatever came out of the previous step.
 - To make those “one column”s: `gather`. I save the graph to show overleaf:
 ```{r}
 weather_tidy %>%
-gather(maxmin,temperature,tmax:tmin) %>%
-mutate(temperature=as.numeric(temperature)) %>%
-ggplot(aes(x=date,y=temperature,colour=maxmin))+
-geom_line() -> g
+  gather(maxmin, temperature, tmax:tmin) %>%
+  mutate(temperature = as.numeric(temperature)) %>%
+  ggplot(aes(x = date, y = temperature, colour = maxmin)) +
+  geom_line() -> g
 ```
 
 ## The plot 
@@ -357,7 +360,7 @@ athletes %>% select(Sport)
 ## Choosing several columns
 
 ```{r}
-athletes %>% select(Sport,Hg,BMI)
+athletes %>% select(Sport, Hg, BMI)
 ```
 
 ## Choosing consecutive columns
@@ -419,8 +422,8 @@ Make up a data frame to illustrate. This `sample` generates 5 random values
 equally likely to be anything 0–9 (without replacement): 
 
 ```{r}
-(d = tibble(
-  y  = sample(0:9, 5),
+(d <- tibble(
+  y = sample(0:9, 5),
   x1 = sample(0:9, 5),
   x2 = sample(0:9, 5),
   x3 = sample(0:9, 5)
@@ -477,7 +480,7 @@ athletes %>% arrange(RCC)
 ## Breaking ties by another variable
 
 ```{r}
-athletes %>% arrange(RCC,BMI)
+athletes %>% arrange(RCC, BMI)
 ```
 
 ## Descending order
@@ -490,14 +493,17 @@ athletes %>% arrange(desc(BMI))
 
 
 ```{r}
-athletes %>% arrange(desc(Wt)) %>% slice(1:7) %>%
+athletes %>%
+  arrange(desc(Wt)) %>%
+  slice(1:7) %>%
   select(Sport, Wt)
 ```
 
 ## Create new variables from old ones
 
 ```{r}
-athletes %>% mutate(wt_lb = Wt * 2.2) %>%
+athletes %>%
+  mutate(wt_lb = Wt * 2.2) %>%
   select(Sport, Wt, wt_lb)
 ```
 
@@ -513,15 +519,19 @@ Or the 20 heaviest weights in descending order:
 
 
 ```{r}
-athletes %>% arrange(desc(Wt)) %>%
-  slice(1:20) %>% pluck("Wt")
+athletes %>%
+  arrange(desc(Wt)) %>%
+  slice(1:20) %>%
+  pluck("Wt")
 ```
 
 ## Another way to do the last one
 
 ```{r}
-athletes %>% arrange(desc(Wt)) %>%
-  slice(1:20) %>% pull("Wt")
+athletes %>%
+  arrange(desc(Wt)) %>%
+  slice(1:20) %>%
+  pull("Wt")
 ```
 
 `pull` grabs the column you name *as a vector* (of whatever it contains).
@@ -536,7 +546,8 @@ athletes %>% group_by(Sex) %>% summarize(m = mean(Ht))
 or
 
 ```{r}
-athletes %>% filter(Sex == "female") %>% 
+athletes %>%
+  filter(Sex == "female") %>%
   summarize(m = mean(Ht))
 ```
 
@@ -573,10 +584,10 @@ Found actual country names to go with those abbreviations, in spreadsheet:
 
 ```{r}
 library(readxl)
-f=tempfile()
-my_url="http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
+f <- tempfile()
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
 download.file(my_url, f)
-country_names = read_excel(f)
+country_names <- read_excel(f)
 ```
 
 ## The country names
@@ -597,7 +608,9 @@ tb3 %>% left_join(country_names, by = c("iso2" = "Code_UC"))
 
 
 ```{r}
-tb3 %>% group_by(iso2) %>% summarize(cases = sum(freq)) %>%
+tb3 %>%
+  group_by(iso2) %>%
+  summarize(cases = sum(freq)) %>%
   left_join(country_names, by = c("iso2" = "Code_UC")) %>%
   select(Country, cases)
 ```
@@ -605,9 +618,11 @@ tb3 %>% group_by(iso2) %>% summarize(cases = sum(freq)) %>%
 ## or even sorted in order
 
 ```{r}
-tb3 %>% group_by(iso2) %>% summarize(cases = sum(freq)) %>%
+tb3 %>%
+  group_by(iso2) %>%
+  summarize(cases = sum(freq)) %>%
   left_join(country_names, by = c("iso2" = "Code_UC")) %>%
-  select(Country, cases) %>% 
+  select(Country, cases) %>%
   arrange(desc(cases))
 ```
 
@@ -618,8 +633,8 @@ tb3 %>% group_by(iso2) %>% summarize(cases = sum(freq)) %>%
   - there is at least one country in `tb3` that was not in `country_names` (the NA above). Which?
   
 ```{r}
-tb3 %>% 
-  anti_join(country_names, by = c("iso2" = "Code_UC")) %>% 
+tb3 %>%
+  anti_join(country_names, by = c("iso2" = "Code_UC")) %>%
   distinct(iso2)
 ```
   

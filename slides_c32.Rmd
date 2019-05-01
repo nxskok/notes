@@ -56,7 +56,7 @@ options(width=55)
 ```{r, child="tidying_R.Rmd"}
 ```
 
-
+xxx from here later
 
 # the end of the notes
 

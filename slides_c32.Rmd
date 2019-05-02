@@ -56,13 +56,12 @@ options(width=55)
 ```{r, child="tidying_R.Rmd"}
 ```
 
-xxx from here later 
-
 # Case study 1: the windmill data
 
 ```{r, child="windmill.Rmd"}
 ```
 
+xxx from here later
 
 # the end of the notes
 

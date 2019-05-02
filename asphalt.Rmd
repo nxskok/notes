@@ -229,3 +229,137 @@ asphalt_2 %>%
 g3
 ```
 
+## Modelling with transformed response
+- These trends look pretty straight, especially with `log.viscosity`.
+- Values of `log.rut.depth` for each `run` have same spread.
+- Other trends weak, but are straight if they exist.
+- Start modelling from the beginning again.
+- Model `log.rut.depth` in terms of everything else, see what can be
+removed:
+```{r}
+rut.2 <- lm(log.rut.depth ~ pct.a.surf + pct.a.base +
+  fines + voids + log.viscosity + run, data = asphalt_2)
+```
+
+- use `tidy` from `broom` to display just the coefficients.
+
+## Output
+```{r}
+tidy(rut.2)
+```
+
+## Taking out everything non-significant
+- Try: remove everything but pct.a.surf and log.viscosity:
+
+```{r}
+rut.3 <- lm(log.rut.depth ~ pct.a.surf + log.viscosity, data = asphalt_2)
+```
+
+
+- Check that removing all those variables wasn’t too much:
+```{r}
+anova(rut.3, rut.2)
+```
+
+- $H_0$ : two models equally good; $H_a$ : bigger model better.
+- Null not rejected here; small model as good as the big one, so prefer
+simpler smaller model `rut.3`.
+
+## Find the largest P-value by eye:
+
+
+```{r}
+tidy(rut.2)
+```
+
+- Largest P-value is 0.78 for `pct.a.base`, not significant.
+- So remove this first, re-fit and re-assess.
+- Or, as over.
+
+## Get the computer to find the largest P-value for you
+
+- Output from `tidy` is itself a data frame, thus:
+
+```{r}
+tidy(rut.2) %>% arrange(p.value)
+```
+
+- Largest P-value at the bottom 
+
+## Take out `pct.a.base`
+
+- Copy and paste the `lm` code and remove what you're removing:
+
+```{r}
+rut.4 <- lm(log.rut.depth ~ pct.a.surf + fines + voids + log.viscosity + run,
+  data = asphalt_2
+)
+tidy(rut.4) %>% arrange(p.value)
+```
+
+- `fines` is next to go, P-value 0.32.
+
+## “Update”
+
+Another way to do the same thing:
+```{r}
+rut.4 <- update(rut.2, . ~ . - pct.a.base)
+tidy(rut.4) %>% arrange(p.value)
+```
+
+- Again, fines is the one to go. (Output identical as it should be.)
+
+## Take out fines:
+
+```{r}
+rut.5 <- update(rut.4, . ~ . - fines)
+tidy(rut.5) %>% arrange(p.value)
+```
+
+Can’t take out intercept, so `run`, with P-value 0.36, goes next.
+
+## Take out run:
+
+
+```{r}
+rut.6 <- update(rut.5, . ~ . - run)
+tidy(rut.6) %>% arrange(p.value)
+```
+
+Again, can’t take out intercept, so largest P-value is for `voids`, 0.044. But
+this is significant, so we shouldn’t remove `voids`.
+
+## Comments
+- Here we stop: `pct.a.surf`, `voids` and `log.viscosity` would all
+make fit significantly worse if removed. So they stay.
+- Different final result from taking things out one at a time (top), than
+by taking out 4 at once (bottom):
+
+```{r}
+coef(rut.6)
+coef(rut.3)
+```
+
+- I like one-at-a-time method better, as general strategy.
+- Point: Can make difference which way we go.
+
+## doing backward elimination using `step`
+
+## Comments on variable selection
+- Best way to decide which $x$’s belong: expert knowledge: which of
+them should be important.
+- Best automatic method: what we did, “backward selection”.
+- Do not learn about “stepwise regression”! ref! xxx
+- R has function `step` that does backward selection, like this:
+```{r, eval=F}
+step(rut.2, direction = "backward")
+```
+
+Gets same answer as we did (by removing least significant x).
+- Removing non-significant $x$’s may remove interesting ones whose
+P-values happened not to reach 0.05. Consider using less stringent
+cutoff like 0.20 or even bigger.
+- Can also fit all possible regressions, as over (may need to do
+`install.packages("leaps")` first.
+
+## 

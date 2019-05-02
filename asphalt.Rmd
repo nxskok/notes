@@ -11,16 +11,16 @@ quality of pavement depend on these?
   - `run` 2 data collection periods: run 1 for run 1, 0 for run 2.
 - `rut.depth` response. Depends on other variables, how?
 
-## Getting set up xxx
+## Getting set up 
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/asphalt.txt"
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/asphalt.txt"
 asphalt <- read_delim(my_url, " ")
 ```
 
 - Quantitative variables with one response: multiple regression.
 - Some issues here that don’t come up in “simple” regression; handle as
-we go. (STAB27/STAC67 ideas.) xxx to here
+we go. (STAB27/STAC67 ideas.)
 
 ## The data (some)
 
@@ -76,7 +76,7 @@ asphalt %>% mutate(log.viscosity = log(viscosity)) -> asphalt_lv
 Now we have to remember to use `asphalt_lv` as our data frame
 from here on, eg.: xxx
 
-```{r logvisplot, fig.keep="none", warning=F}
+```{r logvisplot, fig.keep="none", warning=F, message=F}
 ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
   geom_point() + geom_smooth(se = F)
 ```
@@ -109,8 +109,8 @@ tidy(rut.1)
 ```
 
 ## Comments
-- R-squared 81%, not so bad. xxx
-- F -statistic and P-value assert that something helping to predict
+- R-squared 81%, not so bad. 
+- P-value in `glance` asserts xxx that something helping to predict
 rut.depth.
 - Table of coefficients says `log.viscosity`.
 - But confused by clearly non-significant variables: remove those to get
@@ -124,12 +124,12 @@ clearer picture of what is helpful.
 ## Plot fitted values against residuals
 
 ```{r}
-ggplot(rut.1,aes(x=.fitted,y=.resid))+geom_point()
+ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-## Plotting residuals against x variables
+## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
-observed x-values are in the original data frame asphalt_lv.
+observed $x$-values are in the original data frame `asphalt_lv`. xxx
 - Package broom contains a function `augment` that combines these two
 together so that they can later be plotted: start with a model first, and then augment with a
 data frame:
@@ -145,14 +145,17 @@ rut.1 %>% augment(asphalt_lv) -> rut.1a
 glimpse(rut.1a)
 ```
 
-## Plotting residuals against $x$-variables
+## Plotting residuals against $x$-variables xxx
 
 
 ```{r}
-g=rut.1a %>% gather(xname,x,
-c(pct.a.surf:voids,run,log.viscosity)) %>%
-ggplot(aes(x=x,y=.resid))+
-geom_point()+facet_wrap(~xname,scales="free")
+rut.1a %>%
+  gather(
+    xname, x,
+    c(pct.a.surf:voids, run, log.viscosity)
+  ) %>%
+  ggplot(aes(x = x, y = .resid)) +
+  geom_point() + facet_wrap(~xname, scales = "free") -> g
 ```
 
 ## The plot
@@ -163,11 +166,11 @@ g
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
-transformation of y.
-- The residuals-vs-x’s plots don’t know any serious trends. Worst
+transformation of $y$. xxx
+- The residuals-vs-$x$’s xxx plots don’t show any serious trends. Worst
 probably that potential curve against log-viscosity.
 - Also, large positive residual, 10, that shows up on all plots. Perhaps
-transformation of y will help with this too.
+transformation of $y$ will help with this too.
 - If residual-fitted plot OK, but some residual-$x$ plots not, try
 transforming those $x$’s, eg. by adding $x^2$ to help with curve.
 
@@ -185,8 +188,8 @@ log.
 From package `MASS`:
 
 ```{r}
-boxcox(rut.depth~pct.a.surf+pct.a.base+fines+voids+
-log.viscosity+run,data=asphalt_lv)
+boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
+  log.viscosity + run, data = asphalt_lv)
 ```
 
 ## Comments on Box-Cox plot
@@ -203,7 +206,7 @@ data:
 
 ```{r}
 asphalt_lv %>%
-mutate(log.rut.depth=log(rut.depth)) -> asphalt_2
+  mutate(log.rut.depth = log(rut.depth)) -> asphalt_2
 ```
 
 ## Relationships with explanatories
@@ -211,10 +214,13 @@ mutate(log.rut.depth=log(rut.depth)) -> asphalt_2
 explanatory variables, all in one shot:
 
 ```{r}
-asphalt_2 %>% gather(xname,x,
-c(pct.a.surf:voids,run:log.viscosity)) %>%
-ggplot(aes(y=log.rut.depth,x=x))+geom_point()+
-facet_wrap(~xname,scales="free") -> g3
+asphalt_2 %>%
+  gather(
+    xname, x,
+    c(pct.a.surf:voids, run:log.viscosity)
+  ) %>%
+  ggplot(aes(y = log.rut.depth, x = x)) + geom_point() +
+  facet_wrap(~xname, scales = "free") -> g3
 ```
 
 ## The new plots

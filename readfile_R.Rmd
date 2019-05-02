@@ -61,7 +61,7 @@ file in something, here called mydata. Make a new code chunk for
 this:
 
 ```{r}
-mydata=read_csv("test1.csv")
+mydata <- read_csv("test1.csv")
 ```
 
 ## More on the above
@@ -153,8 +153,8 @@ low, so the min and/or max will be unreasonable.
 long), and then put that variable in the read_ function:
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/global.csv"
-global=read_csv(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/global.csv"
+global <- read_csv(my_url)
 ```
 
 ## The data
@@ -202,7 +202,7 @@ first.
 separating the values:
 
 ```{r}
-coffee=read_delim("coffee.txt"," ")
+coffee <- read_delim("coffee.txt", " ")
 ```
 
 - Name of the cup, text, and tempdiff, a decimal number.
@@ -221,8 +221,8 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 - Save the URL in a variable first:
 
 ```{r}
-url="http://www.utsc.utoronto.ca/~butler/c32/soap.txt"
-soap=read_delim(url," ")
+url <- "http://www.utsc.utoronto.ca/~butler/c32/soap.txt"
+soap <- read_delim(url, " ")
 ```
 
 ## The soap data (some)
@@ -244,7 +244,7 @@ is one fewer space before the 10.
 ## Reading in column-aligned data
 
 ```{r}
-drugs=read_table("migraine.txt")
+drugs <- read_table("migraine.txt")
 ```
 
 ## The data
@@ -273,7 +273,7 @@ cannot read one in from a URL.
 
 ```{r}
 library(readxl)
-mydata2=read_excel("test2.xlsx",sheet="data")
+mydata2 <- read_excel("test2.xlsx", sheet = "data")
 mydata2
 ```
 

@@ -436,8 +436,7 @@ g + geom_rect(
 
 ## The plot
 
-```{r rectangle, echo=F}
-
+```{r, ref.label="rectangle", echo=F}
 ```
 
 ## Comments (1)

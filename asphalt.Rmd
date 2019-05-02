@@ -1,0 +1,225 @@
+## The asphalt data
+- 31 asphalt pavements prepared under different conditions. How does
+quality of pavement depend on these?
+- Variables:
+  - `pct.a.surf` The percentage of asphalt in the surface layer
+  - `pct.a.base` The percentage of asphalt in the base layer
+  - `fines` The percentage of fines in the surface layer
+  - `voids` The percentage of voids in the surface layer
+  - `rut.depth` The change in rut depth per million vehicle passes
+  - `viscosity` The viscosity of the asphalt
+  - `run` 2 data collection periods: run 1 for run 1, 0 for run 2.
+- `rut.depth` response. Depends on other variables, how?
+
+## Getting set up xxx
+
+```{r}
+my_url="http://www.utsc.utoronto.ca/~butler/c32/asphalt.txt"
+asphalt <- read_delim(my_url, " ")
+```
+
+- Quantitative variables with one response: multiple regression.
+- Some issues here that don’t come up in “simple” regression; handle as
+we go. (STAB27/STAC67 ideas.) xxx to here
+
+## The data (some)
+
+```{r}
+asphalt
+```
+
+## Plotting response “rut depth” against everything else
+
+Same idea as for plotting separate predictions on one plot:
+
+
+```{r}
+asphalt %>%
+  gather(
+    xname, x,
+    c(pct.a.surf:voids, viscosity:run)
+  ) %>%
+  ggplot(aes(x = x, y = rut.depth)) + geom_point() +
+  facet_wrap(~xname, scales = "free") -> g
+```
+
+“gather all the x-variables together into one column called x, with another
+column xname saying which x they were, then plot these x’s against
+rut.depth, a separate facet for each x-variable.”
+
+I saved this graph to plot later (on the next page).
+
+## The plot
+
+```{r}
+g
+```
+
+## Interpreting the plots
+- One plot of rut depth against each of the six other variables.
+- Get rough idea of what’s going on.
+- Trends mostly weak.
+- `viscosity` has strong but non-linear trend.
+- `run` has effect but variability bigger when run is 1.
+- Weak but downward trend for `voids`.
+- Non-linearity of `rut.depth`-`viscosity` relationship should concern
+us.
+- Take this back to asphalt engineer: suggests log of `viscosity`.
+
+## Log of `viscosity`: more nearly linear?
+- Create new variable in data frame to hold log of `viscosity`:
+
+```{r}
+asphalt %>% mutate(log.viscosity = log(viscosity)) -> asphalt_lv
+```
+
+Now we have to remember to use `asphalt_lv` as our data frame
+from here on, eg.: xxx
+
+```{r logvisplot, fig.keep="none", warning=F}
+ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
+  geom_point() + geom_smooth(se = F)
+```
+
+(plot overleaf)
+
+## Rut depth against log-viscosity
+
+```{r, ref.label="logvisplot"}
+
+```
+
+## Comments and next steps
+- Not very linear, but better than before.
+- In multiple regression, hard to guess which x’s affect response. So
+typically start by predicting from everything else.
+- Model formula has response on left, squiggle, explanatories on right
+joined by plusses:
+
+```{r}
+rut.1 <- lm(rut.depth ~ pct.a.surf + pct.a.base + fines +
+  voids + log.viscosity + run, data = asphalt_lv)
+```
+
+## Regression output: `summary(rut.1)` or:
+
+```{r, paged.print=F}
+glance(rut.1)
+tidy(rut.1)
+```
+
+## Comments
+- R-squared 81%, not so bad. xxx
+- F -statistic and P-value assert that something helping to predict
+rut.depth.
+- Table of coefficients says `log.viscosity`.
+- But confused by clearly non-significant variables: remove those to get
+clearer picture of what is helpful.
+- Before we do anything, look at residual plots:
+  - (a) of residuals against fitted values (as usual)
+  - (b) of residuals against each explanatory.
+- Problem with (a): fix response variable; problem with some plots in
+(b): fix those explanatory variables.
+
+## Plot fitted values against residuals
+
+```{r}
+ggplot(rut.1,aes(x=.fitted,y=.resid))+geom_point()
+```
+
+## Plotting residuals against x variables
+- Problem here is that residuals are in the fitted model, and the
+observed x-values are in the original data frame asphalt_lv.
+- Package broom contains a function `augment` that combines these two
+together so that they can later be plotted: start with a model first, and then augment with a
+data frame:
+
+```{r}
+rut.1 %>% augment(asphalt_lv) -> rut.1a
+```
+
+
+## What does rut.1a contain?
+
+```{r}
+glimpse(rut.1a)
+```
+
+## Plotting residuals against $x$-variables
+
+
+```{r}
+g=rut.1a %>% gather(xname,x,
+c(pct.a.surf:voids,run,log.viscosity)) %>%
+ggplot(aes(x=x,y=.resid))+
+geom_point()+facet_wrap(~xname,scales="free")
+```
+
+## The plot
+
+```{r}
+g
+```
+
+## Comments
+- There is serious curve in plot of residuals vs. fitted values. Suggests a
+transformation of y.
+- The residuals-vs-x’s plots don’t know any serious trends. Worst
+probably that potential curve against log-viscosity.
+- Also, large positive residual, 10, that shows up on all plots. Perhaps
+transformation of y will help with this too.
+- If residual-fitted plot OK, but some residual-$x$ plots not, try
+transforming those $x$’s, eg. by adding $x^2$ to help with curve.
+
+## Which transformation?
+- Best way: consult with person who brought you the data.
+- Can’t do that here!
+- No idea what transformation would be good.
+- Let data choose: “Box-Cox transformation”.
+- Scale is that of “ladder of powers”: power transformation, but 0 is
+log.
+
+
+## Running Box-Cox
+
+From package `MASS`:
+
+```{r}
+boxcox(rut.depth~pct.a.surf+pct.a.base+fines+voids+
+log.viscosity+run,data=asphalt_lv)
+```
+
+## Comments on Box-Cox plot
+- Best single choice of transformation parameter $\lambda$ is peak of curve,
+close to 0.
+- Vertical dotted lines give CI for $\lambda$, about (−0.05, 0.2).
+- $\lambda = 0$ means “log”.
+- Narrowness of confidence interval mean that these not supported by
+data:
+  - No transformation ($\lambda = 1$)
+  - Square root ($\lambda = 0.5$)
+  - Reciprocal ($\lambda = −1$).
+- So make new data frame with new response variable:
+
+```{r}
+asphalt_lv %>%
+mutate(log.rut.depth=log(rut.depth)) -> asphalt_2
+```
+
+## Relationships with explanatories
+- As before: plot response (now `log.rut.depth`) against other
+explanatory variables, all in one shot:
+
+```{r}
+asphalt_2 %>% gather(xname,x,
+c(pct.a.surf:voids,run:log.viscosity)) %>%
+ggplot(aes(y=log.rut.depth,x=x))+geom_point()+
+facet_wrap(~xname,scales="free") -> g3
+```
+
+## The new plots
+
+```{r}
+g3
+```
+

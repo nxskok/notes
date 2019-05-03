@@ -74,7 +74,7 @@ asphalt %>% mutate(log.viscosity = log(viscosity)) -> asphalt_lv
 ```
 
 Now we have to remember to use `asphalt_lv` as our data frame
-from here on, eg.: xxx
+from here on, eg.: 
 
 ```{r logvisplot, fig.keep="none", warning=F, message=F}
 ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
@@ -110,7 +110,7 @@ tidy(rut.1)
 
 ## Comments
 - R-squared 81%, not so bad. 
-- P-value in `glance` asserts xxx that something helping to predict
+- P-value in `glance` asserts that something helping to predict
 rut.depth.
 - Table of coefficients says `log.viscosity`.
 - But confused by clearly non-significant variables: remove those to get
@@ -129,7 +129,7 @@ ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
-observed $x$-values are in the original data frame `asphalt_lv`. xxx
+observed $x$-values are in the original data frame `asphalt_lv`. 
 - Package broom contains a function `augment` that combines these two
 together so that they can later be plotted: start with a model first, and then augment with a
 data frame:
@@ -145,7 +145,7 @@ rut.1 %>% augment(asphalt_lv) -> rut.1a
 glimpse(rut.1a)
 ```
 
-## Plotting residuals against $x$-variables xxx
+## Plotting residuals against $x$-variables 
 
 
 ```{r}
@@ -166,8 +166,8 @@ g
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
-transformation of $y$. xxx
-- The residuals-vs-$x$’s xxx plots don’t show any serious trends. Worst
+transformation of $y$. 
+- The residuals-vs-$x$’s  plots don’t show any serious trends. Worst
 probably that potential curve against log-viscosity.
 - Also, large positive residual, 10, that shows up on all plots. Perhaps
 transformation of $y$ will help with this too.
@@ -284,7 +284,7 @@ tidy(rut.2)
 tidy(rut.2) %>% arrange(p.value)
 ```
 
-- Largest P-value at the bottom 
+- Largest P-value at the bottom. xxx
 
 ## Take out `pct.a.base`
 
@@ -340,10 +340,7 @@ coef(rut.6)
 coef(rut.3)
 ```
 
-- I like one-at-a-time method better, as general strategy.
 - Point: Can make difference which way we go.
-
-## doing backward elimination using `step`
 
 ## Comments on variable selection
 - Best way to decide which $x$’s belong: expert knowledge: which of
@@ -352,14 +349,116 @@ them should be important.
 - Do not learn about “stepwise regression”! ref! xxx
 - R has function `step` that does backward selection, like this:
 ```{r, eval=F}
-step(rut.2, direction = "backward")
+step(rut.2, direction = "backward", test = "F")
 ```
 
-Gets same answer as we did (by removing least significant x).
+Gets same answer as we did (by removing least significant x). xxx
+
 - Removing non-significant $x$’s may remove interesting ones whose
 P-values happened not to reach 0.05. Consider using less stringent
 cutoff like 0.20 or even bigger.
 - Can also fit all possible regressions, as over (may need to do
 `install.packages("leaps")` first.
 
-## 
+## All possible regressions (output over)
+
+```{r,paged.print=F}
+library(leaps)
+leaps <- regsubsets(log.rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
+  log.viscosity + run, data = asphalt_2, nbest = 2)
+s <- summary(leaps)
+with(s, data.frame(rsq, outmat)) -> d
+```
+
+## The output
+
+```{r}
+d %>% rownames_to_column("model") %>% arrange(desc(rsq))
+```
+
+## Comments
+- Problem: even adding a worthless x increases R-squared. So try for
+line where R-squared stops increasing “too much”, eg. top line (just
+log.viscosity), first 3-variable line (backwards-elimination model).
+Hard to judge.
+- One solution (STAC67): adjusted R-squared, where adding worthless
+variable makes it go down.
+- `data.frame` rather than `tibble` because there are several columns in
+`outmat`. xxx
+
+## All possible regressions, adjusted R-squared
+
+```{r, paged.print=F}
+with(s, data.frame(adjr2, outmat))
+```
+
+## Revisiting the best model
+- Best model was our rut.6:
+
+```{r}
+tidy(rut.6)
+```
+
+## Revisiting (2)
+- Regression slopes say that rut depth increases as log-viscosity
+decreases, `pct.a.surf` increases and `voids` increases. This more or
+less checks out with out scatterplots against `log.viscosity`. xxx
+- We should check residual plots again, though previous scatterplots say
+it’s unlikely that there will be a problem:
+
+```{r}
+g <- ggplot(rut.6, aes(y = .resid, x = .fitted)) + geom_point()
+```
+
+## Residuals against fitted values
+
+
+```{r}
+g
+```
+
+## Plotting residuals against x’s
+- Do our trick again to put them all on one plot:
+
+```{r}
+augment(rut.6, asphalt_2) %>%
+  gather(
+    xname, x,
+    c(pct.a.surf:voids, run:log.viscosity)
+  ) %>%
+  ggplot(aes(y = .resid, x = x)) + geom_point() +
+  facet_wrap(~xname, scales = "free") -> g2
+```
+
+## Residuals against the x’s
+
+```{r}
+g2
+```
+
+## Comments
+- None of the plots show any sort of pattern. The points all look
+random on each plot.
+- On the plot of fitted values (and on the one of log.viscosity), the
+points seem to form a “left half” and a “right half” with a gap in the
+middle. This is not a concern.
+- One of the pct.a.surf values is low outlier (4), shows up top left of
+that plot.
+- Only two possible values of run; the points in each group look
+randomly scattered around 0, with equal spreads.
+- Residuals seem to go above zero further than below, suggesting a
+mild non-normality, but not enough to be a problem.
+
+## Variable-selection strategies
+- Expert knowledge.
+- Backward elimination.
+- All possible regressions.
+- Taking a variety of models to experts and asking their opinion.
+- Use a looser cutoff to eliminate variables in backward elimination (eg.
+only if P-value greater than 0.20).
+- If goal is prediction, eliminating worthless variables less important.
+- If goal is understanding, want to eliminate worthless variables where
+possible.
+- Results of variable selection not always reproducible, so caution
+advised.
+

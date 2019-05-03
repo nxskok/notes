@@ -61,7 +61,6 @@ options(width=55)
 ```{r, child="windmill.Rmd"}
 ```
 
-xxx from here later
 
 # Case study 3: Asphalt
 

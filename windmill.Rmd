@@ -4,7 +4,7 @@
 library(MASS)
 library(tidyverse)
 library(broom)
-library(leaps)
+
 ```
 
 ## The windmill data

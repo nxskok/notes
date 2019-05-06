@@ -18,85 +18,119 @@ knitr::opts_chunk$set(fig.height = 5)
 options(width=55)
 ```
 
-# Course outline
+# Packages xxx
 
-# Running R
-
-```{r child="running_R.Rmd"}
-```
-
-# Reading in data
-
-```{r child="readfile_R.Rmd"}
-```
-
-# Making graphs
-
-```{r, child="graphs_R.Rmd"}
-```
-
-# Numerical summaries: more detailed
-
-```{r, child="numsum_R.Rmd"}
-```
-
-# Statistical Inference
-
-```{r, child="inference_R.Rmd"}
-```
-
-# Writing reports
-
-```{r, child="reports_R.Rmd"}
+```{r, message=F, echo=T}
+library(MASS)
+library(tidyverse)
+library(broom)
+library(readxl)
+library(devtools)
+library(smmr)
+library(PMCMRplus)
+library(leaps)
 ```
 
 
-# Tidying and organizing data
+xxx check from here
 
-```{r, child="tidying_R.Rmd"}
+# Regression with categorical variables
+
+```{r, child="with_categ_R.Rmd"}
 ```
 
-# Case study 1: the windmill data
+# Functions
 
-```{r, child="windmill.Rmd"}
+```{r, child="functions.Rmd"}
 ```
 
-
-# Case study 3: Asphalt
-
-```{r, child="asphalt.Rmd"}
-```
+put these back in order when done
 
 
-# the end of the notes
+<!-- # Course outline -->
 
-# template
+<!-- # Running R -->
 
-# The beginning
+<!-- ```{r child="running_R.Rmd"} -->
+<!-- ``` -->
 
-## R Markdown
+<!-- # Reading in data -->
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+<!-- ```{r child="readfile_R.Rmd"} -->
+<!-- ``` -->
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+<!-- # Making graphs -->
 
-## Slide with Bullets
+<!-- ```{r, child="graphs_R.Rmd"} -->
+<!-- ``` -->
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+<!-- # Numerical summaries: more detailed -->
 
-## Slide with R Output
+<!-- ```{r, child="numsum_R.Rmd"} -->
+<!-- ``` -->
 
-```{r cars, echo = TRUE}
-summary(cars)
-```
+<!-- # Statistical Inference -->
 
-## Slide with Plot
+<!-- ```{r, child="inference_R.Rmd"} -->
+<!-- ``` -->
 
-```{r pressure}
-plot(pressure)
-```
+<!-- # Writing reports -->
+
+<!-- ```{r, child="reports_R.Rmd"} -->
+<!-- ``` -->
 
 
-# the end
+<!-- # Tidying and organizing data -->
+
+<!-- ```{r, child="tidying_R.Rmd"} -->
+<!-- ``` -->
+
+<!-- # Case study 1: the windmill data -->
+
+<!-- ```{r, child="windmill.Rmd"} -->
+<!-- ``` -->
+
+
+<!-- # Case study 3: Asphalt -->
+
+<!-- ```{r, child="asphalt.Rmd"} -->
+<!-- ``` -->
+
+
+
+<!-- # Dates and times (coming next) -->
+
+
+
+<!-- # the end of the notes -->
+
+<!-- # template -->
+
+<!-- # The beginning -->
+
+<!-- ## R Markdown -->
+
+<!-- This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
+
+<!-- When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. -->
+
+<!-- ## Slide with Bullets -->
+
+<!-- - Bullet 1 -->
+<!-- - Bullet 2 -->
+<!-- - Bullet 3 -->
+
+<!-- ## Slide with R Output -->
+
+<!-- ```{r cars, echo = TRUE} -->
+<!-- summary(cars) -->
+<!-- ``` -->
+
+<!-- ## Slide with Plot -->
+
+<!-- ```{r pressure} -->
+<!-- plot(pressure) -->
+<!-- ``` -->
+
+
+<!-- # the end -->

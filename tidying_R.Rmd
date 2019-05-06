@@ -583,7 +583,6 @@ What are actual names of those countries in `iso2`?
 Found actual country names to go with those abbreviations, in spreadsheet: 
 
 ```{r}
-library(readxl)
 f <- tempfile()
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
 download.file(my_url, f)

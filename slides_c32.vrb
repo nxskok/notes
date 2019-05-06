@@ -1,11 +1,32 @@
-\frametitle{Slide with Plot}
-\protect\hypertarget{slide-with-plot}{}
+\frametitle{Using the whole sequence to find its length and its maximum}
+\protect\hypertarget{using-the-whole-sequence-to-find-its-length-and-its-maximum}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(pressure)}
+\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{start=}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}
+\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sequence=}\KeywordTok{map}\NormalTok{(start,hotpo_seq)) }\OperatorTok{%>%}
+\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{seq_length=}\KeywordTok{map_int}\NormalTok{(sequence,}\OperatorTok{~}\KeywordTok{length}\NormalTok{(.)),}
+\DataTypeTok{seq_max=}\KeywordTok{map_int}\NormalTok{(sequence,}\OperatorTok{~}\KeywordTok{max}\NormalTok{(.)))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{slides_c32_files/figure-beamer/pressure-1.pdf}
+\begin{longtable}[]{@{}rlrr@{}}
+\toprule
+start & sequence & seq\_length & seq\_max\tabularnewline
+\midrule
+\endhead
+1 & 1 & 1 & 1\tabularnewline
+2 & 2:1 & 2 & 2\tabularnewline
+3 & c(3, 10, 5, 16, 8, 4, 2, 1) & 8 & 16\tabularnewline
+4 & c(4, 2, 1) & 3 & 4\tabularnewline
+5 & c(5, 16, 8, 4, 2, 1) & 6 & 16\tabularnewline
+6 & c(6, 3, 10, 5, 16, 8, 4, 2, 1) & 9 & 16\tabularnewline
+7 & c(7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1) & 17
+& 52\tabularnewline
+8 & c(8, 4, 2, 1) & 4 & 8\tabularnewline
+9 & c(9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4,
+2, 1) & 20 & 52\tabularnewline
+10 & c(10, 5, 16, 8, 4, 2, 1) & 7 & 16\tabularnewline
+\bottomrule
+\end{longtable}
 

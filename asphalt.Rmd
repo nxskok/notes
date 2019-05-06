@@ -362,8 +362,9 @@ cutoff like 0.20 or even bigger.
 
 ## All possible regressions (output over)
 
+Uses package `leaps`: xxx
+
 ```{r,paged.print=F}
-library(leaps)
 leaps <- regsubsets(log.rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_2, nbest = 2)
 s <- summary(leaps)

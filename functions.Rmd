@@ -21,7 +21,7 @@ editing.
 
 - Programming principle: "don't repeat yourself".
 - Hadley Wickham: don't copy-paste more than twice.
-- Instead: *write a function*. xxx
+- Instead: *write a function*. 
 
 ## Anatomy of function
 - Header line with function name and input value(s).
@@ -59,7 +59,7 @@ sqrt_minus_1(3)
 
 - It works!
 
-## Vectorization 1/2 xxx
+## Vectorization 1/2 
 
 - We conceived our function to work on numbers:
 ```{r}
@@ -73,7 +73,7 @@ sqrt_minus_1(c(50, 11, 3))
 
 - or... (over)
 
-## Vectorization 2/2 xxx
+## Vectorization 2/2 
 
 - or even data frames:
 ```{r}
@@ -125,7 +125,7 @@ sqrt_minus_value <- function(x, d = 1) {
 }
 ```
 
-- If you specify a value for d, it will be used. If you don't, 1 will be used instead: xxx
+- If you specify a value for d, it will be used. If you don't, 1 will be used instead: 
 
 ```{r}
 sqrt_minus_value(51, 2)
@@ -151,7 +151,7 @@ sqrt_minus_value <- function(x, d = 1) {
 }
 ```
 
-## What happens with stopifnot
+## What happens with `stopifnot`
 - This should be good, and is:
 ```{r, error=TRUE}
 sqrt_minus_value(8, 6)
@@ -185,9 +185,9 @@ coef(yy.1)
 - These are the intercept and the slope, in that order.
 
 ## Is this the right thing?
-Check by looking at the summary output from the regression:
+Check by looking at the summary output from the regression: xxx
 ```{r}
-summary(yy.1)
+tidy(yy.1)
 ```
 
 ## Making this into a function
@@ -223,6 +223,20 @@ slope <- function(x, y, ...) {
 - The `...` in the header line means “accept any other input”, and the
 `...` in the lm line means “pass anything other than `x` and `y` straight
 on to `lm`”.
+
+## Using `...` try 1: xxx
+
+- One of the things `lm` will accept is a data frame to take columns from. Let's make a little one:
+
+```{r, error=T}
+little <- tribble(
+  ~u, ~v,
+  1, 10,
+  2, 12
+)
+slope("u", "v", data=little)
+```
+
 
 ## Using `...`
 - One of the things `lm` will accept is a vector called `subset` containing
@@ -267,7 +281,7 @@ slopes
 
 - Check this by doing the three lm’s, one at a time.
 
-## The map_dbl way
+## The `map_dbl` xxx way
 - “for each of these (columns of `d`), run function (`slope`) with inputs
 it and `yy`), and collect together the answers”.
 - Since slope returns a decimal number (a `dbl`), appropriate
@@ -286,8 +300,9 @@ map_dbl(1:10, ~ sqrt(.))
 
 ## Summarizing all columns of a data frame, two ways
 
+- use my `d` from above: xxx
+
 ```{r}
-d
 map_dbl(d, ~ mean(.))
 d %>% summarize_all(~ mean(.))
 ```
@@ -312,10 +327,12 @@ of `map_dbl`.
 map(d, ~ quartiles(.))
 ```
 
-- A list. Better: pretend output from quartiles is one-column data
-frame:
+- A list. 
 
 ## Or
+
+- Better: pretend output from quartiles is one-column data
+frame: xxx
 
 ```{r}
 map_df(d, ~ quartiles(.))
@@ -342,7 +359,7 @@ d %>% mutate(root = map_dbl(x, ~ sqrt(.)))
 ```
 
 ## Write a function first and then map it
-- If the “for each” part is simple, go ahead and use map_-whatever.
+- If the “for each” part is simple, go ahead and use `map_`-whatever. xxx
 - If not, write a function to do the complicated thing first.
 - Example: “half or triple plus one”: if the input is an even number,
 halve it; if it is an odd number, multiply it by three and add one.
@@ -375,9 +392,9 @@ hotpo <- function(x) {
 }
 ```
 
-## Test it xxx
+## Test it 
 
-```{r}
+```{r, error=T}
 hotpo(3)
 hotpo(12)
 hotpo(4.5)
@@ -410,7 +427,7 @@ hotpo_seq <- function(x) {
 
 - Strategy: keep looping “while `x` is not 1”.
 - Each new `x`: add to the end of `ans`. When I hit 1, I break
-out of the `while` and return the whole `ans`. xxx
+out of the `while` and return the whole `ans`. 
 
 ## Trying it 1/2
 - Start at 6:
@@ -419,7 +436,7 @@ out of the `while` and return the whole `ans`. xxx
 hotpo_seq(6)
 ```
 
-## Trying it 2/2 xxx
+## Trying it 2/2 
 
 - Start at 27:
 
@@ -439,9 +456,9 @@ tibble(start = 1:100) %>%
   slice(1:6)
 ```
 
-## What happens if we save the entire sequence?
+## What happens if we save the entire sequence? xxx
 
-```{r, df_print="default"}
+```{r, paged.print=T}
 tibble(start = 1:7) %>%
   mutate(sequence = map(start, ~ hotpo_seq(.)))
 ```
@@ -449,9 +466,9 @@ tibble(start = 1:7) %>%
 - Each entry in sequence is itself a vector. sequence is called a
 “list-column”.
 
-## Using the whole sequence to find its length and its maximum
+## Using the whole sequence to find its length and its maximum xxx
 
-```{r, df_print="default"}
+```{r, paged.print=T}
 tibble(start = 1:7) %>%
   mutate(sequence = map(start, hotpo_seq)) %>%
   mutate(
@@ -464,4 +481,4 @@ tibble(start = 1:7) %>%
 - Called the **Collatz conjecture**.
 - Nobody knows whether the sequence always gets to 1.
 - Nobody has found an n for which it doesn’t.
-- [A pretty tree:](https://en.wikipedia.org/wiki/Collatz_conjecture#/media/File:Collatz-graph-all-30-no27.svg) 
+- [A pretty tree (click):](https://en.wikipedia.org/wiki/Collatz_conjecture#/media/File:Collatz-graph-all-30-no27.svg) 

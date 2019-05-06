@@ -1,6 +1,6 @@
 ## The pigs revisited
 
-- Recall pig feed data, after we tidied it: xxx
+- Recall pig feed data, after we tidied it: 
 
 ```{r, message=F}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/pigs2.txt"
@@ -17,15 +17,15 @@ pigs %>%
 ```
 
 ## Running through `aov` and `lm`
-- What happens if we run this through `lm` rather than `aov`? xxx
-- Recall `aov` first: xxx
+- What happens if we run this through `lm` rather than `aov`? 
+- Recall `aov` first: 
 
 ```{r}
 pigs.1 <- aov(weight ~ feed, data = pigs)
 summary(pigs.1)
 ```
 
-## and now `lm` xxx
+## and now `lm`
 
 ```{r}
 pigs.2 <- lm(weight ~ feed, data = pigs)
@@ -73,14 +73,15 @@ crickets <- read_csv(my_url)
 crickets
 ```
 
-## Fit model with `lm` xxx
+## Fit model with `lm` 
 
 ```{r}
-crickets.1 <- lm(pulse_rate ~ temperature + species, data = crickets)
+crickets.1 <- lm(pulse_rate ~ temperature + species, 
+                 data = crickets)
 drop1(crickets.1, test = "F") %>%  select(-Df, -`Sum of Sq`)
 ```
 
-## The summary xxx
+## The summary 
 
 ```{r}
 glance(crickets.1)
@@ -96,7 +97,7 @@ is baseline).
 - R-squared of almost 0.99 is very high, so that the prediction of pulse
 rate from species and temperature is very good.
 
-## To end with a graph xxx
+## To end with a graph 
 
 ```{r}
 ggplot(crickets, aes(x = temperature, y = pulse_rate,

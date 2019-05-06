@@ -15,12 +15,12 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(fig.height = 5)
 # knitr::opts_chunk$set(echo = FALSE)
-options(width=55)
+options(width=52)
 ```
 
 # Packages xxx
 
-```{r, message=F, echo=T}
+```{r}
 library(MASS)
 library(tidyverse)
 library(broom)
@@ -31,6 +31,59 @@ library(PMCMRplus)
 library(leaps)
 ```
 
+
+
+put these back in order when done
+
+
+# Course outline
+
+# Running R
+
+```{r child="running_R.Rmd"}
+```
+
+# Reading in data
+
+```{r child="readfile_R.Rmd"}
+```
+
+# Making graphs
+
+```{r, child="graphs_R.Rmd"}
+```
+
+# Numerical summaries: more detailed
+
+```{r, child="numsum_R.Rmd"}
+```
+
+# Statistical Inference
+
+```{r, child="inference_R.Rmd"}
+```
+
+# Writing reports
+
+```{r, child="reports_R.Rmd"}
+```
+
+
+# Tidying and organizing data
+
+```{r, child="tidying_R.Rmd"}
+```
+
+# Case study 1: the windmill data
+
+```{r, child="windmill.Rmd"}
+```
+
+
+# Case study 3: Asphalt
+
+```{r, child="asphalt.Rmd"}
+```
 
 xxx check from here
 
@@ -44,93 +97,40 @@ xxx check from here
 ```{r, child="functions.Rmd"}
 ```
 
-put these back in order when done
 
-
-<!-- # Course outline -->
-
-<!-- # Running R -->
-
-<!-- ```{r child="running_R.Rmd"} -->
-<!-- ``` -->
-
-<!-- # Reading in data -->
-
-<!-- ```{r child="readfile_R.Rmd"} -->
-<!-- ``` -->
-
-<!-- # Making graphs -->
-
-<!-- ```{r, child="graphs_R.Rmd"} -->
-<!-- ``` -->
-
-<!-- # Numerical summaries: more detailed -->
-
-<!-- ```{r, child="numsum_R.Rmd"} -->
-<!-- ``` -->
-
-<!-- # Statistical Inference -->
-
-<!-- ```{r, child="inference_R.Rmd"} -->
-<!-- ``` -->
-
-<!-- # Writing reports -->
-
-<!-- ```{r, child="reports_R.Rmd"} -->
-<!-- ``` -->
-
-
-<!-- # Tidying and organizing data -->
-
-<!-- ```{r, child="tidying_R.Rmd"} -->
-<!-- ``` -->
-
-<!-- # Case study 1: the windmill data -->
-
-<!-- ```{r, child="windmill.Rmd"} -->
-<!-- ``` -->
-
-
-<!-- # Case study 3: Asphalt -->
-
-<!-- ```{r, child="asphalt.Rmd"} -->
-<!-- ``` -->
+# Dates and times (coming next)
 
 
 
-<!-- # Dates and times (coming next) -->
+# the end of the notes
+
+# template
+
+# The beginning
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
 
 
-
-<!-- # the end of the notes -->
-
-<!-- # template -->
-
-<!-- # The beginning -->
-
-<!-- ## R Markdown -->
-
-<!-- This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
-
-<!-- When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. -->
-
-<!-- ## Slide with Bullets -->
-
-<!-- - Bullet 1 -->
-<!-- - Bullet 2 -->
-<!-- - Bullet 3 -->
-
-<!-- ## Slide with R Output -->
-
-<!-- ```{r cars, echo = TRUE} -->
-<!-- summary(cars) -->
-<!-- ``` -->
-
-<!-- ## Slide with Plot -->
-
-<!-- ```{r pressure} -->
-<!-- plot(pressure) -->
-<!-- ``` -->
-
-
-<!-- # the end -->
+# the end

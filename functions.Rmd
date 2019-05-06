@@ -1,14 +1,17 @@
 ## Don’t repeat yourself
 - See this:
-a=50 
-b=11 
-d=3
-as=sqrt(a-1)
+```{r}
+a <- 50
+b <- 11
+d <- 3
+as <- sqrt(a - 1)
 as
-bs=sqrt(b-1)
+bs <- sqrt(b - 1)
 bs
-ds=sqrt(d-1)
+ds <- sqrt(d - 1)
 ds
+```
+
 
 ## What's the problem?
 
@@ -16,9 +19,9 @@ ds
 editing.
 - Dangerous: what if you forget to change something after you pasted?
 
-- Programming principle: ``don't repeat yourself''.
+- Programming principle: "don't repeat yourself".
 - Hadley Wickham: don't copy-paste more than twice.
-- Instead: \emph{write a function}.
+- Instead: *write a function*. xxx
 
 ## Anatomy of function
 - Header line with function name and input value(s).
@@ -26,19 +29,18 @@ editing.
 - Return value: the output from function.
 In our case:
 ```{r}
-sqrt_minus_1=function(x) {
-ans=sqrt(x-1)
-return(ans)
+sqrt_minus_1 <- function(x) {
+  ans <- sqrt(x - 1)
+  return(ans)
 }
 ```
 
 or more simply
 
 ```{r}
-sqrt_minus_1=function(x) {
-sqrt(x-1)
+sqrt_minus_1 <- function(x) {
+  sqrt(x - 1)
 }
-
 ```
 
 If last line of function calculates value without saving it, that value is
@@ -57,7 +59,8 @@ sqrt_minus_1(3)
 
 - It works!
 
-## Vectorization
+## Vectorization 1/2 xxx
+
 - We conceived our function to work on numbers:
 ```{r}
 sqrt_minus_1(3.25)
@@ -65,12 +68,16 @@ sqrt_minus_1(3.25)
 
 - but it actually works on vectors too, as a free bonus of R:
 ```{r}
-sqrt_minus_1(c(50,11,3))
+sqrt_minus_1(c(50, 11, 3))
 ```
+
+- or... (over)
+
+## Vectorization 2/2 xxx
 
 - or even data frames:
 ```{r}
-d=tibble(x=1:2,y=3:4)
+d <- tibble(x = 1:2, y = 3:4)
 sqrt_minus_1(d)
 ```
 
@@ -79,28 +86,28 @@ sqrt_minus_1(d)
 - Allow the value to be subtracted, before taking square root, to be
 input to function as well, thus:
 ```{r}
-sqrt_minus_value=function(x,d) {
-sqrt(x-d)
+sqrt_minus_value <- function(x, d) {
+  sqrt(x - d)
 }
 ```
 
 - Call the function with the x and d inputs in the right order:
 ```{r}
-sqrt_minus_value(51,2)
+sqrt_minus_value(51, 2)
 ```
 
 - or give the inputs names, in which case they can be in any order:
 ```{r}
-sqrt_minus_value(d=2,x=51)
+sqrt_minus_value(d = 2, x = 51)
 ```
 
 ## Defaults 1/2
 - Many R functions have values that you can change if you want to,
 but usually you don’t want to, for example:
 ```{r}
-x=c(3,4,5,NA,6,7)
+x <- c(3, 4, 5, NA, 6, 7)
 mean(x)
-mean(x,na.rm=T)
+mean(x, na.rm = T)
 ```
 
 - By default, the mean of data with a missing value is missing, but if
@@ -113,15 +120,15 @@ you change it.
 ## Defaults 2/2
 - In our function, set a default value for d like this:
 ```{r}
-sqrt_minus_value=function(x,d=1) {
-sqrt(x-d)
+sqrt_minus_value <- function(x, d = 1) {
+  sqrt(x - d)
 }
 ```
 
-- If you don’t specify a value for d, 1 will be used:
+- If you specify a value for d, it will be used. If you don't, 1 will be used instead: xxx
 
 ```{r}
-sqrt_minus_value(51,2)
+sqrt_minus_value(51, 2)
 sqrt_minus_value(51)
 ```
 
@@ -129,7 +136,7 @@ sqrt_minus_value(51)
 - What happened here?
 
 ```{r, error=TRUE, warning=TRUE}
-sqrt_minus_value(6,8)
+sqrt_minus_value(6, 8)
 ```
 
 - Message not helpful. Actually, function tried to take square root of
@@ -138,21 +145,21 @@ negative number.
 - Check that the square root will be OK first. Here’s how:
 
 ```{r}
-sqrt_minus_value=function(x,d=1) {
-stopifnot(x-d>=0)
-sqrt(x-d)
+sqrt_minus_value <- function(x, d = 1) {
+  stopifnot(x - d >= 0)
+  sqrt(x - d)
 }
 ```
 
 ## What happens with stopifnot
 - This should be good, and is:
 ```{r, error=TRUE}
-sqrt_minus_value(8,6)
+sqrt_minus_value(8, 6)
 ```
 
 - This should fail, and see how it does:
 ```{r, error=TRUE}
-sqrt_minus_value(6,8)
+sqrt_minus_value(6, 8)
 ```
 
 - Where the function fails, we get informative error, but if everything
@@ -169,9 +176,9 @@ you don’t have to do this from scratch: you can use R’s regression
 calculations, like this:
 
 ```{r}
-xx=1:4
-yy=c(10,11,10,14)
-yy.1=lm(yy~xx)
+xx <- 1:4
+yy <- c(10, 11, 10, 14)
+yy.1 <- lm(yy ~ xx)
 coef(yy.1)
 ```
 
@@ -189,16 +196,16 @@ summary(yy.1)
 - Two inputs, the `x` and the `y`, which I take in that order.
 - Output: just the slope (we throw away intercept). Thus:
 ```{r}
-slope=function(x,y) {
-y.1=lm(y~x)
-ans=coef(y.1)
-ans[2]
+slope <- function(x, y) {
+  y.1 <- lm(y ~ x)
+  ans <- coef(y.1)
+  ans[2]
 }
 ```
 
 - Check using our data from before: correct:
 ```{r}
-slope(xx,yy)
+slope(xx, yy)
 ```
 
 ## Passing things on
@@ -206,10 +213,10 @@ slope(xx,yy)
 Instead of intercepting all the possibilities and passing them on, we
 can do this:
 ```{r}
-slope=function(x,y,...) {
-y.1=lm(y~x,...)
-ans=coef(y.1)
-ans[2]
+slope <- function(x, y, ...) {
+  y.1 <- lm(y ~ x, ...)
+  ans <- coef(y.1)
+  ans[2]
 }
 ```
 
@@ -225,7 +232,7 @@ the list of observations to include in the regression.
 ```{r}
 xx
 yy
-slope(xx,yy,subset=1:2)
+slope(xx, yy, subset = 1:2)
 ```
 
 
@@ -237,7 +244,7 @@ be $(11 − 10)/(2 − 1) = 1$ and is.
 in regressions:
 
 ```{r}
-(d=tibble(x1=1:4,x2=c(8,7,6,5),x3=c(2,4,6,9)))
+(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), x3 = c(2, 4, 6, 9)))
 ```
 
 - Want to use these as different x’s for a regression with our yy as the
@@ -250,10 +257,10 @@ response, and collect together the three different slopes.
 - Create empty vector slopes to store the slopes.
 - Looping variable `i` goes from 1 to 3 (3 columns, thus 3 slopes):
 ```{r}
-slopes=numeric(3)
+slopes <- numeric(3)
 for (i in 1:3) {
-xx=d %>% pull(i)
-slopes[i]=slope(xx,yy)
+  xx <- d %>% pull(i)
+  slopes[i] <- slope(xx, yy)
 }
 slopes
 ```
@@ -267,34 +274,31 @@ it and `yy`), and collect together the answers”.
 function-running function is `map_dbl`:
 
 ```{r}
-map_dbl(d,~slope(.,yy))
+map_dbl(d, ~ slope(., yy))
 ```
 
 - Same as loop, with a lot less coding.
 - “Find the square roots of each of the numbers 1 through 10”:
 
 ```{r}
-map_dbl(1:10,~sqrt(.))
+map_dbl(1:10, ~ sqrt(.))
 ```
 
-## Summarizing all columns of a data frame
+## Summarizing all columns of a data frame, two ways
 
 ```{r}
 d
-map_dbl(d,~mean(.))
+map_dbl(d, ~ mean(.))
+d %>% summarize_all(~ mean(.))
 ```
 
-The mean of each column, with the columns labelled. Or:
-
-```{r}
-d %>% summarize_all(~mean(.))
-```
+The mean of each column, with the columns labelled. xxx
 
 ## What if summary returns more than one thing?
 - For example, finding quartiles:
 ```{r}
-quartiles=function(x) {
-quantile(x,c(0.25,0.75))
+quartiles <- function(x) {
+  quantile(x, c(0.25, 0.75))
 }
 quartiles(1:5)
 ```
@@ -305,19 +309,24 @@ of `map_dbl`.
 ## map results
 - Try:
 ```{r}
-map(d,~quartiles(.))
+map(d, ~ quartiles(.))
 ```
 
 - A list. Better: pretend output from quartiles is one-column data
 frame:
+
+## Or
+
 ```{r}
-map_df(d,~quartiles(.))
+map_df(d, ~ quartiles(.))
 ```
 
 ## Or even
 ```{r}
-d %>% map_df(~quartiles(.))
+d %>% map_df(~ quartiles(.))
 ```
+
+## Comments
 
 - This works because the implicit first thing in map is (the columns of) the
 data frame that came out of the previous step.
@@ -328,8 +337,8 @@ default definition (see help for quantile).
 - `map` can also be used within data frames to calculate new columns.
 Let’s do the square roots of 1 through 10 again:
 ```{r}
-d=tibble(x=1:10)
-d %>% mutate(root=map_dbl(x,~sqrt(.)))
+d <- tibble(x = 1:10)
+d %>% mutate(root = map_dbl(x, ~ sqrt(.)))
 ```
 
 ## Write a function first and then map it
@@ -353,23 +362,33 @@ it.
 - First test for odd or even, and then do the appropriate calculation:
 
 ```{r, error=TRUE}
-hotpo=function(x) {
-stopifnot(round(x)==x)
-remainder = x %% 2
-if (remainder==1) { ans=3*x+1 }
-else { ans=x/2 }
-as.integer(ans)
+hotpo <- function(x) {
+  stopifnot(round(x) == x)
+  remainder <- x %% 2
+  if (remainder == 1) {
+    ans <- 3 * x + 1
+  }
+  else {
+    ans <- x / 2
+  }
+  as.integer(ans)
 }
+```
+
+## Test it xxx
+
+```{r}
 hotpo(3)
 hotpo(12)
 hotpo(4.5)
 ```
 
+
 ## One through ten
 - Use a data frame of numbers 1 through 10 again:
 
 ```{r}
-tibble(x=1:10) %>% mutate(y=map_int(x,hotpo))
+tibble(x = 1:10) %>% mutate(y = map_int(x, hotpo))
 ```
 
 ## Until I get to 1 (if I ever do)
@@ -379,27 +398,28 @@ and keep going, what happens?
 to 1:
 
 ```{r}
-hotpo_seq=function(x) {
-ans=x
-while (x != 1) {
-x=hotpo(x)
-ans=c(ans,x)
-}
-ans
+hotpo_seq <- function(x) {
+  ans <- x
+  while (x != 1) {
+    x <- hotpo(x)
+    ans <- c(ans, x)
+  }
+  ans
 }
 ```
 
-- Strategy: it’s a loop, but I don’t know how long it’s going to be. I
-keep looping “until `x` is 1”, or “while `x` is not 1”.
-- For each new `x` I get, add it to the end of `ans`. When I hit 1, I break
-out of the `while` and return the whole `ans`.
+- Strategy: keep looping “while `x` is not 1”.
+- Each new `x`: add to the end of `ans`. When I hit 1, I break
+out of the `while` and return the whole `ans`. xxx
 
-## Trying it
+## Trying it 1/2
 - Start at 6:
 
 ```{r}
 hotpo_seq(6)
 ```
+
+## Trying it 2/2 xxx
 
 - Start at 27:
 
@@ -408,21 +428,22 @@ hotpo_seq(27)
 ```
 
 ## Which starting points have the longest sequences?
-- The `length` of the vector returned from hotpo_seq says how long it
+- The `length` of the vector returned from `hotpo_seq` says how long it
 took to get to 1.
 - Out of the starting points 1 to 100, which one has the longest
 sequence?
 ```{r}
-tibble(start=1:100) %>%
-mutate(seq_length=map_int(start,~length(hotpo_seq(.)))) %>%
-arrange(desc(seq_length)) %>% slice(1:6)
+tibble(start = 1:100) %>%
+  mutate(seq_length = map_int(start, ~ length(hotpo_seq(.)))) %>%
+  arrange(desc(seq_length)) %>%
+  slice(1:6)
 ```
 
 ## What happens if we save the entire sequence?
 
-```{r}
-tibble(start=1:10) %>%
-mutate(sequence=map(start,~hotpo_seq(.)))
+```{r, df_print="default"}
+tibble(start = 1:7) %>%
+  mutate(sequence = map(start, ~ hotpo_seq(.)))
 ```
 
 - Each entry in sequence is itself a vector. sequence is called a
@@ -430,11 +451,13 @@ mutate(sequence=map(start,~hotpo_seq(.)))
 
 ## Using the whole sequence to find its length and its maximum
 
-```{r}
-tibble(start=1:10) %>%
-mutate(sequence=map(start,hotpo_seq)) %>%
-mutate(seq_length=map_int(sequence,~length(.)),
-seq_max=map_int(sequence,~max(.)))
+```{r, df_print="default"}
+tibble(start = 1:7) %>%
+  mutate(sequence = map(start, hotpo_seq)) %>%
+  mutate(
+    seq_length = map_int(sequence, ~ length(.)),
+    seq_max = map_int(sequence, ~ max(.))
+  )
 ```
 
 ## Final thoughts on this

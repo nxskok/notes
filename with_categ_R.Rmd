@@ -1,11 +1,11 @@
 ## The pigs revisited
 
-- Recall pig feed data, after we tidied it:
+- Recall pig feed data, after we tidied it: xxx
 
 ```{r, message=F}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/pigs2.txt"
 pigs <- read_delim(my_url, " ")
-pigs %>% slice(1:11)
+pigs 
 ```
 
 ## Summaries
@@ -17,19 +17,19 @@ pigs %>%
 ```
 
 ## Running through `aov` and `lm`
-- What happens if we run this through lm rather than aov?
-- Recall aov first:
+- What happens if we run this through `lm` rather than `aov`? xxx
+- Recall `aov` first: xxx
 
 ```{r}
 pigs.1 <- aov(weight ~ feed, data = pigs)
 summary(pigs.1)
 ```
 
-## and now `lm`
+## and now `lm` xxx
 
 ```{r}
 pigs.2 <- lm(weight ~ feed, data = pigs)
-summary(pigs.2)
+tidy(pigs.2)
 ```
 
 ## Understanding those slopes
@@ -73,17 +73,18 @@ crickets <- read_csv(my_url)
 crickets
 ```
 
-## Fit model with `lm`
+## Fit model with `lm` xxx
 
 ```{r}
 crickets.1 <- lm(pulse_rate ~ temperature + species, data = crickets)
-drop1(crickets.1, test = "F")
+drop1(crickets.1, test = "F") %>%  select(-Df, -`Sum of Sq`)
 ```
 
-## The summary
+## The summary xxx
 
 ```{r}
-summary(crickets.1)
+glance(crickets.1)
+tidy(crickets.1)
 ```
 
 ## Conclusions
@@ -95,12 +96,11 @@ is baseline).
 - R-squared of almost 0.99 is very high, so that the prediction of pulse
 rate from species and temperature is very good.
 
-## To end with a graph
+## To end with a graph xxx
+
 ```{r}
-ggplot(crickets, aes(
-  x = temperature, y = pulse_rate,
-  colour = species
-)) +
+ggplot(crickets, aes(x = temperature, y = pulse_rate,
+  colour = species)) +
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 

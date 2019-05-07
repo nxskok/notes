@@ -224,19 +224,6 @@ slope <- function(x, y, ...) {
 `...` in the lm line means “pass anything other than `x` and `y` straight
 on to `lm`”.
 
-## Using `...` try 1: xxx
-
-- One of the things `lm` will accept is a data frame to take columns from. Let's make a little one:
-
-```{r, error=T}
-little <- tribble(
-  ~u, ~v,
-  1, 10,
-  2, 12
-)
-slope("u", "v", data=little)
-```
-
 
 ## Using `...`
 - One of the things `lm` will accept is a vector called `subset` containing
@@ -348,7 +335,7 @@ d %>% map_df(~ quartiles(.))
 - This works because the implicit first thing in map is (the columns of) the
 data frame that came out of the previous step.
 - These are 1st and 3rd quartiles of each column of `d`, according to R’s
-default definition (see help for quantile).
+default definition (see help for `quantile` xxx).
 
 ## `Map` in data frames with `mutate`
 - `map` can also be used within data frames to calculate new columns.
@@ -359,7 +346,7 @@ d %>% mutate(root = map_dbl(x, ~ sqrt(.)))
 ```
 
 ## Write a function first and then map it
-- If the “for each” part is simple, go ahead and use `map_`-whatever. xxx
+- If the “for each” part is simple, go ahead and use `map_`-whatever.
 - If not, write a function to do the complicated thing first.
 - Example: “half or triple plus one”: if the input is an even number,
 halve it; if it is an odd number, multiply it by three and add one.
@@ -458,7 +445,7 @@ tibble(start = 1:100) %>%
 
 ## What happens if we save the entire sequence? xxx
 
-```{r, paged.print=T}
+```{r, paged.print=F}
 tibble(start = 1:7) %>%
   mutate(sequence = map(start, ~ hotpo_seq(.)))
 ```
@@ -466,9 +453,9 @@ tibble(start = 1:7) %>%
 - Each entry in sequence is itself a vector. sequence is called a
 “list-column”.
 
-## Using the whole sequence to find its length and its maximum xxx
+## Using the whole sequence to find its length and its max xxx
 
-```{r, paged.print=T}
+```{r, paged.print=F}
 tibble(start = 1:7) %>%
   mutate(sequence = map(start, hotpo_seq)) %>%
   mutate(

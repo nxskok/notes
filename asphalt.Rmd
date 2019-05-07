@@ -284,7 +284,7 @@ tidy(rut.2)
 tidy(rut.2) %>% arrange(p.value)
 ```
 
-- Largest P-value at the bottom. xxx
+- Largest P-value at the bottom.
 
 ## Take out `pct.a.base`
 
@@ -346,23 +346,23 @@ coef(rut.3)
 - Best way to decide which $x$’s belong: expert knowledge: which of
 them should be important.
 - Best automatic method: what we did, “backward selection”.
-- Do not learn about “stepwise regression”! ref! xxx
+- Do not learn about “stepwise regression”! [eg. here](https://towardsdatascience.com/stopping-stepwise-why-stepwise-selection-is-bad-and-what-you-should-use-instead-90818b3f52df)
 - R has function `step` that does backward selection, like this:
 ```{r, eval=F}
 step(rut.2, direction = "backward", test = "F")
 ```
 
-Gets same answer as we did (by removing least significant x). xxx
+Gets same answer as we did (by removing least significant x). 
 
 - Removing non-significant $x$’s may remove interesting ones whose
 P-values happened not to reach 0.05. Consider using less stringent
 cutoff like 0.20 or even bigger.
 - Can also fit all possible regressions, as over (may need to do
-`install.packages("leaps")` first.
+`install.packages("leaps")` first).
 
 ## All possible regressions (output over)
 
-Uses package `leaps`: xxx
+Uses package `leaps`: 
 
 ```{r,paged.print=F}
 leaps <- regsubsets(log.rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
@@ -385,7 +385,7 @@ Hard to judge.
 - One solution (STAC67): adjusted R-squared, where adding worthless
 variable makes it go down.
 - `data.frame` rather than `tibble` because there are several columns in
-`outmat`. xxx
+`outmat`. 
 
 ## All possible regressions, adjusted R-squared
 
@@ -403,12 +403,13 @@ tidy(rut.6)
 ## Revisiting (2)
 - Regression slopes say that rut depth increases as log-viscosity
 decreases, `pct.a.surf` increases and `voids` increases. This more or
-less checks out with out scatterplots against `log.viscosity`. xxx
+less checks out with out scatterplots against `log.viscosity`. 
 - We should check residual plots again, though previous scatterplots say
 it’s unlikely that there will be a problem:
 
 ```{r}
-g <- ggplot(rut.6, aes(y = .resid, x = .fitted)) + geom_point()
+g <- ggplot(rut.6, aes(y = .resid, x = .fitted)) + 
+  geom_point()
 ```
 
 ## Residuals against fitted values

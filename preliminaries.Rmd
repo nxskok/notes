@@ -6,7 +6,7 @@ options(width=52)
 
 ## Packages xxx
 
-```{r}
+```{r, results="hide"}
 library(MASS)
 library(tidyverse)
 library(broom)

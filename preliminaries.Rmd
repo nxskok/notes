@@ -1,0 +1,19 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.height = 5)
+# knitr::opts_chunk$set(echo = FALSE)
+options(width=52)
+```
+
+## Packages xxx
+
+```{r}
+library(MASS)
+library(tidyverse)
+library(broom)
+library(readxl)
+library(devtools)
+library(smmr)
+library(PMCMRplus)
+library(leaps)
+```
+

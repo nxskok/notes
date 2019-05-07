@@ -12,31 +12,13 @@ output:
     colortheme: "dove"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.height = 5)
-# knitr::opts_chunk$set(echo = FALSE)
-options(width=52)
-```
+# Preliminaries
 
-# Packages xxx
-
-```{r}
-library(MASS)
-library(tidyverse)
-library(broom)
-library(readxl)
-library(devtools)
-library(smmr)
-library(PMCMRplus)
-library(leaps)
+```{r child="preliminaries.Rmd"}
 ```
 
 
-
-put these back in order when done
-
-
-# Course outline
+# Course outline xxx
 
 # Running R
 

@@ -185,7 +185,7 @@ coef(yy.1)
 - These are the intercept and the slope, in that order.
 
 ## Is this the right thing?
-Check by looking at the summary output from the regression: xxx
+Check by looking at the summary output from the regression:
 ```{r}
 tidy(yy.1)
 ```
@@ -268,7 +268,7 @@ slopes
 
 - Check this by doing the three lm’s, one at a time.
 
-## The `map_dbl` xxx way
+## The `map_dbl` way
 - “for each of these (columns of `d`), run function (`slope`) with inputs
 it and `yy`), and collect together the answers”.
 - Since slope returns a decimal number (a `dbl`), appropriate
@@ -287,14 +287,14 @@ map_dbl(1:10, ~ sqrt(.))
 
 ## Summarizing all columns of a data frame, two ways
 
-- use my `d` from above: xxx
+- use my `d` from above: 
 
 ```{r}
 map_dbl(d, ~ mean(.))
 d %>% summarize_all(~ mean(.))
 ```
 
-The mean of each column, with the columns labelled. xxx
+The mean of each column, with the columns labelled. 
 
 ## What if summary returns more than one thing?
 - For example, finding quartiles:
@@ -319,7 +319,7 @@ map(d, ~ quartiles(.))
 ## Or
 
 - Better: pretend output from quartiles is one-column data
-frame: xxx
+frame: 
 
 ```{r}
 map_df(d, ~ quartiles(.))
@@ -335,7 +335,7 @@ d %>% map_df(~ quartiles(.))
 - This works because the implicit first thing in map is (the columns of) the
 data frame that came out of the previous step.
 - These are 1st and 3rd quartiles of each column of `d`, according to R’s
-default definition (see help for `quantile` xxx).
+default definition (see help for `quantile`).
 
 ## `Map` in data frames with `mutate`
 - `map` can also be used within data frames to calculate new columns.
@@ -445,24 +445,28 @@ tibble(start = 1:100) %>%
 
 ## What happens if we save the entire sequence? xxx
 
-```{r, paged.print=F}
+```{r, results="hide"}
 tibble(start = 1:7) %>%
   mutate(sequence = map(start, ~ hotpo_seq(.)))
 ```
+
+![](Screenshot_2019-05-07_13-45-12.png){fig.height=4}
 
 - Each entry in sequence is itself a vector. sequence is called a
 “list-column”.
 
 ## Using the whole sequence to find its length and its max xxx
 
-```{r, paged.print=F}
+```{r, results="hide"}
 tibble(start = 1:7) %>%
-  mutate(sequence = map(start, hotpo_seq)) %>%
+  mutate(sequence = map(start, ~ hotpo_seq(.))) %>%
   mutate(
     seq_length = map_int(sequence, ~ length(.)),
     seq_max = map_int(sequence, ~ max(.))
   )
 ```
+
+![](Screenshot_2019-05-07_13-47-08.png)
 
 ## Final thoughts on this
 - Called the **Collatz conjecture**.

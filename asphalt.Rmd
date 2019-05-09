@@ -409,7 +409,7 @@ it’s unlikely that there will be a problem:
 
 ```{r}
 g <- ggplot(rut.6, aes(y = .resid, x = .fitted)) + 
-  geom_point()
+geom_point()
 ```
 
 ## Residuals against fitted values

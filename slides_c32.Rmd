@@ -12,11 +12,10 @@ output:
     colortheme: "dove"
 ---
 
-# Preliminaries
-
-```{r child="preliminaries.Rmd"}
+```{r child="preliminaries.Rmd", echo=F}
 ```
 
+xxx
 
 # Course outline xxx
 
@@ -67,7 +66,7 @@ output:
 ```{r, child="asphalt.Rmd"}
 ```
 
-xxx check from here
+
 
 # Regression with categorical variables
 
@@ -79,10 +78,23 @@ xxx check from here
 ```{r, child="functions.Rmd"}
 ```
 
+xxx from here
 
-# Dates and times (coming next)
+# Dates and times 
+
+```{r, child="dates_and_times.Rmd"}
+```
+
+# Miscellanea
+
+```{r, child="miscellanea.Rmd"}
+```
 
 
+# Vector and matrix algebra (for C33)
+
+```{r, child="vector_matrix.Rmd"}
+```
 
 # the end of the notes
 
@@ -92,7 +104,7 @@ xxx check from here
 
 ## R Markdown
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is an R Markdown presentation. Markdown is a simple formatting syntax for autAhoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
 

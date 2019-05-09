@@ -4,9 +4,8 @@ knitr::opts_chunk$set(fig.height = 5)
 options(width=52)
 ```
 
-## Packages xxx
 
-```{r, results="hide"}
+```{r, results="hide", message=F, warning=F}
 library(MASS)
 library(tidyverse)
 library(broom)
@@ -15,5 +14,7 @@ library(devtools)
 library(smmr)
 library(PMCMRplus)
 library(leaps)
+library(lubridate)
+library(ggrepel)
 ```
 

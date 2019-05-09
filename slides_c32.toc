@@ -1,18 +1,19 @@
-\beamer@sectionintoc {1}{Preliminaries}{2}{0}{1}
-\beamer@sectionintoc {2}{Course outline xxx}{4}{0}{2}
-\beamer@sectionintoc {3}{Running R}{5}{0}{3}
-\beamer@sectionintoc {4}{Reading in data}{30}{0}{4}
-\beamer@sectionintoc {5}{Making graphs}{55}{0}{5}
-\beamer@sectionintoc {6}{Numerical summaries: more detailed}{71}{0}{6}
-\beamer@sectionintoc {7}{Statistical Inference}{80}{0}{7}
-\beamer@sectionintoc {8}{Writing reports}{233}{0}{8}
-\beamer@sectionintoc {9}{Tidying and organizing data}{251}{0}{9}
-\beamer@sectionintoc {10}{Case study 1: the windmill data}{317}{0}{10}
-\beamer@sectionintoc {11}{Case study 3: Asphalt}{360}{0}{11}
-\beamer@sectionintoc {12}{Regression with categorical variables}{405}{0}{12}
-\beamer@sectionintoc {13}{Functions}{418}{0}{13}
-\beamer@sectionintoc {14}{Dates and times (coming next)}{457}{0}{14}
-\beamer@sectionintoc {15}{the end of the notes}{458}{0}{15}
-\beamer@sectionintoc {16}{template}{459}{0}{16}
-\beamer@sectionintoc {17}{The beginning}{460}{0}{17}
-\beamer@sectionintoc {18}{the end}{465}{0}{18}
+\beamer@sectionintoc {1}{Course outline xxx}{3}{0}{1}
+\beamer@sectionintoc {2}{Running R}{4}{0}{2}
+\beamer@sectionintoc {3}{Reading in data}{29}{0}{3}
+\beamer@sectionintoc {4}{Making graphs}{54}{0}{4}
+\beamer@sectionintoc {5}{Numerical summaries: more detailed}{70}{0}{5}
+\beamer@sectionintoc {6}{Statistical Inference}{79}{0}{6}
+\beamer@sectionintoc {7}{Writing reports}{232}{0}{7}
+\beamer@sectionintoc {8}{Tidying and organizing data}{250}{0}{8}
+\beamer@sectionintoc {9}{Case study 1: the windmill data}{316}{0}{9}
+\beamer@sectionintoc {10}{Case study 3: Asphalt}{359}{0}{10}
+\beamer@sectionintoc {11}{Regression with categorical variables}{404}{0}{11}
+\beamer@sectionintoc {12}{Functions}{417}{0}{12}
+\beamer@sectionintoc {13}{Dates and times}{455}{0}{13}
+\beamer@sectionintoc {14}{Miscellanea}{477}{0}{14}
+\beamer@sectionintoc {15}{Vector and matrix algebra (for C33)}{500}{0}{15}
+\beamer@sectionintoc {16}{the end of the notes}{518}{0}{16}
+\beamer@sectionintoc {17}{template}{519}{0}{17}
+\beamer@sectionintoc {18}{The beginning}{520}{0}{18}
+\beamer@sectionintoc {19}{the end}{525}{0}{19}

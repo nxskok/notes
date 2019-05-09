@@ -11,9 +11,11 @@
 \beamer@sectionintoc {11}{Regression with categorical variables}{404}{0}{11}
 \beamer@sectionintoc {12}{Functions}{417}{0}{12}
 \beamer@sectionintoc {13}{Dates and times}{455}{0}{13}
-\beamer@sectionintoc {14}{Miscellanea}{477}{0}{14}
-\beamer@sectionintoc {15}{Vector and matrix algebra (for C33)}{500}{0}{15}
-\beamer@sectionintoc {16}{the end of the notes}{518}{0}{16}
-\beamer@sectionintoc {17}{template}{519}{0}{17}
-\beamer@sectionintoc {18}{The beginning}{520}{0}{18}
-\beamer@sectionintoc {19}{the end}{525}{0}{19}
+\beamer@sectionintoc {14}{Miscellanea}{480}{0}{14}
+\beamer@sectionintoc {15}{Vector and matrix algebra (for C33)}{503}{0}{15}
+\beamer@sectionintoc {16}{piece on bootstrap}{522}{0}{16}
+\beamer@sectionintoc {17}{piece on rstan}{523}{0}{17}
+\beamer@sectionintoc {18}{the end of the notes}{524}{0}{18}
+\beamer@sectionintoc {19}{template}{525}{0}{19}
+\beamer@sectionintoc {20}{The beginning}{526}{0}{20}
+\beamer@sectionintoc {21}{the end}{531}{0}{21}

@@ -5,23 +5,23 @@ library(lubridate)
 
 ## Dates
 - Dates represented on computers as “days since an origin”,
-typically Jan 1, 1970, with a negative date being before the origin:
-```{r}
-dates=c("1970-01-01","2007-09-04","1931-08-05")
-(d=as.Date(dates))
-```
+typically Jan 1, 1970, with a negative date being before the origin: xxx
 
-```{r}
-as.numeric(d)
+```{r, paged.print=T}
+mydates <- c("1970-01-01", "2007-09-04", "1931-08-05")
+(somedates <- tibble(text = mydates) %>%
+  mutate(
+    d = as.Date(text),
+    numbers = as.numeric(d)
+  ))
 ```
 
 ## Doing arithmetic with dates
 
-- Dates are "actually" numbers, so can add and subtract: xxx
+- Dates are "actually" numbers, so can add and subtract: 
 
-```{r}
-d+30
-d[2]-d[3]
+```{r, paged.print=T}
+somedates %>% mutate(plus30 = d + 30, diffs = d[2] - d)
 ```
 
 ## Reading in dates from a file
@@ -38,49 +38,62 @@ date,status,dunno
 - Then read them in:
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/mydates.csv"
-ddd=read_csv(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/mydates.csv"
+ddd <- read_csv(my_url)
 ```
 
 - read_csv guessed that the 1st column is dates, but not 3rd.
 
 ## The data as read in
 
-```{r}
+```{r, paged.print=T}
 ddd
 ```
 
-## Dates in R
+## Dates in other formats xxx
+
 - Preceding shows that dates should be stored as text in format
 yyyy-mm-dd (ISO standard).
-- To deal with dates in other formats, use package `lubridate` xxx and
+- To deal with dates in other formats, use package `lubridate` and
 convert. For example, dates in US format with month first:
-```{r}
-usdates=c("05/27/2012","01/03/2016","12/31/2015")
-mdy(usdates)
+```{r, paged.print=T}
+tibble(usdates = c("05/27/2012", "01/03/2016", "12/31/2015")) %>%
+  mutate(iso = mdy(usdates))
+```
+
+## Trying to read these as UK dates xxx
+
+```{r, paged.print=T}
+tibble(usdates = c("05/27/2012", "01/03/2016", "12/31/2015")) %>%
+  mutate(uk = dmy(usdates))
 ```
 
 - For UK-format dates with month second, one of these dates is legit,
-but the other two make no sense:
+but the other two make no sense.
 
-```{r}
-dmy(usdates)
+## Our data frame's last column:
+
+- Back to this: xxx
+
+```{r, paged.print=F}
+ddd
 ```
 
-## That last column in our data frame
+- Month, day,  year in that order.
 
-- That is month, day, year, so:
+## so interpret as such
 
-```{r}
-(d4=ddd %>% mutate(date2=mdy(dunno)))
+```{r, paged.print=T}
+(ddd %>% mutate(date2 = mdy(dunno)) -> d4)
 ```
 
-## Are they really the same? xxx
 
-- Column date2 was correctly converted from column dunno: xxx
+## Are they really the same? 
 
-```{r}
-d4 %>% mutate(equal=identical(date,date2))
+- Column `date2` was correctly converted from column `dunno`: xxx
+
+```{r, paged.print=F}
+d4 %>% mutate(equal = identical(date, date2))
 ```
 
 - The two columns of dates are all the same.
@@ -95,24 +108,24 @@ year month day
 1940 4 15
 ```
 
-
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/pieces.txt"
-dates0=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/pieces.txt"
+dates0 <- read_delim(my_url, " ")
 ```
 
 ## Making some dates xxx
 
 ```{r}
+dates0
 dates0 %>%
-unite(dates,day,month,year) %>%
-mutate(d=dmy(dates)) -> newdates
+  unite(dates, day, month, year) %>%
+  mutate(d = dmy(dates)) -> newdates
 ```
 
 
 ## The results
 
-```{r}
+```{r, paged.print=T}
 newdates
 ```
 
@@ -125,51 +138,68 @@ created, other columns are what to make it out of.
 
 ## Extracting information from dates xxx
 
-```{r}
-newdates %>% 
+```{r, paged.print=T}
+newdates %>%
   mutate(
-    mon=month(d),
-    day=day(d),
-    weekday=wday(d, label=T)
+    mon = month(d),
+    day = day(d),
+    weekday = wday(d, label = T)
   )
 ```
 
 ## Dates and times
 - Standard format for times is to put the time after the date, hours,
 minutes, seconds:
-```{r}
-(dd=tibble(text=c("1970-01-01 07:50:01","2007-09-04 15:30:00",
-"1940-04-15 06:45:10","2016-02-10 12:26:40")))
+```{r, paged.print=F}
+(dd <- tibble(text = c(
+  "1970-01-01 07:50:01", "2007-09-04 15:30:00",
+  "1940-04-15 06:45:10", "2016-02-10 12:26:40"
+)))
 ```
 
 ## Converting text to date-times: xxx
 
 - Then get from this text using `ymd_hms`:
-```{r}
-dd %>% mutate(dt=ymd_hms(text))
+```{r, paged.print=F}
+dd %>% mutate(dt = ymd_hms(text))
 ```
 
-- Default timezone is “Universal Coordinated Time”. Change it via `tz=`
-and the name of a timezone:
+## Timezones
 
-```{r}
-(dd %>% mutate(dt=ymd_hms(dd,tz="America/Toronto")) -> dd)
+- Default timezone is “Universal Coordinated Time”. Change it via `tz=`
+and the name of a timezone: xxx
+
+```{r, paged.print=T}
+(dd %>% mutate(dt = ymd_hms(text, tz = "America/Toronto")) -> dd)
 ```
 
 ## Extracting time parts
 - As you would expect: xxx
-```{r}
-dd %>% mutate(h=hour(dt),
-              sec=second(dt),
-              min=minute(dt),
-              zone=tz(dt))
+```{r, paged.print=F}
+dd %>%
+  select(-text) %>%
+  mutate(
+    h = hour(dt),
+    sec = second(dt),
+    min = minute(dt),
+    zone = tz(dt)
+  )
 ```
 
 ## Same times, but different time zone: xxx
 
-```{r}
-dd %>% mutate(oz=with_tz(dt,"Australia/Sydney"))
+```{r, paged.print=T}
+dd %>% mutate(oz = with_tz(dt, "Australia/Sydney"))
 ```
+
+In more detail: 
+
+```{r, echo=F}
+dd %>%
+  mutate(oz = with_tz(dt, "Australia/Sydney")) %>%
+  pull(oz)
+```
+
 
 ## How long between date-times?
 - We may need to calculate the time between two events. For example,
@@ -188,8 +218,8 @@ admit,discharge
 - These ought to get read in and converted to date-times:
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/hospital.csv"
-stays=read_csv(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/hospital.csv"
+stays <- read_csv(my_url)
 ```
 
 -  and so it proves.
@@ -198,7 +228,7 @@ stays=read_csv(my_url)
 
 - In the obvious way, this gets us an answer:
 ```{r}
-stays %>% mutate(stay=discharge-admit)
+stays %>% mutate(stay = discharge - admit)
 ```
 
 - Number of hours; hard to interpret. 
@@ -206,10 +236,10 @@ stays %>% mutate(stay=discharge-admit)
 ## Days
 
 - Fractional number of days would
-be better:
+be better: xxx
 
-```{r}
-stays %>% mutate(stay=(discharge-admit)/ddays(1))
+```{r, paged.print=T}
+stays %>% mutate(stay_days = (discharge - admit) / ddays(1))
 ```
 
 ## Comments

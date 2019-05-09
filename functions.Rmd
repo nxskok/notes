@@ -443,19 +443,20 @@ tibble(start = 1:100) %>%
   slice(1:6)
 ```
 
-## What happens if we save the entire sequence? xxx
+## What happens if we save the entire sequence? 
 
 ```{r, results="hide"}
 tibble(start = 1:7) %>%
   mutate(sequence = map(start, ~ hotpo_seq(.)))
 ```
 
-![](Screenshot_2019-05-07_13-45-12.png){fig.height=4}
+![](Screenshot_2019-05-07_13-45-12.png){height=200px}
+
 
 - Each entry in sequence is itself a vector. sequence is called a
 “list-column”.
 
-## Using the whole sequence to find its length and its max xxx
+## Using the whole sequence to find its length and its max 
 
 ```{r, results="hide"}
 tibble(start = 1:7) %>%

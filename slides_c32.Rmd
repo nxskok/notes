@@ -15,7 +15,7 @@ output:
 ```{r child="preliminaries.Rmd", echo=F}
 ```
 
-xxx
+xxx put in a "packages for this section" each time
 
 # Course outline xxx
 
@@ -78,8 +78,6 @@ xxx
 ```{r, child="functions.Rmd"}
 ```
 
-xxx from here
-
 # Dates and times 
 
 ```{r, child="dates_and_times.Rmd"}
@@ -95,6 +93,10 @@ xxx from here
 
 ```{r, child="vector_matrix.Rmd"}
 ```
+
+# piece on bootstrap
+
+# piece on rstan
 
 # the end of the notes
 

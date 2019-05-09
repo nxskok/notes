@@ -28,7 +28,7 @@ rat7 <- read_fwf(my_url, fwf_widths(
 
 ## The “rat7” data
 
-```{r}
+```{r, paged.print=T}
 rat7
 ```
 
@@ -46,7 +46,7 @@ oranges <- read_delim(my_url, " ")
 
 ## The data
 
-```{r}
+```{r, paged.print=T}
 oranges
 ```
 
@@ -116,11 +116,11 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
 - Handy function ifelse, like Excel `=IF`.
 - Label cars with MPG over 34: xxx
 ```{r}
-g <- cars %>%
+cars %>%
   mutate(newlabel = ifelse(MPG > 34, car, "")) %>%
   ggplot(aes(x = weight, y = MPG, label = newlabel)) +
   geom_point() +
-  geom_text_repel()
+  geom_text_repel() -> g
 ```
 
 ## The plot
@@ -155,13 +155,13 @@ g
 you have to find them first.
 - Now try for lightest weight and worst gas-mileage cars: xxx
 ```{r}
-g <- cars %>%
+cars %>%
   mutate(tolabel = (weight == min(weight) |
     MPG == min(MPG))) %>%
   mutate(newlabel = ifelse(tolabel, car, "")) %>%
   ggplot(aes(x = weight, y = MPG, label = newlabel)) +
   geom_point() +
-  geom_text_repel()
+  geom_text_repel() -> g
 ```
 
 ## The plot
@@ -212,9 +212,9 @@ xx=sample(1:10, 5)
 xx
 saveRDS(xx, "xx.rds")
 rm(xx)
-xx # gome
-yy=readRDS("xx.rds")
-yy # back
+xx # gone 
+xx=readRDS("xx.rds")
+xx # back 
 ```
 
 

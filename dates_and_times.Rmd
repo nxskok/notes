@@ -5,7 +5,7 @@ library(lubridate)
 
 ## Dates
 - Dates represented on computers as “days since an origin”,
-typically Jan 1, 1970, with a negative date being before the origin: xxx
+typically Jan 1, 1970, with a negative date being before the origin: 
 
 ```{r, paged.print=T}
 mydates <- c("1970-01-01", "2007-09-04", "1931-08-05")
@@ -50,7 +50,7 @@ ddd <- read_csv(my_url)
 ddd
 ```
 
-## Dates in other formats xxx
+## Dates in other formats 
 
 - Preceding shows that dates should be stored as text in format
 yyyy-mm-dd (ISO standard).
@@ -61,7 +61,7 @@ tibble(usdates = c("05/27/2012", "01/03/2016", "12/31/2015")) %>%
   mutate(iso = mdy(usdates))
 ```
 
-## Trying to read these as UK dates xxx
+## Trying to read these as UK dates 
 
 ```{r, paged.print=T}
 tibble(usdates = c("05/27/2012", "01/03/2016", "12/31/2015")) %>%
@@ -73,7 +73,7 @@ but the other two make no sense.
 
 ## Our data frame's last column:
 
-- Back to this: xxx
+- Back to this: 
 
 ```{r, paged.print=F}
 ddd
@@ -90,7 +90,7 @@ ddd
 
 ## Are they really the same? 
 
-- Column `date2` was correctly converted from column `dunno`: xxx
+- Column `date2` was correctly converted from column `dunno`: 
 
 ```{r, paged.print=F}
 d4 %>% mutate(equal = identical(date, date2))
@@ -113,7 +113,7 @@ my_url <- "http://www.utsc.utoronto.ca/~butler/c32/pieces.txt"
 dates0 <- read_delim(my_url, " ")
 ```
 
-## Making some dates xxx
+## Making some dates 
 
 ```{r}
 dates0
@@ -136,7 +136,7 @@ created, other columns are what to make it out of.
 *disappear*.
 - The column `dates` is text, while `d` is a real date.
 
-## Extracting information from dates xxx
+## Extracting information from dates 
 
 ```{r, paged.print=T}
 newdates %>%
@@ -157,12 +157,13 @@ minutes, seconds:
 )))
 ```
 
-## Converting text to date-times: xxx
+## Converting text to date-times: 
 
 - Then get from this text using `ymd_hms`:
 ```{r, paged.print=F}
 dd %>% mutate(dt = ymd_hms(text))
 ```
+
 
 ## Timezones
 
@@ -170,11 +171,12 @@ dd %>% mutate(dt = ymd_hms(text))
 and the name of a timezone: xxx
 
 ```{r, paged.print=T}
-(dd %>% mutate(dt = ymd_hms(text, tz = "America/Toronto")) -> dd)
+(dd %>% mutate(dt = ymd_hms(text, tz = "America/Toronto")) %>% 
+   mutate(zone=tz(dt)) -> dd)
 ```
 
 ## Extracting time parts
-- As you would expect: xxx
+- As you would expect: 
 ```{r, paged.print=F}
 dd %>%
   select(-text) %>%
@@ -186,7 +188,7 @@ dd %>%
   )
 ```
 
-## Same times, but different time zone: xxx
+## Same times, but different time zone: 
 
 ```{r, paged.print=T}
 dd %>% mutate(oz = with_tz(dt, "Australia/Sydney"))
@@ -213,7 +215,7 @@ admit,discharge
 2016-08-31 21:00:00,2016-09-02 17:00:00
 ```
 
-## Do they get read in as date-times? xxx
+## Do they get read in as date-times? 
 
 - These ought to get read in and converted to date-times:
 
@@ -236,7 +238,7 @@ stays %>% mutate(stay = discharge - admit)
 ## Days
 
 - Fractional number of days would
-be better: xxx
+be better: 
 
 ```{r, paged.print=T}
 stays %>% mutate(stay_days = (discharge - admit) / ddays(1))

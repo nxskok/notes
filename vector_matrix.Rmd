@@ -7,7 +7,7 @@ Adds 2 to each element.
 ```{r}
 u <- c(2, 3, 6, 5, 7)
 v <- c(1, 8, 3, 2, 0)
-u + v # xxx
+u + v 
 ```
 
 - Elementwise addition. (Linear algebra: vector addition.)
@@ -60,13 +60,13 @@ u + w
 
 - Add 1 to first element of `u`, add 2 to second.
 - Go back to beginning of `w` to find something to add: add 1 to 3rd
-element of `u`, 2 to 4th element, 1 to 5th. xxx
+element of `u`, 2 to 4th element, 1 to 5th. 
 
-## How R does this xxx
+## How R does this 
 
 - Keep re-using shorter vector until reach length of longer one.
-- “recycling”.
-- if the longer vector's length not a multiple of the shorter vector's length, get a warning (probably not what you want). 
+- “Recycling”.
+- If the longer vector's length not a multiple of the shorter vector's length, get a warning (probably not what you want). 
 - Same idea is used when multiplying a vector by a number: the number
 keeps getting recycled.
 
@@ -169,7 +169,7 @@ solve(A)
 correct.
 
 ## Inner product
-- Vectors in R are column vectors, so just do the matrix multiplication (`t()` is transpose): xxx
+- Vectors in R are column vectors, so just do the matrix multiplication (`t()` is transpose): 
 
 ```{r}
 a <- c(1, 2, 3)

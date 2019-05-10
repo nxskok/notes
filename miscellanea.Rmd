@@ -114,7 +114,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   - the label, for the individual you want to label
   - blank text for those you don’t
 - Handy function ifelse, like Excel `=IF`.
-- Label cars with MPG over 34: xxx
+- Label cars with MPG over 34: 
 ```{r}
 cars %>%
   mutate(newlabel = ifelse(MPG > 34, car, "")) %>%
@@ -133,7 +133,7 @@ g
 - Suppose we knew that the cars we wanted to label were in rows 4 and
 9 of data frame.
 - How to use `ifelse` with row numbers? Define new column of row
-numbers, and then use it in `ifelse`, thus: xxx
+numbers, and then use it in `ifelse`, thus: 
 ```{r}
 g <- cars %>%
   mutate(row = row_number()) %>%
@@ -153,7 +153,7 @@ g
 ## Lightest weight and worst gas-mileage cars
 - Suppose you didn’t know which cars were the ones you wanted. Then
 you have to find them first.
-- Now try for lightest weight and worst gas-mileage cars: xxx
+- Now try for lightest weight and worst gas-mileage cars: 
 ```{r}
 cars %>%
   mutate(tolabel = (weight == min(weight) |
@@ -202,7 +202,7 @@ don’t need any more, and you know exactly why everything is there.
   - Con: some objects take time and effort to re-create, and you won’t
 want to do that every time.
 
-## Saving and restoring objects xxx
+## Saving and restoring objects 
 
 - It is possible to save and re-load large/complicated
 objects so that they don’t have to be re-created. Uses `saveRDS` and `readRDS`:

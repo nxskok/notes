@@ -1,5 +1,6 @@
 ## Packages for this section
 ```{r, eval=F}
+library(tidyverse)
 library(lubridate)
 ```
 
@@ -171,8 +172,9 @@ dd %>% mutate(dt = ymd_hms(text))
 and the name of a timezone: xxx
 
 ```{r, paged.print=T}
-(dd %>% mutate(dt = ymd_hms(text, tz = "America/Toronto")) %>% 
-   mutate(zone=tz(dt)) -> dd)
+dd %>% 
+  mutate(dt = ymd_hms(text, tz = "America/Toronto")) -> dd
+dd %>% mutate(zone = tz(dt))
 ```
 
 ## Extracting time parts
@@ -191,7 +193,9 @@ dd %>%
 ## Same times, but different time zone: 
 
 ```{r, paged.print=T}
-dd %>% mutate(oz = with_tz(dt, "Australia/Sydney"))
+dd %>%
+  select(dt) %>%
+  mutate(oz = with_tz(dt, "Australia/Sydney"))
 ```
 
 In more detail: 

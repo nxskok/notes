@@ -1,3 +1,11 @@
+## Packages needed for this section
+
+```{r, eval=F}
+library(tidyverse)
+library(ggrepel)
+```
+
+
 ## How do you read a file like this?
 
 ```
@@ -208,13 +216,13 @@ want to do that every time.
 objects so that they don’t have to be re-created. Uses `saveRDS` and `readRDS`:
 
 ```{r, error=T}
-xx=sample(1:10, 5)
+xx <- sample(1:10, 5)
 xx
 saveRDS(xx, "xx.rds")
 rm(xx)
-xx # gone 
-xx=readRDS("xx.rds")
-xx # back 
+xx # gone
+xx <- readRDS("xx.rds")
+xx # back
 ```
 
 

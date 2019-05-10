@@ -19,6 +19,10 @@ xxx put in a "packages for this section" each time
 
 # Course outline xxx
 
+```{r, child="outline.Rmd"}
+```
+
+
 # Running R
 
 ```{r child="running_R.Rmd"}

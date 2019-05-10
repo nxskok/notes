@@ -1,3 +1,7 @@
+## Packages for this section
+
+- This is all base R! No packages needed, not even `tidyverse`.
+
 ## Vector addition
 
 
@@ -7,7 +11,7 @@ Adds 2 to each element.
 ```{r}
 u <- c(2, 3, 6, 5, 7)
 v <- c(1, 8, 3, 2, 0)
-u + v 
+u + v
 ```
 
 - Elementwise addition. (Linear algebra: vector addition.)

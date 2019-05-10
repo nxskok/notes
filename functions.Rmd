@@ -1,3 +1,10 @@
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+```
+
+
 ## Don’t repeat yourself
 - See this:
 ```{r}

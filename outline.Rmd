@@ -42,12 +42,13 @@ Wickham and Garrett Grolemund, publ.
 O’Reilly, ISBN 978-1-491-91039-9. Also
 available (free) online 
 [here](http://r4ds.had.co.nz/).
+- [PASIAS](http://ritsokiguess.site/pasias/)
 
 ## Structure of course
 - 3 hours/week of class time.
 - Of these, 1 hour in computer lab (“tutorial”):
 - practice what you learned from lecture
-- I give you lab exercises to work on, with answers, or you can work on
+- I give you problems to work through, with answers, or you can work on
 your assignment.
 - Get help if needed (instructor/TA available)
 

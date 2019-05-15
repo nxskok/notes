@@ -9,6 +9,13 @@ Sport.
   concentration, body mass index, percent body fat.
 - Values separated by tabs (which impacts reading in).
 
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+```
+
+
 ## Reading data into R
 - Use `read_tsv` (“tab-separated values”), like `read_csv`.
 - Data in `ais.txt`:

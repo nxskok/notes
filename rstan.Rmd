@@ -1,0 +1,181 @@
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+library(rstan)
+```
+
+## Bayesian and frequentist inference
+
+- The inference philosophy that we have learned so far says that:
+  - parameters to be estimated are *fixed* but *unknown*
+  - randomness from here: if we were to take another sample, we'd (probably) get different results. 
+- This is called "frequentist" or "repeated-sampling" inference.
+- Bayesian inference says:
+  - *everything* is random, parameters and data, and has some probability distribution
+- Ingredients:
+  - **prior distribution**: distribution of parameters before seeing data.
+  - **likelihood**: distribution of data if the parameters are known (model)
+  - **posterior distribution**: distribution of parameters *after* seeing data.
+  
+## Distribution of parameters
+
+- Instead of having a point or interval estimate of a parameter, we have an entire distribution
+- so in Bayesian statistics we can talk about eg.
+  - probability that a parameter is bigger than some value
+  - probability that a parameter is close to some value
+  
+- Name comes from Bayes' Theorem, which here says
+
+> posterior is proportional to likelihood times prior
+
+- more discussion about this is in [a blog post](http://ritsokiguess.site/docs/2018/02/28/working-my-way-back-to-you-a-re-investigation-of-rstan/). 
+
+## An example
+
+- Suppose we have these (integer) observations:
+
+```{r}
+(x=c(0,4,3,6,3,3,2,4))
+```
+
+- Suppose we believe that these come from a Poisson distribution with a mean $\lambda$ that we want to estimate.
+- We need a prior distribution for $\lambda$. I will (for some reason) take a $\chi^2$ distribution with 4 df (that has mean 4). Normally this would come from your knowledge of the data-generating *process*.
+- The Poisson likelihood can be written down (see over).
+
+## Some algebra
+
+- We have $n=8$ observations $x_i$, so the Poisson likelihood is
+
+$$ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{n\lambda} \lambda^S, $$
+where $S=\sum_{i=1}^n x_i$. 
+
+- then you write the chi-squared prior density (as a function of $\lambda$):
+
+$$ C \lambda^1 e^{-\lambda/2} $$
+where $C$ is a constant
+
+- and then you multiply these together and try to recognize the distributional form. 
+
+- Requires too much intelligence (and this is a simple case).
+
+## Sampling from the posterior distribution
+
+- Wouldn't it be nice if we could just *sample* from the posterior distribution? Then we would be able to compute it as accurately as we want.
+
+- Metropolis and Hastings: devise a Markov chain (C62) whose limiting distribution is the posterior you want, and then sample from that Markov chain (easy), allowing enough time to get close enough to the limiting distribution.
+
+- Stan: uses a modern variant that is more efficient (called Hamiltonian Monte Carlo), implemented in R package `rstan`. 
+
+- Write Stan code in a file, compile it and sample from it.
+
+## Components of Stan code: the model
+
+```
+model {
+// likelihood
+x ~ poisson(lambda);
+}
+```
+
+This is how you say "$X$ has a Poisson distribution with mean $\lambda$".
+
+## Components of Stan code: the prior distribution
+
+```
+model {
+// prior
+lambda ~ chi_square(5);
+// likelihood
+x ~ poisson(lambda);
+}
+```
+
+## Components of Stan code: data and parameters (first in the Stan code)
+
+```
+data {
+int x[8];
+}
+
+parameters {
+real<lower=0> lambda;
+}
+```
+
+## Compile and sample from the model
+
+```{r, eval=F}
+poisson1_code=stan_model(file = "poisson1.stan")
+```
+
+- set up data
+
+```{r}
+poisson1_data=list(x=x)
+```
+
+- sample
+
+```{r, eval=F}
+poisson1_fit=sampling(poisson1_code, data=poisson1_data)
+```
+
+```{r, echo=F, results="hide", cache=T}
+poisson1_code=stan_model(file = "poisson1.stan")
+poisson1_data=list(x=x)
+poisson1_fit=sampling(poisson1_code, data=poisson1_data)
+```
+
+
+```{r}
+poisson1_fit
+```
+
+- This summarizes the posterior distribution of $\lambda$; the posterior mean is 3.25, with a 95% posterior interval of 2.15 to 4.66. (The probability that $\lambda$ is between these two values really is 95%.)
+
+## Making the code more general
+
+- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. 
+- To make the code more general (for any estimation of a Poisson mean from any sample size), add the sample size and the prior df to the `data`, thus:
+
+```
+data {
+  int<lower=1> n;
+  real<lower=0> prior_df;
+  int x[n];
+}
+...
+model {
+// prior
+lambda ~ chi_square(prior_df);
+// likelihood
+x ~ poisson(lambda);
+}
+```
+
+- Compile again:
+
+```{r, eval=F}
+poisson2_code=stan_model(file = "poisson2.stan")
+```
+
+- set up the data again including the new things we need:
+
+```{r}
+poisson2_data=list(x=x, n=length(x), prior_df=4)
+```
+
+- sample again
+
+```{r}
+poisson2_fit=sampling(poisson1_code, data=poisson2_data)
+```
+
+
+## output should be the same (to within randomness)
+
+```{r}
+poisson2_fit
+```
+

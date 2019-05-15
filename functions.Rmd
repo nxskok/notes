@@ -2,6 +2,7 @@
 
 ```{r, eval=F}
 library(tidyverse)
+library(broom)
 ```
 
 

@@ -169,7 +169,7 @@ dd %>% mutate(dt = ymd_hms(text))
 ## Timezones
 
 - Default timezone is “Universal Coordinated Time”. Change it via `tz=`
-and the name of a timezone: xxx
+and the name of a timezone: 
 
 ```{r, paged.print=T}
 dd %>% 

@@ -16,5 +16,10 @@ library(PMCMRplus)
 library(leaps)
 library(lubridate)
 library(ggrepel)
+library(rstan)
+library(conflicted)
+conflict_prefer("select", "dplyr")
+conflict_prefer("filter", "dplyr")
+conflict_prefer("extract", "rstan")
 ```
 

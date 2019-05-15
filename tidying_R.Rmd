@@ -32,6 +32,14 @@ columns, which are levels of a factor `feed`.
 saying which feed that weight goes with.
   - Then we can run `aov`.
   
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+library(readxl)
+```
+
+  
 ## Reading in the pig data
 
 ```{r, message=F}
@@ -347,6 +355,12 @@ g
 ## Doing things with data frames
 Let’s go back to our Australian athletes: 
 
+```{r read-athletes, echo=F}
+my_url="http://www.utsc.utoronto.ca/~butler/c32/ais.txt"
+athletes=read_tsv(my_url)
+```
+
+
 ```{r}
 athletes
 ```
@@ -501,7 +515,7 @@ athletes %>%
 
 ## Create new variables from old ones
 
-```{r}
+```{r new-from-old}
 athletes %>%
   mutate(wt_lb = Wt * 2.2) %>%
   select(Sport, Wt, wt_lb)
@@ -511,7 +525,7 @@ athletes %>%
 Output is always data frame unless you explicitly turn it into something
 else, eg. the weight of the heaviest athlete, as a number:
 
-```{r}
+```{r to-number}
 athletes %>% arrange(desc(Wt)) %>% pluck("Wt", 1)
 ```
 
@@ -582,7 +596,7 @@ What are actual names of those countries in `iso2`?
 ## Actual country names
 Found actual country names to go with those abbreviations, in spreadsheet: 
 
-```{r}
+```{r country-codes}
 f <- tempfile()
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
 download.file(my_url, f)

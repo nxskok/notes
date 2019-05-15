@@ -1,3 +1,11 @@
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+library(broom)
+```
+
+
 ## The pigs revisited
 
 - Recall pig feed data, after we tidied it: 

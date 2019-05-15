@@ -7,6 +7,13 @@ software to analyze.
   - Spreadsheet data saved as `.csv` file.
   - “Delimited” data such as values separated by spaces.
   - Actual Excel spreadsheets.
+  
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+```
+
 
 ## A spreadsheet
 
@@ -50,14 +57,14 @@ appear bottom right.
 - ...and get rid of the template document (leaving the first four lines).
 - Make a code chunk and in it put this. Run it.
 
-```{r}
+```{r, eval=F}
 library(tidyverse)
 ```
 
 ## Reading in the file
 
-- Use read_csv with the name of the file, in quotes. Save the read-in
-file in something, here called mydata. Make a new code chunk for
+- Use `read_csv` with the name of the file, in quotes. Save the read-in
+file in something, here called `mydata`. Make a new code chunk for
 this:
 
 ```{r}
@@ -134,23 +141,23 @@ into separate (bigger) window.
 - It is always a good idea to look at your data after you have read it in,
 to make sure you have believable numbers (and the right number of
 individuals and variables).
+- Quick check for errors: these often show up as values too high or too
+low, so the min and/or max will be unreasonable.
 - Five-number summary:
 
 ```{r}
 summary(mydata)
 ```
 
-- For quantitative variables, a five-number summary plus the mean.
-- For categorical variables, count of how many rows.
-- Quick check for errors: these often show up as values too high or too
-low, so the min and/or max will be unreasonable.
+- Quantitative, five-number summary plus mean.
+- Categorical, how many rows.
 
 ## Reading from a URL
 - Any data file on the Web can be read directly.
 - [Example data:](http://www.utsc.utoronto.ca/~butler/c32/global.csv).
 - Use URL instead of filename.
 - I like to save the URL in a variable first (because URLs tend to be
-long), and then put that variable in the read_ function:
+long), and then put that variable in the `read_` function:
 
 ```{r}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/global.csv"
@@ -198,7 +205,7 @@ CUPPS 10
 
 - This file was on my computer so I uploaded it to <http://rstudio.cloud>
 first.
-- This time, read_delim, and we also have to say what the thing is
+- This time, `read_delim`, and we also have to say what the thing is
 separating the values:
 
 ```{r}
@@ -236,10 +243,10 @@ soap
 
 ![](Screenshot_2019-04-24_20-16-24.png){height=180px}
 
-- read_delim will not work: values separated by more than one space.
+- `read_delim` will not work: values separated by more than one space.
 - The number of spaces between values is not constant, because there
 is one fewer space before the 10.
-- read_table works for this.
+- `read_table` works for this.
 
 ## Reading in column-aligned data
 
@@ -262,7 +269,7 @@ drugs
 
 - It is now a workbook with a second sheet called “notes” (that we
 don’t want).
-- Install package readxl first.
+- Install package `readxl` first.
 
 ## Reading it in
 

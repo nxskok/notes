@@ -22,6 +22,15 @@ Certainly not. Actual attendance depends on many things, eg.:
   - day of week
   - weather
   - random chance
+  
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+library(smmr)
+library(PMCMRplus)
+```
+
 
 ## Reading the attendances
 ...as a `.csv` file:
@@ -798,7 +807,7 @@ library(devtools)
 install_github("nxskok/smmr")
 ```
 - Then load it:
-```{r}
+```{r, eval=F
 library(smmr)
 ```
 
@@ -1640,8 +1649,12 @@ oneway.test(density~group,data=rats)
 - Lives in package `PMCMRplus` (also `userfriendlyscience`). Install
 first.
 
-```{r games-howell, warning=F}
+```{r, eval=F}
 library(PMCMRplus)
+```
+
+
+```{r games-howell, warning=F}
 gamesHowellTest(density~factor(group),data=rats)
 ```
 

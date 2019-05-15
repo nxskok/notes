@@ -1,5 +1,5 @@
 ## Summarizing data in R
-- Have seen summary (5-number summary of each column). But what
+- Have seen `summary` (5-number summary of each column). But what
 if we want:
   - a summary or two of just one column
   - a count of observations in each category of a categorical variable
@@ -12,6 +12,18 @@ have a sequence of pipes.
 - Summaries include: mean, median, min, max, sd, IQR, quantile (for
 obtaining quartiles or any percentile), n (for counting observations).
 - Use our Australian athletes data again.
+
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+```
+
+```{r, echo=F, message=F}
+my_url="http://www.utsc.utoronto.ca/~butler/c32/ais.txt"
+athletes=read_tsv(my_url)
+```
+
 
 ## Summarizing one column
 - Mean height: 

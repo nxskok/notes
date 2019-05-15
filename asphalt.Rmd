@@ -11,6 +11,16 @@ quality of pavement depend on these?
   - `run` 2 data collection periods: run 1 for run 1, 0 for run 2.
 - `rut.depth` response. Depends on other variables, how?
 
+## Packages for this section
+
+```{r, eval=F}
+library(MASS)
+library(tidyverse)
+library(broom)
+library(leaps)
+```
+
+
 ## Getting set up 
 
 ```{r}

@@ -1,11 +1,27 @@
-\frametitle{Slide with Plot}
-\protect\hypertarget{slide-with-plot}{}
+\frametitle{output should be the same (to within randomness)}
+\protect\hypertarget{output-should-be-the-same-to-within-randomness}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(pressure)}
+\NormalTok{poisson2_fit}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{slides_c32_files/figure-beamer/pressure-1.pdf}
+\begin{verbatim}
+## Inference for Stan model: poisson1.
+## 4 chains, each with iter=2000; warmup=1000; thin=1;
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+##
+##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
+## lambda 3.22    0.02 0.62 2.11 2.78 3.19 3.62  4.55
+## lp__   4.28    0.02 0.71 2.19 4.12 4.55 4.74  4.79
+##        n_eff Rhat
+## lambda  1491    1
+## lp__    1495    1
+##
+## Samples were drawn using NUTS(diag_e) at Tue May 14 22:56:12 2019.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at
+## convergence, Rhat=1).
+\end{verbatim}
 

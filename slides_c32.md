@@ -19,9 +19,220 @@ output:
 
 
 
-xxx put in a "packages for this section" each time
+# Course outline 
 
-# Course outline xxx
+
+## In this course
+- Data analysis: use mostly known (to you) statistical methods to gain
+insight about data.
+- Use two software packages, SAS and R — I assume you know nothing
+about these.
+- Look at lots of examples.
+- “Get your hands dirty”.
+- Writing reports.
+- Other tasks in R and SAS.
+
+## Prerequisites xxx check for C32/C33
+
+- You need a second Statistics course that covers statistical inference,
+one of:
+- STAB57 (or equivalent such as STA 261, STA 248)
+- STAB27 (or equivalent such as MGEB12, PSYC08, STA 221)
+- I check prerequisites.
+
+## The instructor
+- Ken Butler, office IC 471, e-mail:
+mailto:butler@utsc.utoronto.ca
+- Lectures: both of Tuesday 13:00-14:00 in SW 309, Thursday
+12:00-13:00 in SW 319. Tutorial: one of Wednesday 10:00-11:00,
+11:00-12:00, 15:00-16:00 or 16:00-17:00 in BV 498.
+- Office hours: Tuesday 14:00-15:30, Thursday 10:30-11:30. I am likely
+also around on Monday. Or by appointment (e-mail me, address
+above, to set one up).
+- course website [**here**](http://ritsokiguess.site/STAC32). 
+- This course is on Quercus. Go [**here**](http://q.utoronto.ca), log in, and find
+this course among your courses. Assignment hand-in, grading and
+marks will be done through Quercus.
+- E-mail: Use only UTSC/UToronto e-mail address. I aim to respond
+within two working days. Non-simple questions: office hours/tutorial.
+
+## Text(s)
+
+  \begin{columns}
+    \begin{column}{0.7\textwidth}
+Recommended:
+  \begin{itemize}
+\item ``SAS Essentials: Mastering SAS for data analytics'' by Alan C.\
+  Elliott and Wayne A.\ Woodward, publ.\ Wiley. ISBN 978-1-119-04216-7.
+\item ``R for Data Science'' by Hadley Wickham and Garrett Grolemund,
+  publ.\ O'Reilly, ISBN 978-1-491-91039-9. Also available (free)
+  online at \url{http://r4ds.had.co.nz/}.
+  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{ritsokiguess.site/pasias}
+\end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \includegraphics[width=1in]{Screenshot_2018-08-17_12-24-26.png}
+
+      \includegraphics[width=1in]{r4ds}
+    \end{column}
+  \end{columns}
+
+
+
+## Structure of course
+- 3 hours/week of class time.
+- Of these, 1 hour in computer lab (“tutorial”):
+  - practice what you learned from lecture
+  - you can work on your assignment or on the additional problems listed there.
+  - Get help if needed (instructor/TA available)
+
+## Course material (C32)
+For each of R (first) and then SAS:
+
+- Installation / connection
+- Reading data files (of different sorts)
+- Making graphs
+- Numerical summaries
+- Statistical inference
+- Reports
+- Tidying and organizing data
+- Case studies
+- Functions / arrays
+- Dates and times
+- Miscellaneous tasks
+
+## Course material (C33)
+
+\begin{columns}
+  \begin{column}{0.6\textwidth}
+    R:
+    \begin{itemize}
+\item Installation / connection
+\item Reading data files (of different sorts)
+\item Making graphs
+\item Numerical summaries
+\item Statistical inference
+\item Reports
+\item Tidying and organizing data
+\item Case studies
+\item Functions
+\item Dates and times
+\item Miscellaneous tasks
+\item Bootstrap
+\item Bayesian inference with \texttt{rstan}
+
+    \end{itemize}
+  \end{column}
+  
+  \begin{column}{0.4\textwidth}
+  SAS:
+  \begin{itemize}
+  \item Connection 
+\item Reading in data
+\item Graphics
+\item Basic inference
+\item ANOVA
+\item Regression 
+  
+  \end{itemize}
+  \end{column}
+\end{columns}
+
+
+## Laptop use
+- If you have a laptop, you may find it useful for following along with
+the use of the software or for taking notes.
+- Checking social media or other non-course-specific activity during
+class distracts from your learning. If you are going to get the most
+from this course, you need to pay full attention in class. Multi-tasking
+will not help you.
+- Using your laptop for non-course activity will also distract those
+around you and creates a worse learning experience for everybody. If
+somebody’s inappropriate laptop use is distracting you, let me know. I
+will create laptop-free zones in class if necessary.
+
+## Assessment
+
+
+ \begin{tabular}{p{3.5in}r}
+    \hline
+    Item & Weight\\
+    \hline
+    Assignments (most weeks after first). Can study with classmates, but what you hand in must
+    be \textbf{entirely your own work}. Due Thursdays at 11:59pm. & 15\\
+    \hline
+    Midterm exam, 2 hours, open book (see over) & 30\\
+    \hline
+    Group data analysis report (1--5 people/group). Data analysis on data set of your choosing,
+    using R/SAS/both, report written as described in class.
+    Due last
+    day of classes at 11:59pm. & 10 \\
+    \hline
+    Final exam, 3 hours, open book (see over). \textbf{You must pass
+    the final exam to guarantee passing the course.} & 45\\
+    \hline
+    Total & 100\\
+    \hline
+  \end{tabular}
+
+## Open book, defined
+“Open book” means these are permissible, written/printed versions only: 
+
+- the SAS text
+- the R text
+- my lecture notes
+- assignments, yours (graded) and mine (with solutions)
+- any other notes that you have made in this course.
+
+Old exams are not permitted.
+
+## Missed work and documentation
+- No make-up assignments or tests in this course.
+- Work handed in late may or may not be accepted (instructor’s
+discretion; instructor’s decision is final).
+- If you miss assessed work due to illness/injury, complete form 
+[**here**](http://www.illnessverification.utoronto.ca/)
+and submit to instructor within 10 working days of due date.
+- Weight of missed work with appropriate documentation transferred to
+other assessments of same type.
+
+## Academic integrity
+- Read and understand [**this**](http://www.utoronto.ca/academicintegrity/).
+- Academic dishonesty devalues your degree and those of all other
+students.
+- Cheating and plagiarism taken very seriously.
+- Examples of academic offences:
+- Using someone else’s words/ideas without acknowledgement.
+- Obtaining or providing unauthorized assistance on an assignment.
+- On test/exam, looking at someone else’s answers or allowing someone
+else to look at yours.
+- Pretending to be someone else.
+- Falsifying or altering required documentation (eg. doctor’s notes).
+
+## Penalties
+- Penalties include (depending on seriousness of offence) a mark of zero
+for the work concerned, a mark of zero for the entire course, or
+suspension/expulsion from the University.
+- Penalties are (much) more severe for those caught a second (or third)
+time.
+- “Students who cheat and are not caught will be haunted by the
+memory of their misdeeds for the rest of their miserable lives.” (From 
+[here](https://philosophy.osu.edu/sites/philosophy.osu.edu/files/1100%20Brown_2.pdf).)
+
+## Accessibility statement
+
+> Students with diverse learning styles and needs are welcome in this
+> course. In particular, if you have a disability/health consideration
+> that may require accommodations, please feel free to approach
+> me and/or the AccessAbility Services Office as soon as possible.
+> I will work with you and AccessAbility Services to ensure you can
+> achieve your learning goals in this course. Enquiries are confiden-
+> tial. The UTSC AccessAbility Services staff (located in S302) are
+> available by appointment to assess specific needs, provide referrals
+> and arrange appropriate accommodations: (416) 287-7560 or by
+> e-mail at `ability@utsc.utoronto.ca`.
+
+
 
 # Running R
 
@@ -252,6 +463,14 @@ software to analyze.
   - Spreadsheet data saved as `.csv` file.
   - “Delimited” data such as values separated by spaces.
   - Actual Excel spreadsheets.
+  
+## Packages for this section
+
+
+```r
+library(tidyverse)
+```
+
 
 ## A spreadsheet
 
@@ -302,8 +521,8 @@ library(tidyverse)
 
 ## Reading in the file
 
-- Use read_csv with the name of the file, in quotes. Save the read-in
-file in something, here called mydata. Make a new code chunk for
+- Use `read_csv` with the name of the file, in quotes. Save the read-in
+file in something, here called `mydata`. Make a new code chunk for
 this:
 
 
@@ -405,6 +624,8 @@ into separate (bigger) window.
 - It is always a good idea to look at your data after you have read it in,
 to make sure you have believable numbers (and the right number of
 individuals and variables).
+- Quick check for errors: these often show up as values too high or too
+low, so the min and/or max will be unreasonable.
 - Five-number summary:
 
 
@@ -429,17 +650,15 @@ summary(mydata)
 ## 
 ```
 
-- For quantitative variables, a five-number summary plus the mean.
-- For categorical variables, count of how many rows.
-- Quick check for errors: these often show up as values too high or too
-low, so the min and/or max will be unreasonable.
+- Quantitative, five-number summary plus mean.
+- Categorical, how many rows.
 
 ## Reading from a URL
 - Any data file on the Web can be read directly.
 - [Example data:](http://www.utsc.utoronto.ca/~butler/c32/global.csv).
 - Use URL instead of filename.
 - I like to save the URL in a variable first (because URLs tend to be
-long), and then put that variable in the read_ function:
+long), and then put that variable in the `read_` function:
 
 
 ```r
@@ -514,7 +733,7 @@ CUPPS 10
 
 - This file was on my computer so I uploaded it to <http://rstudio.cloud>
 first.
-- This time, read_delim, and we also have to say what the thing is
+- This time, `read_delim`, and we also have to say what the thing is
 separating the values:
 
 
@@ -608,10 +827,10 @@ soap
 
 ![](Screenshot_2019-04-24_20-16-24.png){height=180px}
 
-- read_delim will not work: values separated by more than one space.
+- `read_delim` will not work: values separated by more than one space.
 - The number of spaces between values is not constant, because there
 is one fewer space before the 10.
-- read_table works for this.
+- `read_table` works for this.
 
 ## Reading in column-aligned data
 
@@ -660,7 +879,7 @@ drugs
 
 - It is now a workbook with a second sheet called “notes” (that we
 don’t want).
-- Install package readxl first.
+- Install package `readxl` first.
 
 ## Reading it in
 
@@ -702,6 +921,14 @@ Sport.
   blood cell counts, haematocrit and haemoglobin (blood), ferritin
   concentration, body mass index, percent body fat.
 - Values separated by tabs (which impacts reading in).
+
+## Packages for this section
+
+
+```r
+library(tidyverse)
+```
+
 
 ## Reading data into R
 - Use `read_tsv` (“tab-separated values”), like `read_csv`.
@@ -793,7 +1020,7 @@ graphs.
 ggplot(athletes, aes(x = Sport)) + geom_bar()
 ```
 
-![plot of chunk unnamed-chunk-33](figure/unnamed-chunk-33-1.png)
+![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.png)
 
 
 ## Histogram of body mass index
@@ -803,7 +1030,7 @@ ggplot(athletes, aes(x = Sport)) + geom_bar()
 ggplot(athletes, aes(x = BMI)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34-1.png)
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png)
 
 ## Which sports are played by males and females?
 
@@ -815,7 +1042,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
   geom_bar(position = "dodge")
 ```
 
-![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.png)
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png)
 
 ## BMI by gender
 
@@ -824,7 +1051,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
 ggplot(athletes, aes(x = Sex, y = BMI)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.png)
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png)
 
 ## Height vs. weight
 
@@ -835,7 +1062,7 @@ Scatterplot:
 ggplot(athletes, aes(x = Ht, y = Wt)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.png)
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.png)
 
 ## With regression line
 
@@ -845,7 +1072,7 @@ ggplot(athletes, aes(x = Ht, y = Wt)) +
   geom_point() + geom_smooth(method = "lm")
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png)
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png)
 
 ## BMI by sport and gender
 
@@ -855,7 +1082,7 @@ ggplot(athletes, aes(x = Sport, y = BMI, colour = Sex)) +
   geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png)
+![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.png)
 
 ## Height and weight by gender
 
@@ -865,7 +1092,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png)
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png)
 
 ## Height by weight for each sport, with facets
 
@@ -875,7 +1102,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport)
 ```
 
-![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.png)
+![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.png)
 
 ## Filling each facet
 
@@ -888,14 +1115,14 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport, scales = "free")
 ```
 
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png)
+![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46-1.png)
 
 
 # Numerical summaries: more detailed
 
 
 ## Summarizing data in R
-- Have seen summary (5-number summary of each column). But what
+- Have seen `summary` (5-number summary of each column). But what
 if we want:
   - a summary or two of just one column
   - a count of observations in each category of a categorical variable
@@ -908,6 +1135,16 @@ have a sequence of pipes.
 - Summaries include: mean, median, min, max, sd, IQR, quantile (for
 obtaining quartiles or any percentile), n (for counting observations).
 - Use our Australian athletes data again.
+
+## Packages for this section
+
+
+```r
+library(tidyverse)
+```
+
+
+
 
 ## Summarizing one column
 - Mean height: 
@@ -1112,6 +1349,16 @@ Certainly not. Actual attendance depends on many things, eg.:
   - day of week
   - weather
   - random chance
+  
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(smmr)
+library(PMCMRplus)
+```
+
 
 ## Reading the attendances
 ...as a `.csv` file:
@@ -1210,7 +1457,7 @@ glimpse(jays)
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-55-1.png)
+![plot of chunk unnamed-chunk-62](figure/unnamed-chunk-62-1.png)
 
 
 ## Comments
@@ -1431,7 +1678,7 @@ it is normal enough, given the sample size.
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-60-1.png)
+![plot of chunk unnamed-chunk-67](figure/unnamed-chunk-67-1.png)
 
 - You might say that this is not normal enough for a sample size of $n = 25$,
 in which case you don’t trust the $t$-test result.
@@ -1500,7 +1747,7 @@ kids
 ggplot(kids, aes(x = group, y = score)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-63](figure/unnamed-chunk-63-1.png)
+![plot of chunk unnamed-chunk-70](figure/unnamed-chunk-70-1.png)
 
 ## Two kinds of two-sample t-test
 
@@ -1918,7 +2165,7 @@ g = ggplot(d, aes(x = n, y = power)) + geom_point() +
 g
 ```
 
-![plot of chunk unnamed-chunk-78](figure/unnamed-chunk-78-1.png)
+![plot of chunk unnamed-chunk-85](figure/unnamed-chunk-85-1.png)
 
 ## Power curves for means
 
@@ -2011,7 +2258,7 @@ g = ggplot(d, aes(x = mean, y = power, colour = n)) +
 g
 ```
 
-![plot of chunk unnamed-chunk-84](figure/unnamed-chunk-84-1.png)
+![plot of chunk unnamed-chunk-91](figure/unnamed-chunk-91-1.png)
 
 ## Comments
 - When `mean=10`, that is, the true mean equals the null mean, $H_0$ is
@@ -2048,7 +2295,7 @@ g=ggplot(d, aes(x=n, y=power, colour=mean)) + geom_point() + geom_line() +
 g
 ```
 
-![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86-1.png)
+![plot of chunk unnamed-chunk-93](figure/unnamed-chunk-93-1.png)
 
 ## Two-sample power
 
@@ -2306,7 +2553,7 @@ Reject null; mean greater than 160.
 ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-94](figure/unnamed-chunk-94-1.png)
+![plot of chunk unnamed-chunk-101](figure/unnamed-chunk-101-1.png)
 
 Skewed to right. Should look at median.
 
@@ -2382,8 +2629,7 @@ library(devtools)
 install_github("nxskok/smmr")
 ```
 - Then load it:
-
-```r
+```{r, eval=F
 library(smmr)
 ```
 
@@ -2850,7 +3096,7 @@ line.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-119](figure/unnamed-chunk-119-1.png)
+![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.png)
 
 - Points should follow the straight line. Bottom left one way off, so
 normality questionable here: outlier.
@@ -2877,7 +3123,7 @@ d=tibble(x=rnorm(200))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-120](figure/unnamed-chunk-120-1.png)
+![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.png)
 
 As normal as you could wish for.
 
@@ -2888,7 +3134,7 @@ As normal as you could wish for.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-121](figure/unnamed-chunk-121-1.png)
+![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.png)
 
 ## Normal data, small sample 
 
@@ -2912,7 +3158,7 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-123](figure/unnamed-chunk-123-1.png)
+![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.png)
 
 Good, apart from the highest and lowest points being slightly off. I’d call
 this good.
@@ -2925,7 +3171,7 @@ d=tibble(x=rchisq(100,10))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-124](figure/unnamed-chunk-124-1.png)
+![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.png)
 
 Somewhat skewed to right.
 
@@ -2936,7 +3182,7 @@ Somewhat skewed to right.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.png)
+![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.png)
 
 Somewhat opening-up curve.
 
@@ -2960,7 +3206,7 @@ Definitely skewed to right.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.png)
+![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.png)
 
 
 Clear upward-opening curve.
@@ -2984,7 +3230,7 @@ Long tails (or a very sharp peak).
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.png)
+![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.png)
 
 Low values too low and high values too high for normal.
 
@@ -3076,7 +3322,7 @@ standard reading method.
 ggplot(kids,aes(x=group,y=score))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.png)
+![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.png)
 
 ## Facetted normal quantile plots
 Done this way:
@@ -3087,7 +3333,7 @@ ggplot(kids,aes(sample=score))+stat_qq()+stat_qq_line()+
 facet_wrap(~group)
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.png)
+![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.png)
 
 ## Comments
 - These plots show no problems with normality. Both groups are more
@@ -3368,7 +3614,7 @@ rats %>% sample_n(12)
 ggplot(rats,aes(y=density,x=group))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-142](figure/unnamed-chunk-142-1.png)
+![plot of chunk unnamed-chunk-148](figure/unnamed-chunk-148-1.png)
 
 ## Or, arranging groups in data (logical) order
 
@@ -3377,7 +3623,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-143](figure/unnamed-chunk-143-1.png)
+![plot of chunk unnamed-chunk-149](figure/unnamed-chunk-149-1.png)
 
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
@@ -3580,7 +3826,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-150](figure/unnamed-chunk-150-1.png)
+![plot of chunk unnamed-chunk-156](figure/unnamed-chunk-156-1.png)
 
 Assumptions:
 - Normally distributed data within each group
@@ -3594,7 +3840,7 @@ ggplot(rats, aes(sample = density)) + stat_qq() + stat_qq_line() +
   facet_wrap( ~ group)
 ```
 
-![plot of chunk unnamed-chunk-151](figure/unnamed-chunk-151-1.png)
+![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.png)
 
 ## The assumptions
 - Normally-distributed data within each group
@@ -3763,6 +4009,11 @@ first.
 
 ```r
 library(PMCMRplus)
+```
+
+
+
+```r
 gamesHowellTest(density~factor(group),data=rats)
 ```
 
@@ -4008,6 +4259,15 @@ columns, which are levels of a factor `feed`.
 saying which feed that weight goes with.
   - Then we can run `aov`.
   
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(readxl)
+```
+
+  
 ## Reading in the pig data
 
 
@@ -4152,7 +4412,7 @@ Feed 3 is best, feed 1 worst.
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-165](figure/unnamed-chunk-165-1.png)
+![plot of chunk unnamed-chunk-173](figure/unnamed-chunk-173-1.png)
 
 Feed 2 has an outlier, but there are only 5 pigs in each group, and the
 conclusion is so clear that I am OK with this.
@@ -4604,7 +4864,7 @@ weather_tidy %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-187](figure/unnamed-chunk-187-1.png)
+![plot of chunk unnamed-chunk-195](figure/unnamed-chunk-195-1.png)
 
 ## Summary of tidying “verbs”
 
@@ -4627,6 +4887,27 @@ g
 
 ## Doing things with data frames
 Let’s go back to our Australian athletes: 
+
+
+```
+## Parsed with column specification:
+## cols(
+##   Sex = col_character(),
+##   Sport = col_character(),
+##   RCC = col_double(),
+##   WCC = col_double(),
+##   Hc = col_double(),
+##   Hg = col_double(),
+##   Ferr = col_double(),
+##   BMI = col_double(),
+##   SSF = col_double(),
+##   `%Bfat` = col_double(),
+##   LBM = col_double(),
+##   Ht = col_double(),
+##   Wt = col_double()
+## )
+```
+
 
 
 ```r
@@ -5464,6 +5745,15 @@ generalize to “this windmill at all times”.
   - Relationship between wind speed and current generated?
   - If so, what kind of relationship?
   - Can we model relationship to do predictions?
+  
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(broom)
+```
+
 
 ## Reading in the data
 
@@ -5529,7 +5819,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-224-1.png)
+![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-230-1.png)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -5628,7 +5918,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-228-1.png)
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-234-1.png)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -5709,7 +5999,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-232-1.png)
+![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238-1.png)
 
 ## Scatterplot with fitted line and curve
 - Residual plot basically random. Good.
@@ -5735,7 +6025,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-233-1.png)
+![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239-1.png)
 
 Curve clearly fits better than line. 
 
@@ -5784,7 +6074,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 ## Scatterplot for wind_pace
 
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-234-1.png)
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.png)
 
 That’s pretty straight. Blue actually smooth curve not line.
 
@@ -5899,7 +6189,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238-1.png)
+![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244-1.png)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6095,7 +6385,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.png)
+![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.png)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6172,6 +6462,17 @@ quality of pavement depend on these?
   - `viscosity` The viscosity of the asphalt
   - `run` 2 data collection periods: run 1 for run 1, 0 for run 2.
 - `rut.depth` response. Depends on other variables, how?
+
+## Packages for this section
+
+
+```r
+library(MASS)
+library(tidyverse)
+library(broom)
+library(leaps)
+```
+
 
 ## Getting set up 
 
@@ -6252,7 +6553,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.png)
+![plot of chunk unnamed-chunk-261](figure/unnamed-chunk-261-1.png)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6296,7 +6597,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-256](figure/unnamed-chunk-256-1.png)
+![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.png)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6365,7 +6666,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-259](figure/unnamed-chunk-259-1.png)
+![plot of chunk unnamed-chunk-266](figure/unnamed-chunk-266-1.png)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6428,7 +6729,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.png)
+![plot of chunk unnamed-chunk-270](figure/unnamed-chunk-270-1.png)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6459,7 +6760,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-264](figure/unnamed-chunk-264-1.png)
+![plot of chunk unnamed-chunk-271](figure/unnamed-chunk-271-1.png)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -6501,7 +6802,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-267](figure/unnamed-chunk-267-1.png)
+![plot of chunk unnamed-chunk-274](figure/unnamed-chunk-274-1.png)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -6885,7 +7186,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-285](figure/unnamed-chunk-285-1.png)
+![plot of chunk unnamed-chunk-292](figure/unnamed-chunk-292-1.png)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -6908,7 +7209,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-287](figure/unnamed-chunk-287-1.png)
+![plot of chunk unnamed-chunk-294](figure/unnamed-chunk-294-1.png)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -6940,6 +7241,15 @@ advised.
 
 
 # Regression with categorical variables
+
+
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(broom)
+```
 
 
 ## The pigs revisited
@@ -7183,10 +7493,19 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-297](figure/unnamed-chunk-297-1.png)
+![plot of chunk unnamed-chunk-305](figure/unnamed-chunk-305-1.png)
 
 
 # Functions
+
+
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(broom)
+```
 
 
 ## Don’t repeat yourself
@@ -8009,18 +8328,19 @@ tibble(start = 1:7) %>%
 - Nobody has found an n for which it doesn’t.
 - [A pretty tree (click):](https://en.wikipedia.org/wiki/Collatz_conjecture#/media/File:Collatz-graph-all-30-no27.svg) 
 
-# Dates and times 
+# Dates and times
 
 
 ## Packages for this section
 
 ```r
+library(tidyverse)
 library(lubridate)
 ```
 
 ## Dates
 - Dates represented on computers as “days since an origin”,
-typically Jan 1, 1970, with a negative date being before the origin: xxx
+typically Jan 1, 1970, with a negative date being before the origin: 
 
 
 ```r
@@ -8105,7 +8425,7 @@ ddd
 ## 3 2012-02-01 goodbye    February 1 2012
 ```
 
-## Dates in other formats xxx
+## Dates in other formats 
 
 - Preceding shows that dates should be stored as text in format
 yyyy-mm-dd (ISO standard).
@@ -8126,7 +8446,7 @@ tibble(usdates = c("05/27/2012", "01/03/2016", "12/31/2015")) %>%
 ## 3 12/31/2015 2015-12-31
 ```
 
-## Trying to read these as UK dates xxx
+## Trying to read these as UK dates 
 
 
 ```r
@@ -8152,7 +8472,7 @@ but the other two make no sense.
 
 ## Our data frame's last column:
 
-- Back to this: xxx
+- Back to this: 
 
 
 ```r
@@ -8189,7 +8509,7 @@ ddd
 
 ## Are they really the same? 
 
-- Column `date2` was correctly converted from column `dunno`: xxx
+- Column `date2` was correctly converted from column `dunno`: 
 
 
 ```r
@@ -8232,7 +8552,7 @@ dates0 <- read_delim(my_url, " ")
 ## )
 ```
 
-## Making some dates xxx
+## Making some dates 
 
 
 ```r
@@ -8278,7 +8598,7 @@ created, other columns are what to make it out of.
 *disappear*.
 - The column `dates` is text, while `d` is a real date.
 
-## Extracting information from dates xxx
+## Extracting information from dates 
 
 
 ```r
@@ -8320,7 +8640,7 @@ minutes, seconds:
 ## 4 2016-02-10 12:26:40
 ```
 
-## Converting text to date-times: xxx
+## Converting text to date-times: 
 
 - Then get from this text using `ymd_hms`:
 
@@ -8338,28 +8658,31 @@ dd %>% mutate(dt = ymd_hms(text))
 ## 4 2016-02-10 12:26:40 2016-02-10 12:26:40
 ```
 
+
 ## Timezones
 
 - Default timezone is “Universal Coordinated Time”. Change it via `tz=`
-and the name of a timezone: xxx
+and the name of a timezone: 
 
 
 ```r
-(dd %>% mutate(dt = ymd_hms(text, tz = "America/Toronto")) -> dd)
+dd %>% 
+  mutate(dt = ymd_hms(text, tz = "America/Toronto")) -> dd
+dd %>% mutate(zone = tz(dt))
 ```
 
 ```
-## # A tibble: 4 x 2
-##   text                dt                 
-##   <chr>               <dttm>             
-## 1 1970-01-01 07:50:01 1970-01-01 07:50:01
-## 2 2007-09-04 15:30:00 2007-09-04 15:30:00
-## 3 1940-04-15 06:45:10 1940-04-15 06:45:10
-## 4 2016-02-10 12:26:40 2016-02-10 12:26:40
+## # A tibble: 4 x 3
+##   text              dt                  zone        
+##   <chr>             <dttm>              <chr>       
+## 1 1970-01-01 07:50… 1970-01-01 07:50:01 America/Tor…
+## 2 2007-09-04 15:30… 2007-09-04 15:30:00 America/Tor…
+## 3 1940-04-15 06:45… 1940-04-15 06:45:10 America/Tor…
+## 4 2016-02-10 12:26… 2016-02-10 12:26:40 America/Tor…
 ```
 
 ## Extracting time parts
-- As you would expect: xxx
+- As you would expect: 
 
 ```r
 dd %>%
@@ -8382,21 +8705,23 @@ dd %>%
 ## 4 2016-02-10 12:26:40    12    40    26 America/Tor…
 ```
 
-## Same times, but different time zone: xxx
+## Same times, but different time zone: 
 
 
 ```r
-dd %>% mutate(oz = with_tz(dt, "Australia/Sydney"))
+dd %>%
+  select(dt) %>%
+  mutate(oz = with_tz(dt, "Australia/Sydney"))
 ```
 
 ```
-## # A tibble: 4 x 3
-##   text       dt                  oz                 
-##   <chr>      <dttm>              <dttm>             
-## 1 1970-01-0… 1970-01-01 07:50:01 1970-01-01 22:50:01
-## 2 2007-09-0… 2007-09-04 15:30:00 2007-09-05 05:30:00
-## 3 1940-04-1… 1940-04-15 06:45:10 1940-04-15 21:45:10
-## 4 2016-02-1… 2016-02-10 12:26:40 2016-02-11 04:26:40
+## # A tibble: 4 x 2
+##   dt                  oz                 
+##   <dttm>              <dttm>             
+## 1 1970-01-01 07:50:01 1970-01-01 22:50:01
+## 2 2007-09-04 15:30:00 2007-09-05 05:30:00
+## 3 1940-04-15 06:45:10 1940-04-15 21:45:10
+## 4 2016-02-10 12:26:40 2016-02-11 04:26:40
 ```
 
 In more detail: 
@@ -8422,7 +8747,7 @@ admit,discharge
 2016-08-31 21:00:00,2016-09-02 17:00:00
 ```
 
-## Do they get read in as date-times? xxx
+## Do they get read in as date-times? 
 
 - These ought to get read in and converted to date-times:
 
@@ -8464,7 +8789,7 @@ stays %>% mutate(stay = discharge - admit)
 ## Days
 
 - Fractional number of days would
-be better: xxx
+be better: 
 
 
 ```r
@@ -8493,6 +8818,15 @@ happens (in this case, a patient being discharged from hospital).
 
 
 # Miscellanea
+
+
+## Packages needed for this section
+
+
+```r
+library(tidyverse)
+library(ggrepel)
+```
 
 
 ## How do you read a file like this?
@@ -8622,7 +8956,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-369](figure/unnamed-chunk-369-1.png)
+![plot of chunk unnamed-chunk-379](figure/unnamed-chunk-379-1.png)
 
 ## Labelling points on a plot
 
@@ -8657,7 +8991,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-371](figure/unnamed-chunk-371-1.png)
+![plot of chunk unnamed-chunk-381](figure/unnamed-chunk-381-1.png)
 
 ## Label points with name of car they belong to
 
@@ -8667,7 +9001,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-372](figure/unnamed-chunk-372-1.png)
+![plot of chunk unnamed-chunk-382](figure/unnamed-chunk-382-1.png)
 
 ## Make labels smaller
 
@@ -8677,7 +9011,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-373](figure/unnamed-chunk-373-1.png)
+![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.png)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -8686,7 +9020,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   - the label, for the individual you want to label
   - blank text for those you don’t
 - Handy function ifelse, like Excel `=IF`.
-- Label cars with MPG over 34: xxx
+- Label cars with MPG over 34: 
 
 ```r
 cars %>%
@@ -8703,13 +9037,13 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-375](figure/unnamed-chunk-375-1.png)
+![plot of chunk unnamed-chunk-385](figure/unnamed-chunk-385-1.png)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
 9 of data frame.
 - How to use `ifelse` with row numbers? Define new column of row
-numbers, and then use it in `ifelse`, thus: xxx
+numbers, and then use it in `ifelse`, thus: 
 
 ```r
 g <- cars %>%
@@ -8727,13 +9061,13 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-377](figure/unnamed-chunk-377-1.png)
+![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.png)
 
 
 ## Lightest weight and worst gas-mileage cars
 - Suppose you didn’t know which cars were the ones you wanted. Then
 you have to find them first.
-- Now try for lightest weight and worst gas-mileage cars: xxx
+- Now try for lightest weight and worst gas-mileage cars: 
 
 ```r
 cars %>%
@@ -8752,7 +9086,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-379](figure/unnamed-chunk-379-1.png)
+![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.png)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -8765,7 +9099,7 @@ We use previous graph as base (to save drawing again).
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-380](figure/unnamed-chunk-380-1.png)
+![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.png)
 
 ## Axis labels
 
@@ -8774,7 +9108,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-381](figure/unnamed-chunk-381-1.png)
+![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.png)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your
@@ -8792,14 +9126,14 @@ don’t need any more, and you know exactly why everything is there.
   - Con: some objects take time and effort to re-create, and you won’t
 want to do that every time.
 
-## Saving and restoring objects xxx
+## Saving and restoring objects 
 
 - It is possible to save and re-load large/complicated
 objects so that they don’t have to be re-created. Uses `saveRDS` and `readRDS`:
 
 
 ```r
-xx=sample(1:10, 5)
+xx <- sample(1:10, 5)
 xx
 ```
 
@@ -8810,7 +9144,7 @@ xx
 ```r
 saveRDS(xx, "xx.rds")
 rm(xx)
-xx # gone 
+xx # gone
 ```
 
 ```
@@ -8818,8 +9152,8 @@ xx # gone
 ```
 
 ```r
-xx=readRDS("xx.rds")
-xx # back 
+xx <- readRDS("xx.rds")
+xx # back
 ```
 
 ```
@@ -8832,6 +9166,16 @@ xx # back
 # Vector and matrix algebra (for C33)
 
 
+## Packages for this section
+
+- This is (almost) all base R! We only need this for one thing later:
+
+
+```r
+library(tidyverse)
+```
+
+
 ## Vector addition
 
 
@@ -8842,7 +9186,7 @@ Adds 2 to each element.
 ```r
 u <- c(2, 3, 6, 5, 7)
 v <- c(1, 8, 3, 2, 0)
-u + v # xxx
+u + v
 ```
 
 ```
@@ -8966,13 +9310,13 @@ u + w
 
 - Add 1 to first element of `u`, add 2 to second.
 - Go back to beginning of `w` to find something to add: add 1 to 3rd
-element of `u`, 2 to 4th element, 1 to 5th. xxx
+element of `u`, 2 to 4th element, 1 to 5th. 
 
-## How R does this xxx
+## How R does this 
 
 - Keep re-using shorter vector until reach length of longer one.
-- “recycling”.
-- if the longer vector's length not a multiple of the shorter vector's length, get a warning (probably not what you want). 
+- “Recycling”.
+- If the longer vector's length not a multiple of the shorter vector's length, get a warning (probably not what you want). 
 - Same idea is used when multiplying a vector by a number: the number
 keeps getting recycled.
 
@@ -9232,7 +9576,7 @@ solve(A)
 correct.
 
 ## Inner product
-- Vectors in R are column vectors, so just do the matrix multiplication (`t()` is transpose): xxx
+- Vectors in R are column vectors, so just do the matrix multiplication (`t()` is transpose): 
 
 
 ```r
@@ -9263,56 +9607,224 @@ sum(a * b)
 
 # piece on rstan
 
+
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(rstan)
+```
+
+## Bayesian and frequentist inference
+
+- The inference philosophy that we have learned so far says that:
+  - parameters to be estimated are *fixed* but *unknown*
+  - randomness from here: if we were to take another sample, we'd (probably) get different results. 
+- This is called "frequentist" or "repeated-sampling" inference.
+- Bayesian inference says:
+  - *everything* is random, parameters and data, and has some probability distribution
+- Ingredients:
+  - **prior distribution**: distribution of parameters before seeing data.
+  - **likelihood**: distribution of data if the parameters are known (model)
+  - **posterior distribution**: distribution of parameters *after* seeing data.
+  
+## Distribution of parameters
+
+- Instead of having a point or interval estimate of a parameter, we have an entire distribution
+- so in Bayesian statistics we can talk about eg.
+  - probability that a parameter is bigger than some value
+  - probability that a parameter is close to some value
+  
+- Name comes from Bayes' Theorem, which here says
+
+> posterior is proportional to likelihood times prior
+
+- more discussion about this is in [a blog post](http://ritsokiguess.site/docs/2018/02/28/working-my-way-back-to-you-a-re-investigation-of-rstan/). 
+
+## An example
+
+- Suppose we have these (integer) observations:
+
+
+```r
+(x=c(0,4,3,6,3,3,2,4))
+```
+
+```
+## [1] 0 4 3 6 3 3 2 4
+```
+
+- Suppose we believe that these come from a Poisson distribution with a mean $\lambda$ that we want to estimate.
+- We need a prior distribution for $\lambda$. I will (for some reason) take a $\chi^2$ distribution with 4 df (that has mean 4). Normally this would come from your knowledge of the data-generating *process*.
+- The Poisson likelihood can be written down (see over).
+
+## Some algebra
+
+- We have $n=8$ observations $x_i$, so the Poisson likelihood is
+
+$$ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{n\lambda} \lambda^S, $$
+where $S=\sum_{i=1}^n x_i$. 
+
+- then you write the chi-squared prior density (as a function of $\lambda$):
+
+$$ C \lambda^1 e^{-\lambda/2} $$
+where $C$ is a constant
+
+- and then you multiply these together and try to recognize the distributional form. 
+
+- Requires too much intelligence (and this is a simple case).
+
+## Sampling from the posterior distribution
+
+- Wouldn't it be nice if we could just *sample* from the posterior distribution? Then we would be able to compute it as accurately as we want.
+
+- Metropolis and Hastings: devise a Markov chain (C62) whose limiting distribution is the posterior you want, and then sample from that Markov chain (easy), allowing enough time to get close enough to the limiting distribution.
+
+- Stan: uses a modern variant that is more efficient (called Hamiltonian Monte Carlo), implemented in R package `rstan`. 
+
+- Write Stan code in a file, compile it and sample from it.
+
+## Components of Stan code: the model
+
+```
+model {
+// likelihood
+x ~ poisson(lambda);
+}
+```
+
+This is how you say "$X$ has a Poisson distribution with mean $\lambda$".
+
+## Components of Stan code: the prior distribution
+
+```
+model {
+// prior
+lambda ~ chi_square(5);
+// likelihood
+x ~ poisson(lambda);
+}
+```
+
+## Components of Stan code: data and parameters (first in the Stan code)
+
+```
+data {
+int x[8];
+}
+
+parameters {
+real<lower=0> lambda;
+}
+```
+
+## Compile and sample from the model
+
+
+```r
+poisson1_code=stan_model(file = "poisson1.stan")
+```
+
+- set up data
+
+
+```r
+poisson1_data=list(x=x)
+```
+
+- sample
+
+
+```r
+poisson1_fit=sampling(poisson1_code, data=poisson1_data)
+```
+
+
+```
+## [conflicted] `extract` found in 2 packages.
+## Either pick the one you want with `::` 
+## * rstan::extract
+## * tidyr::extract
+## Or declare a preference with `conflict_prefer()`
+## * conflict_prefer("extract", "rstan")
+## * conflict_prefer("extract", "tidyr")
+```
+
+```
+## Error in sampling(poisson1_code, data = poisson1_data): object 'poisson1_code' not found
+```
+
+
+
+```r
+poisson1_fit
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'poisson1_fit' not found
+```
+
+- This summarizes the posterior distribution of $\lambda$; the posterior mean is 3.25, with a 95% posterior interval of 2.15 to 4.66. (The probability that $\lambda$ is between these two values really is 95%.)
+
+## Making the code more general
+
+- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. 
+- To make the code more general (for any estimation of a Poisson mean from any sample size), add the sample size and the prior df to the `data`, thus:
+
+```
+data {
+  int<lower=1> n;
+  real<lower=0> prior_df;
+  int x[n];
+}
+...
+model {
+// prior
+lambda ~ chi_square(prior_df);
+// likelihood
+x ~ poisson(lambda);
+}
+```
+
+- Compile again:
+
+
+```r
+poisson2_code=stan_model(file = "poisson2.stan")
+```
+
+- set up the data again including the new things we need:
+
+
+```r
+poisson2_data=list(x=x, n=length(x), prior_df=4)
+```
+
+- sample again
+
+
+```r
+poisson2_fit=sampling(poisson1_code, data=poisson2_data)
+```
+
+```
+## Error in sampling(poisson1_code, data = poisson2_data): object 'poisson1_code' not found
+```
+
+
+## output should be the same (to within randomness)
+
+
+```r
+poisson2_fit
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'poisson2_fit' not found
+```
+
+
+
 # the end of the notes
 
-# template
-
-# The beginning
-
-## R Markdown
-
-This is an R Markdown presentation. Markdown is a simple formatting syntax for autAhoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
-
-## Slide with Bullets
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-
-```r
-summary(cars)
-```
-
-```
-##      car                 MPG            weight     
-##  Length:38          Min.   :15.50   Min.   :1.915  
-##  Class :character   1st Qu.:18.52   1st Qu.:2.208  
-##  Mode  :character   Median :24.25   Median :2.685  
-##                     Mean   :24.76   Mean   :2.863  
-##                     3rd Qu.:30.38   3rd Qu.:3.410  
-##                     Max.   :37.30   Max.   :4.360  
-##    cylinders           hp          country         
-##  Min.   :4.000   Min.   : 65.0   Length:38         
-##  1st Qu.:4.000   1st Qu.: 78.5   Class :character  
-##  Median :4.500   Median :100.0   Mode  :character  
-##  Mean   :5.395   Mean   :101.7                     
-##  3rd Qu.:6.000   3rd Qu.:123.8                     
-##  Max.   :8.000   Max.   :155.0
-```
-
-## Slide with Plot
-
-
-```r
-plot(pressure)
-```
-
-![plot of chunk pressure](figure/pressure-1.png)
-
-
-# the end

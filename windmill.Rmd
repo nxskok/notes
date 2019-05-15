@@ -10,6 +10,14 @@ generalize to “this windmill at all times”.
   - Relationship between wind speed and current generated?
   - If so, what kind of relationship?
   - Can we model relationship to do predictions?
+  
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+library(broom)
+```
+
 
 ## Reading in the data
 

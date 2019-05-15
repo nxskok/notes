@@ -1,6 +1,11 @@
 ## Packages for this section
 
-- This is all base R! No packages needed, not even `tidyverse`.
+- This is (almost) all base R! We only need this for one thing later:
+
+```{r, eval=F}
+library(tidyverse)
+```
+
 
 ## Vector addition
 

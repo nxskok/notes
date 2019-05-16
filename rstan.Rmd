@@ -5,6 +5,9 @@ library(tidyverse)
 library(rstan)
 ```
 
+
+PASIAS: add a one-parameter and multi-parameter example (look at the schools one in Gelman's book) xxx
+
 ## Bayesian and frequentist inference
 
 - The inference philosophy that we have learned so far says that:

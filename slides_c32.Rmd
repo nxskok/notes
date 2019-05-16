@@ -96,7 +96,11 @@ output:
 ```{r, child="vector_matrix.Rmd"}
 ```
 
-# piece on bootstrap
+# The bootstrap
+
+```{r, child="bootstrap.Rmd"}
+```
+
 
 # piece on rstan
 

@@ -13,6 +13,6 @@
 \beamer@sectionintoc {13}{Dates and times}{477}{0}{13}
 \beamer@sectionintoc {14}{Miscellanea}{502}{0}{14}
 \beamer@sectionintoc {15}{Vector and matrix algebra (for C33)}{526}{0}{15}
-\beamer@sectionintoc {16}{piece on bootstrap}{546}{0}{16}
-\beamer@sectionintoc {17}{piece on rstan}{547}{0}{17}
-\beamer@sectionintoc {18}{the end of the notes}{560}{0}{18}
+\beamer@sectionintoc {16}{The bootstrap}{546}{0}{16}
+\beamer@sectionintoc {17}{piece on rstan}{557}{0}{17}
+\beamer@sectionintoc {18}{the end of the notes}{570}{0}{18}

@@ -1135,45 +1135,65 @@
 \headcommand {\beamer@framepages {545}{545}}
 \headcommand {\beamer@sectionpages {526}{545}}
 \headcommand {\beamer@subsectionpages {526}{545}}
-\headcommand {\sectionentry {16}{piece on bootstrap}{546}{piece on bootstrap}{0}}
+\headcommand {\sectionentry {16}{The bootstrap}{546}{The bootstrap}{0}}
 \headcommand {\slideentry {16}{0}{1}{546/546}{}{0}}
 \headcommand {\beamer@framepages {546}{546}}
-\headcommand {\beamer@sectionpages {546}{546}}
-\headcommand {\beamer@subsectionpages {546}{546}}
-\headcommand {\sectionentry {17}{piece on rstan}{547}{piece on rstan}{0}}
-\headcommand {\slideentry {17}{0}{1}{547/547}{}{0}}
+\headcommand {\slideentry {16}{0}{2}{547/547}{}{0}}
 \headcommand {\beamer@framepages {547}{547}}
-\headcommand {\slideentry {17}{0}{2}{548/548}{}{0}}
+\headcommand {\slideentry {16}{0}{3}{548/548}{}{0}}
 \headcommand {\beamer@framepages {548}{548}}
-\headcommand {\slideentry {17}{0}{3}{549/549}{}{0}}
+\headcommand {\slideentry {16}{0}{4}{549/549}{}{0}}
 \headcommand {\beamer@framepages {549}{549}}
-\headcommand {\slideentry {17}{0}{4}{550/550}{}{0}}
+\headcommand {\slideentry {16}{0}{5}{550/550}{}{0}}
 \headcommand {\beamer@framepages {550}{550}}
-\headcommand {\slideentry {17}{0}{5}{551/551}{}{0}}
+\headcommand {\slideentry {16}{0}{6}{551/551}{}{0}}
 \headcommand {\beamer@framepages {551}{551}}
-\headcommand {\slideentry {17}{0}{6}{552/552}{}{0}}
+\headcommand {\slideentry {16}{0}{7}{552/552}{}{0}}
 \headcommand {\beamer@framepages {552}{552}}
-\headcommand {\slideentry {17}{0}{7}{553/553}{}{0}}
+\headcommand {\slideentry {16}{0}{8}{553/553}{}{0}}
 \headcommand {\beamer@framepages {553}{553}}
-\headcommand {\slideentry {17}{0}{8}{554/554}{}{0}}
+\headcommand {\slideentry {16}{0}{9}{554/554}{}{0}}
 \headcommand {\beamer@framepages {554}{554}}
-\headcommand {\slideentry {17}{0}{9}{555/555}{}{0}}
+\headcommand {\slideentry {16}{0}{10}{555/555}{}{0}}
 \headcommand {\beamer@framepages {555}{555}}
-\headcommand {\slideentry {17}{0}{10}{556/556}{}{0}}
+\headcommand {\slideentry {16}{0}{11}{556/556}{}{0}}
 \headcommand {\beamer@framepages {556}{556}}
-\headcommand {\slideentry {17}{0}{11}{557/557}{}{0}}
+\headcommand {\beamer@sectionpages {546}{556}}
+\headcommand {\beamer@subsectionpages {546}{556}}
+\headcommand {\sectionentry {17}{piece on rstan}{557}{piece on rstan}{0}}
+\headcommand {\slideentry {17}{0}{1}{557/557}{}{0}}
 \headcommand {\beamer@framepages {557}{557}}
-\headcommand {\slideentry {17}{0}{12}{558/558}{}{0}}
+\headcommand {\slideentry {17}{0}{2}{558/558}{}{0}}
 \headcommand {\beamer@framepages {558}{558}}
-\headcommand {\slideentry {17}{0}{13}{559/559}{}{0}}
+\headcommand {\slideentry {17}{0}{3}{559/559}{}{0}}
 \headcommand {\beamer@framepages {559}{559}}
-\headcommand {\beamer@sectionpages {547}{559}}
-\headcommand {\beamer@subsectionpages {547}{559}}
-\headcommand {\sectionentry {18}{the end of the notes}{560}{the end of the notes}{0}}
-\headcommand {\slideentry {18}{0}{1}{560/560}{}{0}}
+\headcommand {\slideentry {17}{0}{4}{560/560}{}{0}}
 \headcommand {\beamer@framepages {560}{560}}
-\headcommand {\beamer@partpages {1}{560}}
-\headcommand {\beamer@subsectionpages {560}{560}}
-\headcommand {\beamer@sectionpages {560}{560}}
-\headcommand {\beamer@documentpages {560}}
-\headcommand {\gdef \inserttotalframenumber {560}}
+\headcommand {\slideentry {17}{0}{5}{561/561}{}{0}}
+\headcommand {\beamer@framepages {561}{561}}
+\headcommand {\slideentry {17}{0}{6}{562/562}{}{0}}
+\headcommand {\beamer@framepages {562}{562}}
+\headcommand {\slideentry {17}{0}{7}{563/563}{}{0}}
+\headcommand {\beamer@framepages {563}{563}}
+\headcommand {\slideentry {17}{0}{8}{564/564}{}{0}}
+\headcommand {\beamer@framepages {564}{564}}
+\headcommand {\slideentry {17}{0}{9}{565/565}{}{0}}
+\headcommand {\beamer@framepages {565}{565}}
+\headcommand {\slideentry {17}{0}{10}{566/566}{}{0}}
+\headcommand {\beamer@framepages {566}{566}}
+\headcommand {\slideentry {17}{0}{11}{567/567}{}{0}}
+\headcommand {\beamer@framepages {567}{567}}
+\headcommand {\slideentry {17}{0}{12}{568/568}{}{0}}
+\headcommand {\beamer@framepages {568}{568}}
+\headcommand {\slideentry {17}{0}{13}{569/569}{}{0}}
+\headcommand {\beamer@framepages {569}{569}}
+\headcommand {\beamer@sectionpages {557}{569}}
+\headcommand {\beamer@subsectionpages {557}{569}}
+\headcommand {\sectionentry {18}{the end of the notes}{570}{the end of the notes}{0}}
+\headcommand {\slideentry {18}{0}{1}{570/570}{}{0}}
+\headcommand {\beamer@framepages {570}{570}}
+\headcommand {\beamer@partpages {1}{570}}
+\headcommand {\beamer@subsectionpages {570}{570}}
+\headcommand {\beamer@sectionpages {570}{570}}
+\headcommand {\beamer@documentpages {570}}
+\headcommand {\gdef \inserttotalframenumber {570}}

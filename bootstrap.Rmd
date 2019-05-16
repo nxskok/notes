@@ -1,0 +1,109 @@
+## Notes xxx
+
+[ref](https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests)
+
+xxx PASIAS: add some problems, eg. based on actually normal data, the mean for some skewed data
+an unfamiliar stat (eg. correlation)
+
+xxx also I have the Sioson edits to PASIAS to consider
+
+## Packages for this section
+
+```{r, eval=F}
+library(tidyverse)
+```
+
+
+## Is my sampling distribution normal enough?
+
+- Recall the IRS data that we used as a motivation for the sign test:
+
+```{r, include=F}
+my_url="http://www.utsc.utoronto.ca/~butler/c32/irs.txt"
+irs = read_csv(my_url)
+```
+
+
+```{r, fig.height=3}
+ggplot(irs, aes(x=Time))+geom_histogram(bins=10)
+```
+
+- We said that a $t$ procedure for the mean would not be a good idea because the distribution is skewed.
+
+## What *actually* matters
+
+- It's not the distribution of the *data* that has to be approx normal (for a $t$ procedure).
+- What matters is the *sampling distribution of the sample mean*.
+- If the sample size is large enough, the sampling distribution will be normal enough even if the data distribution is not.
+  - This is why we had to consider the sample size as well as the shape.
+- But how do we know whether this is the case or not? We only have *one* sample.
+
+## The bootstrap
+
+- Typically, our sample will be reasonably representative of the population.
+- Idea: pretend the sample *is* the population, and sample from it *with replacement*.
+- Calculate test statistic, and repeat many times.
+- This gives an idea of how our statistic might vary in repeated samples: that is, its sampling distribution.
+- Called the **bootstrap distribution** of the test statistic.
+- If the bootstrap distribution is approx normal, infer that the true sampling distribution also approx normal, therefore inference about the mean such as $t$ is good enough.
+- If not, we should be more careful.
+
+## Why it works
+
+- We typically estimate population parameters by using the corresponding sample thing: eg. estimate population mean using sample mean.
+- This called **plug-in principle**.
+- The fraction of sample values less than a value $x$ called the **empirical distribution function** (as a function of $x$).
+- By plug-in principle, the empirical distribution function is an estimate of the population CDF.
+- In this sense, the sample *is* an estimate of the population, and so sampling from it is an estimate of sampling from the population.
+
+## Bootstrapping the IRS data
+
+- Sampling with replacement is done like this:
+
+```{r}
+boot=sample(irs$Time, replace=T)
+mean(boot)
+```
+
+- That's one bootstrapped mean. We need a whole bunch.
+- Use the same idea as for simulating power:
+
+```{r}
+rerun(1000, sample(irs$Time, replace=T)) %>% 
+  map_dbl(~mean(.)) -> means
+```
+
+## Sampling distribution of sample mean
+
+```{r}
+ggplot(tibble(means), aes(x=means))+geom_histogram(bins=20)
+```
+
+## Comments
+
+This is not so bad: a little bit skewed, maybe:
+
+```{r, fig.height=3.5}
+ggplot(tibble(means), aes(sample=means))+
+  stat_qq()+stat_qq_line()
+```
+
+## Getting a bootstrap CI for the mean, and compare with $t$:
+
+- a bootstrap CI is the 2.5 and 97.5 percentiles of the bootstrapped sampling distribution
+- another, "bootstrap $t$", uses the SD of the bootstrapped sampling distribution as the SE part
+- the third one here is the ordinary $t$ interval on the original data.
+
+```{r}
+quantile(means, c(0.025, 0.975))
+mean(means)+c(-1,1)*qt(0.975, length(irs$Time)-1)*sd(means)
+t.test(irs$Time)$conf.int
+```
+
+## Comments
+
+- The bootstrap $t$ and the ordinary $t$ intervals are very close.
+- The percentile bootstrap interval is a bit shorter (this usually happens)
+- If the bootstrap $t$ and ordinary $t$ agree (as here), they can both be trusted.
+- If they don't, then trust neither! (What to do? See later.)
+

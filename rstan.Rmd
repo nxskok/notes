@@ -32,14 +32,15 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 
 > posterior is proportional to likelihood times prior
 
-- more discussion about this is in [a blog post](http://ritsokiguess.site/docs/2018/02/28/working-my-way-back-to-you-a-re-investigation-of-rstan/). 
+- more discussion about this is in 
+[**a blog post**](http://ritsokiguess.site/docs/2018/02/28/working-my-way-back-to-you-a-re-investigation-of-rstan/). 
 
 ## An example
 
 - Suppose we have these (integer) observations:
 
 ```{r}
-(x=c(0,4,3,6,3,3,2,4))
+(x <- c(0, 4, 3, 6, 3, 3, 2, 4))
 ```
 
 - Suppose we believe that these come from a Poisson distribution with a mean $\lambda$ that we want to estimate.
@@ -58,7 +59,7 @@ where $S=\sum_{i=1}^n x_i$.
 $$ C \lambda^1 e^{-\lambda/2} $$
 where $C$ is a constant
 
-- and then you multiply these together and try to recognize the distributional form. 
+- and then you multiply these together and try to recognize the distributional form. (This one is gamma.)
 
 - Requires too much intelligence (and this is a simple case).
 
@@ -88,7 +89,7 @@ This is how you say "$X$ has a Poisson distribution with mean $\lambda$".
 ```
 model {
 // prior
-lambda ~ chi_square(5);
+lambda ~ chi_square(4);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -109,27 +110,39 @@ real<lower=0> lambda;
 ## Compile and sample from the model
 
 ```{r, eval=F}
-poisson1_code=stan_model(file = "poisson1.stan")
+poisson1_code <- stan_model(file = "poisson1.stan")
 ```
 
 - set up data
 
 ```{r}
-poisson1_data=list(x=x)
+poisson1_data <- list(x = x)
 ```
 
 - sample
 
 ```{r, eval=F}
-poisson1_fit=sampling(poisson1_code, data=poisson1_data)
+poisson1_fit <- sampling(poisson1_code, data = poisson1_data)
+```
+
+```{r, include=F}
+poisson1_code=readRDS("poisson1_code.rds")
+```
+
+```{r, eval=F}
+poisson1_code <- stan_model(file = "poisson1.stan")
 ```
 
 ```{r, echo=F, results="hide", cache=T}
-poisson1_code=stan_model(file = "poisson1.stan")
-poisson1_data=list(x=x)
-poisson1_fit=sampling(poisson1_code, data=poisson1_data)
+poisson1_data <- list(x = x)
+poisson1_fit <- sampling(poisson1_code, data = poisson1_data)
 ```
 
+```{r, include=F}
+saveRDS(poisson1_code, "poisson1_code.rds")
+```
+
+## The output
 
 ```{r}
 poisson1_fit
@@ -139,8 +152,7 @@ poisson1_fit
 
 ## Making the code more general
 
-- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. 
-- To make the code more general (for any estimation of a Poisson mean from any sample size), add the sample size and the prior df to the `data`, thus:
+- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. More generally:
 
 ```
 data {
@@ -157,22 +169,34 @@ x ~ poisson(lambda);
 }
 ```
 
+## Set up again and sample:
+
 - Compile again:
 
-```{r, eval=F}
-poisson2_code=stan_model(file = "poisson2.stan")
+```{r, include=F}
+poisson2_code=readRDS("poisson2_code.rds")
 ```
+
+
+```{r, eval=F}
+poisson2_code <- stan_model(file = "poisson2.stan")
+```
+
+```{r, include=F}
+saveRDS(poisson2_code, "poisson2_code.rds")
+```
+
 
 - set up the data again including the new things we need:
 
 ```{r}
-poisson2_data=list(x=x, n=length(x), prior_df=4)
+poisson2_data <- list(x = x, n = length(x), prior_df = 4)
 ```
 
 - sample again
 
-```{r}
-poisson2_fit=sampling(poisson1_code, data=poisson2_data)
+```{r, results="hide", cache=T}
+poisson2_fit <- sampling(poisson1_code, data = poisson2_data)
 ```
 
 
@@ -182,3 +206,42 @@ poisson2_fit=sampling(poisson1_code, data=poisson2_data)
 poisson2_fit
 ```
 
+## Extracting actual sampled values
+
+- `rstan` has `extract` for this. There is also an `extract` in `dplyr`: make sure you have the right one.
+
+```{r, fig.height=2.8}
+poisson2_out <- extract(poisson2_fit)
+ggplot(tibble(lambda = poisson2_out$lambda), aes(x = lambda)) +
+  geom_histogram(bins = 20)
+```
+
+## Posterior predictive distribution
+
+- Another use for the actual sampled values is to see what kind of *response* values we might get in the future. This should look something like our data. For a Poisson distribution, the response values are integers:
+
+```{r, fig.height=3}
+tibble(lambda = poisson2_out$lambda) %>%
+  mutate(x_sim = map_int(lambda, ~ rpois(1, .))) -> d
+```
+
+## A bar chart:
+
+```{r, fig.height=4}
+ggplot(d, aes(x = x_sim)) + geom_bar()
+```
+
+
+## Comparison
+
+Our actual data values were these:
+
+```{r}
+x
+```
+
+None of these are very unlikely according to our posterior predictive distribution, so our model is believable. 
+
+## A linear regression
+
+xxxx

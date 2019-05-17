@@ -1,27 +1,18 @@
-\frametitle{output should be the same (to within randomness)}
-\protect\hypertarget{output-should-be-the-same-to-within-randomness}{}
+\frametitle{Comparison}
+\protect\hypertarget{comparison}{}
+
+Our actual data values were these:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{poisson2_fit}
+\NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Inference for Stan model: poisson1.
-## 4 chains, each with iter=2000; warmup=1000; thin=1;
-## post-warmup draws per chain=1000, total post-warmup draws=4000.
-##
-##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
-## lambda 3.22    0.02 0.60 2.15 2.79 3.18 3.60  4.50
-## lp__   4.31    0.02 0.68 2.39 4.16 4.57 4.74  4.79
-##        n_eff Rhat
-## lambda  1466    1
-## lp__    1716    1
-##
-## Samples were drawn using NUTS(diag_e) at Wed May 15 19:43:56 2019.
-## For each parameter, n_eff is a crude measure of effective sample size,
-## and Rhat is the potential scale reduction factor on split chains (at
-## convergence, Rhat=1).
+## [1] 0 4 3 6 3 3 2 4
 \end{verbatim}
+
+None of these are very unlikely according to our posterior predictive
+distribution, so our model is believable.
 

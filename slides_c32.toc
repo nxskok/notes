@@ -14,5 +14,5 @@
 \beamer@sectionintoc {14}{Miscellanea}{502}{0}{14}
 \beamer@sectionintoc {15}{Vector and matrix algebra (for C33)}{526}{0}{15}
 \beamer@sectionintoc {16}{The bootstrap}{546}{0}{16}
-\beamer@sectionintoc {17}{piece on rstan}{557}{0}{17}
-\beamer@sectionintoc {18}{the end of the notes}{570}{0}{18}
+\beamer@sectionintoc {17}{Bayesian statistics with \texttt {rstan} xxx}{573}{0}{17}
+\beamer@sectionintoc {18}{the end of the notes}{593}{0}{18}

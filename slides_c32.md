@@ -1020,7 +1020,7 @@ graphs.
 ggplot(athletes, aes(x = Sport)) + geom_bar()
 ```
 
-![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.png)
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png)
 
 
 ## Histogram of body mass index
@@ -1030,7 +1030,7 @@ ggplot(athletes, aes(x = Sport)) + geom_bar()
 ggplot(athletes, aes(x = BMI)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png)
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png)
 
 ## Which sports are played by males and females?
 
@@ -1042,7 +1042,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
   geom_bar(position = "dodge")
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png)
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png)
 
 ## BMI by gender
 
@@ -1051,7 +1051,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
 ggplot(athletes, aes(x = Sex, y = BMI)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png)
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.png)
 
 ## Height vs. weight
 
@@ -1062,7 +1062,7 @@ Scatterplot:
 ggplot(athletes, aes(x = Ht, y = Wt)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.png)
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png)
 
 ## With regression line
 
@@ -1072,7 +1072,7 @@ ggplot(athletes, aes(x = Ht, y = Wt)) +
   geom_point() + geom_smooth(method = "lm")
 ```
 
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png)
+![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.png)
 
 ## BMI by sport and gender
 
@@ -1082,7 +1082,7 @@ ggplot(athletes, aes(x = Sport, y = BMI, colour = Sex)) +
   geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.png)
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png)
 
 ## Height and weight by gender
 
@@ -1092,7 +1092,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png)
+![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.png)
 
 ## Height by weight for each sport, with facets
 
@@ -1102,7 +1102,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport)
 ```
 
-![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.png)
+![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46-1.png)
 
 ## Filling each facet
 
@@ -1115,7 +1115,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport, scales = "free")
 ```
 
-![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46-1.png)
+![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.png)
 
 
 # Numerical summaries: more detailed
@@ -1457,7 +1457,7 @@ glimpse(jays)
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-62](figure/unnamed-chunk-62-1.png)
+![plot of chunk unnamed-chunk-63](figure/unnamed-chunk-63-1.png)
 
 
 ## Comments
@@ -1678,7 +1678,7 @@ it is normal enough, given the sample size.
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-67](figure/unnamed-chunk-67-1.png)
+![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68-1.png)
 
 - You might say that this is not normal enough for a sample size of $n = 25$,
 in which case you don’t trust the $t$-test result.
@@ -1747,7 +1747,7 @@ kids
 ggplot(kids, aes(x = group, y = score)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-70](figure/unnamed-chunk-70-1.png)
+![plot of chunk unnamed-chunk-71](figure/unnamed-chunk-71-1.png)
 
 ## Two kinds of two-sample t-test
 
@@ -2165,7 +2165,7 @@ g = ggplot(d, aes(x = n, y = power)) + geom_point() +
 g
 ```
 
-![plot of chunk unnamed-chunk-85](figure/unnamed-chunk-85-1.png)
+![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86-1.png)
 
 ## Power curves for means
 
@@ -2258,7 +2258,7 @@ g = ggplot(d, aes(x = mean, y = power, colour = n)) +
 g
 ```
 
-![plot of chunk unnamed-chunk-91](figure/unnamed-chunk-91-1.png)
+![plot of chunk unnamed-chunk-92](figure/unnamed-chunk-92-1.png)
 
 ## Comments
 - When `mean=10`, that is, the true mean equals the null mean, $H_0$ is
@@ -2295,7 +2295,7 @@ g=ggplot(d, aes(x=n, y=power, colour=mean)) + geom_point() + geom_line() +
 g
 ```
 
-![plot of chunk unnamed-chunk-93](figure/unnamed-chunk-93-1.png)
+![plot of chunk unnamed-chunk-94](figure/unnamed-chunk-94-1.png)
 
 ## Two-sample power
 
@@ -2553,7 +2553,7 @@ Reject null; mean greater than 160.
 ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-101](figure/unnamed-chunk-101-1.png)
+![plot of chunk unnamed-chunk-102](figure/unnamed-chunk-102-1.png)
 
 Skewed to right. Should look at median.
 
@@ -3096,7 +3096,7 @@ line.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.png)
+![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.png)
 
 - Points should follow the straight line. Bottom left one way off, so
 normality questionable here: outlier.
@@ -3123,7 +3123,7 @@ d=tibble(x=rnorm(200))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.png)
+![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.png)
 
 As normal as you could wish for.
 
@@ -3134,7 +3134,7 @@ As normal as you could wish for.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.png)
+![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128-1.png)
 
 ## Normal data, small sample 
 
@@ -3158,7 +3158,7 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.png)
+![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.png)
 
 Good, apart from the highest and lowest points being slightly off. I’d call
 this good.
@@ -3171,7 +3171,7 @@ d=tibble(x=rchisq(100,10))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.png)
+![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.png)
 
 Somewhat skewed to right.
 
@@ -3182,7 +3182,7 @@ Somewhat skewed to right.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.png)
+![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.png)
 
 Somewhat opening-up curve.
 
@@ -3206,7 +3206,7 @@ Definitely skewed to right.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.png)
+![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.png)
 
 
 Clear upward-opening curve.
@@ -3230,7 +3230,7 @@ Long tails (or a very sharp peak).
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.png)
+![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.png)
 
 Low values too low and high values too high for normal.
 
@@ -3322,7 +3322,7 @@ standard reading method.
 ggplot(kids,aes(x=group,y=score))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.png)
+![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.png)
 
 ## Facetted normal quantile plots
 Done this way:
@@ -3333,7 +3333,7 @@ ggplot(kids,aes(sample=score))+stat_qq()+stat_qq_line()+
 facet_wrap(~group)
 ```
 
-![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.png)
+![plot of chunk unnamed-chunk-138](figure/unnamed-chunk-138-1.png)
 
 ## Comments
 - These plots show no problems with normality. Both groups are more
@@ -3614,7 +3614,7 @@ rats %>% sample_n(12)
 ggplot(rats,aes(y=density,x=group))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-148](figure/unnamed-chunk-148-1.png)
+![plot of chunk unnamed-chunk-149](figure/unnamed-chunk-149-1.png)
 
 ## Or, arranging groups in data (logical) order
 
@@ -3623,7 +3623,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-149](figure/unnamed-chunk-149-1.png)
+![plot of chunk unnamed-chunk-150](figure/unnamed-chunk-150-1.png)
 
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
@@ -3826,7 +3826,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-156](figure/unnamed-chunk-156-1.png)
+![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.png)
 
 Assumptions:
 - Normally distributed data within each group
@@ -3840,7 +3840,7 @@ ggplot(rats, aes(sample = density)) + stat_qq() + stat_qq_line() +
   facet_wrap( ~ group)
 ```
 
-![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.png)
+![plot of chunk unnamed-chunk-158](figure/unnamed-chunk-158-1.png)
 
 ## The assumptions
 - Normally-distributed data within each group
@@ -4412,7 +4412,7 @@ Feed 3 is best, feed 1 worst.
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-173](figure/unnamed-chunk-173-1.png)
+![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174-1.png)
 
 Feed 2 has an outlier, but there are only 5 pigs in each group, and the
 conclusion is so clear that I am OK with this.
@@ -4864,7 +4864,7 @@ weather_tidy %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-195](figure/unnamed-chunk-195-1.png)
+![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196-1.png)
 
 ## Summary of tidying “verbs”
 
@@ -5819,7 +5819,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-230-1.png)
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-231-1.png)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -5918,7 +5918,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-234-1.png)
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-235-1.png)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -5999,7 +5999,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238-1.png)
+![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239-1.png)
 
 ## Scatterplot with fitted line and curve
 - Residual plot basically random. Good.
@@ -6025,7 +6025,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239-1.png)
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.png)
 
 Curve clearly fits better than line. 
 
@@ -6074,7 +6074,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 ## Scatterplot for wind_pace
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.png)
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241-1.png)
 
 That’s pretty straight. Blue actually smooth curve not line.
 
@@ -6189,7 +6189,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244-1.png)
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245-1.png)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6385,7 +6385,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.png)
+![plot of chunk unnamed-chunk-255](figure/unnamed-chunk-255-1.png)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6553,7 +6553,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-261](figure/unnamed-chunk-261-1.png)
+![plot of chunk unnamed-chunk-262](figure/unnamed-chunk-262-1.png)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6597,7 +6597,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.png)
+![plot of chunk unnamed-chunk-264](figure/unnamed-chunk-264-1.png)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6666,7 +6666,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-266](figure/unnamed-chunk-266-1.png)
+![plot of chunk unnamed-chunk-267](figure/unnamed-chunk-267-1.png)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6729,7 +6729,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-270](figure/unnamed-chunk-270-1.png)
+![plot of chunk unnamed-chunk-271](figure/unnamed-chunk-271-1.png)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6760,7 +6760,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-271](figure/unnamed-chunk-271-1.png)
+![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.png)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -6802,7 +6802,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-274](figure/unnamed-chunk-274-1.png)
+![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.png)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7186,7 +7186,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-292](figure/unnamed-chunk-292-1.png)
+![plot of chunk unnamed-chunk-293](figure/unnamed-chunk-293-1.png)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7209,7 +7209,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-294](figure/unnamed-chunk-294-1.png)
+![plot of chunk unnamed-chunk-295](figure/unnamed-chunk-295-1.png)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7493,7 +7493,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-305](figure/unnamed-chunk-305-1.png)
+![plot of chunk unnamed-chunk-306](figure/unnamed-chunk-306-1.png)
 
 
 # Functions
@@ -8956,7 +8956,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-379](figure/unnamed-chunk-379-1.png)
+![plot of chunk unnamed-chunk-380](figure/unnamed-chunk-380-1.png)
 
 ## Labelling points on a plot
 
@@ -8991,7 +8991,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-381](figure/unnamed-chunk-381-1.png)
+![plot of chunk unnamed-chunk-382](figure/unnamed-chunk-382-1.png)
 
 ## Label points with name of car they belong to
 
@@ -9001,7 +9001,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-382](figure/unnamed-chunk-382-1.png)
+![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.png)
 
 ## Make labels smaller
 
@@ -9011,7 +9011,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.png)
+![plot of chunk unnamed-chunk-384](figure/unnamed-chunk-384-1.png)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9037,7 +9037,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-385](figure/unnamed-chunk-385-1.png)
+![plot of chunk unnamed-chunk-386](figure/unnamed-chunk-386-1.png)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9061,7 +9061,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.png)
+![plot of chunk unnamed-chunk-388](figure/unnamed-chunk-388-1.png)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9086,7 +9086,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.png)
+![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.png)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9099,7 +9099,7 @@ We use previous graph as base (to save drawing again).
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.png)
+![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.png)
 
 ## Axis labels
 
@@ -9108,7 +9108,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.png)
+![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.png)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your
@@ -9603,9 +9603,412 @@ sum(a * b)
 ```
 
 
-# piece on bootstrap
+# The bootstrap
 
-# piece on rstan
+
+## Sources and Notes 
+
+[ref](https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests)
+
+xxx PASIAS: add some problems, eg. based on actually normal data, the mean for some skewed data
+an unfamiliar stat (eg. correlation)
+
+
+
+## Packages for this section
+
+
+```r
+library(tidyverse)
+library(bootstrap)
+```
+
+
+## Is my sampling distribution normal enough?
+
+- Recall the IRS data that we used as a motivation for the sign test:
+
+
+
+
+
+```r
+ggplot(irs, aes(x=Time))+geom_histogram(bins=10)
+```
+
+![plot of chunk unnamed-chunk-415](figure/unnamed-chunk-415-1.png)
+
+- We said that a $t$ procedure for the mean would not be a good idea because the distribution is skewed.
+
+## What *actually* matters
+
+- It's not the distribution of the *data* that has to be approx normal (for a $t$ procedure).
+- What matters is the *sampling distribution of the sample mean*.
+- If the sample size is large enough, the sampling distribution will be normal enough even if the data distribution is not.
+  - This is why we had to consider the sample size as well as the shape.
+- But how do we know whether this is the case or not? We only have *one* sample.
+
+## The (nonparametric) bootstrap
+
+- Typically, our sample will be reasonably representative of the population.
+- Idea: pretend the sample *is* the population, and sample from it *with replacement*.
+- Calculate test statistic, and repeat many times.
+- This gives an idea of how our statistic might vary in repeated samples: that is, its sampling distribution.
+- Called the **bootstrap distribution** of the test statistic.
+- If the bootstrap distribution is approx normal, infer that the true sampling distribution also approx normal, therefore inference about the mean such as $t$ is good enough.
+- If not, we should be more careful.
+
+## Why it works
+
+- We typically estimate population parameters by using the corresponding sample thing: eg. estimate population mean using sample mean.
+- This called **plug-in principle**.
+- The fraction of sample values less than a value $x$ called the **empirical distribution function** (as a function of $x$).
+- By plug-in principle, the empirical distribution function is an estimate of the population CDF.
+- In this sense, the sample *is* an estimate of the population, and so sampling from it is an estimate of sampling from the population.
+
+## Bootstrapping the IRS data
+
+- Sampling with replacement is done like this (the default sample size is as long as the original data):
+
+
+```r
+boot=sample(irs$Time, replace=T)
+mean(boot)
+```
+
+```
+## [1] 197.6333
+```
+
+- That's one bootstrapped mean. We need a whole bunch.
+- Use the same idea as for simulating power:
+
+
+
+
+
+```r
+rerun(1000, sample(irs$Time, replace=T)) %>% 
+  map_dbl(~mean(.)) -> means
+```
+
+## Sampling distribution of sample mean
+
+
+```r
+ggplot(tibble(means), aes(x=means))+geom_histogram(bins=20)
+```
+
+![plot of chunk unnamed-chunk-419](figure/unnamed-chunk-419-1.png)
+
+## Comments
+
+This is not so bad: a long right tail, maybe:
+
+
+```r
+ggplot(tibble(means), aes(sample=means))+
+  stat_qq()+stat_qq_line()
+```
+
+![plot of chunk unnamed-chunk-420](figure/unnamed-chunk-420-1.png)
+
+## Confidence interval from the bootstrap distribution
+
+There are two ways (at least):
+
+- percentile bootstrap interval: take the 2.5 and 97.5 percentiles (to get the middle 95%). This is easy, but not always the best:
+
+
+```r
+(b_p=quantile(means, c(0.025, 0.975)))
+```
+
+```
+##    2.5%   97.5% 
+## 159.365 248.405
+```
+
+- bootstrap $t$: use the SD of the bootstrapped sampling distribution as the SE of the estimator of the mean and make a $t$ interval:
+
+
+```r
+n=length(irs$Time)
+t_star=qt(0.975, n-1)
+(b_t=mean(means)+c(-1, 1)*t_star*sd(means))
+```
+
+```
+## [1] 155.3363 246.3731
+```
+
+## Comparing
+
+- get ordinary $t$ interval:
+
+
+```r
+my_names=c("LCL", "UCL")
+o_t=t.test(irs$Time)$conf.int
+```
+
+
+- Compare the 2 bootstrap intervals with the ordinary $t$-interval: 
+
+
+```r
+tibble(limit=my_names, o_t, b_t, b_p)
+```
+
+```
+## # A tibble: 2 x 4
+##   limit   o_t   b_t   b_p
+##   <chr> <dbl> <dbl> <dbl>
+## 1 LCL    155.  155.  159.
+## 2 UCL    247.  246.  248.
+```
+
+- The bootstrap $t$ and the ordinary $t$ are very close
+- The percentile bootstrap interval is noticeably shorter (common) and higher (skewness).
+  
+## Which to prefer?
+
+- If the intervals agree, then they are all good.
+- If they disagree, they are all bad! 
+- In that case, use BCA interval (over).
+
+  
+## Bias correction and acceleration
+
+- this from 
+"An introduction to the bootstrap", by
+Brad Efron and Robert J. Tibshirani.
+- there is way of correcting the CI for skewness in the bootstrap distribution, called the BCA method
+- complicated, but implemented in `bootstrap` package.
+
+## Run this on the IRS data:
+
+
+```r
+bca=bcanon(irs$Time, 1000, mean)
+bca$confpoints
+```
+
+```
+##      alpha bca point
+## [1,] 0.025  164.5667
+## [2,] 0.050  169.0000
+## [3,] 0.100  175.5000
+## [4,] 0.160  180.2667
+## [5,] 0.840  225.3667
+## [6,] 0.900  232.0000
+## [7,] 0.950  241.1667
+## [8,] 0.975  251.7333
+```
+
+## use 2.5% and 97.5% points for CI
+
+
+```r
+bca$confpoints %>% as_tibble() %>% 
+  filter(alpha %in% c(0.025, 0.975)) %>% 
+  pull(`bca point`) -> b_bca
+b_bca
+```
+
+```
+## [1] 164.5667 251.7333
+```
+
+## Comparing
+
+
+```r
+tibble(limit=my_names, o_t, b_t, b_p, b_bca)
+```
+
+```
+## # A tibble: 2 x 5
+##   limit   o_t   b_t   b_p b_bca
+##   <chr> <dbl> <dbl> <dbl> <dbl>
+## 1 LCL    155.  155.  159.  165.
+## 2 UCL    247.  246.  248.  252.
+```
+
+- The BCA interval says that the mean should be estimated even higher than the bootstrap percentile interval does. 
+- The BCA interval is the one to trust.
+
+
+## Bootstrapping the correlation
+
+Recall the soap data:
+
+
+```r
+url="http://www.utsc.utoronto.ca/~butler/c32/soap.txt"
+soap=read_delim(url," ")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   case = col_double(),
+##   scrap = col_double(),
+##   speed = col_double(),
+##   line = col_character()
+## )
+```
+
+## The data xxx
+
+
+```r
+ggplot(soap, aes(x=speed, y=scrap, colour=line))+
+  geom_point()+geom_smooth(method="lm", se=F)
+```
+
+![plot of chunk unnamed-chunk-429](figure/unnamed-chunk-429-1.png)
+
+## Comments
+
+- Line B produces less scrap for any given speed.
+- For line B, estimate the correlation between speed and scrap (with a confidence interval.)
+
+## Extract the line B data; standard correlation test 
+
+
+```r
+soap %>% filter(line=="b") -> line_b
+with(line_b, cor.test(speed, scrap))
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  speed and scrap
+## t = 15.829, df = 10, p-value = 2.083e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.9302445 0.9947166
+## sample estimates:
+##       cor 
+## 0.9806224
+```
+
+
+
+
+## Bootstrapping a correlation
+
+- Sample from data with replacement, but have to keep the `speed`-`scrap` *pairs* together
+- Sample *rows* at random, then take the variable values that belong to those rows:
+
+
+```r
+rerun(1000, sample(1:nrow(line_b), replace=T)) %>%
+  map(~slice(line_b, .)) %>% 
+  map_dbl(~with(.,cor(speed, scrap))) -> cors
+```
+
+## A picture of this 
+
+
+```r
+ggplot(tibble(cors), aes(x=cors))+geom_histogram(bins=15)
+```
+
+![plot of chunk unnamed-chunk-433](figure/unnamed-chunk-433-1.png)
+
+## Comments and next steps
+
+- This is very left-skewed.
+- Bootstrap percentile interval is:
+
+
+```r
+(b_p=quantile(cors, c(0.025, 0.975)))
+```
+
+```
+##      2.5%     97.5% 
+## 0.9467805 0.9958809
+```
+
+- We probably need the BCA interval instead.
+
+## Getting the BCA interval 1/2
+
+- To use `bcanon`, write a function that takes a vector of row numbers and returns the correlation between `speed` and `scrap` for those rows:
+
+
+```r
+theta=function(rows, d) {
+  d %>% slice(rows) %>% with(., cor(speed, scrap))
+}
+theta(1:3, line_b)
+```
+
+```
+## [1] 0.9928971
+```
+
+```r
+line_b %>% slice(1:3)
+```
+
+```
+## # A tibble: 3 x 4
+##    case scrap speed line 
+##   <dbl> <dbl> <dbl> <chr>
+## 1    16   140   105 b    
+## 2    17   277   215 b    
+## 3    18   384   270 b
+```
+
+- That looks about right.
+
+## Getting the BCA interval 2/2
+
+- Inputs to `bcanon` are now:
+  - row numbers (1 through 12 in our case: 12 rows in `line_b`)
+  - number of bootstrap samples
+  - the function we just wrote
+  - the data frame:
+
+
+```r
+points=bcanon(1:12, 1000, theta, line_b)$confpoints
+points %>% as_tibble() %>% 
+  filter(alpha %in% c(0.025, 0.975)) %>% 
+  pull(`bca point`) -> b_bca
+b_bca
+```
+
+```
+## [1] 0.9201579 0.9951418
+```
+
+## Comparing the results
+
+
+```r
+tibble(limit=my_names, o_c, b_p, b_bca)
+```
+
+```
+## # A tibble: 2 x 4
+##   limit   o_c   b_p b_bca
+##   <chr> <dbl> <dbl> <dbl>
+## 1 LCL   0.930 0.947 0.920
+## 2 UCL   0.995 0.996 0.995
+```
+
+- The bootstrap percentile interval doesn't go down far enough. 
+- The BCA interval seems to do a better job than the ordinary `cor.test` interval in capturing the skewness of the distribution.
+
+
+# Bayesian statistics with `rstan` xxx
 
 
 ## Packages for this section
@@ -9615,6 +10018,9 @@ sum(a * b)
 library(tidyverse)
 library(rstan)
 ```
+
+
+PASIAS: add a one-parameter and multi-parameter example (look at the schools one in Gelman's book) xxx
 
 ## Bayesian and frequentist inference
 
@@ -9640,7 +10046,8 @@ library(rstan)
 
 > posterior is proportional to likelihood times prior
 
-- more discussion about this is in [a blog post](http://ritsokiguess.site/docs/2018/02/28/working-my-way-back-to-you-a-re-investigation-of-rstan/). 
+- more discussion about this is in 
+[**a blog post**](http://ritsokiguess.site/docs/2018/02/28/working-my-way-back-to-you-a-re-investigation-of-rstan/). 
 
 ## An example
 
@@ -9648,7 +10055,7 @@ library(rstan)
 
 
 ```r
-(x=c(0,4,3,6,3,3,2,4))
+(x <- c(0, 4, 3, 6, 3, 3, 2, 4))
 ```
 
 ```
@@ -9671,7 +10078,7 @@ where $S=\sum_{i=1}^n x_i$.
 $$ C \lambda^1 e^{-\lambda/2} $$
 where $C$ is a constant
 
-- and then you multiply these together and try to recognize the distributional form. 
+- and then you multiply these together and try to recognize the distributional form. (This one is gamma.)
 
 - Requires too much intelligence (and this is a simple case).
 
@@ -9701,7 +10108,7 @@ This is how you say "$X$ has a Poisson distribution with mean $\lambda$".
 ```
 model {
 // prior
-lambda ~ chi_square(5);
+lambda ~ chi_square(4);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -9723,38 +10130,35 @@ real<lower=0> lambda;
 
 
 ```r
-poisson1_code=stan_model(file = "poisson1.stan")
+poisson1_code <- stan_model(file = "poisson1.stan")
 ```
 
 - set up data
 
 
 ```r
-poisson1_data=list(x=x)
+poisson1_data <- list(x = x)
 ```
 
 - sample
 
 
 ```r
-poisson1_fit=sampling(poisson1_code, data=poisson1_data)
+poisson1_fit <- sampling(poisson1_code, data = poisson1_data)
 ```
 
 
-```
-## [conflicted] `extract` found in 2 packages.
-## Either pick the one you want with `::` 
-## * rstan::extract
-## * tidyr::extract
-## Or declare a preference with `conflict_prefer()`
-## * conflict_prefer("extract", "rstan")
-## * conflict_prefer("extract", "tidyr")
+
+
+```r
+poisson1_code <- stan_model(file = "poisson1.stan")
 ```
 
-```
-## Error in sampling(poisson1_code, data = poisson1_data): object 'poisson1_code' not found
-```
 
+
+
+
+## The output
 
 
 ```r
@@ -9762,15 +10166,28 @@ poisson1_fit
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'poisson1_fit' not found
+## Inference for Stan model: poisson1.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
+## lambda 3.20    0.02 0.61 2.09 2.77 3.15 3.60  4.50
+## lp__   3.71    0.02 0.69 1.67 3.56 3.97 4.15  4.21
+##        n_eff Rhat
+## lambda  1438    1
+## lp__    1721    1
+## 
+## Samples were drawn using NUTS(diag_e) at Sun May 19 22:28:26 2019.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).
 ```
 
 - This summarizes the posterior distribution of $\lambda$; the posterior mean is 3.25, with a 95% posterior interval of 2.15 to 4.66. (The probability that $\lambda$ is between these two values really is 95%.)
 
 ## Making the code more general
 
-- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. 
-- To make the code more general (for any estimation of a Poisson mean from any sample size), add the sample size and the prior df to the `data`, thus:
+- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. More generally:
 
 ```
 data {
@@ -9787,29 +10204,33 @@ x ~ poisson(lambda);
 }
 ```
 
+## Set up again and sample:
+
 - Compile again:
 
 
+
+
+
 ```r
-poisson2_code=stan_model(file = "poisson2.stan")
+poisson2_code <- stan_model(file = "poisson2.stan")
 ```
+
+
+
 
 - set up the data again including the new things we need:
 
 
 ```r
-poisson2_data=list(x=x, n=length(x), prior_df=4)
+poisson2_data <- list(x = x, n = length(x), prior_df = 4)
 ```
 
 - sample again
 
 
 ```r
-poisson2_fit=sampling(poisson1_code, data=poisson2_data)
-```
-
-```
-## Error in sampling(poisson1_code, data = poisson2_data): object 'poisson1_code' not found
+poisson2_fit <- sampling(poisson1_code, data = poisson2_data)
 ```
 
 
@@ -9821,9 +10242,74 @@ poisson2_fit
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'poisson2_fit' not found
+## Inference for Stan model: poisson1.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
+## lambda 3.18    0.02 0.62 2.07 2.74 3.15 3.59  4.50
+## lp__   3.69    0.02 0.75 1.45 3.54 3.97 4.15  4.21
+##        n_eff Rhat
+## lambda  1386 1.01
+## lp__    1628 1.00
+## 
+## Samples were drawn using NUTS(diag_e) at Sun May 19 22:28:32 2019.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).
 ```
 
+## Extracting actual sampled values
+
+- `rstan` has `extract` for this. There is also an `extract` in `dplyr`: make sure you have the right one.
+
+
+```r
+poisson2_out <- extract(poisson2_fit)
+ggplot(tibble(lambda = poisson2_out$lambda), aes(x = lambda)) +
+  geom_histogram(bins = 20)
+```
+
+![plot of chunk unnamed-chunk-454](figure/unnamed-chunk-454-1.png)
+
+## Posterior predictive distribution
+
+- Another use for the actual sampled values is to see what kind of *response* values we might get in the future. This should look something like our data. For a Poisson distribution, the response values are integers:
+
+
+```r
+tibble(lambda = poisson2_out$lambda) %>%
+  mutate(x_sim = map_int(lambda, ~ rpois(1, .))) -> d
+```
+
+## A bar chart:
+
+
+```r
+ggplot(d, aes(x = x_sim)) + geom_bar()
+```
+
+![plot of chunk unnamed-chunk-456](figure/unnamed-chunk-456-1.png)
+
+
+## Comparison
+
+Our actual data values were these:
+
+
+```r
+x
+```
+
+```
+## [1] 0 4 3 6 3 3 2 4
+```
+
+None of these are very unlikely according to our posterior predictive distribution, so our model is believable. 
+
+## A linear regression
+
+xxxx
 
 
 # the end of the notes

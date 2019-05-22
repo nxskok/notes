@@ -14799,7 +14799,8 @@ and then all is good:
 \href{https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests}{ref}
 
 xxx PASIAS: add some problems, eg. based on actually normal data, the
-mean for some skewed data an unfamiliar stat (eg. correlation)
+mean for some skewed data an unfamiliar stat (eg. correlation,
+regression slope)
 
 \end{frame}
 
@@ -15215,8 +15216,8 @@ Recall the soap data:
 
 \end{frame}
 
-\begin{frame}[fragile]{The data xxx}
-\protect\hypertarget{the-data-xxx}{}
+\begin{frame}[fragile]{The data}
+\protect\hypertarget{the-data-6}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -15457,9 +15458,9 @@ test}
 
 \end{frame}
 
-\hypertarget{bayesian-statistics-with-rstan-xxx}{%
-\section{\texorpdfstring{Bayesian statistics with \texttt{rstan}
-xxx}{Bayesian statistics with rstan xxx}}\label{bayesian-statistics-with-rstan-xxx}}
+\hypertarget{bayesian-statistics-with-rstan}{%
+\section{\texorpdfstring{Bayesian statistics with
+\texttt{rstan}}{Bayesian statistics with rstan}}\label{bayesian-statistics-with-rstan}}
 
 \begin{frame}[fragile]{Packages for this section}
 \protect\hypertarget{packages-for-this-section-12}{}
@@ -15584,9 +15585,9 @@ posterior is proportional to likelihood times prior
   mean \(\lambda\) that we want to estimate.
 \item
   We need a prior distribution for \(\lambda\). I will (for some reason)
-  take a \(\chi^2\) distribution with 4 df (that has mean 4). Normally
-  this would come from your knowledge of the data-generating
-  \emph{process}.
+  take a \(Weibull\) distribution with parameters 1.1 and 6, that has
+  quartiles 2 and 6. Normally this would come from your knowledge of the
+  data-generating \emph{process}.
 \item
   The Poisson likelihood can be written down (see over).
 \end{itemize}
@@ -15600,26 +15601,28 @@ posterior is proportional to likelihood times prior
 \tightlist
 \item
   We have \(n=8\) observations \(x_i\), so the Poisson likelihood is
+  proportional to
 \end{itemize}
 
-\[ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{n\lambda} \lambda^S, \]
+\[ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{-n\lambda} \lambda^S, \]
 where \(S=\sum_{i=1}^n x_i\).
 
 \begin{itemize}
 \tightlist
 \item
-  then you write the chi-squared prior density (as a function of
+  then you write the Weibull prior density (as a function of
   \(\lambda\)):
 \end{itemize}
 
-\[ C \lambda^1 e^{-\lambda/2} \] where \(C\) is a constant
+\[ C (\lambda/6)^{0.1} e^{-(\lambda/6)^{1.1}}  \] where \(C\) is a
+constant.
 
 \begin{itemize}
+\tightlist
 \item
   and then you multiply these together and try to recognize the
-  distributional form. (This one is gamma.)
-\item
-  Requires too much intelligence (and this is a simple case).
+  distributional form. Only, here you can't. The powers 0.1 and 1.1 get
+  in the way.
 \end{itemize}
 
 \end{frame}
@@ -15667,7 +15670,7 @@ This is how you say ``\(X\) has a Poisson distribution with mean
 \begin{verbatim}
 model {
 // prior
-lambda ~ chi_square(4);
+lambda ~ weibull(1.1, 6);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -15747,25 +15750,34 @@ real<lower=0> lambda;
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
-## lambda 3.20    0.02 0.61 2.09 2.77 3.15 3.60  4.50
-## lp__   3.71    0.02 0.69 1.67 3.56 3.97 4.15  4.21
+## lambda 3.20    0.02 0.63 2.10 2.75 3.15 3.60  4.56
+## lp__   3.75    0.02 0.69 1.84 3.56 4.02 4.21  4.26
 ##        n_eff Rhat
-## lambda  1438    1
-## lp__    1721    1
+## lambda  1412    1
+## lp__    1831    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Sun May 19 22:28:26 2019.
+## Samples were drawn using NUTS(diag_e) at Tue May 21 15:57:10 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
 \end{verbatim}
 
+\end{frame}
+
+\begin{frame}{Comments}
+\protect\hypertarget{comments-26}{}
+
 \begin{itemize}
 \tightlist
 \item
-  This summarizes the posterior distribution of \(\lambda\); the
-  posterior mean is 3.25, with a 95\% posterior interval of 2.15 to
-  4.66. (The probability that \(\lambda\) is between these two values
-  really is 95\%.)
+  This summarizes the posterior distribution of \(\lambda\)
+\item
+  the posterior mean is 3.20
+\item
+  with a 95\% posterior interval of 2.14 to 4.50.
+\item
+  The probability that \(\lambda\) is between these two values really is
+  95\%.
 \end{itemize}
 
 \end{frame}
@@ -15777,19 +15789,20 @@ real<lower=0> lambda;
 \tightlist
 \item
   The coder in you is probably offended by hard-coding the sample size
-  and the df of the prior distribution. More generally:
+  and the parameters of the prior distribution. More generally:
 \end{itemize}
 
 \begin{verbatim}
 data {
   int<lower=1> n;
-  real<lower=0> prior_df;
+  real<lower=0> a;
+  real<lower=0> b;
   int x[n];
 }
 ...
 model {
 // prior
-lambda ~ chi_square(prior_df);
+lambda ~ weibull(a, b);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -15820,7 +15833,7 @@ x ~ poisson(lambda);
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{poisson2_data <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{n =} \KeywordTok{length}\NormalTok{(x), }\DataTypeTok{prior_df =} \DecValTok{4}\NormalTok{)}
+\NormalTok{poisson2_data <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{n =} \KeywordTok{length}\NormalTok{(x), }\DataTypeTok{a =} \FloatTok{1.1}\NormalTok{, }\DataTypeTok{b =} \DecValTok{6}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -15853,13 +15866,13 @@ x ~ poisson(lambda);
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
-## lambda 3.18    0.02 0.62 2.07 2.74 3.15 3.59  4.50
-## lp__   3.69    0.02 0.75 1.45 3.54 3.97 4.15  4.21
+## lambda 3.18    0.02 0.63 2.09 2.74 3.14 3.59  4.53
+## lp__   3.74    0.02 0.73 1.80 3.54 4.01 4.20  4.26
 ##        n_eff Rhat
-## lambda  1386 1.01
-## lp__    1628 1.00
+## lambda  1416    1
+## lp__    1572    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Sun May 19 22:28:32 2019.
+## Samples were drawn using NUTS(diag_e) at Tue May 21 15:57:14 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
@@ -15951,8 +15964,9 @@ distribution, so our model is believable.
 
 \end{frame}
 
-\begin{frame}{A linear regression}
-\protect\hypertarget{a-linear-regression}{}
+\begin{frame}{A linear regression, or look at the ``eight schools'', or
+an ANOVA}
+\protect\hypertarget{a-linear-regression-or-look-at-the-eight-schools-or-an-anova}{}
 
 xxxx
 

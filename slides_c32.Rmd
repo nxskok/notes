@@ -102,7 +102,7 @@ output:
 ```
 
 
-# Bayesian statistics with `rstan` xxx
+# Bayesian statistics with `rstan` 
 
 ```{r, child="rstan.Rmd"}
 ```

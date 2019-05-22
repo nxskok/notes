@@ -1192,7 +1192,7 @@
 \headcommand {\beamer@framepages {572}{572}}
 \headcommand {\beamer@sectionpages {546}{572}}
 \headcommand {\beamer@subsectionpages {546}{572}}
-\headcommand {\sectionentry {17}{Bayesian statistics with \texttt {rstan} xxx}{573}{Bayesian statistics with \texttt {rstan} xxx}{0}}
+\headcommand {\sectionentry {17}{Bayesian statistics with \texttt {rstan}}{573}{Bayesian statistics with \texttt {rstan}}{0}}
 \headcommand {\slideentry {17}{0}{1}{573/573}{}{0}}
 \headcommand {\beamer@framepages {573}{573}}
 \headcommand {\slideentry {17}{0}{2}{574/574}{}{0}}
@@ -1233,13 +1233,15 @@
 \headcommand {\beamer@framepages {591}{591}}
 \headcommand {\slideentry {17}{0}{20}{592/592}{}{0}}
 \headcommand {\beamer@framepages {592}{592}}
-\headcommand {\beamer@sectionpages {573}{592}}
-\headcommand {\beamer@subsectionpages {573}{592}}
-\headcommand {\sectionentry {18}{the end of the notes}{593}{the end of the notes}{0}}
-\headcommand {\slideentry {18}{0}{1}{593/593}{}{0}}
+\headcommand {\slideentry {17}{0}{21}{593/593}{}{0}}
 \headcommand {\beamer@framepages {593}{593}}
-\headcommand {\beamer@partpages {1}{593}}
-\headcommand {\beamer@subsectionpages {593}{593}}
-\headcommand {\beamer@sectionpages {593}{593}}
-\headcommand {\beamer@documentpages {593}}
-\headcommand {\gdef \inserttotalframenumber {593}}
+\headcommand {\beamer@sectionpages {573}{593}}
+\headcommand {\beamer@subsectionpages {573}{593}}
+\headcommand {\sectionentry {18}{the end of the notes}{594}{the end of the notes}{0}}
+\headcommand {\slideentry {18}{0}{1}{594/594}{}{0}}
+\headcommand {\beamer@framepages {594}{594}}
+\headcommand {\beamer@partpages {1}{594}}
+\headcommand {\beamer@subsectionpages {594}{594}}
+\headcommand {\beamer@sectionpages {594}{594}}
+\headcommand {\beamer@documentpages {594}}
+\headcommand {\gdef \inserttotalframenumber {594}}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.4.30)  19 MAY 2019 22:28
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2019.4.30)  21 MAY 2019 15:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5278,7 +5278,7 @@ r arguments[]
 File: figure/unnamed-chunk-415-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-415-1.png>
 )
-Overfull \vbox (57.55699pt too high) detected at line 14846
+Overfull \vbox (57.55699pt too high) detected at line 14847
  []
 
 [549
@@ -5301,7 +5301,7 @@ Overfull \vbox (57.55699pt too high) detected at line 14846
 File: figure/unnamed-chunk-419-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-419-1.png>
 )
-Overfull \vbox (44.48767pt too high) detected at line 14978
+Overfull \vbox (44.48767pt too high) detected at line 14979
  []
 
 [554
@@ -5313,7 +5313,7 @@ Overfull \vbox (44.48767pt too high) detected at line 14978
 File: figure/unnamed-chunk-420-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-420-1.png>
 )
-Overfull \vbox (53.96135pt too high) detected at line 14998
+Overfull \vbox (53.96135pt too high) detected at line 14999
  []
 
 [555
@@ -5327,7 +5327,7 @@ Overfull \vbox (53.96135pt too high) detected at line 14998
 \openout4 = `slides_c32.vrb'.
 
  (./slides_c32.vrb)
-Overfull \vbox (0.45052pt too high) detected at line 15090
+Overfull \vbox (0.45052pt too high) detected at line 15091
  []
 
 [557
@@ -5366,7 +5366,7 @@ Overfull \vbox (0.45052pt too high) detected at line 15090
 File: figure/unnamed-chunk-429-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-429-1.png>
 )
-Overfull \vbox (45.86282pt too high) detected at line 15234
+Overfull \vbox (45.86282pt too high) detected at line 15235
  []
 
 [564
@@ -5396,7 +5396,7 @@ o 0[]
 File: figure/unnamed-chunk-433-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-433-1.png>
 )
-Overfull \vbox (44.48767pt too high) detected at line 15315
+Overfull \vbox (44.48767pt too high) detected at line 15316
  []
 
 [568
@@ -5410,7 +5410,7 @@ Overfull \vbox (44.48767pt too high) detected at line 15315
 \openout4 = `slides_c32.vrb'.
 
  (./slides_c32.vrb)
-Overfull \vbox (26.50078pt too high) detected at line 15392
+Overfull \vbox (26.50078pt too high) detected at line 15393
  []
 
 [570
@@ -5481,8 +5481,8 @@ ws=4000.[]
 
 
 Overfull \hbox (54.3683pt too wide) in paragraph at lines 26--26
-[]\TU/lmtt/m/n/10.95 ## Samples were drawn using NUTS(diag_e) at Sun May 19 22:
-28:26 2019.[] 
+[]\TU/lmtt/m/n/10.95 ## Samples were drawn using NUTS(diag_e) at Tue May 21 15:
+57:10 2019.[] 
  []
 
 
@@ -5498,20 +5498,22 @@ it chains (at[]
  []
 
 )
-Overfull \vbox (58.1685pt too high) detected at line 15771
+Overfull \vbox (10.33853pt too high) detected at line 15765
  []
 
 [584
 
-]
-\openout4 = `slides_c32.vrb'.
-
- (./slides_c32.vrb) [585
+] [585
 
 ]
 \openout4 = `slides_c32.vrb'.
 
  (./slides_c32.vrb) [586
+
+]
+\openout4 = `slides_c32.vrb'.
+
+ (./slides_c32.vrb) [587
 
 ]
 \openout4 = `slides_c32.vrb'.
@@ -5524,8 +5526,8 @@ ws=4000.[]
 
 
 Overfull \hbox (54.3683pt too wide) in paragraph at lines 26--26
-[]\TU/lmtt/m/n/10.95 ## Samples were drawn using NUTS(diag_e) at Sun May 19 22:
-28:32 2019.[] 
+[]\TU/lmtt/m/n/10.95 ## Samples were drawn using NUTS(diag_e) at Tue May 21 15:
+57:14 2019.[] 
  []
 
 
@@ -5541,10 +5543,10 @@ it chains (at[]
  []
 
 )
-Overfull \vbox (10.33853pt too high) detected at line 15868
+Overfull \vbox (10.33853pt too high) detected at line 15881
  []
 
-[587
+[588
 
 ]
 \openout4 = `slides_c32.vrb'.
@@ -5553,15 +5555,15 @@ Overfull \vbox (10.33853pt too high) detected at line 15868
 File: figure/unnamed-chunk-454-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-454-1.png>
 )
-Overfull \vbox (46.60097pt too high) detected at line 15894
+Overfull \vbox (46.60097pt too high) detected at line 15907
  []
 
-[588
+[589
 
 ]
 \openout4 = `slides_c32.vrb'.
 
- (./slides_c32.vrb) [589
+ (./slides_c32.vrb) [590
 
 ]
 \openout4 = `slides_c32.vrb'.
@@ -5570,19 +5572,19 @@ Overfull \vbox (46.60097pt too high) detected at line 15894
 File: figure/unnamed-chunk-456-1.png Graphic file (type bmp)
 <figure/unnamed-chunk-456-1.png>
 )
-Overfull \vbox (44.48767pt too high) detected at line 15932
+Overfull \vbox (44.48767pt too high) detected at line 15945
  []
 
-[590
+[591
 
 ]
 \openout4 = `slides_c32.vrb'.
 
- (./slides_c32.vrb) [591
-
-] [592
+ (./slides_c32.vrb) [592
 
 ] [593
+
+] [594
 
 ]
 \tf@nav=\write7
@@ -5594,19 +5596,19 @@ Overfull \vbox (44.48767pt too high) detected at line 15932
 \tf@snm=\write9
 \openout9 = `slides_c32.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 15964.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 15964.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 15978.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 15978.
  (./slides_c32.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 15964.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 15964.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 15978.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 15978.
  ) 
 Here is how much of TeX's memory you used:
  38768 strings out of 493007
  742873 string characters out of 6136719
- 957010 words of memory out of 5000000
+ 956987 words of memory out of 5000000
  41191 multiletter control sequences out of 15000+600000
  537676 words of font info for 93 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  61i,15n,117p,10419b,1256s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on slides_c32.pdf (593 pages).
+Output written on slides_c32.pdf (594 pages).

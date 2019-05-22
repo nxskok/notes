@@ -3,7 +3,7 @@
 [ref](https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests)
 
 xxx PASIAS: add some problems, eg. based on actually normal data, the mean for some skewed data
-an unfamiliar stat (eg. correlation)
+an unfamiliar stat (eg. correlation, regression slope)
 
 
 
@@ -181,7 +181,7 @@ url="http://www.utsc.utoronto.ca/~butler/c32/soap.txt"
 soap=read_delim(url," ")
 ```
 
-## The data xxx
+## The data
 
 ```{r, fig.height=3.75}
 ggplot(soap, aes(x=speed, y=scrap, colour=line))+

@@ -9611,7 +9611,7 @@ sum(a * b)
 [ref](https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests)
 
 xxx PASIAS: add some problems, eg. based on actually normal data, the mean for some skewed data
-an unfamiliar stat (eg. correlation)
+an unfamiliar stat (eg. correlation, regression slope)
 
 
 
@@ -9859,7 +9859,7 @@ soap=read_delim(url," ")
 ## )
 ```
 
-## The data xxx
+## The data
 
 
 ```r
@@ -10008,7 +10008,7 @@ tibble(limit=my_names, o_c, b_p, b_bca)
 - The BCA interval seems to do a better job than the ordinary `cor.test` interval in capturing the skewness of the distribution.
 
 
-# Bayesian statistics with `rstan` xxx
+# Bayesian statistics with `rstan` 
 
 
 ## Packages for this section
@@ -10063,24 +10063,22 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 ```
 
 - Suppose we believe that these come from a Poisson distribution with a mean $\lambda$ that we want to estimate.
-- We need a prior distribution for $\lambda$. I will (for some reason) take a $\chi^2$ distribution with 4 df (that has mean 4). Normally this would come from your knowledge of the data-generating *process*.
+- We need a prior distribution for $\lambda$. I will (for some reason) take a $Weibull$ distribution with parameters 1.1 and 6, that has quartiles 2 and 6. Normally this would come from your knowledge of the data-generating *process*.
 - The Poisson likelihood can be written down (see over).
 
 ## Some algebra
 
-- We have $n=8$ observations $x_i$, so the Poisson likelihood is
+- We have $n=8$ observations $x_i$, so the Poisson likelihood is proportional to
 
-$$ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{n\lambda} \lambda^S, $$
+$$ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{-n\lambda} \lambda^S, $$
 where $S=\sum_{i=1}^n x_i$. 
 
-- then you write the chi-squared prior density (as a function of $\lambda$):
+- then you write the Weibull prior density (as a function of $\lambda$):
 
-$$ C \lambda^1 e^{-\lambda/2} $$
-where $C$ is a constant
+$$ C (\lambda/6)^{0.1} e^{-(\lambda/6)^{1.1}}  $$
+where $C$ is a constant.
 
-- and then you multiply these together and try to recognize the distributional form. (This one is gamma.)
-
-- Requires too much intelligence (and this is a simple case).
+- and then you multiply these together and try to recognize the distributional form. Only, here you can't. The powers 0.1 and 1.1 get in the way.
 
 ## Sampling from the posterior distribution
 
@@ -10108,7 +10106,7 @@ This is how you say "$X$ has a Poisson distribution with mean $\lambda$".
 ```
 model {
 // prior
-lambda ~ chi_square(4);
+lambda ~ weibull(1.1, 6);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -10171,34 +10169,41 @@ poisson1_fit
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
-## lambda 3.20    0.02 0.61 2.09 2.77 3.15 3.60  4.50
-## lp__   3.71    0.02 0.69 1.67 3.56 3.97 4.15  4.21
+## lambda 3.20    0.02 0.63 2.10 2.75 3.15 3.60  4.56
+## lp__   3.75    0.02 0.69 1.84 3.56 4.02 4.21  4.26
 ##        n_eff Rhat
-## lambda  1438    1
-## lp__    1721    1
+## lambda  1412    1
+## lp__    1831    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Sun May 19 22:28:26 2019.
+## Samples were drawn using NUTS(diag_e) at Tue May 21 15:57:10 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
 ```
 
-- This summarizes the posterior distribution of $\lambda$; the posterior mean is 3.25, with a 95% posterior interval of 2.15 to 4.66. (The probability that $\lambda$ is between these two values really is 95%.)
+
+## Comments
+
+- This summarizes the posterior distribution of $\lambda$
+- the posterior mean is 3.20 
+- with a 95% posterior interval of 2.14 to 4.50. 
+- The probability that $\lambda$ is between these two values really is 95%.
 
 ## Making the code more general
 
-- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. More generally:
+- The coder in you is probably offended by hard-coding the sample size and the parameters of the prior distribution. More generally:
 
 ```
 data {
   int<lower=1> n;
-  real<lower=0> prior_df;
+  real<lower=0> a;
+  real<lower=0> b;
   int x[n];
 }
 ...
 model {
 // prior
-lambda ~ chi_square(prior_df);
+lambda ~ weibull(a, b);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -10223,7 +10228,7 @@ poisson2_code <- stan_model(file = "poisson2.stan")
 
 
 ```r
-poisson2_data <- list(x = x, n = length(x), prior_df = 4)
+poisson2_data <- list(x = x, n = length(x), a = 1.1, b = 6)
 ```
 
 - sample again
@@ -10247,13 +10252,13 @@ poisson2_fit
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##        mean se_mean   sd 2.5%  25%  50%  75% 97.5%
-## lambda 3.18    0.02 0.62 2.07 2.74 3.15 3.59  4.50
-## lp__   3.69    0.02 0.75 1.45 3.54 3.97 4.15  4.21
+## lambda 3.18    0.02 0.63 2.09 2.74 3.14 3.59  4.53
+## lp__   3.74    0.02 0.73 1.80 3.54 4.01 4.20  4.26
 ##        n_eff Rhat
-## lambda  1386 1.01
-## lp__    1628 1.00
+## lambda  1416    1
+## lp__    1572    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Sun May 19 22:28:32 2019.
+## Samples were drawn using NUTS(diag_e) at Tue May 21 15:57:14 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
@@ -10307,7 +10312,7 @@ x
 
 None of these are very unlikely according to our posterior predictive distribution, so our model is believable. 
 
-## A linear regression
+## A linear regression, or look at the "eight schools", or an ANOVA
 
 xxxx
 

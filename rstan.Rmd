@@ -44,24 +44,22 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 ```
 
 - Suppose we believe that these come from a Poisson distribution with a mean $\lambda$ that we want to estimate.
-- We need a prior distribution for $\lambda$. I will (for some reason) take a $\chi^2$ distribution with 4 df (that has mean 4). Normally this would come from your knowledge of the data-generating *process*.
+- We need a prior distribution for $\lambda$. I will (for some reason) take a $Weibull$ distribution with parameters 1.1 and 6, that has quartiles 2 and 6. Normally this would come from your knowledge of the data-generating *process*.
 - The Poisson likelihood can be written down (see over).
 
 ## Some algebra
 
-- We have $n=8$ observations $x_i$, so the Poisson likelihood is
+- We have $n=8$ observations $x_i$, so the Poisson likelihood is proportional to
 
-$$ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{n\lambda} \lambda^S, $$
+$$ \prod_{i=1}^n e^{-\lambda} \lambda^{x_i} = e^{-n\lambda} \lambda^S, $$
 where $S=\sum_{i=1}^n x_i$. 
 
-- then you write the chi-squared prior density (as a function of $\lambda$):
+- then you write the Weibull prior density (as a function of $\lambda$):
 
-$$ C \lambda^1 e^{-\lambda/2} $$
-where $C$ is a constant
+$$ C (\lambda/6)^{0.1} e^{-(\lambda/6)^{1.1}}  $$
+where $C$ is a constant.
 
-- and then you multiply these together and try to recognize the distributional form. (This one is gamma.)
-
-- Requires too much intelligence (and this is a simple case).
+- and then you multiply these together and try to recognize the distributional form. Only, here you can't. The powers 0.1 and 1.1 get in the way.
 
 ## Sampling from the posterior distribution
 
@@ -89,7 +87,7 @@ This is how you say "$X$ has a Poisson distribution with mean $\lambda$".
 ```
 model {
 // prior
-lambda ~ chi_square(4);
+lambda ~ weibull(1.1, 6);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -133,7 +131,8 @@ poisson1_code=readRDS("poisson1_code.rds")
 poisson1_code <- stan_model(file = "poisson1.stan")
 ```
 
-```{r, echo=F, results="hide", cache=T}
+```{r, echo=F, results="hide"}
+set.seed(457299)
 poisson1_data <- list(x = x)
 poisson1_fit <- sampling(poisson1_code, data = poisson1_data)
 ```
@@ -148,22 +147,29 @@ saveRDS(poisson1_code, "poisson1_code.rds")
 poisson1_fit
 ```
 
-- This summarizes the posterior distribution of $\lambda$; the posterior mean is 3.25, with a 95% posterior interval of 2.15 to 4.66. (The probability that $\lambda$ is between these two values really is 95%.)
+
+## Comments
+
+- This summarizes the posterior distribution of $\lambda$
+- the posterior mean is 3.20 
+- with a 95% posterior interval of 2.10 to 4.56. 
+- The probability that $\lambda$ is between these two values really is 95%.
 
 ## Making the code more general
 
-- The coder in you is probably offended by hard-coding the sample size and the df of the prior distribution. More generally:
+- The coder in you is probably offended by hard-coding the sample size and the parameters of the prior distribution. More generally:
 
 ```
 data {
   int<lower=1> n;
-  real<lower=0> prior_df;
+  real<lower=0> a;
+  real<lower=0> b;
   int x[n];
 }
 ...
 model {
 // prior
-lambda ~ chi_square(prior_df);
+lambda ~ weibull(a, b);
 // likelihood
 x ~ poisson(lambda);
 }
@@ -190,12 +196,12 @@ saveRDS(poisson2_code, "poisson2_code.rds")
 - set up the data again including the new things we need:
 
 ```{r}
-poisson2_data <- list(x = x, n = length(x), prior_df = 4)
+poisson2_data <- list(x = x, n = length(x), a = 1.1, b = 6)
 ```
 
 - sample again
 
-```{r, results="hide", cache=T}
+```{r, results="hide"}
 poisson2_fit <- sampling(poisson1_code, data = poisson2_data)
 ```
 
@@ -242,6 +248,6 @@ x
 
 None of these are very unlikely according to our posterior predictive distribution, so our model is believable. 
 
-## A linear regression
+## A linear regression, or look at the "eight schools", or an ANOVA
 
 xxxx

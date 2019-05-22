@@ -1,0 +1,23 @@
+# anova done the bayes way
+
+## packages
+
+```{r}
+library(tidyverse)
+library(rstan)
+```
+
+## grab some data
+
+```{r}
+my_url="http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
+rats=read_delim(my_url," ")
+rats
+```
+
+plot
+
+```{r}
+ggplot(rats, aes(x=group, y=density))+geom_boxplot()
+```
+

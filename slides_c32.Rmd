@@ -12,6 +12,8 @@ output:
     colortheme: "dove"
 ---
 
+
+
 ```{r child="preliminaries.Rmd", echo=F}
 ```
 

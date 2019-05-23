@@ -143,8 +143,8 @@ tibble(limit=my_names, o_t, b_t, b_p)
 - this from 
 "An introduction to the bootstrap", by
 Brad Efron and Robert J. Tibshirani.
-- there is way of correcting the CI for skewness in the bootstrap distribution, called the BCA method
-- complicated, but implemented in `bootstrap` package.
+- there is way of correcting the CI for skewness in the bootstrap distribution, called the BCa method
+- complicated (see the Efron and Tibshirani book), but implemented in `bootstrap` package.
 
 ## Run this on the IRS data:
 

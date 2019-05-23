@@ -19,6 +19,8 @@ output:
 
 
 
+
+
 # Course outline 
 
 
@@ -1020,7 +1022,7 @@ graphs.
 ggplot(athletes, aes(x = Sport)) + geom_bar()
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.png)
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.pdf)
 
 
 ## Histogram of body mass index
@@ -1030,7 +1032,7 @@ ggplot(athletes, aes(x = Sport)) + geom_bar()
 ggplot(athletes, aes(x = BMI)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.png)
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.pdf)
 
 ## Which sports are played by males and females?
 
@@ -1042,7 +1044,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
   geom_bar(position = "dodge")
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.png)
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.pdf)
 
 ## BMI by gender
 
@@ -1051,7 +1053,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
 ggplot(athletes, aes(x = Sex, y = BMI)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.png)
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.pdf)
 
 ## Height vs. weight
 
@@ -1062,7 +1064,7 @@ Scatterplot:
 ggplot(athletes, aes(x = Ht, y = Wt)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.png)
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.pdf)
 
 ## With regression line
 
@@ -1072,7 +1074,7 @@ ggplot(athletes, aes(x = Ht, y = Wt)) +
   geom_point() + geom_smooth(method = "lm")
 ```
 
-![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.png)
+![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.pdf)
 
 ## BMI by sport and gender
 
@@ -1082,7 +1084,7 @@ ggplot(athletes, aes(x = Sport, y = BMI, colour = Sex)) +
   geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.png)
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.pdf)
 
 ## Height and weight by gender
 
@@ -1092,7 +1094,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.png)
+![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.pdf)
 
 ## Height by weight for each sport, with facets
 
@@ -1102,7 +1104,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport)
 ```
 
-![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46-1.png)
+![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46-1.pdf)
 
 ## Filling each facet
 
@@ -1115,7 +1117,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport, scales = "free")
 ```
 
-![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.png)
+![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47-1.pdf)
 
 
 # Numerical summaries: more detailed
@@ -1457,7 +1459,7 @@ glimpse(jays)
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-63](figure/unnamed-chunk-63-1.png)
+![plot of chunk unnamed-chunk-63](figure/unnamed-chunk-63-1.pdf)
 
 
 ## Comments
@@ -1678,7 +1680,7 @@ it is normal enough, given the sample size.
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68-1.png)
+![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68-1.pdf)
 
 - You might say that this is not normal enough for a sample size of $n = 25$,
 in which case you don’t trust the $t$-test result.
@@ -1747,7 +1749,7 @@ kids
 ggplot(kids, aes(x = group, y = score)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-71](figure/unnamed-chunk-71-1.png)
+![plot of chunk unnamed-chunk-71](figure/unnamed-chunk-71-1.pdf)
 
 ## Two kinds of two-sample t-test
 
@@ -2165,7 +2167,7 @@ g = ggplot(d, aes(x = n, y = power)) + geom_point() +
 g
 ```
 
-![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86-1.png)
+![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86-1.pdf)
 
 ## Power curves for means
 
@@ -2258,7 +2260,7 @@ g = ggplot(d, aes(x = mean, y = power, colour = n)) +
 g
 ```
 
-![plot of chunk unnamed-chunk-92](figure/unnamed-chunk-92-1.png)
+![plot of chunk unnamed-chunk-92](figure/unnamed-chunk-92-1.pdf)
 
 ## Comments
 - When `mean=10`, that is, the true mean equals the null mean, $H_0$ is
@@ -2295,7 +2297,7 @@ g=ggplot(d, aes(x=n, y=power, colour=mean)) + geom_point() + geom_line() +
 g
 ```
 
-![plot of chunk unnamed-chunk-94](figure/unnamed-chunk-94-1.png)
+![plot of chunk unnamed-chunk-94](figure/unnamed-chunk-94-1.pdf)
 
 ## Two-sample power
 
@@ -2553,7 +2555,7 @@ Reject null; mean greater than 160.
 ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-102](figure/unnamed-chunk-102-1.png)
+![plot of chunk unnamed-chunk-102](figure/unnamed-chunk-102-1.pdf)
 
 Skewed to right. Should look at median.
 
@@ -3096,7 +3098,7 @@ line.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.png)
+![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.pdf)
 
 - Points should follow the straight line. Bottom left one way off, so
 normality questionable here: outlier.
@@ -3123,7 +3125,7 @@ d=tibble(x=rnorm(200))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.png)
+![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.pdf)
 
 As normal as you could wish for.
 
@@ -3134,7 +3136,7 @@ As normal as you could wish for.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128-1.png)
+![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128-1.pdf)
 
 ## Normal data, small sample 
 
@@ -3147,7 +3149,7 @@ d=tibble(x=rnorm(20))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk normal-small](figure/normal-small-1.png)
+![plot of chunk normal-small](figure/normal-small-1.pdf)
 
 - Not so convincingly normal, but not obviously skewed.
 
@@ -3158,7 +3160,7 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.png)
+![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
 
 Good, apart from the highest and lowest points being slightly off. I’d call
 this good.
@@ -3171,7 +3173,7 @@ d=tibble(x=rchisq(100,10))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.png)
+![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
 
 Somewhat skewed to right.
 
@@ -3182,7 +3184,7 @@ Somewhat skewed to right.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.png)
+![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.pdf)
 
 Somewhat opening-up curve.
 
@@ -3194,7 +3196,7 @@ d=tibble(x=rchisq(100,3))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk chisq-small-df](figure/chisq-small-df-1.png)
+![plot of chunk chisq-small-df](figure/chisq-small-df-1.pdf)
 
 
 Definitely skewed to right.
@@ -3206,7 +3208,7 @@ Definitely skewed to right.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.png)
+![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.pdf)
 
 
 Clear upward-opening curve.
@@ -3218,7 +3220,7 @@ d=tibble(x=rt(300,3))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk t-small](figure/t-small-1.png)
+![plot of chunk t-small](figure/t-small-1.pdf)
 
 
 Long tails (or a very sharp peak).
@@ -3230,7 +3232,7 @@ Long tails (or a very sharp peak).
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.png)
+![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.pdf)
 
 Low values too low and high values too high for normal.
 
@@ -3241,7 +3243,7 @@ Low values too low and high values too high for normal.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk pain-relief-qq](figure/pain-relief-qq-1.png)
+![plot of chunk pain-relief-qq](figure/pain-relief-qq-1.pdf)
 
 
 - Definitely not normal. What to do?
@@ -3322,7 +3324,7 @@ standard reading method.
 ggplot(kids,aes(x=group,y=score))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.png)
+![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.pdf)
 
 ## Facetted normal quantile plots
 Done this way:
@@ -3333,7 +3335,7 @@ ggplot(kids,aes(sample=score))+stat_qq()+stat_qq_line()+
 facet_wrap(~group)
 ```
 
-![plot of chunk unnamed-chunk-138](figure/unnamed-chunk-138-1.png)
+![plot of chunk unnamed-chunk-138](figure/unnamed-chunk-138-1.pdf)
 
 ## Comments
 - These plots show no problems with normality. Both groups are more
@@ -3614,7 +3616,7 @@ rats %>% sample_n(12)
 ggplot(rats,aes(y=density,x=group))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-149](figure/unnamed-chunk-149-1.png)
+![plot of chunk unnamed-chunk-149](figure/unnamed-chunk-149-1.pdf)
 
 ## Or, arranging groups in data (logical) order
 
@@ -3623,7 +3625,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-150](figure/unnamed-chunk-150-1.png)
+![plot of chunk unnamed-chunk-150](figure/unnamed-chunk-150-1.pdf)
 
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
@@ -3826,7 +3828,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.png)
+![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.pdf)
 
 Assumptions:
 - Normally distributed data within each group
@@ -3840,7 +3842,7 @@ ggplot(rats, aes(sample = density)) + stat_qq() + stat_qq_line() +
   facet_wrap( ~ group)
 ```
 
-![plot of chunk unnamed-chunk-158](figure/unnamed-chunk-158-1.png)
+![plot of chunk unnamed-chunk-158](figure/unnamed-chunk-158-1.pdf)
 
 ## The assumptions
 - Normally-distributed data within each group
@@ -4412,7 +4414,7 @@ Feed 3 is best, feed 1 worst.
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174-1.png)
+![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174-1.pdf)
 
 Feed 2 has an outlier, but there are only 5 pigs in each group, and the
 conclusion is so clear that I am OK with this.
@@ -4864,7 +4866,7 @@ weather_tidy %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196-1.png)
+![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196-1.pdf)
 
 ## Summary of tidying “verbs”
 
@@ -5819,7 +5821,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-231-1.png)
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-231-1.pdf)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -5918,7 +5920,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-235-1.png)
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-235-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -5999,7 +6001,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239-1.png)
+![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239-1.pdf)
 
 ## Scatterplot with fitted line and curve
 - Residual plot basically random. Good.
@@ -6025,7 +6027,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.png)
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6074,7 +6076,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 ## Scatterplot for wind_pace
 
-![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241-1.png)
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241-1.pdf)
 
 That’s pretty straight. Blue actually smooth curve not line.
 
@@ -6124,7 +6126,7 @@ parabola model (`wind.velocity` and its square).
 ggplot(DC.3, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk resida](figure/resida-1.png)
+![plot of chunk resida](figure/resida-1.pdf)
 
 
 ## Plotting trends on scatterplot
@@ -6189,7 +6191,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245-1.png)
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6385,7 +6387,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-255](figure/unnamed-chunk-255-1.png)
+![plot of chunk unnamed-chunk-255](figure/unnamed-chunk-255-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6553,7 +6555,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-262](figure/unnamed-chunk-262-1.png)
+![plot of chunk unnamed-chunk-262](figure/unnamed-chunk-262-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6597,7 +6599,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-264](figure/unnamed-chunk-264-1.png)
+![plot of chunk unnamed-chunk-264](figure/unnamed-chunk-264-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6666,7 +6668,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-267](figure/unnamed-chunk-267-1.png)
+![plot of chunk unnamed-chunk-267](figure/unnamed-chunk-267-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6729,7 +6731,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-271](figure/unnamed-chunk-271-1.png)
+![plot of chunk unnamed-chunk-271](figure/unnamed-chunk-271-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6760,7 +6762,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.png)
+![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -6802,7 +6804,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.png)
+![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7186,7 +7188,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-293](figure/unnamed-chunk-293-1.png)
+![plot of chunk unnamed-chunk-293](figure/unnamed-chunk-293-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7209,7 +7211,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-295](figure/unnamed-chunk-295-1.png)
+![plot of chunk unnamed-chunk-295](figure/unnamed-chunk-295-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7493,7 +7495,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-306](figure/unnamed-chunk-306-1.png)
+![plot of chunk unnamed-chunk-306](figure/unnamed-chunk-306-1.pdf)
 
 
 # Functions
@@ -8956,7 +8958,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-380](figure/unnamed-chunk-380-1.png)
+![plot of chunk unnamed-chunk-380](figure/unnamed-chunk-380-1.pdf)
 
 ## Labelling points on a plot
 
@@ -8991,7 +8993,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-382](figure/unnamed-chunk-382-1.png)
+![plot of chunk unnamed-chunk-382](figure/unnamed-chunk-382-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -9001,7 +9003,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.png)
+![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.pdf)
 
 ## Make labels smaller
 
@@ -9011,7 +9013,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-384](figure/unnamed-chunk-384-1.png)
+![plot of chunk unnamed-chunk-384](figure/unnamed-chunk-384-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9037,7 +9039,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-386](figure/unnamed-chunk-386-1.png)
+![plot of chunk unnamed-chunk-386](figure/unnamed-chunk-386-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9061,7 +9063,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-388](figure/unnamed-chunk-388-1.png)
+![plot of chunk unnamed-chunk-388](figure/unnamed-chunk-388-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9086,7 +9088,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.png)
+![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9099,7 +9101,7 @@ We use previous graph as base (to save drawing again).
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.png)
+![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.pdf)
 
 ## Axis labels
 
@@ -9108,7 +9110,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.png)
+![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your
@@ -9636,7 +9638,7 @@ library(bootstrap)
 ggplot(irs, aes(x=Time))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-415](figure/unnamed-chunk-415-1.png)
+![plot of chunk unnamed-chunk-415](figure/unnamed-chunk-415-1.pdf)
 
 - We said that a $t$ procedure for the mean would not be a good idea because the distribution is skewed.
 
@@ -9699,7 +9701,7 @@ rerun(1000, sample(irs$Time, replace=T)) %>%
 ggplot(tibble(means), aes(x=means))+geom_histogram(bins=20)
 ```
 
-![plot of chunk unnamed-chunk-419](figure/unnamed-chunk-419-1.png)
+![plot of chunk unnamed-chunk-419](figure/unnamed-chunk-419-1.pdf)
 
 ## Comments
 
@@ -9711,7 +9713,7 @@ ggplot(tibble(means), aes(sample=means))+
   stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-420](figure/unnamed-chunk-420-1.png)
+![plot of chunk unnamed-chunk-420](figure/unnamed-chunk-420-1.pdf)
 
 ## Confidence interval from the bootstrap distribution
 
@@ -9783,8 +9785,8 @@ tibble(limit=my_names, o_t, b_t, b_p)
 - this from 
 "An introduction to the bootstrap", by
 Brad Efron and Robert J. Tibshirani.
-- there is way of correcting the CI for skewness in the bootstrap distribution, called the BCA method
-- complicated, but implemented in `bootstrap` package.
+- there is way of correcting the CI for skewness in the bootstrap distribution, called the BCa method
+- complicated (see the Efron and Tibshirani book), but implemented in `bootstrap` package.
 
 ## Run this on the IRS data:
 
@@ -9867,7 +9869,7 @@ ggplot(soap, aes(x=speed, y=scrap, colour=line))+
   geom_point()+geom_smooth(method="lm", se=F)
 ```
 
-![plot of chunk unnamed-chunk-429](figure/unnamed-chunk-429-1.png)
+![plot of chunk unnamed-chunk-429](figure/unnamed-chunk-429-1.pdf)
 
 ## Comments
 
@@ -9918,7 +9920,7 @@ rerun(1000, sample(1:nrow(line_b), replace=T)) %>%
 ggplot(tibble(cors), aes(x=cors))+geom_histogram(bins=15)
 ```
 
-![plot of chunk unnamed-chunk-433](figure/unnamed-chunk-433-1.png)
+![plot of chunk unnamed-chunk-433](figure/unnamed-chunk-433-1.pdf)
 
 ## Comments and next steps
 
@@ -10026,13 +10028,13 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 
 - The inference philosophy that we have learned so far says that:
   - parameters to be estimated are *fixed* but *unknown*
-  - randomness from here: if we were to take another sample, we'd (probably) get different results. 
+  - Data random; if we took another sample we'd get different data.
 - This is called "frequentist" or "repeated-sampling" inference.
 - Bayesian inference says:
-  - *everything* is random, parameters and data, and has some probability distribution
+  - *parameters* are random, *data* is *given*
 - Ingredients:
   - **prior distribution**: distribution of parameters before seeing data.
-  - **likelihood**: distribution of data if the parameters are known (model)
+  - **likelihood**: model for data if the parameters are known 
   - **posterior distribution**: distribution of parameters *after* seeing data.
   
 ## Distribution of parameters
@@ -10041,6 +10043,7 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 - so in Bayesian statistics we can talk about eg.
   - probability that a parameter is bigger than some value
   - probability that a parameter is close to some value
+  - probability that one parameter is bigger than another
   
 - Name comes from Bayes' Theorem, which here says
 
@@ -10148,10 +10151,6 @@ poisson1_fit <- sampling(poisson1_code, data = poisson1_data)
 
 
 
-```r
-poisson1_code <- stan_model(file = "poisson1.stan")
-```
-
 
 
 
@@ -10175,7 +10174,7 @@ poisson1_fit
 ## lambda  1412    1
 ## lp__    1831    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue May 21 15:57:10 2019.
+## Samples were drawn using NUTS(diag_e) at Wed May 22 23:02:10 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
@@ -10186,7 +10185,7 @@ poisson1_fit
 
 - This summarizes the posterior distribution of $\lambda$
 - the posterior mean is 3.20 
-- with a 95% posterior interval of 2.14 to 4.50. 
+- with a 95% posterior interval of 2.10 to 4.56. 
 - The probability that $\lambda$ is between these two values really is 95%.
 
 ## Making the code more general
@@ -10258,7 +10257,7 @@ poisson2_fit
 ## lambda  1416    1
 ## lp__    1572    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue May 21 15:57:14 2019.
+## Samples were drawn using NUTS(diag_e) at Wed May 22 23:02:14 2019.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).
@@ -10275,7 +10274,7 @@ ggplot(tibble(lambda = poisson2_out$lambda), aes(x = lambda)) +
   geom_histogram(bins = 20)
 ```
 
-![plot of chunk unnamed-chunk-454](figure/unnamed-chunk-454-1.png)
+![plot of chunk unnamed-chunk-453](figure/unnamed-chunk-453-1.pdf)
 
 ## Posterior predictive distribution
 
@@ -10294,7 +10293,7 @@ tibble(lambda = poisson2_out$lambda) %>%
 ggplot(d, aes(x = x_sim)) + geom_bar()
 ```
 
-![plot of chunk unnamed-chunk-456](figure/unnamed-chunk-456-1.png)
+![plot of chunk unnamed-chunk-455](figure/unnamed-chunk-455-1.pdf)
 
 
 ## Comparison
@@ -10310,11 +10309,494 @@ x
 ## [1] 0 4 3 6 3 3 2 4
 ```
 
-None of these are very unlikely according to our posterior predictive distribution, so our model is believable. 
+- None of these are very unlikely according to our posterior predictive distribution, so our model is believable. 
+- Or make a plot: a bar chart with the data on it as well (over):
 
-## A linear regression, or look at the "eight schools", or an ANOVA
 
-xxxx
+```r
+ggplot(d, aes(x = x_sim)) + geom_bar() +
+  geom_dotplot(data = tibble(x), aes(x = x), binwidth = 1) +
+  scale_y_continuous(NULL, breaks = NULL) -> g
+```
+
+- This also shows that the distribution of the data conforms well enough to the posterior predictive distribution (over).
+
+## The plot 
+
+
+```r
+g
+```
+
+![plot of chunk unnamed-chunk-458](figure/unnamed-chunk-458-1.pdf)
+
+
+## Analysis of variance, the Bayesian way
+
+Recall the jumping rats data:
+
+
+```r
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
+rats0 <- read_delim(my_url, " ")
+rats0 %>% sample_n(6) # random sample of rows
+```
+
+```
+## # A tibble: 6 x 2
+##   group    density
+##   <chr>      <dbl>
+## 1 Control      593
+## 2 Highjump     650
+## 3 Highjump     631
+## 4 Lowjump      632
+## 5 Highjump     622
+## 6 Highjump     643
+```
+
+## Our aims here
+
+- Estimate the mean bone density of all rats under each of the experimental conditions
+- Model: given the group means, each observation normally distributed with common variance $\sigma^2$
+- Three parameters to estimate, plus the common variance.
+- Obtain posterior distributions for the group means.
+- Ask whether the posterior distributions of these means are sufficiently different.
+
+## Numbering the groups
+
+- Stan doesn't handle categorical variables (everything is `real` or `int`).
+- Turn the groups into group *numbers* first.
+- Take opportunity to put groups in logical order:
+
+
+```r
+rats0 %>% mutate(
+  group_fct = fct_inorder(group),
+  group_no = as.integer(group_fct)
+) -> rats
+rats %>% sample_n(4)
+```
+
+```
+## # A tibble: 4 x 4
+##   group    density group_fct group_no
+##   <chr>      <dbl> <fct>        <int>
+## 1 Highjump     626 Highjump         3
+## 2 Lowjump      635 Lowjump          2
+## 3 Control      621 Control          1
+## 4 Highjump     626 Highjump         3
+```
+
+## Plotting the data 1/2
+
+Most obviously, boxplots:
+
+
+```r
+ggplot(rats, aes(x = group_fct, y = density)) + geom_boxplot()
+```
+
+![plot of chunk unnamed-chunk-461](figure/unnamed-chunk-461-1.pdf)
+
+## Plotting the data 2/2
+
+Another way: density plot (smoothed out histogram); can distinguish groups by colours:
+
+
+```r
+ggplot(rats, aes(x = density, colour = group_fct)) + 
+  geom_density()
+```
+
+![plot of chunk unnamed-chunk-462](figure/unnamed-chunk-462-1.pdf)
+
+
+## The procedure
+
+- For each observation, find out which (numeric) group it belongs to, 
+- then model it as having a normal distribution with that group's mean and the common variance.
+- Stan does `for` loops.
+
+## The model part
+
+Suppose we have `n_obs` observations:
+
+```
+model {
+  // likelihood
+  for (i in 1:n_obs) {
+    g=group_no[i];
+    density[i] ~ normal(mu[g], sigma);
+  }
+}
+```
+
+## The variables here
+
+- `n_obs` is data.
+- `g` is a temporary integer variable only used here
+- `i` is only used in the loop (integer) and does not need to be declared
+- `density` is data, a real vector of length `n_obs`
+- `mu` is a parameter, a real vector of length 3 (3 groups)
+- `sigma` is a real parameter
+
+`mu` and `sigma` need prior distributions: 
+
+  - for `mu`, each component independently normal with mean 600 and SD 50 (my guess at how big and variable they will be)
+  - for `sigma`, chi-squared with 50 df (my guess at typical amount of variability from obs to obs)
+
+## Complete the `model` section:
+
+```
+model {
+  int g;
+  // priors
+  mu ~ normal(600, 50);
+  sigma ~ chi_square(50);
+  // likelihood
+  for (i in 1:n_obs) {
+    g=group_no[i];
+    density[i] ~ normal(mu[g], sigma);
+  }
+}
+```
+
+## Parameters
+
+The elements of `mu`, one per group, and also `sigma`, scalar:
+
+```
+parameters {
+  real mu[n_group];
+  real<lower=0> sigma;
+}
+```
+
+- `sigma` has to be positive. Declare it so here, so that the sampling runs smoothly.
+- declare `n_group` in data section 
+
+## Data
+
+Everything else:
+
+```
+data {
+  int n_obs;
+  int n_group;
+  real density[n_obs];
+  int<lower=1, upper=n_group> group_no[n_obs];
+}
+```
+
+## Compile
+
+Arrange these in order data, parameters, model in file `anova.stan`, then:
+
+
+```r
+anova_compiled <- stan_model("anova.stan")
+```
+
+
+
+## Set up data and sample
+
+Supply values for *everything* declared in `data`: 
+
+
+```r
+anova_data <- list(
+  n_obs = 30,
+  n_group = 3,
+  density = rats$density,
+  group_no = rats$group_no
+)
+anova_samples <- sampling(anova_compiled, data = anova_data)
+```
+
+```
+## 
+## SAMPLING FOR MODEL 'anova' NOW (CHAIN 1).
+## Chain 1: 
+## Chain 1: Gradient evaluation took 1.4e-05 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
+## Chain 1: Adjust your expectations accordingly!
+## Chain 1: 
+## Chain 1: 
+## Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 1: 
+## Chain 1:  Elapsed Time: 0.098954 seconds (Warm-up)
+## Chain 1:                0.026212 seconds (Sampling)
+## Chain 1:                0.125166 seconds (Total)
+## Chain 1: 
+## 
+## SAMPLING FOR MODEL 'anova' NOW (CHAIN 2).
+## Chain 2: 
+## Chain 2: Gradient evaluation took 7e-06 seconds
+## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+## Chain 2: Adjust your expectations accordingly!
+## Chain 2: 
+## Chain 2: 
+## Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 2: 
+## Chain 2:  Elapsed Time: 0.101162 seconds (Warm-up)
+## Chain 2:                0.024709 seconds (Sampling)
+## Chain 2:                0.125871 seconds (Total)
+## Chain 2: 
+## 
+## SAMPLING FOR MODEL 'anova' NOW (CHAIN 3).
+## Chain 3: 
+## Chain 3: Gradient evaluation took 7e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+## Chain 3: Adjust your expectations accordingly!
+## Chain 3: 
+## Chain 3: 
+## Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 3: 
+## Chain 3:  Elapsed Time: 0.099214 seconds (Warm-up)
+## Chain 3:                0.025758 seconds (Sampling)
+## Chain 3:                0.124972 seconds (Total)
+## Chain 3: 
+## 
+## SAMPLING FOR MODEL 'anova' NOW (CHAIN 4).
+## Chain 4: 
+## Chain 4: Gradient evaluation took 8e-06 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+## Chain 4: Adjust your expectations accordingly!
+## Chain 4: 
+## Chain 4: 
+## Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 4: 
+## Chain 4:  Elapsed Time: 0.077148 seconds (Warm-up)
+## Chain 4:                0.028106 seconds (Sampling)
+## Chain 4:                0.105254 seconds (Total)
+## Chain 4:
+```
+
+## Check that the sampling worked properly 
+
+
+```r
+traceplot(anova_samples)
+```
+
+![plot of chunk unnamed-chunk-466](figure/unnamed-chunk-466-1.pdf)
+
+## Comments
+
+- The sampled values for each of the parameters should move freely across their posterior distributions (and not get stuck anywhere). 
+- This appears to have happened.
+
+## Look at the results
+
+
+```r
+anova_samples
+```
+
+```
+## Inference for Stan model: anova.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##         mean se_mean   sd   2.5%    25%    50%
+## mu[1] 601.25    0.13 8.97 583.62 595.41 601.13
+## mu[2] 612.06    0.14 9.06 594.02 605.91 612.21
+## mu[3] 637.25    0.15 9.26 619.26 631.02 637.28
+## sigma  28.73    0.08 4.49  21.31  25.57  28.21
+## lp__  -41.11    0.04 1.57 -45.19 -41.87 -40.75
+##          75%  97.5% n_eff Rhat
+## mu[1] 607.06 618.83  4701    1
+## mu[2] 618.16 629.45  4180    1
+## mu[3] 643.31 655.88  3961    1
+## sigma  31.40  38.93  3437    1
+## lp__  -39.98 -39.17  1714    1
+## 
+## Samples were drawn using NUTS(diag_e) at Wed May 22 23:02:17 2019.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).
+```
+
+## Comments
+
+- The posterior 95% intervals for control (group 1) and highjump (group 3) do not quite overlap, suggesting that these exercise groups really are different.
+- Bayesian approach does not normally do tests: look at posterior distributions and decide whether they are different enough to be worth treating as different.
+
+## Plotting the posterior distributions for the `mu`
+
+- Extract the sampled `mu` values (matrix):
+
+
+```r
+anova_ext <- extract(anova_samples)
+head(anova_ext$mu)
+```
+
+```
+##           
+## iterations     [,1]     [,2]     [,3]
+##       [1,] 607.0495 598.6400 644.9649
+##       [2,] 589.6069 613.6543 642.8363
+##       [3,] 618.8842 604.9311 644.7575
+##       [4,] 613.1348 616.1122 636.1995
+##       [5,] 601.4309 629.1250 647.1461
+##       [6,] 603.7752 605.6885 622.0273
+```
+
+## Turn into a data frame, arrange for plotting, name groups
+
+
+```r
+cbind(anova_ext$mu, sigma = anova_ext$sigma) %>%
+  as_tibble() %>%
+  gather(group, density, V1:V3) %>%
+  mutate(group = fct_recode(
+    group,
+    Control = "V1",
+    Lowjump = "V2",
+    Highjump = "V3"
+  )) -> sims
+```
+
+## What we have now:
+
+
+```r
+sims %>% sample_n(8)
+```
+
+```
+## # A tibble: 8 x 3
+##   sigma group    density
+##   <dbl> <fct>      <dbl>
+## 1  27.5 Highjump    629.
+## 2  37.9 Highjump    626.
+## 3  26.3 Lowjump     621.
+## 4  39.4 Control     611.
+## 5  29.4 Control     600.
+## 6  31.8 Control     599.
+## 7  20.9 Control     590.
+## 8  24.8 Highjump    645.
+```
+
+
+## Density plots of posterior mean distributions
+
+
+```r
+ggplot(sims, aes(x = density, colour = group)) + geom_density()
+```
+
+![plot of chunk unnamed-chunk-471](figure/unnamed-chunk-471-1.pdf)
+
+## Posterior predictive distributions
+
+Randomly sample from posterior means and SDs in `sims`. There are 12000 rows in `sims`:
+
+
+```r
+sims %>% mutate(sim_data = rnorm(12000, density, sigma)) -> ppd
+ppd %>% sample_n(8)
+```
+
+```
+## # A tibble: 8 x 4
+##   sigma group    density sim_data
+##   <dbl> <fct>      <dbl>    <dbl>
+## 1  18.8 Lowjump     614.     669.
+## 2  30.5 Highjump    621.     628.
+## 3  31.2 Control     583.     545.
+## 4  37.1 Lowjump     592.     579.
+## 5  32.4 Control     609.     602.
+## 6  27.1 Control     606.     605.
+## 7  25.6 Highjump    641.     673.
+## 8  26.1 Control     587.     580.
+```
+
+## Compare posterior predictive distribution with actual data
+
+- Check that the model works: distributions of data similar to what we'd predict
+- Idea: make plots of posterior predictive distribution, and plot actual data as points on them
+- Use facets, one for each treatment group: 
+
+
+```r
+my_binwidth <- 15
+ggplot(ppd, aes(x = sim_data)) +
+  geom_histogram(binwidth = my_binwidth) +
+  geom_dotplot(data = rats, aes(x = density), 
+               binwidth = my_binwidth) +
+  facet_wrap(~group) +
+  scale_y_continuous(NULL, breaks = NULL) -> g
+```
+
+- See (over) that the data values are mainly in the middle of the predictive distributions.
+- Even the control group that had outliers. 
+
+## The plot
+
+
+```r
+g
+```
+
+![plot of chunk unnamed-chunk-474](figure/unnamed-chunk-474-1.pdf)
+
+## Extensions 
+
+- if you want a different model other than normal, change distribution in `model` section
+- if you want to allow unequal spreads, create `sigma[n_group]` and in model `density[i] ~ normal(mu[g], sigma[g]);`
+- Stan will work just fine after you recompile
+- very flexible.
+- Typical modelling strategy: start simple, add complexity as warranted by data.
+
+
+
 
 
 # the end of the notes

@@ -2,6 +2,7 @@
 knitr::opts_chunk$set(fig.height = 5)
 # knitr::opts_chunk$set(echo = FALSE)
 options(width=52)
+knitr::opts_chunk$set(dev = 'pdf')
 ```
 
 

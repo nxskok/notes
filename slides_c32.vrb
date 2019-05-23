@@ -1,18 +1,21 @@
-\frametitle{Comparison}
-\protect\hypertarget{comparison}{}
+\frametitle{Extensions}
+\protect\hypertarget{extensions}{}
 
-Our actual data values were these:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0 4 3 6 3 3 2 4
-\end{verbatim}
-
-None of these are very unlikely according to our posterior predictive
-distribution, so our model is believable.
+\begin{itemize}
+\tightlist
+\item
+  if you want a different model other than normal, change distribution
+  in \texttt{model} section
+\item
+  if you want to allow unequal spreads, create
+  \texttt{sigma{[}n\_group{]}} and in model
+  \texttt{density{[}i{]}\ \textasciitilde{}\ normal(mu{[}g{]},\ sigma{[}g{]});}
+\item
+  Stan will work just fine after you recompile
+\item
+  very flexible.
+\item
+  Typical modelling strategy: start simple, add complexity as warranted
+  by data.
+\end{itemize}
 

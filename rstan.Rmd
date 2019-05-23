@@ -12,13 +12,13 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 
 - The inference philosophy that we have learned so far says that:
   - parameters to be estimated are *fixed* but *unknown*
-  - randomness from here: if we were to take another sample, we'd (probably) get different results. 
+  - Data random; if we took another sample we'd get different data.
 - This is called "frequentist" or "repeated-sampling" inference.
 - Bayesian inference says:
-  - *everything* is random, parameters and data, and has some probability distribution
+  - *parameters* are random, *data* is *given*
 - Ingredients:
   - **prior distribution**: distribution of parameters before seeing data.
-  - **likelihood**: distribution of data if the parameters are known (model)
+  - **likelihood**: model for data if the parameters are known 
   - **posterior distribution**: distribution of parameters *after* seeing data.
   
 ## Distribution of parameters
@@ -27,6 +27,7 @@ PASIAS: add a one-parameter and multi-parameter example (look at the schools one
 - so in Bayesian statistics we can talk about eg.
   - probability that a parameter is bigger than some value
   - probability that a parameter is close to some value
+  - probability that one parameter is bigger than another
   
 - Name comes from Bayes' Theorem, which here says
 
@@ -124,12 +125,9 @@ poisson1_fit <- sampling(poisson1_code, data = poisson1_data)
 ```
 
 ```{r, include=F}
-poisson1_code=readRDS("poisson1_code.rds")
+poisson1_code <- readRDS("poisson1_code.rds")
 ```
 
-```{r, eval=F}
-poisson1_code <- stan_model(file = "poisson1.stan")
-```
 
 ```{r, echo=F, results="hide"}
 set.seed(457299)
@@ -180,7 +178,7 @@ x ~ poisson(lambda);
 - Compile again:
 
 ```{r, include=F}
-poisson2_code=readRDS("poisson2_code.rds")
+poisson2_code <- readRDS("poisson2_code.rds")
 ```
 
 
@@ -250,16 +248,16 @@ x
 - Or make a plot: a bar chart with the data on it as well (over):
 
 ```{r}
-ggplot(d, aes(x=x_sim))+geom_bar()+
-  geom_dotplot(data=tibble(x), aes(x=x), binwidth=1)+
-   scale_y_continuous(NULL, breaks = NULL) -> g
+ggplot(d, aes(x = x_sim)) + geom_bar() +
+  geom_dotplot(data = tibble(x), aes(x = x), binwidth = 1) +
+  scale_y_continuous(NULL, breaks = NULL) -> g
 ```
 
 - This also shows that the distribution of the data conforms well enough to the posterior predictive distribution (over).
 
-## The plot
+## The plot 
 
-```{r}
+```{r, fig.height=3.8}
 g
 ```
 
@@ -269,8 +267,8 @@ g
 Recall the jumping rats data:
 
 ```{r, message=F}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
-rats0=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
+rats0 <- read_delim(my_url, " ")
 rats0 %>% sample_n(6) # random sample of rows
 ```
 
@@ -289,25 +287,28 @@ rats0 %>% sample_n(6) # random sample of rows
 - Take opportunity to put groups in logical order:
 
 ```{r}
-rats0 %>% mutate(group_fct=fct_inorder(group),
-              group_no=as.integer(group_fct)) -> rats
-rats %>% sample_n(8)
+rats0 %>% mutate(
+  group_fct = fct_inorder(group),
+  group_no = as.integer(group_fct)
+) -> rats
+rats %>% sample_n(4)
 ```
 
 ## Plotting the data 1/2
 
 Most obviously, boxplots:
 
-```{r}
-ggplot(rats, aes(x=group_fct, y=density))+geom_boxplot()
+```{r, fig.height=3.4}
+ggplot(rats, aes(x = group_fct, y = density)) + geom_boxplot()
 ```
 
 ## Plotting the data 2/2
 
 Another way: density plot (smoothed out histogram); can distinguish groups by colours:
 
-```{r}
-ggplot(rats, aes(x=density, colour=group_fct))+geom_density()
+```{r, fig.height=3.1}
+ggplot(rats, aes(x = density, colour = group_fct)) + 
+  geom_density()
 ```
 
 
@@ -340,7 +341,8 @@ model {
 - `mu` is a parameter, a real vector of length 3 (3 groups)
 - `sigma` is a real parameter
 
-`mu` and `sigma` need prior distributions:
+`mu` and `sigma` need prior distributions: 
+
   - for `mu`, each component independently normal with mean 600 and SD 50 (my guess at how big and variable they will be)
   - for `sigma`, chi-squared with 50 df (my guess at typical amount of variability from obs to obs)
 
@@ -362,16 +364,17 @@ model {
 
 ## Parameters
 
-The three elements of `mu`, and also `sigma`:
+The elements of `mu`, one per group, and also `sigma`, scalar:
 
 ```
 parameters {
-  real mu[3];
+  real mu[n_group];
   real<lower=0> sigma;
 }
 ```
 
 - `sigma` has to be positive. Declare it so here, so that the sampling runs smoothly.
+- declare `n_group` in data section 
 
 ## Data
 
@@ -391,31 +394,37 @@ data {
 Arrange these in order data, parameters, model in file `anova.stan`, then:
 
 ```{r, eval=F}
-anova_compiled=stan_model("anova.stan")
+anova_compiled <- stan_model("anova.stan")
 ```
 
 ```{r, echo=FALSE}
-anova_compiled=readRDS("anova_compiled.rds")
+anova_compiled <- readRDS("anova_compiled.rds")
 ```
 
 ## Set up data and sample
 
-Supply values for *everything* declared in `data`:
+Supply values for *everything* declared in `data`: 
 
 ```{r}
-anova_data=list(n_obs=30, n_group=3, density=rats$density, group_no=rats$group_no)
-anova_samples=sampling(anova_compiled, data=anova_data)
+anova_data <- list(
+  n_obs = 30,
+  n_group = 3,
+  density = rats$density,
+  group_no = rats$group_no
+)
+anova_samples <- sampling(anova_compiled, data = anova_data)
 ```
 
-## Check that the sampling worked properly
+## Check that the sampling worked properly 
 
-```{r}
+```{r, fig.height=4}
 traceplot(anova_samples)
 ```
 
 ## Comments
 
-- The sampled values for each of the parameters should move freely across their posterior distributions (and not get stuck anywhere). This appears to have happened.
+- The sampled values for each of the parameters should move freely across their posterior distributions (and not get stuck anywhere). 
+- This appears to have happened.
 
 ## Look at the results
 
@@ -426,30 +435,42 @@ anova_samples
 ## Comments
 
 - The posterior 95% intervals for control (group 1) and highjump (group 3) do not quite overlap, suggesting that these exercise groups really are different.
+- Bayesian approach does not normally do tests: look at posterior distributions and decide whether they are different enough to be worth treating as different.
 
 ## Plotting the posterior distributions for the `mu`
 
 - Extract the sampled `mu` values (matrix):
 
 ```{r}
-anova_ext=extract(anova_samples)
+anova_ext <- extract(anova_samples)
 head(anova_ext$mu)
 ```
 
 ## Turn into a data frame, arrange for plotting, name groups
 
-```{r}
-cbind(anova_ext$mu, sigma=anova_ext$sigma) %>% 
-  as_tibble() %>% 
-  gather(group, density, V1:V3) %>% 
-  mutate(group=fct_recode(group, Control="V1", Lowjump="V2", Highjump="V3")) -> sims
-sims %>% sample_n(6)
+```{r, warning=F}
+cbind(anova_ext$mu, sigma = anova_ext$sigma) %>%
+  as_tibble() %>%
+  gather(group, density, V1:V3) %>%
+  mutate(group = fct_recode(
+    group,
+    Control = "V1",
+    Lowjump = "V2",
+    Highjump = "V3"
+  )) -> sims
 ```
+
+## What we have now:
+
+```{r}
+sims %>% sample_n(8)
+```
+
 
 ## Density plots of posterior mean distributions
 
-```{r}
-ggplot(sims, aes(x=density, colour=group))+ geom_density()
+```{r, fig.height=4}
+ggplot(sims, aes(x = density, colour = group)) + geom_density()
 ```
 
 ## Posterior predictive distributions
@@ -457,29 +478,42 @@ ggplot(sims, aes(x=density, colour=group))+ geom_density()
 Randomly sample from posterior means and SDs in `sims`. There are 12000 rows in `sims`:
 
 ```{r}
-sims %>%  mutate(sim_data=rnorm(12000, density, sigma)) -> ppd
+sims %>% mutate(sim_data = rnorm(12000, density, sigma)) -> ppd
 ppd %>% sample_n(8)
 ```
 
-## Compare posterior predicted distribution with actual data
+## Compare posterior predictive distribution with actual data
 
+- Check that the model works: distributions of data similar to what we'd predict
 - Idea: make plots of posterior predictive distribution, and plot actual data as points on them
-- Use facets, one for each treatment group:
+- Use facets, one for each treatment group: 
 
 ```{r}
-my_binwidth=15
-ggplot(ppd, aes(x=sim_data)) + geom_histogram(binwidth=my_binwidth) +
-  geom_dotplot(data=rats, aes(x=density), binwidth=my_binwidth) + 
+my_binwidth <- 15
+ggplot(ppd, aes(x = sim_data)) +
+  geom_histogram(binwidth = my_binwidth) +
+  geom_dotplot(data = rats, aes(x = density), 
+               binwidth = my_binwidth) +
   facet_wrap(~group) +
-  scale_y_continuous(NULL, breaks = NULL) -> g 
+  scale_y_continuous(NULL, breaks = NULL) -> g
 ```
 
 - See (over) that the data values are mainly in the middle of the predictive distributions.
+- Even the control group that had outliers. 
 
 ## The plot
 
-```{r}
+```{r, fig.height=3.75}
 g
 ```
+
+## Extensions 
+
+- if you want a different model other than normal, change distribution in `model` section
+- if you want to allow unequal spreads, create `sigma[n_group]` and in model `density[i] ~ normal(mu[g], sigma[g]);`
+- Stan will work just fine after you recompile
+- very flexible.
+- Typical modelling strategy: start simple, add complexity as warranted by data.
+
 
 

@@ -15,4 +15,4 @@
 \beamer@sectionintoc {15}{Vector and matrix algebra (for C33)}{526}{0}{15}
 \beamer@sectionintoc {16}{The bootstrap}{546}{0}{16}
 \beamer@sectionintoc {17}{Bayesian statistics with \texttt {rstan}}{573}{0}{17}
-\beamer@sectionintoc {18}{the end of the notes}{594}{0}{18}
+\beamer@sectionintoc {18}{the end of the notes}{619}{0}{18}

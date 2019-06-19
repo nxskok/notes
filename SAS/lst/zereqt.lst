@@ -1,0 +1,7 @@
+                                                  Standard
+Parameter                        Estimate            Error   t Value   Pr > |t|
+ 
+Intercept                    -17.27619743 B     2.19552853     -7.87     <.0001
+temperature                    3.60275287       0.09728809     37.03     <.0001
+species     exclamationis     10.06529123 B     0.73526224     13.69     <.0001
+species     niveus             0.00000000 B      .               .        .

@@ -1,0 +1,15 @@
+                              The POWER Procedure
+          Two-Sample t Test for Mean Difference with Unequal Variances
+ 
+                            Fixed Scenario Elements
+ 
+                   Distribution                        Normal
+                   Method                               Exact
+                   Number of Sides                          1
+                   Mean Difference                          5
+                   Group 1 Standard Deviation              11
+                   Group 2 Standard Deviation              17
+                   Group 1 Sample Size                     21
+                   Group 2 Sample Size                     23
+                   Null Difference                          0
+                   Nominal Alpha                         0.05

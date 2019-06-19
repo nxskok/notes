@@ -1,21 +1,45 @@
-\frametitle{Extensions}
-\protect\hypertarget{extensions}{}
+\frametitle{Saving and restoring objects}
+\protect\hypertarget{saving-and-restoring-objects}{}
 
 \begin{itemize}
 \tightlist
 \item
-  if you want a different model other than normal, change distribution
-  in \texttt{model} section
-\item
-  if you want to allow unequal spreads, create
-  \texttt{sigma{[}n\_group{]}} and in model
-  \texttt{density{[}i{]}\ \textasciitilde{}\ normal(mu{[}g{]},\ sigma{[}g{]});}
-\item
-  Stan will work just fine after you recompile
-\item
-  very flexible.
-\item
-  Typical modelling strategy: start simple, add complexity as warranted
-  by data.
+  It is possible to save and re-load large/complicated objects so that
+  they don't have to be re-created. Uses \texttt{saveRDS} and
+  \texttt{readRDS}:
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xx <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{xx}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3 10  4  9  7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{saveRDS}\NormalTok{(xx, }\StringTok{"xx.rds"}\NormalTok{)}
+\KeywordTok{rm}\NormalTok{(xx)}
+\NormalTok{xx }\CommentTok{# gone}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in eval(expr, envir, enclos): object 'xx' not found
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xx <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\StringTok{"xx.rds"}\NormalTok{)}
+\NormalTok{xx }\CommentTok{# back}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3 10  4  9  7
+\end{verbatim}
 

@@ -1,0 +1,1320 @@
+\section{Tidying and organizing data}
+
+\frame{\sectionpage}
+
+  
+
+%% \begin{frame}[fragile]{Reading in data}
+%% 
+%% <<echo=F, message=F>>=
+%% require(tidyverse)
+%% @   
+%%   
+%% <<size="small">>=
+%% pigs1=read_delim("pigs1.txt"," ")
+%% glimpse(pigs1)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Gathering up the columns}
+%%   
+%%   \begin{itemize}
+%%   \item This is a very common reorganization, and the magic ``verb''
+%%     is \texttt{gather}:
+%%     
+%% <<>>=
+%% pigs2=pigs1 %>% gather(feed,weight,feed1:feed4)
+%% glimpse(pigs2)
+%% @     
+%% \item \texttt{pigs2} is now in ``long'' format, ready for analysis.
+%% \item Anatomy of \texttt{gather}: what makes the columns different
+%%   (different feeds), what makes them the same (all weights), which
+%%   columns to combine.
+%% \item Column \texttt{pig} now is 1--5 4 times (number of pig within
+%%   each feed group). 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{\ldots and finally, the analysis}
+%%   
+%%   \begin{itemize}
+%%   \item which is just what we saw before:
+%%     
+%% <<size="footnotesize">>=
+%% weight.1=aov(weight~feed,data=pigs2)
+%% summary(weight.1)
+%% @     
+%% \item The mean weights of pigs on the different feeds are definitely
+%%   not all equal.
+%%   
+%% \item So we run Tukey to see which ones differ (over).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Tukey}
+%%   
+%% <<size="small">>=
+%% TukeyHSD(weight.1)
+%% @   
+%% 
+%% All of the feeds differ! To find the best and worst, get mean weight
+%% by feed group (over).
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Mean weights by feed}
+%%   
+%%   I borrowed an idea from later to put the means in descending order:
+%%   
+%% <<>>=
+%% pigs2 %>% group_by(feed) %>% 
+%%   summarize(mean_weight=mean(weight)) %>%
+%%   arrange(desc(mean_weight))
+%% @   
+%% 
+%% Feed 3 is best, feed 1 worst.
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Should we have any concerns about the ANOVA?}
+%%   
+%% <<fig.height=3.5>>=
+%% ggplot(pigs2,aes(x=feed,y=weight))+geom_boxplot()
+%% @   
+%%   
+%% Feed 2 has an outlier, but there are only 5 pigs in each group, and
+%% the conclusion is so clear that I am OK with this.
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Tuberculosis}
+%%   
+%%   \begin{itemize}
+%%   \item The World Health Organization keeps track of number of cases
+%%     of various diseases, eg.\ tuberculosis.
+%%   \item Some data:
+%% <<>>=
+%%   tb=read_csv("tb.csv")
+%% @ 
+%% \item Variables (see over): country (abbreviated), year. Then number of cases
+%%   for each gender and age group, eg.\ \texttt{m1524} is males aged
+%%   15--24. Also \texttt{mu} and \texttt{fu}, where age is unknown.
+%% \item Lots of missings. Want to get rid of.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The data}
+%% 
+%% <<size="footnotesize">>=
+%% tb
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Gather the gender-age group columns}
+%% 
+%% <<>>=
+%%   tb2=tb %>% gather(genage,freq,m04:fu,na.rm=T)
+%% @   
+%% 
+%% \begin{itemize}
+%% \item what makes the columns-to-be-gathered different, then
+%% \item what makes them the same, then
+%% \item the columns to gather, then (optionally)
+%% \item get rid of the missing values.
+%% \end{itemize}
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Results}
+%%   
+%% <<>>=
+%% tb2
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Separating}
+%%   
+%%   \begin{itemize}
+%%   \item 4 columns, but 5 variables, since \texttt{genage} contains
+%%     both gender and age group. Split that up using \texttt{separate}.
+%%   \item \texttt{separate} needs 3 things:
+%%     \begin{itemize}
+%%     \item what to separate (no quotes needed),
+%%   \item what to separate into (here you \emph{do} need quotes),
+%%   \item how to split.
+%%     \end{itemize}
+%%   \item For ``how to split'', here ``after first character'':
+%% <<>>=
+%%   tb3=tb2 %>% separate(genage,c("gender","age"),1)
+%% @     
+%%   \end{itemize}
+%%   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Tidied tuberculosis data}
+%%   
+%% <<>>=
+%% tb3
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{In practice\ldots}
+%%   
+%%   \begin{itemize}
+%%   \item instead of doing the pipe one step at a time, you \emph{debug}
+%%     it one step at a time, and when you have each step working, you
+%%     use that step's output as input to the next step, thus:
+%% 
+%% <<>>=
+%%   tb3=tb %>% gather(genage,freq,m04:fu,na.rm=T) %>%
+%%              separate(genage,c("gender","age"),1)
+%% @     
+%%     
+%% \item You can split the R code over as many lines as you like,
+%%   \emph{as long as each line is incomplete}, so that R knows more is
+%%   to come.
+%% \item I like to put the pipe symbol on the end of the line.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Total tuberculosis cases by year}
+%%   
+%% <<>>=
+%% s=tb3 %>% group_by(year) %>% summarize(cases=sum(freq))
+%% @   
+%% 
+%% \begin{multicols}{3}
+%% <<size="small">>=
+%% s %>% slice(1:10)
+%% @     
+%% 
+%% <<size="small">>=
+%% s %>% slice(11:20)
+%% @ 
+%% 
+%% <<size="small">>=
+%% s %>% slice(21:29)
+%% @ 
+%%   
+%%   \end{multicols}
+%%   
+%%   Something very interesting happened between 1994 and 1995.
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Some weather data}
+%% 
+%% <<size="footnotesize">>=
+%% weather=read_csv("weather.csv")
+%% @     
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The data}
+%%   
+%% <<size="footnotesize">>=
+%% weather
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The columns}
+%%   
+%%   These are daily weather records for a weather station in Mexico.
+%%   
+%%   \begin{description}
+%%   \item[\texttt{id}:] identifier for this weather station (always same here)
+%%   \item[\texttt{year}, \texttt{month}:] obvious
+%%   \item[\texttt{element}:] whether temperature given was daily max or
+%%     daily min
+%%   \item[\texttt{d1, d2,...}:] day of the month from 1st to 31st.
+%%   \end{description}
+%%   
+%%   Numbers in data frame all temperatures (for different days of the
+%%   month), so first step is
+%% <<>>=
+%% weather2= weather %>% gather(day,temperature,d1:d31,na.rm=T)    
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Results}
+%% 
+%% <<>>=
+%% weather2
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The days}
+%%   
+%%   \begin{itemize}
+%%     \item Column \texttt{element} contains \emph{names of two different
+%%         variables}, that should each be in separate column.
+%%     \item Distinct from eg.\ \texttt{m1524} in tuberculosis data, that
+%%       contained \emph{levels of two different factors}, handled by \texttt{separate}.
+%%     \item Untangling names of variables handled by \texttt{spread}:
+%% <<>>=
+%% weather3= weather %>% 
+%%   gather(day,temperature,d1:d31,na.rm=T) %>%
+%%   spread(element,temperature)
+%% @ 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Result}
+%%   
+%% <<>>=
+%% weather3
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Further improvements}
+%%   
+%%   \begin{itemize}
+%%   \item We have tidy data now, but can improve things further.
+%%   \item \texttt{mutate} creates new columns from old (or assign back
+%%     to change a variable).
+%% 
+%%   \item Would like the numerical dates. \texttt{separate} works, but
+%%     also produces column named \texttt{d} whose value is always
+%%     \texttt{d}. Instead pull out number as below.
+%% 
+%%   \item \texttt{select} keeps columns (or drops, with minus). Station
+%%   \texttt{id} has no value to us:
+%% 
+%% <<>>=
+%% weather4= weather %>% 
+%%   gather(day,temperature,d1:d31,na.rm=T) %>%
+%%   spread(element,temperature) %>%
+%%   mutate(day=parse_number(day)) %>%
+%%   select(-id)    
+%% @     
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Results}
+%%   
+%% <<>>=
+%% weather4
+%% @   
+%% \end{frame}
+%%   
+%% \begin{frame}[fragile]{Final step(s)}
+%% 
+%%   \begin{itemize}
+%%   \item Make year-month-day into proper date.
+%%   \item Keep only \texttt{date, tmax, tmin}:
+%% 
+%% <<>>=
+%% weather5= weather %>% 
+%%   gather(day,temperature,d1:d31,na.rm=T) %>%
+%%   spread(element,temperature) %>%
+%%   mutate(day=parse_number(day)) %>%
+%%   select(-id) %>% 
+%%   unite(datestr,c(year,month,day),sep="-") %>%
+%%   mutate(date=as.Date(datestr)) %>%
+%%   select(c(date,tmax,tmin))  
+%% @ 
+%%   \end{itemize}
+%% 
+%%     
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Final results}
+%% 
+%% <<>>=
+%% weather5
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Plotting the temperatures}
+%%   
+%%   \begin{itemize}
+%%   \item Plot temperature against date joined by lines, but with
+%%     separate lines for max and min.
+%%   \item \texttt{ggplot} requires something like
+%% <<eval=F>>=
+%% ggplot(weather5,aes(x=date,y=temperature))
+%% @     
+%% only we have \emph{two} temperatures, one a max and one a min, that we
+%% want to keep separate.
+%% \item The trick: combine \texttt{tmax}  and \texttt{tmin} together
+%%   into \emph{one} column, keeping track of what kind of temp they
+%%   are. (This actually same format as \texttt{weather2}, which we said
+%%   was ``untidy''.) Are making \texttt{weather5} untidy \emph{for
+%%     purposes of drawing graph} only.
+%% \item Then can do something like
+%% <<eval=F>>=
+%% ggplot(...,aes(x=date,y=temperature,colour=maxmin)
+%% @   
+%% to distinguish max and min on graph.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Setting up plot}
+%%   
+%%   \begin{itemize}
+%% \item Since we only need data frame for plot, we can do the
+%%   column-creation and plot in a chain.
+%% \item The temperature columns are actually text (see printout of
+%%   \texttt{weather5}), but for graph they need to be numbers.
+%%   \item For a \texttt{ggplot} in a chain, the initial data frame is
+%%   omitted, because it is \emph{whatever came out of the previous step}.
+%%   \item To make those ``one column''s: \texttt{gather} (result like \texttt{weather2}):
+%%     
+%% <<>>=
+%% g=weather5 %>% 
+%%   gather(maxmin,temperature,tmax:tmin) %>%
+%%   mutate(temperature=as.numeric(temperature)) %>%
+%%   ggplot(aes(x=date,y=temperature,colour=maxmin))+
+%%     geom_line()
+%% @     
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The plot}
+%% 
+%%   
+%% <<fig.height=3.5>>=
+%% g
+%% @   
+%%  
+%% \end{frame}
+%% 
+%% %\begin{frame}[fragile]{The (computing) pipe}
+%% %  
+%% %  \begin{itemize}
+%% %  \item Unix (and Linux) are built on small tools that do one thing
+%% %    well.
+%% %    
+%% %  \item \texttt{grep} lists the lines of a file that match something:
+%% %\begin{verbatim}
+%% %bash> grep "dog" dog.txt
+%% %My neighbour has a dog
+%% %I like dogs.
+%% %\end{verbatim}
+%% %  \item You can also feed the output of one command into another:
+%% %\begin{verbatim}
+%% %bash> grep "dog" dog.txt | grep "neighbour"
+%% %My neighbour has a dog
+%% %\end{verbatim}
+%% %  \item This obtains all the lines in the file that contain both
+%% %    \texttt{dog} and \texttt{neighbour}. First finds all \texttt{dog} lines,
+%% %    then ``pipes'' output of that into another \texttt{grep} that
+%% %    finds all \texttt{neighbour} lines of result.
+%% %  \item Pipe allows you to combine simple tools together.
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Pipes in \texttt{dplyr}}
+%% %  
+%% %  \begin{itemize}
+%% %  \item In \texttt{weather}, got up to \texttt{weather8}, but really
+%% %    only needed last one: many temporary variables, needed only to
+%% %    hold output of one part until used as input to next (and then can
+%% %    be thrown away).
+%% %  \item \texttt{dplyr} has ``pipe'' mechanism, notated \texttt{\%>\%}.
+%% %  \item Put on \emph{end} of line so that R knows more to come.
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Tuberculosis code (review)}
+%% %  
+%% %<<eval=F,cache=T>>=
+%% %  tb=read.csv("tb.csv",header=T)
+%% %  tb2=gather(tb,genage,freq,m04:fu,na.rm=T)
+%% %  tb3=separate(tb2,genage,c("gender","age"),1)
+%% %  aggregate(freq~year,tb3,sum)      
+%% %@   
+%% %
+%% %Corresponding code using pipe is shorter:
+%% %
+%% %<<cache=T>>=
+%% %  read.csv("tb.csv",header=T) %>%
+%% %    gather(genage,freq,m04:fu,na.rm=T) %>%
+%% %    separate(genage,c("gender","age"),1) %>%
+%% %    aggregate(freq~year,.,sum) %>% head(4)
+%% %@ 
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Comments}
+%% %  
+%% %  \begin{itemize}
+%% %  \item Output from \texttt{read.csv} is data frame,
+%% %    so its output fed straight into \texttt{gather}.
+%% %  \item All the temporary variables have gone.
+%% %  \item \texttt{gather}, \texttt{separate}, \texttt{head} shorter, and
+%% %    \texttt{aggregate} different:
+%% %    \begin{itemize}
+%% %    \item If a function accepts data frame first, then the data frame
+%% %      disappears in a pipe: ``whatever came out of the previous step''.
+%% %    \item If function accepts data frame elsewhere, ``output from
+%% %      previous stage of pipe'' replaced by a dot. 
+%% %    \end{itemize}
+%% %  \item To read: put word ``take'' before initial data frame and words
+%% %    ``and then'' every time you see a pipe.
+%% %  \item To save output from pipe in variable \texttt{x}, put
+%% %    \texttt{x=} as usual at start of line. Alternatively, put
+%% %    \texttt{-> x} at \emph{end}.
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Weather code as a (long) pipe}
+%% %
+%% %<<>>=
+%% %read.csv("weather.csv",header=T) %>%
+%% %   gather(day,temperature,d1:d31,na.rm=T) %>%
+%% %   spread(element,temperature) %>%
+%% %   mutate(day=extract_numeric(day)) %>%
+%% %   select(-id) %>%
+%% %   mutate(datestr=paste(year,month,day,sep="-")) %>%
+%% %   mutate(date=as.Date(datestr)) %>%
+%% %   select(c(date,tmax,tmin)) -> my_weather    
+%% %@   
+%% %
+%% %
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Results (some)}
+%% %
+%% %<<>>=
+%% %tbl_df(my_weather)
+%% %@   
+%% %  
+%% %\end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Summary of tidying ``verbs''}
+%%   
+%%   \begin{tabular}{lp{0.7\textwidth}}
+%%     Verb & Purpose\\
+%%     \hline
+%%     \texttt{gather}& Combine columns that measure same thing into one\\
+%%     \texttt{spread}& Take column that measures one thing under
+%%                      different conditions and put into multiple columns\\
+%%     \texttt{separate} & Turn a column that encodes
+%%                         several variables into
+%%                         several columns\\
+%%     \texttt{unite} & Combine several (related) variables into one
+%%                      ``combination'' variable\\
+%%     \hline
+%%   \end{tabular}
+%%   
+%%   \texttt{gather} and \texttt{spread} are opposites; \texttt{separate}
+%%   and \texttt{unite} are opposites.
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Doing things with data frames}
+%%   
+%%   Let's go back to our Australian athletes:
+%%   
+%% <<echo=F,message=F>>=
+%% athletes=read_tsv("ais.txt")
+%% options(width=65)
+%% @  
+%% 
+%% <<size="footnotesize">>=
+%% athletes
+%% @   
+%% 
+%% Following are some tasks that we might want to perform on this data frame.
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Choosing a column}
+%%   
+%% <<>>=
+%% athletes %>% select(Sport)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Choosing several columns}
+%%   
+%% <<>>=
+%% athletes %>% select(Sport,Hg,BMI)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Choosing consecutive columns}
+%%   
+%% <<>>=
+%% athletes %>% select(Sex:WCC)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Choosing all-but some columns}
+%%   
+%% <<>>=
+%% athletes %>% select(-(RCC:LBM))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Select-helpers}
+%%   
+%%   Other ways to \texttt{select} columns:
+%%   
+%%   \begin{itemize}
+%%   \item \texttt{starts\_with} something
+%%   \item \texttt{ends\_with} something
+%%   \item \texttt{contains} something
+%%   \item \texttt{matches} a ``regular expression''
+%%   \item \texttt{num\_range} like \texttt{x1} to \texttt{x3}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Columns beginning with S}
+%%   
+%% <<>>=
+%% athletes %>% select(starts_with("S"))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Columns ending with C}
+%%   
+%%   either uppercase or lowercase:
+%%   
+%% <<>>=
+%% athletes %>% select(ends_with("c"))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Column names containing letter R}
+%%   
+%% <<>>=
+%% athletes %>% select(contains("r"))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Exactly two characters, ending with T}
+%%   
+%%   In regular expression terms, this is \verb=^.t$=: 
+%%   %$ %$ %$
+%%   \begin{itemize}
+%%   \item   \verb=^= means ``start of text''
+%%   \item \verb=.= means ``exactly one character, but could be
+%%     anything''
+%%     
+%%   \item \verb=$= %$ %$ %$
+%%     means ``end of text''.
+%%   \end{itemize}
+%%   
+%% <<>>=
+%% athletes %>% select(matches("^.t$"))
+%% @   
+%% %$ %$ %$
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Displaying some numbered columns 1/2}
+%%   
+%% Make up a data frame to illustrate. This \texttt{sample} generates random
+%% values equally likely to be anything 0--9 (without replacement):
+%% 
+%% <<>>=
+%% d=tibble( y=sample(0:9,5),
+%%           x1=sample(0:9,5),
+%% 	  x2=sample(0:9,5),
+%% 	  x3=sample(0:9,5))
+%% d	  
+%% @ 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Displaying some numbered columns 2/2}
+%%   
+%% Just display \texttt{x2} and \texttt{x3}:
+%% 
+%% <<>>=
+%% d %>% select(num_range("x",2:3))
+%% @ 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Displaying more than 10 rows}
+%%   
+%% <<size="footnotesize">>=
+%% athletes %>% print(n=12)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Displaying all the columns}
+%%   
+%% Just for 5 rows here:
+%% 
+%% <<size="footnotesize">>=
+%% athletes %>% print(n=5, width=Inf)
+%% @ 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Choosing rows by number}
+%%   
+%% <<>>=
+%% athletes %>% slice(16:25)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Non-consecutive rows}
+%%   
+%% <<>>=
+%% athletes %>% slice(c(10,13,17,42))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{A random sample of rows}
+%%   
+%% <<>>=
+%% athletes %>% sample_n(8)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Rows for which something is true}
+%%   
+%% <<size="small">>=
+%% athletes %>% filter(Sport=="Tennis")
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{More complicated selections}
+%%   
+%% <<>>=
+%% athletes %>% filter(Sport=="Tennis",RCC<5)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Either/Or}
+%%   
+%% <<>>=
+%% athletes %>% filter(Sport=="Tennis" | RCC>5) 
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Sorting into order}
+%%   
+%% <<>>=
+%% athletes %>% arrange(RCC) 
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Breaking ties by another variable}
+%%   
+%% <<>>=
+%% athletes %>% arrange(RCC,BMI)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Descending order}
+%%   
+%% <<>>=
+%% athletes %>% arrange(desc(BMI))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{``The top ones''}
+%%   
+%% <<>>=
+%% athletes %>% arrange(desc(Wt)) %>% slice(1:7) %>% 
+%%   select(Sport,Wt)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Create new variables from old ones}
+%%   
+%% <<>>=
+%% athletes %>% mutate(wt_lb=Wt*2.2) %>%
+%%   select(Sport,Wt,wt_lb)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Turning the result into a number}
+%%   
+%% Output is always data frame unless you explicitly turn it into
+%% something else, eg.\ the weight of the heaviest athlete, as a number:
+%% 
+%% <<>>=
+%% athletes %>% arrange(desc(Wt)) %>% slice(1) %>%
+%%   pull(Wt)
+%% @ 
+%% 
+%% All of these tools can be combined, as with this example.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{To find the mean height of the women athletes}
+%%   
+%% Two ways:
+%% 
+%% <<>>=
+%% athletes %>% group_by(Sex) %>% summarize(m=mean(Ht))
+%% @ 
+%% 
+%% or
+%% 
+%% <<>>=
+%% athletes %>% filter(Sex=="female") %>% summarize(m=mean(Ht))
+%% @ 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Summary of data selection/arrangement ``verbs''}
+%%   
+%%   \begin{tabular}{lp{0.7\textwidth}}
+%%     Verb & Purpose\\
+%%     \hline
+%%     \texttt{select} & Choose columns\\
+%%     \texttt{print} & Display non-default \# of rows/columns \\
+%%     \texttt{slice} & Choose rows by number\\
+%%     \texttt{sample\_n} & Choose random rows\\ 
+%%     \texttt{filter} & Choose rows satisfying conditions \\
+%%     \texttt{arrange}& Sort in order by column(s) \\
+%%     \texttt{mutate} & Create new variables\\
+%%     \texttt{as.numeric}     & Turn result from data frame into number\\
+%%     \texttt{group\_by} & Create groups to summarize by\\
+%%     \texttt{summarize} & Calculate summary statistics (by groups if defined)\\
+%%     \hline
+%%   \end{tabular}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Looking things up in another data frame}
+%%   
+%%   Recall the tuberculosis data set, tidied:
+%%   
+%% <<size="footnotesize">>=
+%% tb3
+%% @   
+%% 
+%% What are actual names of those countries in \texttt{iso2}?
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Actual country names}
+%%   
+%%   Found actual country names to go with those abbreviations, in spreadsheet:
+%%   
+%% <<>>=
+%% library(readxl)
+%% country_names=read_excel("ISOCountryCodes081507.xlsx")
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The country names}
+%%   
+%% <<>>=
+%% country_names
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Looking up country codes}
+%%   
+%%   Matching a variable in one data frame to one in another is called a
+%%   \textbf{join} (database terminology):
+%%   
+%% <<size="small">>=
+%% tb3 %>% left_join(country_names,by=c("iso2"="Code_UC"))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Total cases by country}
+%%   
+%% <<>>=
+%% tb3 %>% group_by(iso2) %>% summarize(cases=sum(freq)) %>%
+%%   left_join(country_names,by=c("iso2"="Code_UC")) %>%
+%%   select(Country,cases)
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Some tidying and organizing in SAS}
+  
+  \begin{itemize}
+  \item SAS is less flexible than R's \texttt{tidyverse} tools, but
+    some of the previous can be done (with effort).
+  \item Basic idea: create a new dataset using \texttt{data} and
+    \texttt{set}, and then provide additional code to say what to do
+    to the previous dataset.
+  \item Read Australian athletes data again:
+    
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/ais.txt'
+  dbms=dlm
+  out=sports
+  replace;
+  delimiter='09'x;
+  getnames=yes;
+
+    \end{Datastep}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Check the data}
+  
+  \begin{Sascode}[store=ta]
+proc print data=sports(obs=10);    
+  \end{Sascode}
+  
+  \Listing[store=ta,fontsize=tiny]{taa}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Choosing variables}
+  
+  \texttt{keep} to say which ones you want:
+
+  \begin{Datastep}
+data sports2;
+  set sports;
+  keep Sport Sex Ht Wt;
+  \end{Datastep}
+  
+  \begin{Sascode}[store=tb]
+proc print data=sports2(obs=8);
+  \end{Sascode}
+  
+  \Listing[store=tb]{tbb}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Un-choosing variables}
+  
+  \texttt{drop} to say which ones you don't want. Note the double-dash
+  to denote ``this through that'':
+
+  \begin{Datastep}
+data sports3;
+  set sports;
+  drop RCC--LBM;
+  \end{Datastep}
+  
+  \begin{Sascode}[store=tc]
+    proc print data=sports3(obs=8);
+  \end{Sascode}
+
+    \Listing[store=tc,fontsize=small]{tcc}
+
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+  
+  \begin{itemize}
+  \item Normally don't worry about explicitly dropping variables you
+    don't need; you just ignore them in your analysis.
+  \item \texttt{keep} and \texttt{drop} mostly for final ``tidy'' version of
+    datasets that you create.
+  \item Can also feed \texttt{proc print} the columns to display, with
+    \texttt{var}. 
+  \item For example, might want to discard intermediate steps of a
+    calculation. 
+  \item \texttt{keep} and \texttt{drop} equivalent to R
+    \texttt{select}.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Calculating a new variable}
+  
+  Put the calculation in the \texttt{data} step, as we have seen
+  before. R equivalent: \texttt{mutate}.
+  
+  \begin{Datastep}
+data sports4;
+  set sports;
+  Wt_lb=Wt*2.2;
+  keep Sport Wt Wt_lb;
+  \end{Datastep}
+  
+  \begin{Sascode}[store=td]
+proc print data=sports4(obs=7);    
+  \end{Sascode}
+  
+  \Listing[store=td, fontsize=small]{tdd}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Choosing rows by row number}
+  
+  SAS has a special variable \texttt{\_N\_} that holds the row
+  number. R equivalent: \texttt{slice}.
+  
+  \begin{Datastep}
+data sports5;
+  set sports;
+  if _N_>=16 and _N_<=25;
+\end{Datastep}
+
+\begin{Sascode}[store=te, fontsize=small]
+proc print;  
+\end{Sascode}
+
+\Listing[store=te,fontsize=footnotesize]{tee}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Choosing each of a number of rows}
+  
+  \begin{Datastep}
+data sports6;
+  set sports;
+  if _N_ in (10, 13, 17, 42);
+  \end{Datastep}
+  
+  \begin{Sascode}[store=tf]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=tf,fontsize=footnotesize]{tff}
+\end{frame}
+
+\begin{frame}[fragile]{Choosing rows where a condition is true}
+  
+  \texttt{if} like R's \texttt{filter}, but note that SAS uses
+  \emph{one} equals sign in testing for equality:
+  
+  \begin{Datastep}
+data sports7;
+  set sports;
+  if Sport="Tennis";
+  \end{Datastep}
+  \begin{Sascode}[store=tg]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=tg,fontsize=scriptsize]{tgg}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Multiple conditions 1/2}
+  
+  Join them with actual words \texttt{and}, \texttt{or}:
+  
+  \begin{Datastep}
+data sports8;
+  set sports;
+  if Sport="Tennis" and RCC<5;
+  \end{Datastep}
+  
+  \begin{Sascode}[store=th]
+proc print;
+  var Sex--RCC;
+  \end{Sascode}
+  
+  \Listing[store=th]{thh}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Multiple conditions 2/2}
+  
+  \begin{Datastep}
+data sports9;
+  set sports;
+  if Sport="Tennis" or RCC>5;
+  \end{Datastep}
+  
+  \begin{Sascode}[store=ti]
+proc print;
+  var Sex--RCC BMI;
+  \end{Sascode}
+  
+  \Listing[store=ti,fontsize=tiny]{tii}
+\end{frame}
+
+\begin{frame}[fragile]{Using data \texttt{where} a condition is true}
+  
+  \begin{itemize}
+  \item Rather than creating a new data set containing the values that
+    satisfy a condition, we can tell SAS which data to use right in a
+    \texttt{proc}.
+  \item As near as SAS gets to R pipeline.
+  \item Key idea: put \texttt{where} and a logical condition as the
+    \emph{first} line of the \texttt{proc}.
+  \item For example, mean BMI of tennis players:
+    \begin{Sascode}[store=zawis]
+proc means;
+  where sport="Tennis";
+  var BMI;
+    \end{Sascode}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Mean and SD of BMI for tennis players}
+  
+\Listing[store=zawis, fontsize=footnotesize]{zawiss}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Arranging values in order}
+  
+  This is \texttt{proc sort}, which produces an output data set that
+  is the ``most recent'' one. R equiv: \texttt{arrange}.
+  
+  \begin{Sascode}[store=tj]
+proc sort data=sports;
+  by RCC;
+  
+proc print;  
+  var Sex--RCC;
+  \end{Sascode}
+  
+  \Listing[store=tj,fontsize=footnotesize]{tjj}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Using a second variable as tiebreaker}
+  
+  
+  \begin{Sascode}[store=tk]
+proc sort data=sports;
+  by RCC BMI;
+  
+proc print;  
+  var Sex--RCC BMI;
+  \end{Sascode}
+  
+  \Listing[store=tk,fontsize=footnotesize]{tkk}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Descending order}
+  
+  
+  \begin{Sascode}[store=tl]
+proc sort data=sports;
+  by descending BMI;
+  
+proc print;  
+  var Sex--RCC BMI;
+  \end{Sascode}
+  
+  \Listing[store=tl,fontsize=footnotesize]{tll}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Displaying the seven heaviest athletes}
+  
+  \begin{Sascode}[store=tm]
+proc sort data=sports;
+  by descending Wt;
+  
+data sports10;
+  set sports;
+  if _N_<=7;
+  keep Sport Wt;
+  
+proc print;
+  \end{Sascode}
+  
+  \Listing[store=tm,fontsize=footnotesize]{tmm}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Tidying data}
+\begin{itemize}
+\item Data rarely come to us as we want to use them.
+\item Before we can do analysis, typically have organizing to do.
+\item This is typical of ANOVA-type data, ``wide format'':
+  
+  \verbatiminput{/home/ken/teaching/c32/notes/2017/pigs1.txt}
+\item 20 pigs are randomly allocated to one of four feeds. At the end
+  of the study, the weight of each pig is recorded, and we want to
+  know whether there are any differences in mean weights among the
+  feeds.
+\item Problem: want the weights all in \emph{one} column, with 2nd
+  column labelling which feed each weight was from. Untidy!
+\end{itemize}
+\end{frame}
+
+  \begin{frame}[fragile]{Tidy and untidy data (Wickham)}
+  
+  \begin{itemize}
+  \item Data set easier to deal with if:
+    \begin{itemize}
+    \item each observation is one \emph{row}
+    \item each variable is one \emph{column}
+    \item each type of observation unit is one \emph{table}
+    \end{itemize}
+
+  \item Data arranged this way called ``tidy''; otherwise called
+    ``untidy''.
+  \item For the pig data, response variable is weight, but scattered
+    over 4 columns, which are \emph{levels} of a factor \texttt{feed}.
+  \item Want all the weights in \emph{one} column, with a second
+    column \texttt{feed} saying which feed that weight goes with, like
+    R \texttt{gather}.
+  \item Then we can run \texttt{proc anova}.
+    
+    
+
+    
+  \end{itemize}
+
+  
+
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Tidying data in SAS}
+  
+  \begin{itemize}
+  \item Hard. Illustrate the SAS version
+    of \texttt{gather} on the pigs data, that we have to read in first.
+  \item Each line of this dataset has to produce \emph{four} lines
+    of the long data set. 
+    
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/pigs1.txt'
+  dbms=dlm out=pigs replace;
+  delimiter=' ';
+  getnames=yes;
+    \end{Datastep}
+    
+    \begin{Sascode}[store=tn]
+proc print;      
+    \end{Sascode}
+    
+    \Listing[store=tn,fontsize=scriptsize]{tnn}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Making the long data set, the tedious way}
+  
+  \begin{Datastep}
+data pigs2;
+  set pigs;
+  feed='feed1';
+  weight=feed1;
+  output;
+  feed='feed2';
+  weight=feed2;
+  output;
+  feed='feed3';
+  weight=feed3;
+  output;
+  feed='feed4';
+  weight=feed4;
+  output;
+  keep feed weight;
+  \end{Datastep}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The long data set}
+  
+  \begin{Sascode}[store=to]
+proc print;    
+  \end{Sascode}
+  
+\Listing[store=to,fontsize=scriptsize]{too}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Using a SAS array to reduce repetition}
+
+  \begin{Datastep}
+data pigs3;
+  set pigs;
+  array feed_array [4] feed1-feed4;
+  do i=1 to 4;
+    weight=feed_array[i];
+    feed=vname(feed_array[i]);
+    output;
+  end;
+  keep pig feed weight;
+  \end{Datastep}
+  
+  \begin{itemize}
+  \item   In SAS, an array is a mechanism for referring to a group of
+  variables together, here the four feed variables. The $i$-th element
+  of the array refers to the $i$-th feed variable.
+\item In the loop (indented), \texttt{weight} is set to the
+  \emph{value} of the appropriate one of the \texttt{feed} variables,
+  while \texttt{feed} is set to the \emph{name} of that \texttt{feed}
+  variable. Compare the coding without the loop.
+  \end{itemize}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{The long data set, again}
+  
+  \begin{Sascode}[store=tp]
+proc print;    
+  \end{Sascode}
+  
+\Listing[store=tp,fontsize=scriptsize]{tpp}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{The ANOVA, again, with output part 1}
+  
+  \begin{Sascode}[store=tr]
+proc anova;
+  class feed;
+  model weight=feed;
+  means feed / tukey;
+  \end{Sascode}
+  
+\Listing[store=tr,fontsize=scriptsize,objects=overallanova modelanova]{trs} 
+
+The mean weights are not all the same for each feed.
+
+\end{frame}
+
+\begin{frame}[fragile]{Tukey output}
+  
+\Listing[store=tr,fontsize=footnotesize,objects=mclines]{trr}  
+  
+
+All of the feeds have significantly different mean weight, with feed 3
+being the best and feed 1 the worst.
+\end{frame}

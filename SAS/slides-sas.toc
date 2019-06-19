@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{Connecting to SAS}{1}{0}{1}
+\beamer@sectionintoc {2}{Reading data from files}{25}{0}{2}
+\beamer@sectionintoc {3}{Graphs}{48}{0}{3}
+\beamer@sectionintoc {4}{More detailed summaries of data}{64}{0}{4}
+\beamer@sectionintoc {5}{Inference}{73}{0}{5}
+\beamer@sectionintoc {6}{Tidying and organizing data}{164}{0}{6}
+\beamer@sectionintoc {7}{Case study 2: Electricity, peak hour demand and total energy usage}{191}{0}{7}
+\beamer@sectionintoc {8}{Regression with categorical variables}{215}{0}{8}
+\beamer@sectionintoc {9}{Dates and times}{230}{0}{9}
+\beamer@sectionintoc {10}{Miscellaneous stuff in SAS}{250}{0}{10}
+\beamer@sectionintoc {11}{Vector and matrix algebra}{293}{0}{11}

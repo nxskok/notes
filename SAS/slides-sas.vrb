@@ -1,0 +1,17 @@
+\frametitle{Inner product}
+
+  \begin{itemize}
+  \item Make sure both vectors are \emph{column} vectors, and then
+    matrix-multiply the transpose of the first (a row vector) by the second:
+
+    \begin{Sascode}[store=imi]
+proc iml;
+  a={1,2,3};
+  b={4,5,6};
+  ans=t(a)*b;
+  print ans;
+    \end{Sascode}
+
+    \Listing[store=imi]{imii}
+  \end{itemize}
+

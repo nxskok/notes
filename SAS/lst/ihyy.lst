@@ -1,0 +1,8 @@
+                              The TTEST Procedure
+ 
+                                Variable:  score
+ 
+           Method           Variances        DF    t Value    Pr < t
+ 
+           Pooled           Equal            42      -2.27    0.0143
+           Satterthwaite    Unequal      37.855      -2.31    0.0132

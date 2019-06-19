@@ -1,0 +1,13 @@
+                             The NPAR1WAY Procedure
+ 
+      Median Scores (Number of Points Above Median) for Variable density
+                         Classified by Variable group
+ 
+                           Sum of      Expected       Std Dev          Mean
+    group         N        Scores      Under H0      Under H0         Score
+ 
+    Control      10           1.0           5.0      1.313064          0.10
+    Lowjump      10           4.0           5.0      1.313064          0.40
+    Highjum      10          10.0           5.0      1.313064          1.00
+ 
+                      Average scores were used for ties.

@@ -1,0 +1,334 @@
+\section{Graphs}
+
+\frame{\sectionpage}
+
+\begin{frame}[fragile]{Our data}
+  
+  \begin{itemize}
+  \item Once again use data on 202 male and female athletes at the
+    Australian Institute of Sport.
+  \item Variables:
+    \begin{itemize}
+    \item categorical: Sex of athlete, sport they play 
+    \item quantitative: height (cm), weight (kg), lean body mass, red
+      and white blood cell counts, haematocrit and haemoglobin
+      (blood), ferritin concentration, body mass index, percent body
+      fat. 
+    \end{itemize}
+  \item Values separated by \emph{tabs} (which impacts reading in).
+
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Reading data into R}
+%%   
+%% <<echo=F, message=F>>=
+%% require(tidyverse)
+%% @   
+%%   
+%%   \begin{itemize}
+%%   \item Use \texttt{read\_tsv} (``tab-separated values''), like
+%%     \texttt{read\_csv}.
+%%   \item Data in \texttt{ais.txt}:
+%%     
+%% <<size="small">>=
+%% athletes=read_tsv("ais.txt")
+%% @  
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The data (some)}
+%%   
+%% <<size="footnotesize">>=
+%% athletes
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Reading data into SAS}
+  
+  \begin{itemize}
+    \item Upload file to SAS Studio first.
+    \item Or get from
+      \url{http://www.utsc.utoronto.ca/~butler/c32/ais.txt} and use
+      \texttt{filename myurl url} thing first.
+      
+    \item R equivalent: \texttt{read\_tsv}.
+  \item A bit trickier because we can't \emph{type} tab: have to use
+    special code \texttt{'09'x} (ASCII code \texttt{09} in hex):
+    
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/ais.txt'
+  dbms=dlm
+  out=sports
+  replace;
+  delimiter='09'x;
+  getnames=yes;
+
+    \end{Datastep}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Some of the data, tiny}
+  
+  \begin{Sascode}[store=ga]
+proc print data=sports(obs=9);
+  \end{Sascode}
+  
+\Listing[fontsize=scriptsize,store=ga]{gaa}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Or, summarized}
+  
+  \begin{Sascode}[store=gb]
+proc means;    
+  \end{Sascode}
+  
+\Listing[store=gb,fontsize=scriptsize]{gbb}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Kinds of graph}
+  
+  Reminder: depends on number and type of variables you have:
+  
+  \begin{center}
+  \begin{tabular}{ccp{0.3\textwidth}p{0.35\textwidth}}
+    Categ.\ & Quant.\ & Graph & R equiv.\ \\
+    \hline
+    1 & 0 & bar chart & \texttt{geom\_bar}\\
+    0 & 1 & histogram & \texttt{geom\_histogram}\\
+    2 & 0 & grouped bar charts & \texttt{geom\_bar}, \texttt{fill}\\
+    1 & 1 & side-by-side boxplots & \texttt{geom\_boxplot}\\
+    0 & 2 & scatterplot & \texttt{geom\_point} \\
+    2 & 1 & grouped boxplots & \texttt{geom\_boxplot}, \texttt{colour}\\
+    1 & 2 & scatterplot with points identified by group (eg.\ by
+            colour) & \texttt{geom\_point}, \texttt{colour}\\
+    \hline
+  \end{tabular}
+    
+  \end{center}
+  
+  With more variables, \emph{separate plots by groups}:
+  \texttt{paneling} in SAS (\texttt{facetting} in R).
+  
+\end{frame}
+
+\begin{frame}[fragile]{Workhorse graphing procedure}
+  
+  \begin{itemize}
+  \item   SAS also has standard graphing procedure, that we use for all our
+  SAS graphs. 
+  \item \textbf{proc sgplot}
+  \item   Use in different ways to get precise graph we want.
+\item   Start with bar chart of the sports played by the athletes.
+
+  \end{itemize}
+    
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Bar chart in R}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Sport))+geom_bar()
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Bar chart in SAS}
+  
+  \begin{Sascode}[store=gd]
+proc sgplot;
+  vbar Sport;
+  \end{Sascode}
+  
+  \Graphic[store=gd,scale=0.5]{gdd}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Histogram of body mass index, in SAS}
+  
+  \begin{Sascode}[store=ge]
+proc sgplot;
+  histogram BMI;
+  \end{Sascode}
+  
+  \Graphic[store=ge,scale=0.5]{gee}
+
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{BMI histogram in R}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=BMI))+geom_histogram(bins=10)
+%% @   
+%%   
+%% \end{frame}
+%% \begin{frame}[fragile]{Which sports are played by males and females?}
+%%   
+%% 
+%%   
+%% <<fig.height=3.5>>=
+%% ggplot(athletes,aes(x=Sport,fill=Sex))+
+%%   geom_bar(position="dodge")
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Grouped bar plot in SAS}
+  
+  \begin{Sascode}[store=gf]
+proc sgplot;
+  vbar Sport / group=Sex groupdisplay=cluster;
+  \end{Sascode}
+  
+  \Graphic[store=gf,scale=0.5]{gff}
+  
+\end{frame}
+
+\begin{frame}[fragile]{BMI by gender}
+  
+  Side-by-side boxplots:
+  
+  \begin{Sascode}[store=gg]
+proc sgplot;
+  vbox BMI / category=Sex;
+  \end{Sascode}
+  
+  \Graphic[store=gg,scale=0.5]{ggg}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{And in R}
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Sex,y=BMI))+geom_boxplot()
+%% @   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Height vs.\ weight}
+%%   
+%%   Scatterplot:
+%%   
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Ht,y=Wt))+geom_point()
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Height vs.\ weight}
+  
+  \begin{Sascode}[store=gh]
+proc sgplot;
+  scatter x=Ht y=Wt;
+  \end{Sascode}
+  
+  \Graphic[store=gh,scale=0.5]{ghh}
+  
+\end{frame}
+
+\begin{frame}[fragile]{and again, with regression line}
+  
+  \begin{Sascode}[store=gj]
+proc sgplot;
+  scatter x=Ht y=Wt;
+  reg x=Ht y=Wt;
+  \end{Sascode}
+  
+  \Graphic[store=gj,scale=0.5]{gjj}
+  
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{One more time}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Ht,y=Wt))+
+%%   geom_point()+geom_smooth(method="lm")
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{BMI by sport and gender}
+  
+  \begin{Sascode}[store=gi]
+proc sgplot;
+  vbox BMI / group=Sex category=Sport;
+  \end{Sascode}
+  
+  \Graphic[store=gi,scale=0.5]{gii}
+\end{frame}
+
+%% \begin{frame}[fragile]{R}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Sport,y=BMI,colour=Sex))+
+%%   geom_boxplot()
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Height and weight by gender}
+%% 
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Ht,y=Wt,colour=Sex))+
+%%   geom_point()
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Scatterplot by gender}
+  
+  \begin{Sascode}[store=gk]
+proc sgplot;
+  scatter x=Ht y=Wt / group=Sex;
+  \end{Sascode}
+  
+  \Graphic[store=gk,scale=0.5]{gkk}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Height by weight for each sport}
+  
+  Separate plot for each sport, first two panels here:
+  
+  \begin{Sascode}[store=gl]
+proc sgpanel;
+  panelby Sport;
+  scatter x=Ht y=Wt / group=Sex;
+  \end{Sascode}
+  
+  \Graphic[store=gl,scale=0.5]{gll}
+  
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{same in R, with facets}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(athletes,aes(x=Ht,y=Wt,colour=Sex))+
+%%   geom_point()+facet_wrap(~Sport)
+%% @   
+%%   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Filling each facet}
+%%   
+%%   Default uses same scale for each facet. To use different scales for
+%%   each facet, this:
+%%   
+%% <<fig.height=3.5>>=
+%% ggplot(athletes,aes(x=Ht,y=Wt,colour=Sex))+
+%%   geom_point()+facet_wrap(~Sport,scales="free")
+%% @   
+%%   
+%%   
+%% \end{frame}

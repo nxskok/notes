@@ -1,0 +1,242 @@
+\section{More detailed summaries of data}
+
+\frame{\sectionpage}
+
+%% \begin{frame}[fragile]{Summarizing data in R}
+%% 
+%% <<results="hide",echo=F,message=F>>=
+%% require(tidyverse)
+%% @   
+%%   
+%%   \begin{itemize}
+%%   \item 
+%%     What if we want:
+%%     
+%%     \begin{itemize}
+%%     \item a summary or two of just one column
+%%     \item a count of observations in each category of a categorical
+%%       variable? 
+%%     \item summaries by group
+%%     \item a different summary of all columns (eg.\ SD)
+%%     \end{itemize}
+%%     
+%%   \item To do this, meet \textbf{pipe} operator \texttt{\%>\%}. This
+%%     takes input data frame, does something do it, and outputs result.
+%%   \item Output from a pipe can be used as input to something else, so
+%%     can have a sequence of pipes.
+%%   \item Summaries include: \texttt{mean}, \texttt{median},
+%%     \texttt{min}, \texttt{max},
+%%     \texttt{sd}, \texttt{IQR}, \texttt{quantile} (for obtaining
+%%     quartiles or any percentile), \texttt{n} (for counting
+%%     observations). 
+%%   \item Use our Australian athletes data again.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Summarizing one column}
+%%   \begin{itemize}
+%%   \item Like this, for example the mean height:
+%%     
+%% <<>>=
+%% athletes %>% summarize(m=mean(Ht))
+%% @     
+%% 
+%% or to get mean and SD of BMI:
+%% 
+%% <<>>=
+%% athletes %>% summarize(m=mean(BMI),s=sd(BMI))
+%% @ 
+%%   \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Quartiles}
+%%   
+%%   \begin{itemize}
+%%   \item \texttt{quantile} calculates percentiles, so we want the 25th
+%%     and 75th percentiles:
+%%     
+%% <<>>=
+%% athletes %>% summarize( Q1=quantile(Wt,0.25),
+%%                         Q3=quantile(Wt,0.75))
+%% @     
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Counting how many}
+%%   
+%%   \begin{multicols}{2}
+%%   for example, number of athletes in each sport:
+%%   
+%% <<>>=
+%% athletes %>% count(Sport)
+%% @   
+%%   
+%% Another way (which will make sense in a moment):
+%% 
+%% <<size="small">>=
+%% athletes %>% group_by(Sport) %>% 
+%%   summarize(count=n())
+%% @ 
+%%     
+%%   \end{multicols}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Summaries by group}
+%%   
+%%   \begin{itemize}
+%%   \item Might want separate summaries for each ``group'', eg.\ mean
+%%     and SD of height for males and females. Strategy is
+%%     \texttt{group\_by} (to define the groups) and then \texttt{summarize}:
+%%     
+%% <<>>=
+%% athletes %>% group_by(Sex) %>%
+%%   summarize(m=mean(Ht),s=sd(Ht))
+%% @     
+%% 
+%% \item This explains second variation on counting within group:
+%%   ``within each sport, how many athletes were there?''
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Summarizing several columns}
+%%   
+%%   \begin{itemize}
+%%   \item Standard deviation of each (numeric) column:
+%%     
+%% <<size="footnotesize">>=
+%% athletes %>% summarize_if(is.numeric,funs(sd))
+%% @   
+%% 
+%% \item Median and IQR of all columns whose name starts with H:
+%%   
+%% <<>>=
+%% athletes %>% summarize_at(vars(starts_with("H")),
+%%   funs(median,IQR))
+%% @   
+%%       
+%%   \end{itemize}
+%%   
+%% 
+%%   
+%% \end{frame}
+
+
+
+
+\begin{frame}[fragile]{Summarizing data in SAS}
+  
+  \begin{itemize}
+  \item Already saw \texttt{proc means} to find means, SDs and sample
+    sizes.
+  \item \texttt{proc means} will also calculate means of only some
+    variables or by group.
+  \item Also, \texttt{proc means} can calculate other statistics (by
+    group if desired), despite its name.
+  \item SAS names for other statistics: \texttt{mean},
+    \texttt{median}, \texttt{stddev} (SD), \texttt{qrange} (IQR),
+    \texttt{Q1}, \texttt{Q3} (quartiles).
+  \item R equivalent: (\texttt{group\_by}), \texttt{summarize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Specifying summaries, variables and groups}
+  
+  \begin{itemize}
+  \item To specify which summaries to calculate, list them on the
+    \texttt{proc means} line.
+  \item To specify which variables to calculate summaries for, use a
+    line starting with \texttt{var}.
+  \item To specify which groups to calculate for, use a line starting
+    with \texttt{class} and the name of the grouping variable.
+  \item Examples over.
+
+    \begin{Datastep}[program]
+data ath;
+  set sports;
+      \end{Datastep}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Quartiles of athlete weight}
+  
+  \begin{Sascode}[store=sa]
+proc means Q1 Q3 Qrange;
+  var Wt;
+  \end{Sascode}
+  
+  \Listing[store=sa,fontsize=small]{saa}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Mean and SD of height by gender}
+  
+  \begin{itemize}
+  \item Thus:
+    
+    \begin{Sascode}[store=sb]
+proc means mean stddev;
+  var Ht;
+  class Sex;
+    \end{Sascode}
+    
+    \Listing[store=sb,fontsize=footnotesize]{sbb}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{How many athletes from each sport?}
+  
+  \begin{itemize}
+  \item Have to pick a variable to count observations of (though it
+    doesn't matter):
+    
+    \begin{Sascode}[store=sc]
+proc means n;
+  var BMI;
+  class Sport;
+    \end{Sascode}
+  \item Results over.
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+  
+    \Listing[fontsize=scriptsize,store=sc]{scc}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{A perhaps better way to count}
+  
+  \begin{Sascode}[store=sd]
+proc freq;
+  tables Sport;
+  \end{Sascode}
+  
+  \Listing[fontsize=footnotesize,store=sd]{sdd}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{SD of all the (numerical) columns}
+  
+  \begin{itemize}
+  \item Just don't specify a \texttt{var} or a \texttt{class}:
+    
+    \begin{Sascode}[store=se]
+proc means stddev;
+    \end{Sascode}
+    
+    \Listing[store=se]{see}
+  \end{itemize}
+  
+\end{frame}

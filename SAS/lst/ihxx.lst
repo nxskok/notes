@@ -1,0 +1,10 @@
+                            The UNIVARIATE Procedure
+                                Variable:  diff
+ 
+                           Tests for Location: Mu0=0
+ 
+                Test           -Statistic-    -----p Value------
+ 
+                Student's t    t  -2.16771    Pr > |t|    0.0530
+                Sign           M        -3    Pr >= |M|   0.1460
+                Signed Rank    S       -32    Pr >= |S|   0.0088

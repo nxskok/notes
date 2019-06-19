@@ -1,0 +1,26 @@
+Obs          row         game date                box      team venue opp result
+ 
+  1           82            7 Monday, Apr 13      boxscore TOR        TBR  L
+  2           83            8 Tuesday, Apr 14     boxscore TOR        TBR  L
+  3           84            9 Wednesday, Apr 15   boxscore TOR        TBR  W
+  4           85           10 Thursday, Apr 16    boxscore TOR        TBR  L
+  5           86           11 Friday, Apr 17      boxscore TOR        ATL  L
+  6           87           12 Saturday, Apr 18    boxscore TOR        ATL  W-wo
+ 
+Obs         runs      Oppruns      innings wl        position gb   winner
+ 
+  1            1            2            . 4-3              2 1    Odorizzi
+  2            2            3            . 4-4              3 2    Geltz
+  3           12            7            . 5-4              2 1    Buehrle
+  4            2            4            . 5-5              4 1.5  Archer
+  5            7            8            . 5-6              4 2.5  Martin
+  6            6            5           10 6-6              3 1.5  Cecil
+ 
+Obs loser      save                  game_time  Daynight    attendance  streak
+ 
+  1 Dickey     Boxberger           2:30:00.000     N             48414   -
+  2 Castro     Jepsen              3:06:00.000     N             17264   --
+  3 Ramirez                        3:02:00.000     N             15086   +
+  4 Sanchez    Boxberger           3:00:00.000     N             14433   -
+  5 Cecil      Grilli              3:09:00.000     N             21397   --
+  6 Marimon                        2:41:00.000     D             34743   +

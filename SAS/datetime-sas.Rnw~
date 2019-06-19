@@ -1,0 +1,709 @@
+\section{Dates and times}
+
+\frame{\sectionpage}
+
+%%  \begin{frame}[fragile]{Packages for this section}
+%%  
+%%  <<echo=F,message=F>>=
+%%  require(tidyverse)
+%%  @   
+%%    
+%%  <<>>=
+%%  library(lubridate)
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  
+%%  \begin{frame}[fragile]{Dates}
+%%    
+%%    \begin{itemize}
+%%    \item Dates are represented on computers as ``days since an
+%%      origin'', typically Jan 1, 1970, with a negative date  being
+%%      before the origin: 
+%%      
+%%  <<>>=
+%%  dates=c("1970-01-01","2007-09-04","1940-04-15")
+%%  d=as.Date(dates) ; d
+%%  as.numeric(d)
+%%  @     
+%%  \item This means that we can do arithmetic with dates, eg.\
+%%  <<>>=
+%%  d[2]+30
+%%  d[2]-d[3]
+%%  @   
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Reading in dates from a file}
+%%    
+%%    \begin{itemize}
+%%    \item \texttt{read\_csv} and the others can guess that you have
+%%      dates, if you format them as year-month-day, like column 1 of this
+%%      \texttt{.csv}:
+%%      
+%%  \verbatiminput{mydates.csv}
+%%  
+%%  \item Then read them in:
+%%      
+%%  <<>>=
+%%  ddd=read_csv("mydates.csv")
+%%  @     
+%%  
+%%  \item \texttt{read\_csv} guessed that the 1st column is dates, but not 3rd.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The data as read in}
+%%    
+%%  <<>>=
+%%  ddd
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Dates in R}
+%%    
+%%    \begin{itemize}
+%%    \item Preceding shows that dates should be stored as text in format
+%%      \texttt{yyyy-mm-dd} (ISO standard).
+%%    \item To deal with dates in other formats, use package
+%%      \texttt{lubridate} and convert. For example, dates in US format
+%%      with month first:
+%%  <<>>=
+%%  usdates=c("05/27/2012","01/03/2016","12/31/2015")
+%%  mdy(usdates)
+%%  @     
+%%  \item For UK-format dates with month \emph{second}, one of these dates
+%%    is legit, but the other two make no sense:
+%%    
+%%  <<>>=
+%%  dmy(usdates)
+%%  @   
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{That last column in our data frame}
+%%    
+%%    \begin{itemize}
+%%    \item That is month, day, year, so:
+%%      
+%%  <<>>=
+%%  d4=ddd %>% mutate(date2=mdy(dunno)) ; d4
+%%  @     
+%%  \item Column \texttt{date2} was correctly converted from column
+%%    \texttt{dunno}.
+%%  <<>>=
+%%  with(d4,all.equal(date,date2))
+%%  @ 
+%%  
+%%  \item The two columns of dates are all the same.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+
+\begin{frame}[fragile]{Reading dates in SAS}
+  
+  \begin{itemize}
+  \item \texttt{proc import} will make guesses about what you have:
+    
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/mydates.csv'
+    dbms=csv
+    out=dates
+    replace;
+  getnames=yes;
+  \end{Datastep}
+
+  \begin{Sascode}[store=da]
+proc print;
+  \end{Sascode}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{What that reads in}
+  
+    
+    \Listing[store=da]{daa}
+    
+    \begin{itemize}
+      
+    \item SAS made a guess at the dates with month names in them: it
+      guessed they were ``datetimes'', which explains the mysterious
+      midnight times.
+    \item Not clear from looking at this whether the column
+      \texttt{date} actually \emph{is} dates, or just text. To check,
+      look in Log tab for the word \texttt{format}. I got:
+  
+      \begin{small}
+\begin{verbatim}
+  format date yymmdd10. ;
+  format status $10. ;
+  format dunno datetime. ;
+\end{verbatim}
+        
+      \end{small}
+%$ %$ %$      
+      
+      
+    \item This tells you how the values have been displayed: the
+      \texttt{date} is indeed a date with year first, and
+      \texttt{dunno} is indeed a ``datetime''.
+
+\end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Display formatted dates in SAS}
+
+  \begin{itemize}
+  \item If you don't like how your dates are displayed, you can change
+   it, eg.:  
+  
+  \begin{Sascode}[store=db]
+proc print;
+  format date mmddyy8.;
+  \end{Sascode}
+  
+  \Listing[store=db]{dbb}
+  
+  \item   Even though dates were originally in ISO year-month-day format, they
+  can be output in any format (eg.\ US format here).
+\item SAS can input/output dates in many formats; you just have to
+  find name of one you need. See eg.\ \url{https://v8doc.sas.com/sashtml/lrcon/zenid-63.htm}.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Constructing dates from year, month and day}
+  
+  \begin{itemize}
+    
+  \item You might have separate columns containing year, month, day.
+  \item Strategy (both R and SAS): glue them together into something
+    that can be recognized as date:
+    \begin{Datastep}
+proc import
+  datafile='/home/ken/pieces.txt'
+    dbms=dlm
+    out=pieces
+    replace;
+  delimiter=' ';
+  getnames=yes;
+  
+data makedates;
+  set pieces;
+  sasdate=mdy(month,day,year);
+    \end{Datastep}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The resulting data set}
+
+    \begin{Sascode}[store=dd]
+proc print;
+  format sasdate yymmdd10.;
+    \end{Sascode}
+
+\Listing[store=dd, fontsize=small]{ddd}    
+
+The \texttt{format} displays the dates in ISO format. If you omit it:
+
+    \begin{Sascode}[store=dda]
+proc print;
+    \end{Sascode}
+
+\Listing[store=dda,fontsize=small]{ddda}    
+
+you get \emph{days since Jan 1, 1960}.
+  
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Month names}
+  
+  \begin{itemize}
+  \item If your data file contains month \emph{names}, may need to
+    organize as text that SAS can read as a date. 
+    Example, monthly sales of a product:
+    
+    \verbatiminput{/home/ken/monthly.csv}
+    
+  \item Read data as is, see how it came out.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading in}
+  \begin{itemize}
+    
+    \item Try it:
+    
+    \begin{Sascode}[store=jahaq]
+proc import
+  datafile='/home/ken/monthly.csv'
+  out=sales1
+  dbms=csv
+  replace;
+  getnames=yes;
+  
+proc print;  
+    \end{Sascode}
+
+  \item Still have separate year and month, so need to combine ourselves:
+
+    \Listing[store=jahaq, fontsize=footnotesize]{jahaqq}
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Making dates of these}
+  
+  \begin{itemize}
+  \item Two-step process:
+    \begin{itemize}
+    \item construct a piece of text that looks like a date (\texttt{cat})
+    \item turn that into a genuine date (\texttt{input})
+    \end{itemize}
+  \item All done in a \texttt{data} step (creating new variables)
+  \item Have to invent day-of-month; here pretend 16th of month.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Making it work}
+  \begin{itemize}
+  \item Something like this. Can use any format for output, but in
+    \texttt{input} must use format respecting the text you made:
+    
+    \begin{small}
+    \begin{Sascode}[store=nubiv]
+data sales2;
+  set sales1;
+  date_text=cat('16 ',month,' ',year);
+  real_date=input(date_text,anydtdte20.);
+  
+proc print;  
+  var sales date_text real_date;
+  format real_date yymmdd10.;
+    \end{Sascode}
+      
+    \end{small}
+    
+    \item Results:
+      
+      \Listing[store=nubiv, fontsize=footnotesize]{nubivv}      
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Plotting sales against time}
+  
+  Now that we have real dates, this is easy. \texttt{series} joins
+  points by lines:
+  
+  \begin{Sascode}[store=komav]
+proc sgplot;
+  series x=real_date y=sales / markers;
+  format real_date monyy7.;
+  \end{Sascode}
+  
+  \Graphic[store=komav, scale=0.5]{komavv}
+  
+\end{frame}
+
+%%  \begin{frame}[fragile]{In R}
+%%    
+%%  Starting from this file:
+%%  
+%%  \verbatiminput{pieces.txt}
+%%    
+%%  <<>>=
+%%  dates0=read_delim("pieces.txt"," ") 
+%%  @ 
+%%  
+%%  <<>>=
+%%  newdates=dates0 %>%
+%%    unite(dates,day,month,year) %>%
+%%    mutate(d=dmy(dates))
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The results}
+%%    
+%%  <<>>=
+%%  newdates
+%%  @   
+%%  
+%%  \begin{itemize}
+%%  \item \texttt{unite} glues things together with an underscore between
+%%    them (if you don't specify anything else). Syntax: first thing is
+%%    new column to be created, other columns are what to make it out of.
+%%  \item \texttt{unite} makes the original variable columns
+%%    \texttt{year}, \texttt{month}, \texttt{day} disappear.
+%%  \item The column \texttt{dates} is \emph{text}, while \texttt{d} is a
+%%    real date.
+%%  \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Extracting information from dates}
+%%    
+%%    \begin{itemize}
+%%    \item Have seen how to construct dates from ingredients.
+%%    \item If we have a date, how to extract those ingredients?
+%%    \item \texttt{lubridate} has tools for that, eg.\ using the dates we
+%%      just made:
+%%  <<>>=
+%%  thedates=newdates$d
+%%  month(thedates)
+%%  day(thedates)
+%%  wday(thedates,label=T)
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+
+\begin{frame}[fragile]{Extracting things in SAS}
+  
+Recall:
+
+\begin{Sascode}[store=dm]
+proc print data=dates;
+\end{Sascode}
+
+%  format date ddmmyy10.;
+
+\Listing[store=dm,fontsize=small]{dmm}
+
+Extract day, month, year thus:
+
+\begin{Datastep}
+data moredates;
+  set dates;
+  d=day(date);
+  m=month(date);
+  y=year(date);
+\end{Datastep}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{The results}
+
+\begin{Sascode}[store=dn]
+proc print;  
+\end{Sascode}
+
+\Listing[store=dn,fontsize=footnotesize]{dnn}
+
+%  format date yymmdd10.;
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Dates and times in SAS}
+
+  \begin{itemize}
+    
+  \item **** compare with R *****
+\item If it looks like a date-and-time, SAS will read it as one, for example:
+  
+\verbatiminput{dt.csv}  
+  
+\item Since date-times might have spaces, delimit by something other
+  than space!
+
+\begin{Datastep}
+proc import
+  datafile='/home/ken/dt.csv'
+    dbms=csv
+    out=dt
+    replace;
+  getnames=yes;
+\end{Datastep}
+    
+
+  
+
+\end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Resulting data set}
+
+\begin{Sascode}[store=do]
+proc print;  
+\end{Sascode}
+  
+\Listing[store=do,fontsize=small]{doo}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Constructing date-times}
+  
+  \begin{itemize}
+  \item SAS has function \texttt{dhms} from which we can construct
+    date-times from pieces such as these:
+    
+    \verbatiminput{manypieces.txt}    
+    
+    
+  \item which we read in the usual way:
+  
+    \begin{Datastep}
+proc import
+  datafile='/home/ken/manypieces.txt'
+    dbms=dlm
+    out=many
+    replace;
+  delimiter=' ';
+  getnames=yes;
+    \end{Datastep}
+
+      
+  
+  
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Creating the date-times}
+  
+  Start from dataset read in from file and then create what you need,
+  throwing away original variables (not needed any more):
+
+%   thetime=hms(hour,minute,second);
+
+  
+    \begin{Datastep}
+data dtm;
+  set many;
+  thedate=mdy(month,day,year);
+  sasdt=dhms(thedate,hour,minute,second); 
+  keep thedate hour minute second sasdt;      
+    \end{Datastep}
+
+\end{frame}
+
+\begin{frame}[fragile]{The result}
+  
+  \begin{Sascode}[store=qa]
+proc print;    
+  \end{Sascode}
+  
+\Listing[store=qa,fontsize=footnotesize]{qaa}  
+
+which doesn't account for the new variables being date or date/time,
+or better:
+
+  \begin{Sascode}[store=qab]
+proc print;    
+format thedate yymmdd10. thetime time8. 
+  sasdt datetime.;
+  \end{Sascode}
+  
+\Listing[store=qab,fontsize=scriptsize]{qabb}  
+
+  
+\end{frame}
+
+
+%%  \begin{frame}[fragile]{Dates and times in R}
+%%    
+%%    \begin{itemize}
+%%    \item Standard format for times is to put the time after the
+%%      date, hours, minutes, seconds:
+%%    
+%%      \begin{footnotesize}
+%%  <<>>=
+%%  dd=c("1970-01-01 07:50:01","2007-09-04 15:30:00",
+%%  "1940-04-15 06:45:10","2016-02-10 12:26:40") ; dd
+%%  @     
+%%        
+%%      \end{footnotesize}
+%%  \item Then read in using \verb+ymd_hms+:
+%%    \begin{footnotesize}
+%%  <<>>=
+%%  dt=ymd_hms(dd) ; dt
+%%  @       
+%%    \end{footnotesize}
+%%  \item Default timezone is ``Universal Coordinated Time''. Change it
+%%    via \texttt{tz=} and the name of a timezone:
+%%    \begin{footnotesize}
+%%  <<>>=
+%%  dt=ymd_hms(dd,tz="America/Toronto") ; dt
+%%  @   
+%%      
+%%    \end{footnotesize}
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Extracting time parts}
+%%    
+%%    \begin{itemize}
+%%    \item As you would expect:
+%%      \begin{small}
+%%  <<>>=
+%%  dt
+%%  @ 
+%%  
+%%  \begin{multicols}{2}
+%%  <<>>=
+%%  hour(dt)
+%%  minute(dt)
+%%  @     
+%%  
+%%  <<>>=
+%%  second(dt)
+%%  tz(dt)
+%%  @ 
+%%  
+%%  \end{multicols}
+%%  
+%%  
+%%      \end{small}
+%%  \item Same times, but different time zone:
+%%    \begin{small}
+%%  <<>>=
+%%  with_tz(dt,"Australia/Sydney")
+%%  @       
+%%    \end{small}
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Subtracting date-times}
+%%    
+%%    \begin{itemize}
+%%    \item We may need to calculate the time \emph{between} two
+%%      events. For example, these are the dates and times that some
+%%      patients were admitted to and discharged from a hospital:
+%%      
+%%      \verbatiminput{hospital.csv}
+%%      
+%%      
+%%    \item These ought to get read in and converted to date-times:
+%%      
+%%  <<>>=
+%%  stays=read_csv("hospital.csv")
+%%  @     
+%%  \item and so it proves.
+%%      
+%%  % <<>>=
+%%  % admit=c("1981-12-10 22:00:00","2014-03-07 14:00:00",
+%%  %   "2016-08-31 21:00:00")
+%%  % discharge=c("1982-01-03 14:00:00","2014-03-08 09:30:00",
+%%  %   "2016-09-02 17:00:00")
+%%  % admit.dt=ymd_hms(admit,tz="America/Toronto")
+%%  % discharge.dt=ymd_hms(discharge,tz="America/Toronto")
+%%  % stay=(discharge.dt-admit.dt)/ddays(1)
+%%  % data.frame(admit.dt,discharge.dt,stay)
+%%  % @     
+%%    
+%%  \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Subtracting the date-times}
+%%    
+%%    \begin{itemize}
+%%    \item In the obvious way, this gets us an answer:
+%%      
+%%  <<size="small">>=
+%%  stays %>% mutate(stay=discharge-admit)
+%%  @    
+%%  
+%%  \item The number of hours is hard to interpret. The fractional number
+%%    of days would be better:
+%%  
+%%  <<size="small">>=
+%%  stays %>% mutate(stay=(discharge-admit)/ddays(1))
+%%  @    
+%%    
+%%    
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Comments}
+%%    
+%%    \begin{itemize}
+%%    \item Date-times are stored internally as seconds-since-something,
+%%      so that subtracting two of them will give, internally, a number of
+%%      seconds. 
+%%    \item Just subtracting the date-times is displayed as a time (in
+%%      units that R chooses for us).
+%%    \item Functions \texttt{ddays(1)}, \texttt{dminutes(1)} etc.\ will
+%%      give number of seconds in a day or a minute,
+%%      thus dividing by them will give (fractional) days, minutes etc.
+%%    \item This idea useful for calculating time from a start point until
+%%      an event happens (in this case, a patient being discharged from
+%%      hospital). 
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+
+\begin{frame}[fragile]{Handling date-times}
+  
+  \begin{itemize}
+  \item In SAS, date-times are \emph{seconds since midnight Jan 1,
+      1960}.
+  \item Thus, subtracting date-times gives a number of seconds, which
+    we might then have to translate into something useful. Hospital data:
+
+    \begin{small}
+\begin{Datastep}
+proc import
+  datafile='/home/ken/hospital.csv'
+    dbms=csv
+    out=stays
+    replace;
+  getnames=yes;
+\end{Datastep}      
+    \end{small}
+    
+  \item In a new dataset, calculate the lengths of stay, converting
+    seconds to days:
+
+    \begin{small}
+    \begin{Datastep}
+data hospitalstay;
+  set stays;
+  stay=(discharge-admit)/60/60/24;
+    \end{Datastep}
+    \begin{Sascode}[store=dq]
+proc print;          
+    \end{Sascode}
+       
+    \end{small}
+     
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The results}
+  
+  \begin{itemize}
+  \item Output below. The \texttt{stay} should be displayed as a
+    decimal number, so no special treatment required.
+    Length of \texttt{stay} agrees with R:
+
+    \Listing[store=dq,fontsize=footnotesize]{dqq}  
+
+  \end{itemize}
+  
+  
+\end{frame}
+

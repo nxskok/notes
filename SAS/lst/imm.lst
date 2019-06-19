@@ -1,0 +1,10 @@
+                            The UNIVARIATE Procedure
+                                Variable:  Time
+ 
+                          Tests for Location: Mu0=160
+ 
+                Test           -Statistic-    -----p Value------
+ 
+                Student's t    t  1.824364    Pr > |t|    0.0784
+                Sign           M         2    Pr >= |M|   0.5847
+                Signed Rank    S        50    Pr >= |S|   0.3118

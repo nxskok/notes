@@ -1,0 +1,509 @@
+\section{Vector and matrix algebra}
+
+\frame{\sectionpage}
+
+\begin{frame}[fragile]{Vector and matrix algebra in SAS}
+
+<<echo=F,message=F>>=
+require(tidyverse)
+@   
+
+  \begin{itemize}
+  \item SAS has this through \texttt{proc iml}, which we have to learn
+    about. 
+  \end{itemize}
+  
+\end{frame}
+
+%%  \begin{frame}[fragile]{Vector addition}
+%%  
+%%    \begin{itemize}
+%%    \item Define a vector, then ``add 2'' to it:
+%%  <<>>=
+%%  u=c(2,3,6,5,7)
+%%  k=2
+%%  u+k
+%%  @ 
+%%  Adds 2 to each element.
+%%  \item Adding vectors:
+%%  <<>>=
+%%  u
+%%  v=c(1,8,3,4,2)
+%%  u+v  
+%%  @ 
+%%  Elementwise addition. (MAT A23: vector addition.)
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Scalar multiplication}
+%%  
+%%  As per A23:
+%%  
+%%  <<>>=
+%%  k
+%%  u
+%%  k*u
+%%  @ 
+%%  
+%%  Each element of vector multiplied by 2.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{``Vector multiplication''}
+%%  
+%%  What about this?
+%%  
+%%  <<>>=
+%%  u
+%%  v
+%%  u*v
+%%  @ 
+%%  
+%%  Each element of \texttt{u} multiplied by \emph{corresponding} element
+%%  of \texttt{v}. Could be called \emph{elementwise multiplication}. (Not
+%%  to be confused with ``outer'' or ``vector'' product from A23, or
+%%  indeed ``inner'' or ``scalar'' multiplication, for which the answer is
+%%  a number.)
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Combining different-length vectors}
+%%  
+%%    \begin{itemize}
+%%    \item No error here (you get a warning). What happens?
+%%  <<warning=F>>=
+%%  u
+%%  w=c(1,2)
+%%  u+w  
+%%  @ 
+%%  \item Add 1 to first element of \texttt{u}, add 2 to second.
+%%  \item Go back to beginning of \texttt{w} to find something to add: add
+%%    1 to 3rd element of \texttt{u}, 2 to 4th element.
+%%  \item Keep re-using shorter vector until reach length of longer one.
+%%  \item R: ``recycling''.
+%%  \item Same idea is used when multiply a vector by a number: the number
+%%    keeps getting recycled.
+%%  
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+
+\begin{frame}[fragile]{Vectors and scalars in \texttt{proc iml}}
+  
+  \begin{itemize}
+  \item Define vectors and scalars as below.
+    \item To do a calculation, define the answer into a variable, and
+      then \texttt{print} it. Note that 2 has gotten added to each
+      element of \texttt{u}:
+    
+    \begin{Sascode}[store=ima]
+proc iml;
+  k=2;
+  u={2 3 6 5 7};
+  ans=k+u;
+  print ans;
+    \end{Sascode}
+    
+    \Listing[store=ima]{imaa}
+      
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Adding vectors}
+  
+  \begin{itemize}
+  \item Each run of \texttt{proc iml} is independent, so you have to
+    redefine anything you want to use. This is vector addition, as before:
+    
+    \begin{Sascode}[store=imb]
+proc iml;
+  u={2 3 6 5 7};
+  v={1 8 3 4 2};
+  ans=u+v;
+  print ans;
+    \end{Sascode}
+    
+    \Listing[store=imb]{imbb}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Elementwise and scalar multiplication}
+  
+  \begin{itemize}
+  \item Elementwise vector multiplication does not work in
+    \texttt{proc iml}.
+  \item Scalar multiplication, though, exactly as you would expect:
+
+        \begin{Sascode}[store=imc]
+proc iml;
+  k=2;
+  u={2 3 6 5 7};
+  ans=k*u;
+  print ans;
+    \end{Sascode}
+    
+    \Listing[store=imc]{imcc}
+
+  \end{itemize}
+  
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%
+
+%%  \begin{frame}[fragile]{Matrices (in R)}
+%%  
+%%    \begin{itemize}
+%%    \item Create matrix like this:
+%%      
+%%      \begin{footnotesize}
+%%  <<>>=
+%%  A=matrix(1:4,nrow=2,ncol=2)
+%%  A  
+%%  @       
+%%      \end{footnotesize}
+%%  
+%%  \item First: stuff to make matrix from, then how many rows and columns.
+%%  \item R goes \emph{down columns} by default. To go along rows instead:
+%%    
+%%    \begin{footnotesize}
+%%  <<>>=
+%%  B=matrix(5:8,nrow=2,ncol=2,byrow=T)
+%%  B    
+%%  @ 
+%%      
+%%    \end{footnotesize}
+%%    
+%%  \item One of \texttt{nrow} and \texttt{ncol} enough, since R knows how
+%%    many things in the matrix.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Adding matrices}
+%%  
+%%  What happens if you add two matrices?
+%%  
+%%  \begin{multicols}{2}
+%%  <<>>=
+%%  A
+%%  B
+%%  @ 
+%%  
+%%  <<>>=
+%%  A+B
+%%  @   
+%%  \end{multicols}
+%%  
+%%  
+%%  Nothing surprising here. This is matrix addition as we (and A23) know it.
+%%  
+%%    
+%%  \end{frame}
+%%  
+%%  
+%%  \begin{frame}[fragile]{Multiplying matrices}
+%%  
+%%    \begin{itemize}
+%%    \item Now, what has happened here?
+%%  
+%%      \begin{multicols}{2}
+%%  <<>>=
+%%  A
+%%  B
+%%  @       
+%%  
+%%  <<>>=
+%%  A*B
+%%  @ 
+%%      \end{multicols}
+%%  \item \emph{Not} matrix multiplication (as per A23).
+%%  \item Elementwise multiplication. Also called \emph{Hadamard product}
+%%    of \texttt{A} and \texttt{B}.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Legit matrix multiplication}
+%%  
+%%  Like this:
+%%  
+%%  \begin{multicols}{2}
+%%  <<>>=
+%%  A
+%%  B
+%%  @ 
+%%  
+%%  <<>>=
+%%  A %*% B
+%%  @ 
+%%  \end{multicols}
+%%  
+%%  
+%%    
+%%  \end{frame}
+
+\begin{frame}[fragile]{Matrices in \texttt{proc iml}}
+  
+  \begin{itemize}
+  \item Enter a matrix like a vector, but row by row, with a comma
+    separating rows:
+    
+    \begin{Sascode}[store=imea]
+proc iml;
+  A={1 3,2 4};
+  B={5 6,7 8};
+  print A;
+  print B;
+    \end{Sascode}
+    
+    \Listing[store=imea]{imeaa}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Adding and multiplying matrices}
+  
+  \begin{itemize}
+  \item These are genuine matrix addition and multiplication (no
+    elementwise multiplication):
+    
+    \begin{Sascode}[store=ime]
+proc iml;
+  A={1 3,2 4};
+  B={5 6,7 8};
+  ans1=A+B; 
+  print ans1;
+  ans2=A*B;
+  print ans2;
+    \end{Sascode}
+    
+    \Listing[store=ime]{imee}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading a matrix in from a file 1/2}
+  
+  \begin{itemize}
+  \item If your matrix is in a file like this:
+    
+\verbatiminput{m.txt}
+\item read into data set as usual:
+  
+    \begin{Datastep}
+proc import
+  datafile='/home/ken/m.txt'
+    dbms=dlm
+    out=mymatrix
+    replace;
+  delimiter=' ';
+  getnames=no; 
+    \end{Datastep}
+    
+  \item Columns get names \texttt{VAR1}, \texttt{VAR2}, etc.
+    
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Reading a matrix in from a file 2/2}
+  
+  \begin{itemize}
+  \item and then use in \texttt{proc iml} thus:
+    
+    \begin{Sascode}[store=imf]
+proc iml;
+  use mymatrix;
+  read all var {VAR1 VAR2} into M;
+  v={1,3};
+  ans=M*v;
+  print ans;
+    \end{Sascode}
+    
+    \Listing[store=imf]{imff}
+    
+  \end{itemize}
+  
+\end{frame}
+
+%%  \begin{frame}[fragile]{Reading matrix from file in R}
+%%    
+%%    \begin{itemize}
+%%    \item The usual:
+%%      
+%%  <<>>=
+%%  M=read_delim("m.txt"," ",col_names=F)
+%%  class(M)
+%%  @     
+%%  
+%%  \item except that \texttt{M} is not an R \texttt{matrix}, and thus
+%%    this doesn't work:
+%%    
+%%  <<>>=
+%%  v=c(1,3)
+%%  M %*% v
+%%  @   
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Making a real matrix}
+%%    
+%%  Do this first:
+%%  
+%%  <<>>=
+%%  M=as.matrix(M)
+%%  @ 
+%%  
+%%  and then all is good:
+%%  
+%%  <<>>=
+%%  M %*% v
+%%  @ 
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Linear algebra stuff}
+%%  
+%%  \begin{multicols}{2}
+%%    \begin{itemize}
+%%    \item To solve system of equations $Ax=w$ for $x$:
+%%  <<>>=
+%%  A
+%%  w
+%%  solve(A,w)
+%%  @ 
+%%  
+%%  \columnbreak
+%%  
+%%  \item To find the inverse of \texttt{A}:
+%%  <<>>=
+%%  A
+%%  solve(A)
+%%  @ 
+%%  \item You can check that these are correct.
+%%    \end{itemize}
+%%  \end{multicols}
+%%    
+%%  \end{frame}
+
+
+\begin{frame}[fragile]{Solve a system of equations}
+
+  \begin{itemize}
+  \item Suppose we wish to solve, for $x$ and $y$:
+\begin{eqnarray*}
+  x+3y & =& 1\\
+  2x+4y &=& 2
+\end{eqnarray*}
+\item Can be done with matrix algebra by defining
+  
+  $$ A = \left( 
+    \begin{array}{cc}
+      1 & 3 \\ 2 & 4
+    \end{array}
+    \right), 
+    w = \left( 
+      \begin{array}{c}
+        1 \\ 2
+      \end{array}
+      \right)
+      $$
+    \item Then solve $Az=w$ as $z=A^{-1}w$.
+    \item Thus, strategy is to find inverse \emph{first}.
+
+  \end{itemize}
+  
+
+
+
+    
+    
+  
+\end{frame}
+
+\begin{frame}[fragile]{Code and result}
+  
+    \begin{Sascode}[store=img]
+proc iml;
+  A={1 3,2 4};
+  w={1,2};
+  Ainv=inv(A);
+  print Ainv;
+  ans=Ainv*w;
+  print ans;
+    \end{Sascode}
+    
+    \Listing[store=img]{imgg}
+    
+  Thus solution is $x=1, y=0$. These solve original equations.
+  
+\end{frame}
+
+\begin{frame}[fragile]{Row and column vectors in \texttt{proc iml}}
+  
+  \begin{itemize}
+  \item Without commas gives a \emph{row} vector in \texttt{proc iml}.
+  \item \emph{With} commas gives a column vector:
+    
+    \begin{Sascode}[store=imh]
+proc iml;
+  r={1 2 3};
+  c={4,5,6};
+  print r;
+  print c;
+    \end{Sascode}
+    
+    \Listing[store=imh]{imhh}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Inner product}
+  
+  \begin{itemize}
+  \item Make sure both vectors are \emph{column} vectors, and then
+    matrix-multiply the transpose of the first (a row vector) by the second:
+    
+    \begin{Sascode}[store=imi]
+proc iml;
+  a={1,2,3};
+  b={4,5,6};
+  ans=t(a)*b;
+  print ans;
+    \end{Sascode}
+    
+    \Listing[store=imi]{imii}
+  \end{itemize}
+  
+\end{frame}
+
+%%  \begin{frame}[fragile]{Inner product in R}
+%%    
+%%    \begin{itemize}
+%%    \item Vectors in R are column vectors, so just do the matrix multiplication:
+%%      
+%%  <<>>=
+%%  a=c(1,2,3)
+%%  b=c(4,5,6)
+%%  t(a) %*% b
+%%  @     
+%%  
+%%  Note that the answer is actually a $1\times 1$ matrix.
+%%  
+%%  \item Or as the sum of the elementwise multiplication:
+%%    
+%%  <<>>=
+%%  sum(a*b)
+%%  @   
+%%    \end{itemize}
+%%    
+%%  \end{frame}

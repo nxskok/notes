@@ -1,0 +1,4 @@
+          Method           Variances        DF    t Value    Pr > |t|
+ 
+          Pooled           Equal            13      -2.22      0.0446
+          Satterthwaite    Unequal      8.7104      -2.09      0.0668

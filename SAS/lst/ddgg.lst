@@ -1,0 +1,7 @@
+                               The REG Procedure
+                                 Model: MODEL1
+                         Dependent Variable: rtdemand
+ 
+              Root MSE              0.46404    R-Square     0.6485
+              Dependent Mean        1.68040    Adj R-Sq     0.6416
+              Coeff Var            27.61503

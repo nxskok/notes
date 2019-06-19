@@ -1,0 +1,35 @@
+                            The UNIVARIATE Procedure
+                                Variable:  Time
+ 
+                            Quantiles (Definition 5)
+ 
+                             Level         Quantile
+ 
+                             100% Max         527.0
+                             99%              527.0
+                             95%              474.0
+                             90%              421.0
+                             75% Q3           243.0
+                             50% Median       172.5
+                             25% Q1           110.0
+                             10%               77.5
+                             5%                65.0
+                             1%                64.0
+                             0% Min            64.0
+ 
+                           Quantiles (Definition 5)
+ 
+                   95% Confidence Limits    -------Order Statistics-------
+     Level           Distribution Free      LCL Rank  UCL Rank    Coverage
+ 
+     100% Max
+     99%              .                .           .         .         .
+     95%            391              527          27        30       72.46
+     90%            264              527          24        30       93.18
+     75% Q3         194              451          18        28       96.78
+     50% Median     119              215          10        21       95.72
+     25% Q1          71              150           3        13       96.78
+     10%             64              104           1         7       93.18
+     5%              64               84           1         4       72.46
+     1%               .                .           .         .         .
+     0% Min

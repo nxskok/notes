@@ -1,0 +1,269 @@
+
+\begin{frame}[plain,c]
+  \begin{center}
+    {\Huge Welcome to STAC32! \\ \vspace{0.5in} Ken Butler (instructor)}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{In this course}
+
+  \begin{itemize}
+  \item Data analysis: use mostly known (to you) statistical methods to gain
+    insight about data.
+  \item Use two software packages, SAS and R --- I assume you know
+    nothing about these.
+  \item Look at lots of examples.
+  \item ``Get your hands dirty''.
+  \item Writing reports.
+  \item Other tasks in R and SAS.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Prerequisites}
+  
+  
+  \begin{itemize}
+  \item 
+      You \emph{need} a second Statistics course that covers statistical
+  inference, one of: 
+  
+  \begin{itemize}
+  \item STAB57 (or equivalent such as STA 261, STA 248)
+  \item STAB27 (or equivalent such as MGEB12, PSYC08, STA 221)
+  \end{itemize}
+  
+  \item I check prerequisites.
+
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{The instructor}
+
+\begin{itemize}
+  
+\item Ken Butler, office IC 471, e-mail:
+
+    \url{mailto:butler@utsc.utoronto.ca}
+
+\item Lectures: both of Tuesday 13:00-14:00 in SW 319, Thursday 12:00-13:00 in
+  IC 130. Tutorial: one of Wednesday 10:00-11:00, 11:00-12:00, 15:00-16:00 or
+  16:00-17:00 in BV 498.
+\item Office hours: Tuesday 14:00-15:30, Thursday 11:00-12:00. I am
+  likely also around on Monday.
+  Or by appointment (e-mail me, address above, to set one up).
+\item Link to course website: \url{http://www.utsc.utoronto.ca/~butler/c32/}
+\item I use Blackboard only for assignment handin and grades.
+\item E-mail: Use only UTSC/UToronto e-mail address. I aim
+  to respond within two working days. Non-simple questions: office
+  hours/tutorial. 
+\end{itemize}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Text(s)}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+Recommended:
+  \begin{itemize}
+\item ``SAS Essentials: Mastering SAS for data analytics'' by Alan C.\
+  Elliott and Wayne A.\ Woodward, publ.\ Wiley. ISBN 978-1-119-04216-7.
+\item ``R for Data Science'' by Hadley Wickham and Garrett Grolemund,
+  publ.\ O'Reilly, ISBN 978-1-491-91039-9. Also available (free)
+  online at \url{http://r4ds.had.co.nz/}.
+\end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \includegraphics[width=1in]{sas-essentials}
+
+      \includegraphics[width=1in]{r4ds}
+    \end{column}
+  \end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Structure of course}
+
+  \begin{itemize}
+  \item 3 hours/week of class time.
+  \item Of these, 1 hour in computer lab:
+    \begin{itemize}
+    \item practice what you learned from lecture
+    \item I give you lab exercises to work on, with answers, or you
+      can work on your assignment.
+    \item Get help if needed.
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Course material}
+
+For each of R (first) and then SAS:
+  
+\begin{itemize}
+\item Installation / connection
+\item Reading data files (of different sorts)
+\item Making graphs
+\item Scripts and projects
+\item Numerical summaries
+\item Statistical inference
+\item R Markdown and reports
+\item Tidying and organizing data
+\item Case studies
+\item functions / arrays
+\item Dates and times
+\item Miscellaneous tasks in R and SAS
+\item Vector-matrix algebra
+\end{itemize}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Laptop use}
+  
+  \begin{itemize}
+  \item If you have a laptop, you may find it useful for following
+    along with the use of the software or for taking notes.
+  \item Checking social media or other non-course-specific activity
+    during class distracts from your learning. If you are going to get the most
+    from this course, you need to \emph{pay full attention} in
+    class. Multi-tasking \emph{will not} help you.
+  \item Using your laptop for non-course activity will also distract
+    those around you and creates a worse learning experience for
+    everybody. If somebody's inappropriate laptop use is distracting
+    you, let me know. I will create laptop-free zones in class if
+    necessary. 
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}{Assessment}
+
+  \begin{tabular}{p{3.5in}r}
+    \hline
+    Item & Weight\\
+    \hline
+    Assignments (every week after first). Can study with classmates, but what you hand in must
+    be \textbf{entirely your own work}. Due Thursdays at 11:59pm. & 20\\
+    \hline
+    Midterm exam, 2 hours, open book (see over) & 25\\
+    \hline
+    Group data analysis report (1--5 people/group). Data analysis on data set of your choosing,
+    using R/SAS/both, report written as described in class.
+    Due last
+    day of classes at 11:59pm. & 10 \\
+    \hline
+    Final exam, 3 hours, open book (see over). \textbf{You must pass
+    the final exam to guarantee passing the course.} & 45\\
+    \hline
+    Total & 100\\
+    \hline
+  \end{tabular}
+
+\bigskip
+
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Open book, defined}
+  
+``Open book'' means these are permissible, written/printed versions only:
+
+\begin{itemize}
+\item the SAS text
+\item the R text
+\item my lecture notes
+\item any other notes that you have made in this course.
+\end{itemize}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Missed work and documentation}
+
+  \begin{itemize}
+  \item \emph{No} make-up  assignments or tests in this course.
+  \item Work handed in late may or may not be accepted (instructor's
+    discretion; instructor's decision is final).
+  \item If you miss assessed work due to illness/injury, complete form
+    at
+
+\url{ http://www.illnessverification.utoronto.ca/}
+
+    and submit to instructor \emph{within 10 working days of due date}.
+  \item Weight of missed work \emph{with appropriate documentation}
+    transferred to other assessments of same type.
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Academic integrity}
+
+  \begin{itemize}
+  \item Read and understand
+
+      \url{http://www.utoronto.ca/academicintegrity/}
+
+  \item Academic dishonesty devalues \emph{your} degree \emph{and}
+    those of \emph{all} other students.
+  \item Cheating and plagiarism taken very seriously.
+  \item Examples of academic offences:
+    \begin{itemize}
+    \item Using someone else's words/ideas without acknowledgement.
+    \item Obtaining or providing unauthorized assistance on an assignment.
+    \item On test/exam, looking at someone else's answers or
+      \emph{allowing someone else to look at yours.}
+    \item Pretending to be someone else.
+    \item Falsifying or altering required documentation (eg.\ doctor's notes).
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Penalties}
+  
+  \begin{itemize}
+  \item Penalties include (depending on seriousness of offence) a mark
+    of zero for 
+    the work concerned, a mark of zero for the entire course, or
+    suspension/expulsion from the University.
+  \item Penalties are (much) more severe for those caught a second (or
+    third) time.
+  \item ``Students who cheat and are not caught will be haunted by the
+    memory of their misdeeds for the rest of their miserable lives.''
+    (From
+    \url{https://philosophy.osu.edu/sites/philosophy.osu.edu/files/1100%20Brown_2.pdf}.)
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Accessibility statement}
+
+  \begin{quote}
+   Students with diverse learning styles and needs are welcome in this
+course. In particular, if you have a disability/health consideration
+that may require accommodations, please feel free to approach me
+and/or the AccessAbility Services Office as soon as possible. I will
+work with you and AccessAbility Services to ensure you can achieve
+your learning goals in this course. Enquiries are confidential. The
+UTSC AccessAbility Services staff (located in S302) are available by
+appointment to assess specific needs, provide referrals and arrange
+appropriate accommodations: (416) 287-7560 or by e-mail as below.
+  \end{quote}
+
+  \begin{semiverbatim}
+    ability@utsc.utoronto.ca
+  \end{semiverbatim}
+  
+\end{frame}
+

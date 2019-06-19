@@ -1,0 +1,4 @@
+ Source                     DF    Type III SS    Mean Square   F Value   Pr > F
+ 
+ temperature                 1    4376.082568    4376.082568   1371.35   <.0001
+ species                     1     598.003953     598.003953    187.40   <.0001

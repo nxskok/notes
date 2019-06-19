@@ -1,6 +1,6 @@
 all: slides_c32.pdf
 	evince slides_c32.pdf&
-slides_c32.md: slides_c32.Rmd preliminaries.Rmd rstan.Rmd running_R.Rmd readfile_R.Rmd graphs_R.Rmd numsum_R.Rmd\
+slides_c32.md: slides_c32.Rmd outline_c32.Rmd preliminaries.Rmd rstan.Rmd running_R.Rmd readfile_R.Rmd graphs_R.Rmd numsum_R.Rmd\
 inference_R.Rmd reports_R.Rmd tidying_R.Rmd bootstrap.Rmd
 	Rscript -e 'knitr::knit("slides_c32.Rmd")'
 slides_c32.tex: slides_c32.md 

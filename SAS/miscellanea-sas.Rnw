@@ -1,0 +1,1406 @@
+\section{Miscellaneous stuff in SAS}
+
+\frame{\sectionpage}
+
+
+
+
+%5%%%%%%% sas
+
+\begin{frame}[fragile]{SAS: More than one observation per line of data file}
+  
+  \begin{itemize}
+  \item Suppose you have a data file like this:
+    
+\verbatiminput{many.txt}
+
+but the data are \emph{all} values of one variable \texttt{x} (so
+there are 12 values altogether).
+\item How to get \emph{one} column called \texttt{x}?
+\item Strategy: read values in the usual way, then process.
+\item Here there are no variable names, so:
+
+  \begin{footnotesize}
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/many.txt'
+    dbms=dlm out=many replace;
+  delimiter=' ';
+  getnames=no;
+  \end{Datastep}
+    
+  \end{footnotesize}
+
+\item Note last line, not the usual.
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{So far}
+  
+  \begin{Sascode}[store=ma]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=ma,fontsize=scriptsize]{maa}
+
+We have six variables with names like \texttt{VAR2}, each ``variable''
+having two values (two lines of data file).
+
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Solution for this}
+
+  Solution very like the SAS version of \texttt{gather}, using an array:
+
+  \begin{Datastep}
+data one;
+  set many;
+  array x_array VAR1-VAR6;
+  do i=1 to 6;
+    x=x_array[i];
+    output;
+  end;
+  keep x;
+  \end{Datastep}
+
+\end{frame}
+
+\begin{frame}[fragile]{Did it work?}
+    
+    \begin{Sascode}[store=mb]
+proc print;      
+    \end{Sascode}
+    
+\Listing[store=mb,fontsize=scriptsize]{mbb}
+    
+\end{frame}
+
+\begin{frame}[fragile]{Same data file as values of \texttt{x} and \texttt{y}}
+  
+  \begin{itemize}
+  \item   Recall:
+  
+\verbatiminput{many.txt}
+\item Suppose now a value of \texttt{x} and a value of \texttt{y}, then
+another \texttt{x} and another \texttt{y}, and so on, so 3 is
+\texttt{x}, 4 is \texttt{y}, 5 is \texttt{x}, 6 is \texttt{y} and so on.
+
+\item Read in as before using \texttt{proc import} to get data set
+  with \texttt{VAR1} through \texttt{VAR6}, then loop from 1 to
+  \emph{3} (3 \texttt{x-y} pairs), pulling out the right things.
+  \end{itemize}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Making \texttt{x} and \texttt{y}}
+
+  \begin{itemize}
+  \item This code, adapted from previous:
+        \begin{Datastep}
+data two;
+  set many;
+  array xy_array VAR1-VAR6;
+  do i=1 to 3;
+    x=xy_array[2*i-1];
+    y=xy_array[2*i];
+    output;
+  end;
+  keep x y;
+  \end{Datastep}
+  
+  \item Tricky part: when $i=1$, want items 1 and 2 from the array;
+    when $i=2$, want items 3 and 4, etc. 
+  \item Twice the value of $i$ will
+    give the second value we want (the one for \texttt{y}), so one
+    less than that will give the value we want for \texttt{x}.
+
+  \end{itemize}
+
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Did it work?}
+  
+      We seem to have been successful. You can check that the right values
+  got assigned to \texttt{x} and \texttt{y} in the right order.
+
+  
+  \begin{Sascode}[store=mc]
+proc print;    
+  \end{Sascode}
+  
+\Listing[store=mc]{mcc}  
+
+\end{frame}
+
+\begin{frame}[fragile]{Permanent data sets}
+  \begin{itemize}
+  \item Can we read in data set \emph{once} and not every time?
+  \item Yes, use \emph{this mechanism} when creating, for
+    example pigs data:
+
+\begin{Datastep}
+libname mydata V9 '/home/ken';
+proc import
+  datafile='/home/ken/pigs1.txt'
+    dbms=dlm 
+    out=mydata.pigs1
+    replace;
+  delimiter=' ';
+  getnames=yes;
+\end{Datastep}
+
+\item First, define a \texttt{libname} that tells SAS which folder
+  this dataset will go in.
+\item Then, on \texttt{out=}, use a two-part name: the
+  \texttt{libname}, then dataset name.
+
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+  \begin{itemize}
+  \item In folder defined by \texttt{libname}, will be a file called
+    \texttt{pigs1.sas7bdat} (!) on SAS Studio. In my case, in my main
+    SAS Studio folder.
+\item Can use subfolders, using \texttt{/} forward slash syntax, in
+  \texttt{libname}. 
+
+\item Whenever you need to use it, add
+  \texttt{data='/home/username/pigs1'} to a \texttt{proc} line
+  (replacing \texttt{username} with your username, and replacing
+  \texttt{pigs1} with your data set name).
+\item Closing SAS breaks connection with temporary (ie.\
+  \emph{non}-permanent) data sets. To get those back, need to run
+  \texttt{proc import} lines again. 
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{proc means} without reading in data}
+  
+  \begin{itemize}
+  \item Imagine we closed down SAS Studio and opened it up again. Then:
+    
+    \begin{Sascode}[store=md]
+proc means data='/home/ken/pigs1';      
+    \end{Sascode}
+    
+    
+  \item with output
+    
+    \Listing[store=md,fontsize=scriptsize]{mdd}
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Saving permanent data sets another way}
+  
+  \begin{itemize}
+  \item Can also create a new data set, using \texttt{data} step, and
+    make \emph{that} permanent. For example, suppose we take data set
+    \texttt{two} from before (containing variables \texttt{x} and
+    \texttt{y}):
+    
+    \begin{Sascode}[store=sozip, fontsize=footnotesize]
+proc print data=two;      
+    \end{Sascode}
+    
+    \Listing[store=sozip, fontsize=footnotesize]{sozipp}
+    
+    \item Then add a variable \texttt{z} to it, saving in
+    permanent data set \texttt{three}.
+    
+    \begin{small}
+  \begin{Datastep}
+libname mydata V9 '/home/ken';    
+data mydata.three; /* permanent data set to save in */
+  set two; /* this has variables x and y in it */
+  z=x+y;
+  \end{Datastep}
+      
+    \end{small}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The new permanent data set}
+  
+  \begin{itemize}
+  \item Imagine I closed down SAS Studio and opened it up again:
+    
+    \begin{Sascode}[store=me]
+proc print data='/home/ken/three';
+    \end{Sascode}
+    
+\Listing[store=me,fontsize=scriptsize]{mee}    
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Why permanent data sets?}
+  
+  \begin{itemize}
+  \item It is a lot of work (for us) to read in data sets from file
+    every time. I can never remember the syntax for \texttt{proc
+      import} (I usually copy an old one).
+  \item It can take a lot of effort to get data in the right format
+    for analysis. Rather than do that every time, we can save a
+    permanent data set once the dataset is in the right shape.
+  \item For big data, we don't want to repeat the effort of reading
+    and processing more than once. (This can take a \emph{long} time.)
+    Better to create one permanent dataset and use it for each of our
+    analyses. 
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{How does SAS know which data set to use?}
+
+Two rules:
+
+\begin{enumerate}
+\item Any \texttt{proc} can have \texttt{data=} on it. Tells SAS to
+  use that data set. Can be
+  \begin{itemize}
+  \item unquoted dataset name (created by \texttt{proc import} or by
+    processing a dataset read in that way)
+  \item quoted data set name (permanent one on disk created as above)
+  \end{itemize}
+\item Without \texttt{data=}, \emph{most recently created data
+    set}. Typically data set created by \texttt{proc import} or
+  \texttt{data} step.  Also, data set created by \texttt{out=} counts.
+\end{enumerate}
+Does permanent data set count as ``most recently created''? No,
+  or at least not always. If unsure, use \texttt{data=}.  
+\end{frame}
+
+
+\begin{frame}[fragile]{Embellishments to plots}
+  
+  \begin{itemize}
+  \item Histogram with kernel density curve
+  \item Smooth trend on scatterplot
+  \item Plotting several series of data
+  \item Labelling points on plots
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Use Australian athletes data}
+  
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/ais.txt'
+  dbms=dlm
+  out=sports
+  replace;
+  delimiter='09'x;
+  getnames=yes;
+    \end{Datastep}
+  
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Kernel density curve on histogram}
+
+  \begin{itemize}
+  \item A kernel density curve smooths out a histogram and gives sense
+    of shape of distribution.
+  \item \texttt{geom\_density} in R on a \texttt{geom\_histogram}.
+  \item Athlete heights:
+\begin{Sascode}[store=mix]
+proc sgplot;
+  histogram Ht;
+  density Ht / type=kernel;
+\end{Sascode}
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Histogram of heights with kernel density}
+
+\Graphic[store=mix,scale=0.5]{mixx}
+
+More or less symmetric.
+  
+\end{frame}
+
+\begin{frame}[fragile]{Kernel density for BMI}
+  
+\begin{Sascode}[store=miy]
+proc sgplot;
+  histogram BMI;
+  density BMI / type=kernel;
+\end{Sascode}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Histogram with kernel density}
+
+  \Graphic[store=miy,scale=0.5]{miyy}
+
+Rather more clearly skewed right.  
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Loess curve}
+
+  \begin{itemize}
+  \item R equivalent: \texttt{geom\_smooth} \emph{without} \texttt{method="lm"}.
+  \item Smooth curve through scatterplot called \emph{Loess curve}  in SAS: Code like this:
+\begin{Sascode}[store=mjc]
+proc sgplot;
+  scatter x=Ht y=Wt;
+  loess x=Ht y=Wt;
+\end{Sascode}
+
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Loess curve on plot}
+  
+  \Graphic[store=mjc,scale=0.5]{mjcc}
+  
+  Loess curve says this is as straight as you could wish for.
+\end{frame}
+
+\begin{frame}[fragile]{Loess curve for windmill data}
+  
+  \begin{itemize}
+  \item Read into SAS thus:
+    
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/windmill.csv'
+    dbms=csv
+    out=windmill
+    replace;
+  getnames=yes;
+  \end{Datastep}
+  
+  \begin{Sascode}[store=ng]
+proc means;    
+  \end{Sascode}
+  
+  \Listing[store=ng,fontsize=scriptsize]{ngg}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{To make the scatterplot with loess curve}
+  
+\begin{Sascode}[store=mje]
+proc sgplot;
+  scatter x=wind_velocity y=DC_output;
+  loess x=wind_velocity y=DC_output;
+\end{Sascode}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{The plot with curve}
+  
+  \Graphic[store=mje,scale=0.5]{mjee}
+  
+  This time, relationship is definitely curved.
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Multiple series on one plot: the oranges data}
+
+  \begin{itemize}
+  \item Data file like this (circumferences of 5 trees each at 7
+    times):
+    
+\verbatiminput{/home/ken/oranges.txt}
+
+\item Columns don't line up because the delimiter is ``exactly one
+  space'', and some of the values are longer than others.
+\item In R, \texttt{gather} data to  put $x$ and $y$ for plot in
+  single columns. Here, use original columns.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading the data}
+  
+    \begin{Datastep}
+proc import
+  datafile='/home/ken/oranges.txt'
+    dbms=dlm
+    out=trees
+    replace;
+  delimiter=' ';
+  getnames=yes;
+    \end{Datastep}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Did it work?}
+  
+  \begin{Sascode}[store=ora]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=ora,fontsize=scriptsize]{oraa}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Multiple series}
+
+  \begin{itemize}
+  \item Growth curve for \emph{each} tree, joined by lines.
+  \item \texttt{series} joins points by lines.
+  \item \texttt{markers} displays actual data points too.
+  \item Do each series one at a time.
+\begin{Sascode}[store=mjd]
+proc sgplot;
+  series x=age y=a / markers;
+  series x=age y=b / markers;
+  series x=age y=c / markers;
+  series x=age y=d / markers;
+  series x=age y=e / markers;
+\end{Sascode}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The growth curves}
+
+\Graphic[store=mjd,scale=0.6]{mjdd}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Labelling points on a plot}
+  
+  \begin{itemize}
+    \item Often, a data set comes with an identifier variable.
+    \item We would like to label each point on a plot with its
+      identifier, to see which individual is which.
+    \item Commonly (but not only) done on scatterplot.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Example: the cars data}
+  
+  \begin{itemize}
+  \item 38 cars. For each: 
+    \begin{itemize}
+    \item Name of car (identifier)
+    \item Gas mileage (miles per US gallon)
+    \item Weight (US tons)
+    \item Number of cylinders in engine
+    \item Horsepower of engine
+    \item Country of origin
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading in}
+  
+  \texttt{.csv} file, so:
+  
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/cars.csv'
+  dbms=csv
+  out=cars
+  replace;
+  getnames=yes;
+    \end{Datastep}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Adding labels to scatterplot}
+  
+  \begin{itemize}
+  \item Expect heavier car to have worse (lower) gas mileage, so make
+    scatterplot of gas mileage ($y$) against weight ($x$).
+  \item Want to see which car is which, so label points. 
+    
+  \item R: \texttt{geom\_text} (or \texttt{geom\_text\_repel}).
+  \item The magic word is \texttt{datalabel}:
+    
+    \begin{Sascode}[store=muggins]
+proc sgplot;
+  scatter y=mpg x=weight / datalabel=car;
+    \end{Sascode}
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{The plot}
+  
+\Graphic[store=muggins,scale=0.6]{mugginss}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+  
+  \begin{itemize}
+  \item Each car labelled with its name, either left, right, above or
+    below, whichever makes it clearest. (Some intelligence applied to
+    placement, like \texttt{geom\_text\_repel} in R.)
+  \item Cars top left are ``nimble'': light in weight, good gas
+    mileage.
+  \item Cars bottom right are ``boats'': heavy, with terrible gas mileage.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Labelling by country}
+  
+  Same idea:
+  
+  \begin{Sascode}[store=mka]
+proc sgplot;
+  scatter x=weight y=mpg / datalabel=country;
+  \end{Sascode}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Labelled by country}
+
+\Graphic[store=mka,scale=0.7]{mkaa}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Labelling only some of the observations}
+
+  \begin{itemize}
+  \item Create a new data set with all the old variables plus a new
+    one that contains the text to plot.
+  \item For example, label most fuel-efficient car (\#4) and heaviest
+    car (\#9).
+  \item ``Observation number'' given by SAS special variable
+    \texttt{\_n\_}, like \texttt{row\_number} in R.
+  \item Note the syntax: ``if then do'' followed by ``end''.
+    \begin{small}
+    \begin{Datastep}
+data cars2;
+  set cars;
+  if (_n_=4 or _n_=9) then do;
+    newtext=car;
+  end;
+    \end{Datastep}      
+    \end{small}
+  \item For any cars not selected, \texttt{newtext} will be
+    blank. Then, using the new data set that we just created:
+    \begin{small}
+    \begin{Sascode}[store=mwa]
+proc sgplot;
+  scatter x=weight y=mpg / datalabel=newtext;
+    \end{Sascode}      
+    \end{small}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The plot}
+  
+\Graphic[store=mwa, scale=0.6]{mwaa}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Or label cars with \texttt{mpg} greater than
+    34}
+
+  \begin{Datastep}
+data cars3;
+  set cars;
+  if mpg>34 then do;
+     newtext=car;
+  end;
+    
+  \end{Datastep}
+  \begin{Sascode}[store=mjk]
+proc sgplot;
+  scatter x=weight y=mpg / datalabel=newtext;
+  \end{Sascode}
+
+  
+\end{frame}
+
+\begin{frame}{High-\texttt{mpg} cars}
+
+\Graphic[store=mjk,scale=0.6]{mjkk}
+  
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%% R
+
+
+
+%%  \begin{frame}[fragile]{More R stuff}
+%%  
+%%    \begin{itemize}
+%%    \item R has a thousand tiny parts, all working together, but to use
+%%      them, need to know their \emph{names}.
+%%      
+%%    \item Sometimes you \emph{do} know the name, but you forget how it
+%%      works. Then (at Console) type eg.\ \texttt{?median} or
+%%      \texttt{help(median)}. 
+%%      Help appears in R Studio bottom right.
+%%  % \item Read in the cars data to use for examples later:
+%%  %   \begin{small}
+%%  % <<>>=
+%%  % cars=read.csv("cars.csv")
+%%  % str(cars)
+%%  % @     
+%%  %   \end{small}
+%%  % 
+%%    \end{itemize}
+%%  
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Structure of help file}
+%%  
+%%  All R's help files laid out the same way:
+%%  
+%%  \begin{itemize}
+%%  \item \textbf{Purpose}: what the function does
+%%  \item \textbf{Usage}: how you make it go
+%%  \item \textbf{Arguments}: what you need to feed in. Arguments with a \texttt{=}
+%%    have \emph{default} values. If the default is OK (it often is), you
+%%    don't need to specify it.
+%%  \item \textbf{Details}: more information about how the function works.
+%%  \item \textbf{Value}: what comes back from the function.
+%%  \item \textbf{References} to the literature, so that you can find out exactly
+%%    how everything was calculated.
+%%  \item \textbf{Examples}. Run these using eg.\ \texttt{example(median)}.
+%%    
+%%  \end{itemize}
+%%  
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{If you don't know the name}
+%%    
+%%    \begin{itemize}
+%%    \item Then you have to find it out!
+%%    \item If you know what it might be, \texttt{apropos(name)}:
+%%  
+%%      \begin{small}
+%%  <<>>=
+%%  apropos("read_")
+%%  @       
+%%      \end{small}
+%%  and then you investigate more via \texttt{help()}.
+%%  \item Google-searching, eg: \texttt{r ggplot add horizontal
+%%      line}. Often turns up questions on \texttt{stackoverflow.com},
+%%    which might be adapted to your needs.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{That Google search}
+%%    
+%%    \includegraphics[height=0.7\textheight]{hline1}
+%%    
+%%    \begin{itemize}
+%%    \item 3rd one looks promising.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Click the 3rd link}
+%%    
+%%    \includegraphics[height=0.6\textheight]{hline2}
+%%    
+%%    \begin{itemize}
+%%    \item \texttt{geom\_hline}.
+%%    \item Get help with \texttt{?geom\_hline}.
+%%    \end{itemize}
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{I never heard of \texttt{read\_fwf}!}
+%%    
+%%    \begin{itemize}
+%%    \item Often \texttt{apropos} turns up things you never heard of.
+%%    \item But now you have the name, you can look up the help:
+%%      
+%%  \includegraphics[width=0.7\textwidth]{read-fwf}
+%%  
+%%  \item What does a fixed-width file look like?
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The original oranges data}
+%%    
+%%  \verbatiminput{oranges-orig.txt}
+%%  
+%%  \begin{itemize}
+%%  \item The columns \emph{line up}, so they are easy to read.
+%%  \item That means that sometimes you have more
+%%  than one space between them, and \texttt{read\_delim} won't work.
+%%  \item But each column is \emph{a fixed number of characters}
+%%    wide.
+%%  \item No variable names, so have to supply them also when reading in.
+%%  
+%%  \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Guessing columns based on spaces}
+%%    
+%%  <<>>=
+%%  fname="oranges-orig.txt"
+%%  oranges2=read_fwf(fname,
+%%    fwf_empty(fname,col_names=c("age","A","B","C","D","E")))
+%%  @   
+%%  
+%%  Note that we have to supply file name \emph{twice}, so define it into
+%%  variable to save typing.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The data}
+%%    
+%%  <<>>=
+%%  oranges2
+%%  @   
+%%  
+%%  That worked.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Reading columns based on widths}
+%%    
+%%    Here, there are 6 columns each 4 characters wide (including
+%%    preceding space(s)), so:
+%%    
+%%  <<>>=
+%%  oranges3=read_fwf(fname,fwf_widths(c(4,4,4,4,4,4),
+%%             c("age","A","B","C","D","E")))
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The data}
+%%    
+%%  <<>>=
+%%  oranges3
+%%  @   
+%%  
+%%  That worked also.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{No delimiters}
+%%    
+%%    The advantage to reading by width is that \emph{you don't need any
+%%      delimiters}. For example, this file \texttt{rats7.txt}:
+%%    
+%%  \verbatiminput{rats7.txt}
+%%  
+%%  has a rat identifier in the first 4 columns, a group T or C in the
+%%  next 1 column, and then a response variable \texttt{y} in the next 2.
+%%  
+%%  Delimiterless files used to be very common, because they take up
+%%    very little disk space:
+%%    
+%%  <<engine="bash">>=
+%%  ls -l rats7.txt
+%%  @   
+%%  
+%%  40 bytes: $7+1=8$ for each line, times 5 lines.
+%%  
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Reading in delimiterless data}
+%%    
+%%    \begin{itemize}
+%%    \item Read in with \texttt{read\_fwf} and vector of widths:
+%%      
+%%  <<>>=
+%%  rat7=read_fwf("rats7.txt",fwf_widths(c(4,1,2),
+%%         c("id","group","y")))
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The ``rat7'' data}
+%%    
+%%  <<>>=
+%%  rat7
+%%  @   
+%%  
+%%  \begin{itemize}
+%%  \item That worked too. Note that \texttt{read\_fwf} determined that
+%%  \texttt{y} was a number and the other things were text.
+%%  \item You need to have a separate document telling you how many
+%%    characters each column is.
+%%  \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  
+%%  \begin{frame}[fragile]{Plotting series with R}
+%%  
+%%    \begin{itemize}
+%%    \item The oranges data:
+%%  
+%%  <<>>=
+%%  oranges2
+%%  @ 
+%%  \item Want to plot orange circumferences against age for each orange
+%%    tree.
+%%  \item Recall \texttt{ggplot} wants one column of $x$ values and one
+%%    column of $y$ values, which we do not have.
+%%    
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Making right format and plot}
+%%    
+%%  Use \texttt{gather} to create columns we need, and then plot:
+%%  
+%%  <<>>=
+%%  g=oranges2 %>% gather(tree,circumf,A:E) %>%
+%%      ggplot(aes(x=age,y=circumf,colour=tree))+
+%%        geom_point()+geom_line()
+%%  @   
+%%  
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The plot}
+%%    
+%%  <<fig.height=4>>=
+%%  g
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Data for other plots}
+%%    
+%%    \begin{itemize}
+%%    \item Re-use data on Australian athletes and cars to get
+%%      corresponding plots to SAS's.
+%%  <<>>=
+%%  cars=read_csv("cars.csv")
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Histogram with kernel density}
+%%    
+%%    \begin{itemize}
+%%    \item Athletes height and BMI, height first.
+%%    \item Two things: 
+%%      \begin{itemize}
+%%      \item     use density scale on histogram (0--1 or fraction
+%%      of whole, rather than count)
+%%    \item add kernel density.
+%%      \end{itemize}
+%%  
+%%  <<>>=
+%%  g=ggplot(athletes,aes(x=Ht))+
+%%      geom_histogram(aes(y=..density..),bins=10)+
+%%      geom_density()
+%%  @ 
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The histogram}
+%%    
+%%  <<fig.height=4>>=
+%%  g
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Same idea for BMI}
+%%  
+%%  <<fig.height=4>>=
+%%  ggplot(athletes,aes(x=BMI))+
+%%    geom_histogram(aes(y=..density..),bins=10)+
+%%    geom_density()
+%%  @ 
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Too many bins}
+%%    
+%%    Kernel density still works for inappropriate number of bins:
+%%    
+%%  <<fig.height=3.5>>=
+%%  ggplot(athletes,aes(x=BMI))+
+%%    geom_histogram(aes(y=..density..),bins=50)+
+%%    geom_density()
+%%  @ 
+%%    
+%%    
+%%  \end{frame}
+%%  
+%%  
+%%  \begin{frame}[fragile]{Smooth trends}
+%%    
+%%    \begin{itemize}
+%%    \item Done by \texttt{geom\_smooth} without \texttt{method}.
+%%    \item Athletes height vs.\ weight:
+%%  <<fig.height=3>>=
+%%  ggplot(athletes,aes(x=Ht,y=Wt))+
+%%    geom_point()+geom_smooth()
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{And with windmill data}
+%%    
+%%  
+%%  <<echo=F,message=F>>=
+%%  windmill=read_csv("windmill.csv")
+%%  @ 
+%%  
+%%  <<fig.height=3.5>>=
+%%  ggplot(windmill,aes(x=wind_velocity,y=DC_output))+
+%%    geom_point()+geom_smooth()
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Labelling observations}
+%%    
+%%    \begin{itemize}
+%%    \item There is a bad way and a good way.
+%%    \item Bad way: \texttt{geom\_text}
+%%    \item Good way: \texttt{geom\_text\_repel} from package
+%%      \texttt{ggrepel}.
+%%    \item Illustrate on cars data with MPG vs.\ weight.
+%%    \item Worst way first:
+%%      
+%%  <<>>=
+%%  g=ggplot(cars,aes(x=Weight,y=MPG,label=Car))+
+%%    geom_point()+geom_text()
+%%  @
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The worst plot}
+%%    
+%%  <<fig.height=3.5>>=
+%%  g
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Problems}
+%%    
+%%    \begin{itemize}
+%%    \item Labels are centred at points instead of off to side
+%%    \item Text too big
+%%    \item Labels overlap so you can't read them.
+%%    \item If you put the labels next to the points, they might go off
+%%      the plot.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Adding labels to plot}
+%%    
+%%    
+%%  
+%%  <<fig.height=4>>=
+%%  g=ggplot(cars,aes(x=Weight,y=MPG,label=Car))+
+%%    geom_point()+
+%%    geom_text(hjust=-0.1,size=2)+
+%%    xlim(1.8,5.0)
+%%  @   
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Comments}
+%%    
+%%    \begin{itemize}
+%%    \item \texttt{hjust} says where to put the labels relative to the
+%%      points: 0.5 is centred over them, negative is on the right,
+%%      greater than 1 is on the left.
+%%    \item \texttt{vjust} similar to move labels up and down (less than
+%%      0, greater than 1 for above or below points).
+%%    \item \texttt{size} controls size of text: 5 is default (so this is
+%%      smaller).
+%%    \item Not an obvious way to stop labels overlapping! But there is a
+%%      solution, which we will see.
+%%      
+%%    \item \texttt{xlim} changes limits of $x$-axis (to stop labels going
+%%      off side). Likewise \texttt{ylim}.
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Next attempt}
+%%    
+%%  <<fig.height=3.5>>=
+%%  g
+%%  @   
+%%  
+%%  Better, but labels still overlap. Need another solution.
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Non-overlapping labels}
+%%    
+%%    \begin{itemize}
+%%    \item Key is to use package \texttt{ggrepel} and
+%%      \verb+geom_text_repel+ from that package instead of \verb+geom_text+:
+%%  
+%%  <<fig.height=3.5>>=
+%%  library(ggrepel) 
+%%  g=ggplot(cars,aes(x=Weight,y=MPG,label=Car))+
+%%    geom_point()+
+%%    geom_text_repel(size=2)
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Is that better?}
+%%    
+%%  <<fig.height=3.5>>=
+%%  g
+%%  @   
+%%  
+%%  Much better. I recommend this approach to labelling points on a graph.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Labelling some of the cars}
+%%    
+%%    \begin{itemize}
+%%    \item Maybe you want to draw attention only to \emph{some} of the
+%%      individuals
+%%    \item for example labelling only certain cars or ones that satisfy a
+%%      condition
+%%    \item Mechanism: define a new label variable that contains:
+%%      \begin{itemize}
+%%      \item the label, for the individual you want to label 
+%%      \item blank text for those you don't (same idea as SAS)
+%%      \end{itemize}
+%%    \item Handy function \texttt{ifelse}, like Excel \texttt{=IF}.
+%%      
+%%    \item Label cars with \texttt{MPG over 34}:
+%%      
+%%  <<>>=
+%%  g=cars %>% mutate(newlabel=ifelse(MPG>34,Car,"")) %>%
+%%      ggplot(aes(x=Weight,y=MPG,label=newlabel))+
+%%        geom_point()+
+%%        geom_text_repel(size=2)
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{High gas-mileage cars}
+%%    
+%%  <<fig.height=4>>=
+%%  g
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Highest gas-mileage and highest-weight cars}
+%%    
+%%    \begin{itemize}
+%%    \item Found before that these were in rows 4 and 9 of data frame.
+%%    \item How to use \texttt{ifelse} with row numbers? Define new column
+%%      of row numbers, and then use it in \texttt{ifelse}, thus:
+%%      
+%%  <<>>=
+%%  g=cars %>%
+%%      mutate(row=row_number()) %>%
+%%      mutate(newlabel=ifelse(row==4 | row==9,Car,"")) %>%
+%%      ggplot(aes(x=Weight,y=MPG,label=newlabel))+
+%%        geom_point()+
+%%        geom_text_repel(size=2)
+%%  @     
+%%    \end{itemize}
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Heaviest and best-gas-mileage cars}
+%%    
+%%  <<fig.height=4,size="footnotesize">>=
+%%  g
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Lightest weight and worst gas-mileage cars}
+%%    
+%%    \begin{itemize}
+%%    \item Suppose you didn't know which cars were the ones you
+%%      wanted. Then you have to find them first.
+%%    \item Now try for lightest weight and worst gas-mileage cars:
+%%      
+%%  <<>>=
+%%  g=cars %>% mutate(tolabel= (Weight==min(Weight) | 
+%%        MPG==min(MPG))) %>%
+%%      mutate(newlabel=ifelse(tolabel,Car,"")) %>%
+%%      ggplot(aes(x=Weight,y=MPG,label=newlabel))+
+%%        geom_point()+
+%%        geom_text_repel(size=2)
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The plot}
+%%    
+%%  <<fig.height=4>>=
+%%  g
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Miscellaneous graph things}
+%%    
+%%    \begin{itemize}
+%%    \item Title for graph
+%%    \item Axis labels
+%%    \item Adding extra data to plot
+%%    \end{itemize}
+%%    
+%%    We use previous graph as base (to save drawing again).
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{With title}
+%%    
+%%  <<fig.height=4>>=
+%%  g+ggtitle("Gas mileage against weight")
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Axis labels}
+%%    
+%%  <<fig.height=4>>=
+%%  g+xlab("Weight (tons)")+ylab("MPG (miles per US gallon)")
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Labelling points by group}
+%%    
+%%    \texttt{Cylinders}, though a number, should be treated as categorical:
+%%    
+%%  <<fig.height=3.5>>=
+%%  g3=cars %>% mutate(cyl=factor(Cylinders)) %>%
+%%       ggplot(aes(x=Weight,y=MPG,colour=cyl))+ 
+%%         geom_point() ; g3       
+%%  @     
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Adding new data: averages by cylinders}
+%%  
+%%    \begin{itemize}
+%%    \item First make data frame of new data to add:
+%%  
+%%  \begin{small}
+%%  <<>>=
+%%  summ=cars %>% group_by(Cylinders) %>%
+%%         summarize(mw=mean(Weight),mm=mean(MPG)) 
+%%  summ       
+%%  @       
+%%  \end{small}
+%%  \item then to plot averages on graph, add a new \verb=geom_point=
+%%    \emph{with a new data frame}:
+%%    
+%%  <<fig.height=3>>=
+%%  g4=g3+geom_point(data=summ,aes(x=mw,y=mm,
+%%    colour=as.factor(Cylinders)),shape=3)
+%%  @   
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{The plot, group mean marked by +}
+%%    
+%%  <<fig.height=4>>=
+%%  g4
+%%  @   
+%%    
+%%  \end{frame}
+%%  
+%%    
+%%  \begin{frame}[fragile]{Thinking back to SAS}
+%%    
+%%    We thought about a couple of issues in SAS that we should also
+%%    address in R:
+%%    
+%%    \begin{itemize}
+%%      
+%%    \item Permanence of data in R
+%%    \item Reading data with multiple obs per line, one variable
+%%    \item Reading data with multiple obs per line, two variables
+%%    \end{itemize}
+%%    
+%%    We talk briefly about those below.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Permanence}
+%%    
+%%    \begin{itemize}
+%%    \item When you close R Studio, you are offered the option to ``save
+%%      your workspace''. If you choose ``yes'', all of the data frames
+%%      and other things you have created are saved, so that when you open
+%%      R Studio in the same project later, you will be able to access all
+%%      of these things. (``Everything is permanent'' in that sense.)
+%%    \item If you choose not to save your workspace, you will have to
+%%      recreate all your objects next time (eg.\ re-read data from
+%%      files). But you have a script to do that, don't you?
+%%    \item There is a school of thought that says you should \emph{not}
+%%      save your workspace, but keep scripts to re-create everything.
+%%      \begin{itemize}
+%%      \item Pro: keeps your workspace ``clean'' of old objects that you
+%%        created but don't need any more, and you know exactly why
+%%        everything is there.
+%%      \item Con: some objects take time and effort to re-create, and you
+%%        won't want to do that every time.
+%%      \item It is possible (beyond our scope) to save and re-load
+%%        large/complicated objects so that they don't have to be
+%%        re-created.
+%%      \end{itemize}
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  
+%%  \begin{frame}[fragile]{Multiple observations on one line}
+%%    
+%%    
+%%  
+%%  \begin{itemize}
+%%  \item   Recall:
+%%  
+%%  \verbatiminput{many.txt}
+%%  
+%%  \item These are all values of a variable \texttt{x}, six values on
+%%    each line (thus 12 values in total).
+%%  \item Read the data as R wants to. There are no column names, which we
+%%    have to say explicitly (column names created)
+%%    
+%%  <<size="small">>=
+%%  many=read_delim("many.txt"," ",col_names=F)
+%%  many
+%%  @   
+%%  
+%%  \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Gather}
+%%    
+%%    \begin{itemize}
+%%    \item Idea: use \texttt{gather} to turn all six columns into one.
+%%    \item This works, but we have to create a ``dummy'' column (named
+%%      \texttt{col} here), that we ignore, to fill the ``different'' slot:
+%%      
+%%  <<size="footnotesize">>=
+%%  many %>% gather(col,x,X1:X6)
+%%  @     
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{\texttt{x} and \texttt{y}, alternately}
+%%    
+%%    \begin{itemize}
+%%    \item Now suppose the values in the file are an \texttt{x} and a
+%%      \texttt{y}, then another \texttt{x} and another \texttt{y}, and so
+%%      on.
+%%    \item \texttt{gather} works best on one ``unit'', here an
+%%      \texttt{x-y} pair, so strategy: create \texttt{x-y} pairs, gather,
+%%      then separate out pairs.
+%%    \item Start from here:
+%%      
+%%  <<>>=
+%%  many
+%%  @   
+%%  
+%%  \item Tool to create pairs is \texttt{unite}, which we have to do
+%%    three times (3 pairs).
+%%    \end{itemize}
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Creating the pairs}
+%%    
+%%  <<>>=
+%%  many %>% 
+%%    unite(xy1,X1,X2) %>%
+%%    unite(xy2,X3,X4) %>%
+%%    unite(xy3,X5,X6)
+%%  @   
+%%  
+%%  Next, we gather up those columns.
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Gathering up the pairs}
+%%    
+%%  <<>>=
+%%  many %>% 
+%%    unite(xy1,X1,X2) %>%
+%%    unite(xy2,X3,X4) %>%
+%%    unite(xy3,X5,X6) %>%
+%%    gather(col,xy,xy1:xy3)
+%%  @   
+%%  
+%%  Next, \texttt{separate} out those columns.
+%%    
+%%    
+%%  \end{frame}
+%%  
+%%  \begin{frame}[fragile]{Separating out}
+%%    
+%%  <<>>=
+%%  many %>% 
+%%    unite(xy1,X1,X2) %>%
+%%    unite(xy2,X3,X4) %>%
+%%    unite(xy3,X5,X6) %>%
+%%    gather(col,xy,xy1:xy3) %>%
+%%    separate(xy,c("x","y"))
+%%  @   
+%%  
+%%  Same data as SAS (though not the same order of rows).
+%%    
+%%    
+%%  \end{frame}
+
+
+

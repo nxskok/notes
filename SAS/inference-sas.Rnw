@@ -1,0 +1,3871 @@
+\section{Inference}
+
+\frame{\sectionpage}
+
+
+%% \begin{frame}{Statistical Inference and Science}
+%% 
+%% <<results="hide",echo=F,message=F>>=
+%% require(tidyverse)
+%% @   
+%% 
+%% \begin{itemize}
+%% \item Previously: \emph{descriptive statistics}. ``Here are data; what
+%%   do they say?''.
+%% \item May need to \emph{take some action} based on information in data.
+%% \item Or want to \emph{generalize} beyond data (sample) to larger
+%%   world (population).
+%% \item Science: first guess about how world works.
+%% \item Then collect data, by sampling.
+%% \item Is guess correct (based on data) for whole world, or not?
+%% \end{itemize}
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Sample data are imperfect}
+%%   
+%%   \begin{itemize}
+%%   \item Sample data never entirely represent what you're observing.
+%%   \item There is always random error present.
+%%   \item Thus you can never be entirely certain about your conclusions.
+%%   \item The Toronto Blue Jays' average home attendance in part of 2015
+%%     season was 25,070
+%%     (up to May 27 2015, from \url{baseball-reference.com}).
+%%   \item Does that mean the attendance at every game was exactly
+%%     25,070? Certainly not. Actual attendance depends on many things, eg.:
+%%     \begin{itemize}
+%%     \item how well the Jays are playing
+%%     \item the opposition
+%%     \item day of week
+%%     \item weather
+%%     \item random chance
+%%     \end{itemize}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Reading the attendances}
+%% 
+%% \ldots as a \texttt{.csv} file:
+%% 
+%% <<>>=
+%% jays=read_csv("jays15-home.csv")
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Taking a look}
+%%   
+%% <<size="footnotesize">>=
+%% jays
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Another way}
+%% <<size="scriptsize">>=
+%% glimpse(jays)
+%% @   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Attendance histogram}
+%% <<fig.height=4>>=
+%% ggplot(jays,aes(x=attendance))+geom_histogram(bins=10)
+%% @   
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Comments}
+%%   
+%%   \begin{itemize}
+%%   \item Attendances have substantial variability, ranging from just
+%%     over 10,000 to around 50,000.
+%%   \item Distribution somewhat skewed to right (but no outliers).
+%%   \item These are a sample of ``all possible games'' (or maybe ``all
+%%     possible games played in April and May''). What can we say about
+%%     mean attendance in all possible games based on this evidence?
+%%   \item Think about:
+%%     \begin{itemize}
+%%     \item Confidence interval
+%%     \item Hypothesis test.
+%%     \end{itemize}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% 
+%% \begin{frame}[fragile]{Getting CI for mean attendance}
+%%   
+%%   \begin{itemize}
+%%   \item \texttt{t.test} function does CI and test. Look at CI first:
+%% <<>>=
+%% t.test(jays$attendance)  
+%% @ 
+%% \item From 20,500 to 29,600.
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Or, 90\% CI}
+%%   
+%%   \begin{itemize}
+%%   \item by including a value for \texttt{conf.level}:
+%% <<>>=
+%% t.test(jays$attendance,conf.level=0.90)  
+%% @ 
+%% \item From 21,300 to 28,800. (Shorter, as it should be.)
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% \begin{frame}[fragile]{Comments}
+%%   
+%%   \begin{itemize}
+%%   \item Need to say ``column \texttt{attendance} within data frame
+%%     \texttt{jays}'' using \texttt{\$}.
+%%   \item 95\% CI from about 20,000 to about 30,000.
+%%   \item Not estimating mean  attendance well at all!
+%%   \item Generally want confidence interval to be \emph{shorter}, which
+%%     happens if:
+%%     \begin{itemize}
+%%     \item SD smaller
+%%     \item sample size \emph{bigger}
+%%     \item confidence level smaller
+%%     \end{itemize}
+%%   \item Last one is a cheat, really, since reducing confidence level
+%%     increases chance that interval won't contain pop.\ mean at all!
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Another way to access data frame columns}
+%%   
+%% <<>>=
+%% with(jays,t.test(attendance))
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Hypothesis test}
+%%   
+%%   \begin{itemize}
+%%   \item CI answers question ``what is the mean?''
+%%   \item Might have a value $\mu$ in mind for the mean, and question
+%%     ``Is the mean equal to $\mu$, or not?''
+%%   \item For example, 2014 average attendance was 29,327. 
+%%   \item Second question answered by \textbf{hypothesis test}.
+%%   \item Value being assessed goes in \textbf{null hypothesis}: here,
+%%     $H_0: \mu=29,327$.
+%%   \item \textbf{Alternative hypothesis} says how null might be wrong,
+%%     eg.\ $H_a: \mu \ne 29,327$.
+%%   \item Assess evidence \emph{against null}. If that evidence strong
+%%     enough, \emph{reject null hypothesis}; if not, \emph{fail to
+%%       reject null hypothesis} (sometimes \emph{retain null}). 
+%%   \item Note asymmetry between null and alternative, and utter absence
+%%     of word ``accept''. 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{$\alpha$ and errors}
+%%   
+%%   \begin{itemize}
+%%   \item Hypothesis test ends with \emph{decision}:
+%%     \begin{itemize}
+%%     \item reject null hypothesis
+%%     \item do not reject null hypothesis.
+%%     \end{itemize}
+%%   \item but decision may be \emph{wrong}:
+%%     
+%% 
+%% \begin{center}
+%%   
+%%   
+%% \begin{tabular}{|l|cc|}
+%% \hline
+%%   & \multicolumn{2}{c|}{Decision}\\
+%% Truth & Do not reject & Reject null\\
+%% \hline
+%% Null true & Correct & Type I error\\
+%% Null false & Type II error & Correct\\
+%% \hline
+%% \end{tabular}
+%% \end{center}
+%% 
+%% \item Either type of error is bad, but for now focus on controlling
+%%   Type I error: write $\alpha=P(\mbox{type I error})$, and devise test
+%%   so that $\alpha$ \emph{small}, typically 0.05.
+%% \item That is, \textbf{if null hypothesis true}, have only small
+%%   chance to reject it (which would be a mistake).
+%% \item Worry about type II errors later (when we consider power of
+%%   test). 
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Why 0.05? This man.}
+%%   
+%%   \begin{multicols}{2}
+%%   
+%%   \includegraphics[width=2in]{fisher}
+%%   
+%%   Responsible for:
+%%   
+%%   \begin{itemize}
+%%   \item analysis of variance
+%%   \item Fisher information
+%%   \item Linear discriminant analysis
+%%   \item Fisher's $z$-transformation
+%%   \item Fisher-Yates shuffle
+%%   \item Behrens-Fisher problem
+%%   \end{itemize}
+%% 
+%%   Sir Ronald A.\ Fisher, 1890--1962.
+%%   \end{multicols}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Why 0.05? (2)}
+%%   
+%%   \begin{itemize}
+%%   \item From \emph{The Arrangement of Field Experiments}
+%%     (1926):
+%%     
+%%     \includegraphics[width=0.9\textwidth]{fisher1}
+%%     
+%%   \item and
+%%     
+%%     \includegraphics[width=0.9\textwidth]{fisher2}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Test statistic: going from data to decision}
+%%   
+%%   \begin{itemize}
+%%   \item ``How far away from null hypothesis is data?''
+%%   \item In testing for mean, statistic is
+%%     $$ t = { \bar{x} - \mu \over s/\sqrt{n} }$$
+%%   \item and for our baseball attendance data
+%% <<>>=
+%% t.stat=(25070-29327)/(11000/sqrt(25)) 
+%% t.stat  
+%% @ 
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{P-value}
+%%   
+%%   \begin{itemize}
+%%   \item The probability of observing a test statistic value \emph{as
+%%       extreme or more extreme than that observed, if the null
+%%       hypothesis is true}.
+%%   \item ``More extreme'' depends on $H_a$: count both sides if
+%%     two-sided, count only the proper side if one-sided.
+%%   \item Our $H_a$ was $H_a:  \mu \ne 29,327$, two-sided.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{$t$-table}
+%%   
+%%   \begin{multicols}{2}
+%% 
+%%       \includegraphics[height=0.95\textheight]{StudentTTable}
+%% 
+%%       \begin{itemize}
+%%       \item $n=25$ so df is $25-1=24$.
+%%       \item Look up 1.935 not $-1.935$.
+%%       \item $1.71 < 1.935 < 2.06$
+%%       \item P-value between 0.05 and 0.10
+%% 
+%% \item P-value not less than 0.05: do not reject null.
+%% \item No evidence of change in mean attendance.
+%%       \end{itemize}
+%%     
+%%   \end{multicols}
+%%   
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Or, again, using \texttt{t.test}:}
+%%   
+%% <<>>=
+%% t.test(jays$attendance, mu=29327)    
+%% @ 
+%% 
+%%   
+%%   \begin{itemize}
+%%   \item See test statistic $-1.93$, P-value 0.065.
+%%   \item Again, do not reject null: conclusion same.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+\begin{frame}[fragile]{Inference in SAS}
+  
+  Blue Jays data again:
+  
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/jays15-home.csv'
+    dbms=csv
+    out=jays
+    replace;
+  getnames=yes;
+  \end{Datastep}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Checking what I read in}
+  
+  \begin{itemize}
+  \item Especially important in SAS:
+    
+    \begin{Sascode}[store=iza]
+proc print data=jays(obs=6);      
+    \end{Sascode}
+    
+    \Listing[fontsize=tiny,store=iza]{izaa}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Doing a $t$-test}
+  
+  of a difference from last year's attendance. Null mean is previous
+  year's mean attendance. R: \texttt{t.test}:
+  
+  \begin{Sascode}[store=ia]
+proc ttest h0=29327;
+  var attendance;
+  \end{Sascode}
+
+  \Listing[store=ia,fontsize=small]{iaa}
+  
+  Same CI (20527 to 29614) as R, also same P-value 0.0650.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Day and night games}
+  
+  \begin{itemize}
+  \item \texttt{daynight} is \texttt{D} for a day game and \texttt{N} for
+    a night game. How do attendances compare for these?
+\begin{Sascode}[store=id]
+  proc sgplot;
+    vbox attendance / category=daynight;
+\end{Sascode}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The boxplot}
+  
+\Graphic[scale=0.5,store=id]{idd}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Comments}
+  
+  \begin{itemize}
+  \item Attendances on average \emph{much} higher for day games than
+    night ones. Why?
+  \item We should be cautious about doing a $t$-test here. Why?
+  \item What is that upper outlier in the night games?
+  \end{itemize}
+  
+\end{frame}
+
+%\begin{frame}[fragile]{Inference for proportions}
+%  
+%  \begin{itemize}
+%  \item An instant coffee company took a random sample of 100 married
+%    men, and found that 20 of the men in the sample preferred that
+%    brand of coffee. What can we say about the proportion of all
+%    married men that would prefer that brand of coffee?
+%    
+%  \item Also, is there evidence that the proportion of all married men
+%    preferring that brand is greater than 0.15?
+%    
+%  \item \texttt{prop.test}.
+%  
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]{Confidence interval}
+%
+%\begin{Rcode}
+%prop.test(20,100)  
+%\end{Rcode}
+%
+%0.13 to 0.29. Ignore P-value.
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{and then test}
+%
+%\begin{Rcode}
+%prop.test(20,100,p=0.15,alternative="greater")  
+%\end{Rcode}
+%
+%P-value $0.1038>0.05$, no evidence that proportion greater than
+%0.15. (Sample proportion would have to be much bigger, or sample size larger.)
+%
+%Ignore CI (``one-sided CI''). 
+%  
+%\end{frame}
+
+
+\begin{frame}{Another example: learning to read}
+
+  \begin{itemize}
+  \item You devised new method for teaching children to read.
+  \item Guess it will be more effective than current methods.
+  \item To support this guess, collect data.
+  \item Want to generalize to ``all children in Canada''.
+  \item So take random sample of all children in Canada.
+  \item Or, argue that sample you actually have is ``typical'' of all
+    children in Canada.
+  \item Randomization: whether or not a child in sample or not has
+    nothing to do with anything else about that child.
+  \item Aside: if your new method good for 
+    teaching \emph{struggling} children to read, then ``all
+    kids'' is ``all kids having trouble learning to
+    read'', and you take a sample of \emph{those}.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The data, in SAS}
+
+  \begin{itemize}
+    \item Data in file \texttt{drp.txt} with header line, group then
+    reading test score, separated by \emph{space}:
+  \end{itemize}
+
+\begin{Datastep}
+proc import
+  datafile='/home/ken/drp.txt'
+  dbms=dlm
+  out=reading
+  replace;
+  delimiter=' ';
+  getnames=yes;
+\end{Datastep}
+%$ %$
+\begin{Sascode}[store=ix]
+  proc print;
+\end{Sascode}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{The data, some, tiny}
+
+  \Listing[store=ix,fontsize=tiny]{ixx}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Analysis}
+
+  \begin{itemize}
+    \item Groups labelled \texttt{c} for ``control'' and \texttt{t}
+      for ``treatment''.
+    \item Start with summaries (group means) and plot (boxplot).
+  \item No pairing, matching: might compare means with \emph{two-sample $t$-test}.
+  \item For test, need approx.\ normality, but don't need equal variability.
+    \item Use summaries to decide if test reasonable.
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Comparing means}
+
+\begin{Sascode}[store=if]
+  proc means;
+    class group;
+    var score;
+\end{Sascode}
+
+\Listing[store=if,fontsize=scriptsize]{iff}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Boxplots}
+
+\begin{Sascode}[store=ifx]
+  proc sgplot;
+    vbox score / category=group;
+\end{Sascode}
+
+\Graphic[store=ifx,scale=0.5]{ifxx}
+
+  
+\end{frame}
+
+\begin{frame}{Comments}
+
+\begin{itemize}
+\item Groups not actually same size (maybe 2 kids had to drop out).
+\item Means a fair bit different, treatment mean higher.
+\item But a lot of variability, so groups do overlap.
+\item Standard deviations somewhat different too.
+  \item Biggest threat to normality is outliers, none here.
+  \item Both distributions not far off symmetric.
+  \item $t$-test should be good enough.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The $t$-test}
+
+  In R, was \texttt{t.test(score\mytilde group)}:
+  
+\begin{Sascode}[store=ihy]
+  proc ttest side=L;
+    var score;
+    class group;
+\end{Sascode}
+
+\Listing[store=ihy,objects=ttests,fontsize=small]{ihyy}
+
+plus a lot more output. 
+
+
+
+\end{frame}
+
+\begin{frame}{Comments and Conclusions}
+
+  \begin{itemize}
+  \item One-sided test (looking for \emph{improvement}). \texttt{side}
+    can be \texttt{L} (lower), \texttt{U} (upper) or \texttt{2}
+    (two-sided, can be omitted.) This is \texttt{L} because control
+    group first in alphabetical order.
+  \item Right $t$-test is Satterthwaite (does not assume equal variability)
+  \item P-value $0.0132<0.05$: there \emph{is} increase in reading scores.
+  \item Should not use pooled test, because SDs not close; even so,
+    result very similar (P-value 0.0143).
+  \item One-sided test doesn't give (regular) CI for difference in
+    means. To get that, repeat analysis without \texttt{side=L}.
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Doing it with R}
+%% 
+%%   \begin{itemize}
+%%   \item Proper reading-in function is \texttt{read\_delim}.
+%%   \item If you know that the file is in current folder, read it in by
+%%     name (instead of searching for it):
+%%     
+%% <<>>=
+%% kids=read_delim("drp.txt"," ")
+%% @     
+%% 
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{The data}
+%%   
+%% <<size="small">>=
+%% kids
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Boxplots}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(kids,aes(x=group,y=score))+geom_boxplot()
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The (Satterthwaite-Welch) $t$-test}
+%%   
+%%   \begin{itemize}
+%%   \item \texttt{c} (control) before \texttt{t} (treatment)
+%%     alphabetically, so proper alternative is ``less''.
+%%   \item R does Satterthwaite test by default (as before: new reading program really helps):
+%% 
+%% 
+%% <<size="footnotesize">>=
+%% t.test(score~group,data=kids,alternative="less")
+%% @     
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The pooled $t$-test}
+%% 
+%%   \begin{itemize}
+%%   \item Pooled (equal variances) test this way:
+%% 
+%% <<>>=
+%% t.test(score~group,data=kids,alternative="less",
+%%   var.equal=T)
+%% @ 
+%% 
+%% \item Similar P-value to Satterthwaite test (and same results as SAS).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Two-sided test; CI}
+%%   
+%%   \begin{itemize}
+%% \item To do 2-sided test, leave out \texttt{alternative}:
+%% 
+%%   {\small
+%% <<>>=
+%% t.test(score~group,data=kids)
+%% @ 
+%% }
+%% 
+%% \item Also gives CI: new reading program increases average scores by somewhere
+%%   between about 1 and 19 points. 
+%% \item Confidence intervals inherently two-sided, so do 2-sided test to
+%%   get them.
+%% 
+%%   \end{itemize}
+%% 
+%% \end{frame}
+%% 
+%% %\begin{frame}{Jargon for testing}
+%% %
+%% %  \begin{description}
+%% %  \item[Alternative hypothesis:] what we are trying to prove (new reading
+%% %    program is effective).
+%% %  \item[Null hypothesis:] ``there is no difference'' (new reading program
+%% %    no better than current program). \emph{Must contain ``equals''}.
+%% %  \item[One-sided alternative:] trying to prove \emph{better} (as with
+%% %    reading program).
+%% %  \item[Two-sided alternative:] trying to prove \emph{different}.
+%% %  \item[Test statistic:] something expressing difference between data
+%% %    and null (eg.\ difference in sample means, $t$ statistic).
+%% %  \item[P-value:] probability of observing test statistic value
+%% %    \emph{as extreme or more extreme, if null is true}.
+%% %  \end{description}
+%% %  
+%% %\end{frame}
+%% 
+%% \begin{frame}{Logic of testing}
+%% 
+%%   \begin{itemize}
+%%   \item Work out what \emph{would} happen if null hypothesis were true.
+%%   \item Compare to what actually \emph{did} happen.
+%%   \item If these are too far apart, conclude that null hypothesis
+%%     \emph{is not} true after all. (Be guided by P-value.)
+%%   \end{itemize}
+%% 
+%% As applied to our reading programs:
+%% 
+%% \begin{itemize}
+%% \item If reading programs equally good, expect to see a difference in
+%%   means close to 0. 
+%%   \begin{itemize}
+%%   \item Closeness quantified eg.\ by $t$.
+%%   \end{itemize}
+%% \item Mean reading score was 10 higher for new program.
+%% \item Difference of 10 was unusually big (P-value small from
+%%   $t$-test). So conclude that new reading program is effective.
+%% \end{itemize}
+%% 
+%% Nothing here about what happens if null hypothesis is
+%% \emph{false}. This is power and type II error probability.
+%%   
+%% \end{frame}
+
+\begin{frame}{Errors in testing}
+
+Reminder of what can happen:
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|cc|}
+\hline
+  & \multicolumn{2}{c|}{Decision}\\
+Truth & Do not reject & Reject null\\
+\hline
+Null true & Correct & Type I error\\
+Null false & Type II error & Correct\\
+\hline
+\end{tabular}  
+\end{center}
+
+\bigskip
+
+
+\begin{itemize}
+\item Prob.\ of \emph{not} making type II error called \textbf{power}
+  ($=1-\beta)$. \emph{High} power good.
+\end{itemize}
+  
+\end{frame}
+
+  
+
+
+%% \begin{frame}[fragile]{Power}
+%%   \begin{itemize}
+%%   \item Suppose $H_0: \theta=10$, $H_a: \theta \ne 10$ for some
+%%     parameter $\theta$.
+%%   \item Suppose $H_0$ wrong. What does that say about $\theta$?
+%%   \item Not much. Could have $\theta=11$ or $\theta=8$ or
+%%     $\theta=496$. In each case, $H_0$ wrong.
+%%   \item How likely a type II error is depends on what $\theta$ is:
+%%     \begin{itemize}
+%%     \item If $\theta=496$, should be able to reject $H_0:\theta=10$
+%%       even for small sample, so $\beta$ should be small (power large).
+%%     \item If $\theta=11$, might have hard time rejecting $H_0$ even
+%%       with large sample, so $\beta$ would be larger (power smaller).
+%%     \end{itemize}
+%%   \item \emph{Power depends on true parameter value, and on sample size.}
+%%   \item So we play ``what if'': ``if $\theta$ were 11 (or 8 or 496),
+%%     what would power be?''.
+%%   \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}{Figuring out power}
+%% 
+%%   \begin{itemize}
+%%   \item Time to figure out power is \emph{before} you collect any
+%%     data, as part of planning process.
+%%   \item Need to have idea of what kind of departure from null
+%%     hypothesis of interest to you, eg.\ average improvement of 5 points on
+%%     reading test scores. (Subject-matter decision, not statistical one.)
+%%   \item Then, either:
+%%     \begin{itemize}
+%%     \item ``I have this big a sample and this big a departure I want
+%%       to detect. What is my power for detecting it?''
+%%     \item ``I want to detect this big a departure with this much
+%%       power. How big a sample size do I need?''
+%%     \end{itemize}
+%%   \item R or SAS.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{How to understand/estimate power?}
+%%   
+%%   \begin{itemize}
+%%   \item Suppose we test $H_0: \mu=10$ against $H_a: \mu \ne 10$, where
+%%     $\mu$ is population mean.
+%%   \item Suppose in actual fact, $\mu=8$, so $H_0$ is \emph{wrong}. We
+%%     want to reject it. How likely is that to happen?
+%%   \item Need population SD (take $\sigma=4$) and sample size (take
+%%     $n=15$). In practice, get $\sigma$ from pilot/previous study, and
+%%     take the $n$ we plan to use.
+%%   \item Idea: draw a random sample from the \emph{true} distribution,
+%%     test whether its mean is 10 or not.
+%%   \item Repeat previous step ``many'' times.
+%%     
+%%   \item ``Simulation''.
+%%   \item Most easily in R.
+%%   \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Making it go}
+%%   
+%%   \begin{itemize}
+%%   \item Random sample of 15 normal observations with mean 8 and SD 4:
+%% 
+%% <<echo=F>>=
+%% set.seed(457299)
+%% @     
+%% <<size="small">>=
+%% x=rnorm(15,8,4)
+%% x
+%% @
+%% \item Test whether \texttt{x} from population with mean 10 or not:
+%% <<size="small">>=
+%% t.test(x,mu=10)
+%% @   
+%%   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{\ldots continued}
+%%   
+%%   \begin{itemize}
+%%    
+%% \item Fail to reject the mean being 10 (a Type II error).    
+%% \item Same again, but just get the P-value:
+%%   
+%% <<>>=
+%% t.test(x,mu=10)$p.value
+%% @   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Write a function\ldots}
+%%   
+%%   \begin{itemize}
+%%   \item \ldots to generate the random sample and return its P-value:
+%%     
+%% <<>>=
+%% sim=function() {
+%%   x=rnorm(15,8,4)
+%%   t.test(x,mu=10)$p.value
+%% }
+%% @     
+%% 
+%% \item Test it (different from before: random data):
+%%   
+%% <<>>=
+%% sim()
+%% @   
+%% 
+%% \item Once again fail to reject a null mean of 10 (incorrectly).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{To run lots of times}
+%%   
+%%   \begin{itemize}
+%%   \item Like this --- ``as many times as the first thing, do the second thing'':
+%% <<>>=
+%% pvals=replicate(1000,sim())
+%% head(pvals)
+%% @   
+%% \item What fraction of those P-values are 0.05 or smaller? This is our
+%%   best guess at how often our test will correctly reject:
+%%   
+%% <<>>=
+%% table(pvals<=0.05)
+%% @   
+%% 
+%% \item Test correctly rejects 422 times of 1000: estimated power is 0.422.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Calculating power}
+%%   
+%%   \begin{itemize}
+%%   \item Simulation approach very flexible: will work for any test. But
+%%     answer different each time because of randomness.
+%%   \item In some cases, for example 1-sample and 2-sample $t$-tests,
+%%     power can be \emph{calculated}.
+%%   \item In R, \texttt{power.t.test}. \texttt{delta} is
+%%     \emph{difference} between null and true mean:
+%%     
+%% <<>>=
+%% power.t.test(n=15,delta=2,sd=4,type="one.sample")
+%% @     
+%%   \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Calculating power in SAS}
+  
+  \begin{itemize}
+  \item The magic \texttt{proc} is \texttt{proc power}. 
+  \item We did before: a one-sample $t$-test with $n=15$, $H_0: \mu=10$
+    vs.\ $H_a: \mu \ne 10$, and a true $\mu=8$:
+    
+    \begin{Sascode}[store=pb]
+proc power;
+  onesamplemeans
+  test=t
+  nullmean=10
+  mean=8
+  stddev=4
+  ntotal=15
+  power=.;
+    \end{Sascode}
+    
+    \item R equivalent was \texttt{power.t.test} (or simulation).
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The results}
+  
+  \Listing[store=pb,fontsize=small]{pbb}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Comparison of results}
+%%   
+%%   \begin{center}
+%%   \begin{tabular}{lr}
+%%     Method & Power\\
+%%     \hline
+%%     \texttt{power.t.test} & 0.4378\\
+%%     \hline
+%%   \end{tabular}
+%%     
+%%   \end{center}
+%%   
+%%   \begin{itemize}
+%%   \item Two calculated power values are same to within rounding.
+%%   \item Simulation power is similar; to get more accurate value,
+%%     repeat more times (eg.\ 10,000 instead of 1,000), which takes
+%%     longer. 
+%%   \item CI for power based on simulation approx.\ $0.42 \pm 0.03$.
+%%   \item With this small a sample size, the power is not great. With a
+%%     bigger sample, the sample mean should be closer to 8 most of the
+%%     time, so would reject $H_0: \mu=10$ more often. 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+
+\begin{frame}[fragile]{Calculating sample size}
+  
+  \begin{itemize}
+  \item Often, when planning a study, we do not have a particular
+    sample size in mind. Rather, we want to know how big a sample to
+    take. This can be done by asking how big a sample is needed to
+    achieve a certain power.
+  \item For the power-calculation methods, you supply a value for the
+    power, but leave the sample size missing.
+  \item Re-use the same problem: $H_0: \mu=10$ against 2-sided
+    alternative, true $\mu=8$, $\sigma=4$, but now aim for power 0.80.
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Using \texttt{power.t.test}}
+%%   
+%%   
+%%   \begin{itemize}
+%%   \item No \texttt{n=}, replaced by a \texttt{power=}:
+%% <<>>=
+%% power.t.test(power=0.80,delta=2,sd=4,type="one.sample")
+%% @     
+%% \item Sample size must be a whole number, so \emph{round up} to 34 (to
+%%   get at least as much power as you want).
+%%   \end{itemize}
+%%   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Using \texttt{proc power}}
+
+  Explicitly leave \texttt{ntotal} missing, and supply value for
+  \texttt{power}: 
+  
+    \begin{Sascode}[store=pc]
+proc power;
+  onesamplemeans
+  test=t
+  nullmean=10
+  mean=8
+  stddev=4
+  ntotal=.
+  power=0.80;
+    \end{Sascode}
+
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+  
+\Listing[store=pc,fontsize=footnotesize]{pcc}  
+  
+SAS says that with $n=34$, power
+actually 0.808.
+
+\end{frame}
+
+\begin{frame}[fragile]{Power curves}
+  
+  \begin{itemize}
+  \item Rather than calculating power for one sample size, or sample
+    size for one power, might want a \emph{picture} of relationship
+    between sample size and power.
+  \item Or, likewise, picture of relationship between true mean and
+    power.
+  \item Called \textbf{power curve}.
+  \item SAS makes these automatically (have to learn how).
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Power curves in SAS}
+
+    
+  Hint: when plotting power curves, supply values for everything
+  except power. In \texttt{plot} line, specify what you want as $x$ on
+  the plot. (Power goes on $y$-axis.) You may have to experiment with
+  limits of $x$-scale.
+  
+  \begin{Sascode}[store=pd]
+  proc power plotonly;
+    onesamplemeans
+      test=t
+      nullmean=10
+      mean=8
+      stddev=4
+      ntotal=15
+      power=.;    
+    plot x=n min=15 max=80;
+  \end{Sascode}
+
+\end{frame}
+
+\begin{frame}[fragile]{The graph}
+  
+  \Graphic[store=pd,scale=0.5]{pdd}
+  
+``Diminishing returns'': increasing sample size increases power, but
+by decreasing amount.  
+\end{frame}
+
+%% \begin{frame}[fragile]{Building the same thing in R}
+%%   
+%%   \begin{itemize}
+%%   \item If you feed \texttt{power.t.test} a collection (``vector'') of
+%%     values, it will do calculation for each one.
+%%   \item Do power for variety of sample sizes, from 10 to 100 in steps
+%%     of 10:
+%% <<>>=
+%% ns=seq(10,100,10)
+%% ns
+%% @     
+%% \item Calculate powers:
+%% <<>>=
+%% ans=power.t.test(n=ns,delta=2,sd=4,type="one.sample")
+%% ans$power
+%% @   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Building a plot}
+%%   
+%%   \begin{itemize}
+%%   \item Make a data frame out of the values to plot:
+%%     
+%% <<>>=
+%% d=tibble(n=ns,power=ans$power)
+%% @     
+%% \item Plot these as points joined by lines, and add horizontal line at
+%%   1 (maximum power):
+%%   
+%% <<>>=
+%% g=ggplot(d,aes(x=n,y=power))+geom_point()+geom_line()+
+%%   geom_hline(yintercept=1,linetype="dashed")
+%% @   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The power curve}
+%%   
+%% <<fig.height=4>>=
+%% g
+%% @   
+%%   
+%% \end{frame}
+
+%% \begin{frame}[fragile]{Power curves for mean differences}
+%%   
+%%   \begin{itemize}
+%%   \item Can also investigate power as it depends on how far the true
+%%     mean is from the null mean (the farther apart they are, the higher
+%%     the power will be).
+%%   \item Investigate for two different sample sizes, 15 and 34.
+%%   \item First make all combos of mean diff and sample size:
+%% <<>>=
+%% diffs=seq(0,4,0.5)
+%% diffs
+%% ns=c(15,34)
+%% ns
+%% combos=expand.grid(diff=diffs,n=ns)
+%% @     
+%%     
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The combos}
+%% <<>>=
+%% combos
+%% @   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Calculate and plot}
+%%   
+%%   
+%%   \begin{itemize}
+%%   \item Calculate the powers, carefully:
+%% <<>>=
+%% ans=power.t.test(n=combos$n,delta=combos$diff,sd=4,
+%%   type="one.sample")
+%% @   
+%% \item Make a data frame to plot, pulling things from the right places:
+%%   
+%% <<>>=
+%% d=tibble(n=factor(combos$n),diff=combos$diff,
+%%   power=ans$power)
+%% @ 
+%% \item then make the plot:
+%% 
+%% <<>>=
+%% g=ggplot(d,aes(x=diff,y=power,colour=n))+
+%%   geom_point()+geom_line()+
+%%   geom_hline(yintercept=1,linetype="dashed")
+%% 
+%% @   
+%%   \end{itemize}
+%% 
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{The power curves}
+%%   
+%% <<fig.height=4>>=
+%% g
+%% @   
+%% \end{frame}
+%% 
+
+\begin{frame}[fragile]{Power curves for \emph{mean}}
+
+  How wrong does the null hypothesis have to be, to have good
+  chance of correctly rejecting the null? 
+  
+  Try for sample sizes $n=15$ and $n=34$. (As before, $\sigma=4$.)
+  
+  \begin{Sascode}[store=pe]
+  proc power plotonly;
+    onesamplemeans
+      test=t
+      nullmean=10
+      mean=8
+      stddev=4
+      ntotal=15 34
+      power=.;
+    plot x=effect min=5 max=10;    
+  \end{Sascode}
+  
+  \begin{itemize}
+  \item   I specify two different sample
+    sizes as shown. 
+  \item This time I want ``effect size'' (mean) on $x$-axis.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The SAS power curves}
+  
+\Graphic[store=pe,scale=0.5]{pee}  
+  
+Comments over.
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Comments}
+  \begin{itemize}
+  \item When true \texttt{mean=10}, $H_0$ actually \emph{true}, and
+    probability of rejecting it then is $\alpha=0.05$.
+  \item As the null gets more wrong, becomes easier to
+    correctly reject it.
+  \item No matter how wrong $H_0$ is, always have a greater chance of
+    correctly rejecting it with larger sample size.
+  \item Previously, true mean 8, producing power 0.42 and 0.80.
+  \item With $n=34$, a mean less than about 7 is
+    almost certain to be correctly rejected. (With $n=15$, the
+    mean needs to be less than about 5.)
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Calculating power for a two-sample $t$-test}
+
+  
+Think about reading programs again. Suppose we treat the study that
+was done as a pilot study and wish to plan the real thing.
+
+Recall sample statistics:
+
+\begin{Sascode}[store=ph]
+proc means;
+  var score;
+  class group;
+\end{Sascode}
+
+\Listing[store=ph,fontsize=footnotesize]{phh}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]{What to consider}
+
+    \begin{itemize}
+  \item What kind of $t$-test (here 2-sample, not 1-sample or paired)
+  \item Given a 2-sample $t$, Satterthwaite not pooled
+  \item What kind of $H_a$ (here one-sided)
+  \item What the population SD is (usually have to guess this). Here
+    the sample SDs were 11 and 17, so 15 seems a fair guess (same for
+    each group).
+  \item What size departure from null of interest to us (here, if the
+    new reading method increases mean test score by 5--10 points, that
+    is of interest). 
+    
+    \item Draw some pictures showing sample size-power relationship
+      for these mean test score differences.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Code}
+
+    \begin{Sascode}[store=pf]
+  proc power plotonly;
+    twosamplemeans
+      test=diff_satt
+      sides=1
+      meandiff=5 10
+      stddev=15
+      ntotal=44
+      power=.;
+    plot x=n min=10 max=300;
+  \end{Sascode}
+
+\end{frame}
+
+\begin{frame}[fragile]{Code comments}
+  
+  \begin{itemize}
+  \item \texttt{twosamplemeans}
+  \item \texttt{test=diff\_satt} to specify Satterthwaite two-sample
+    test
+  \item \texttt{sides=1} (1-sided test; this is number 1)
+  \item \texttt{meandiff} specifies true differences between
+    means. Use two different values.
+  \item Population SDs taken to be 15 for both groups.
+  \item Leave power blank to plot power against something else.
+  \item On \texttt{plot} specify what goes on $x$-axis and its limits.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The power curves}
+  
+\Graphic[store=pf,scale=0.5]{pff}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+  
+  \begin{itemize}
+  \item If the new reading method actually leads to a 10-point 
+   increase in mean test scores (rather than 5), we will be much more
+   easily able to prove that it works.
+ \item Original total sample size was $23+21=44$:
+   \begin{itemize}
+   \item if new program improves reading scores by 10, power is barely
+     acceptable 0.6 or so
+   \item if new program improves reading scores by only 5, power is
+     definitely unacceptable 0.3.
+   \item If we want to reach power 0.8, we need total of about 60
+     children ($2 \times 30$) if the mean improvement is 10, and over
+     200 ($2 \times 100$) (!) if the mean improvement is only 5.
+   \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Same picture in R}
+%%   
+%%   Similar procedure to before:
+%%   
+%% <<>>=
+%% diffs=c(5,10)
+%% ns=seq(10,200,10) # total sample size
+%% combos=expand.grid(diff=diffs,n=ns)
+%% ans=power.t.test(n=combos$n/2,delta=combos$diff,sd=15,
+%%   type="two.sample",alternative="one.sided")
+%% # divide by 2 above because R wants per group  
+%% d=tibble(diff=factor(combos$diff),n=combos$n,
+%%   power=ans$power)
+%% g=ggplot(d,aes(x=n,y=power,colour=diff))+
+%%   geom_point()+geom_line()+
+%%   geom_hline(yintercept=1,linetype="dashed")
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The power curves}
+%% <<fig.height=4>>=
+%% g
+%% @   
+%% \end{frame}
+
+\begin{frame}[fragile]{Or, more accurately\ldots}
+
+  \begin{itemize}
+  \item Didn't actually have same-size groups or equal population
+    SDs. 
+  \item SAS will allow different values per group.
+  \item We had sample sizes 21 and 23, sample SDs 11 and 17 (use as
+    population SDs).
+  \item Unequal sample sizes usually decrease power, but smaller
+    sample size with smaller SD actually better. Overall effect unclear.
+  \item SAS: use \texttt{groupstddevs} and \texttt{groupns}, and
+    vertical bars.
+  \end{itemize}
+
+\begin{Sascode}[store=il,fontsize=footnotesize]
+  proc power;
+  twosamplemeans
+    test=diff_satt
+    sides=1
+    meandiff=5
+    groupstddevs=11|17
+    groupns=21|23
+    power=.;
+\end{Sascode}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+
+  \Listing[store=il,fontsize=scriptsize]{ill}
+
+Power actually went \emph{up} a tiny bit.
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Unequal sample sizes}
+
+To show effect of unequal sample sizes, go back to SDs both being 15,
+but have very unequal sample sizes. What effect does that have on
+power?
+
+
+\begin{Sascode}[store=im]
+  proc power;
+  twosamplemeans
+    test=diff_satt
+    sides=1
+    meandiff=5
+    stddev=15
+    groupns=10|34
+    power=.;
+\end{Sascode}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+
+Power for 22 in each group was 29\%:
+
+\Listing[store=im,fontsize=scriptsize]{imm}
+
+Unequal sample sizes bring power down to 22.5\%.
+  
+\end{frame}
+
+
+%% \begin{frame}[fragile]{Duality between confidence intervals and
+%%     hypothesis tests}
+%% 
+%%   \begin{itemize}
+%%   \item Tests and CIs really do the same thing, if you look at them
+%%     the right way. They are both telling you something about a
+%%     parameter, and they use same things about data.
+%%   \item Illustrate with R and SAS, R first.
+%% 
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Some data, to illustrate}
+%%   
+%% <<>>=
+%% twogroups=read_delim("duality.txt"," ")
+%% glimpse(twogroups)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{95\% CI (default)}
+%% 
+%%   
+%% 
+%% <<>>=
+%% t.test(y~group,data=twogroups)
+%% @ 
+%%   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{90\% CI}
+%% 
+%% <<>>=
+%%   t.test(y~group,data=twogroups,conf.level=0.90)
+%% @ 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Comparing results}
+%% 
+%% Recall null here is $H_0: \mu_1-\mu_2=0$. P-value 0.0668.
+%% 
+%%   \begin{itemize}
+%%   \item 95\% CI from $-5.6$ to 0.2, contains 0.
+%%   \item 90\% CI from $-5.0$ to $-0.3$, does not contain 0.
+%%   \item At $\alpha=0.05$, would not reject $H_0$ since P-value $>0.05$.
+%%   \item At $\alpha=0.10$, \emph{would} reject $H_0$ since P-value $<0.10$.
+%%   \end{itemize}
+%% 
+%%   Not just coincidence. Let $C=100(1-\alpha)$, so $C\%$ gives corresponding
+%%   CI to level-$\alpha$ test. Then following \emph{always}
+%%   true. ($\iff$ means ``if and only if''.)
+%% 
+%% \begin{tabular}{|rcl|}
+%%   \hline
+%%   Reject $H_0$ at level $\alpha$ & $\iff$ & $C\%$ CI does not contain $H_0$ value\\
+%%   Do not reject $H_0$ at level $\alpha$ & $\iff$ & $C\%$ CI contains $H_0$ value\\
+%%   \hline
+%% \end{tabular}
+%% 
+%% Idea: ``Plausible'' parameter value inside CI, not rejected;
+%%   ``Implausible'' parameter value outside CI, rejected.
+%% 
+%% 
+%% \end{frame}
+
+\begin{frame}[fragile]{Duality between test and CI}
+  
+    The data:
+    
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/duality.txt'
+    dbms=dlm
+    out=duality
+    replace;
+  delimiter=' ';
+  getnames=yes;
+  \end{Datastep}
+  \begin{Sascode}[store=it]
+proc print;
+  \end{Sascode}
+  Output over.
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{The data, small}
+  
+  \Listing[store=it,fontsize=scriptsize]{itt}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Test and CI at default $\alpha=0.05$}
+  
+  \begin{Sascode}[store=iu]
+    proc ttest;
+      var y;
+      class group;
+  \end{Sascode}
+  
+  \Listing[store=iu,fontsize=tiny,objects=conflimits ttests]{iuu}
+  
+  95\% CI $(-5.56,0.23)$ contains null mean of 0, P-value greater than
+  $\alpha=0.05$ (do not reject 0).
+  
+\end{frame}
+
+\begin{frame}[fragile]{90\% CI}
+  
+  \begin{Sascode}[store=iva]
+    proc ttest alpha=0.10;
+      var y;
+      class group;
+  \end{Sascode}
+  
+  \Listing[store=iva,fontsize=tiny,objects=conflimits ttests]{ivaa}
+  
+  90\% CI $(-5.01,-0.32)$ \emph{does not} contain zero, P-value less
+  than $\alpha=0.10$ (reject 0 at this $\alpha$).
+  
+\end{frame}
+
+\begin{frame}[fragile]{If you have a test but no CI}
+
+  \begin{itemize}
+  \item you make a CI by including all the parameter values that would
+    \emph{not be rejected} by your test.
+  \item Use:
+    \begin{itemize}
+    \item $\alpha=0.01$ for a 99\% CI,
+    \item     $\alpha=0.05$ for a 95\% CI,
+    \item  $\alpha=0.10$ for a 90\% CI, 
+    \end{itemize}
+    and so on.
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Testing for non-normal data}
+  
+  Same data as before:
+  
+  \begin{itemize}
+  \item The IRS (``Internal Revenue Service'') is the US authority
+    that deals with taxes (like Revenue Canada). 
+  \item One of their forms is supposed to take no more than 160
+    minutes to complete. A citizen's organization claims that it takes
+    people longer than that on average.
+  \item Sample of 30 people; time to complete form recorded.
+  \item Read in data, and do $t$-test of $H_0: \mu=160$ vs.\
+    $H_a: \mu>160$.
+  \item For reading in, there is only one column, so can pretend it is
+    delimited by anything.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading in data}
+  
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/irs.txt'
+    dbms=csv
+    out=irs
+    replace;
+  getnames=yes;
+  \end{Datastep}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Checking: all looks good}
+  
+  \begin{Sascode}[store=ij]
+proc print;    
+  \end{Sascode}
+  
+\Listing[store=ij,fontsize=tiny]{ijj}
+  
+\end{frame}
+
+\begin{frame}[fragile]{$t$-test}
+  $n=30$ data values:
+  \begin{Sascode}[store=ik]
+proc ttest h0=160 sides=U;
+  var Time;
+  \end{Sascode}
+  
+\Listing[store=ik, fontsize=footnotesize]{ikk}  
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+  
+  \begin{itemize}
+  \item All looks good, and we have shown that the mean time to
+    complete this form is greater than 160 minutes (P-value 0.0392). 
+  \item \textbf{But}, the $t$-test assumes approximately
+    normally-distributed data. We don't have that. Histogram:
+    
+    \begin{Sascode}[store=il]
+proc sgplot;
+  histogram Time;
+    \end{Sascode}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The histogram}
+  
+\Graphic[store=il,scale=0.5]{ill}
+
+Times are \emph{skewed to the right}. 
+
+\end{frame}
+
+
+\begin{frame}[fragile]{The sign test}
+  
+  \begin{itemize}
+  \item To test whether the \emph{median} is greater than 160?
+  \item \emph{Count} how many observations above and below 160.
+  \item If too many above, reject null that median is 160, in favour
+    of alternative, median greater.
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Doing the sign test in SAS}
+  
+  \begin{itemize}
+  \item SAS has \texttt{proc univariate} which obtains a whole bunch
+    of information about a single variable, including these,
+    \emph{which are two-sided}:
+    
+    \begin{Sascode}[store=im]
+proc univariate location=160;
+  var Time;
+    \end{Sascode}
+    
+\Listing[store=im,objects=testsforlocation,fontsize=tiny]{imm}    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+  \begin{itemize}
+  \item P-values are (take half of the two-sided SAS ones):
+    
+    \begin{center}
+    \begin{tabular}{lr}
+      Test & P-value\\
+      \hline
+      $t$ & 0.0392\\
+      Sign & 0.2923\\
+      \hline
+    \end{tabular}
+      
+    \end{center}
+  \item These are \emph{very} different: we reject a mean of 160 (in
+    favour of the mean being bigger), but clearly \emph{fail} to reject a
+    median of 160 in favour of a bigger one.
+  \item Why is that? Look at boxplot:
+    
+    \begin{Sascode}[store=in]
+proc sgplot;
+  vbox Time;
+    \end{Sascode}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{The boxplot}
+  
+  \Graphic[store=in,scale=0.5]{inn}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Concluding comments (about this)}
+  
+  \begin{itemize}
+  \item The mean is pulled a long way up by the right skew, and is a
+    fair bit bigger than 160.
+  \item The median is quite close to 160.
+  \item We ought to be trusting the sign test and not the $t$-test
+    here (median and not mean), and therefore there is no evidence
+    that the ``typical'' time to complete the form is longer than 160
+    minutes. 
+  \item Having said that, there are clearly some people who take a
+    \emph{lot} longer than 160 minutes to complete the form, and the
+    IRS could focus on simplifying its form for these people.
+  \item In this example, looking at any kind of average is not really
+    helpful; a better question might be ``do an unacceptably large
+    fraction of people take longer than (say) 300 minutes to complete
+    the form?'': that is, thinking about worst-case rather than
+    average-case.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Confidence interval for the median}
+  
+  \begin{itemize}
+  \item The sign test does not naturally come with a confidence
+    interval for the median.
+  \item So we use the ``duality'' between test and confidence interval
+    to say: the (95\%) confidence interval for the median contains
+    exactly those values of the null median that would not be rejected
+    by the \emph{two-sided} sign test (at $\alpha=0.05$).
+  \item Uses \texttt{proc univariate} (don't have to calculate
+    anything ourselves).
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{CI for median using \texttt{proc univariate}}
+
+  This is attributed in the SAS documentation to Hahn and Meeker, but
+  it's the same procedure as we used in R:
+  
+    \begin{Sascode}[store=pevay]
+proc univariate cipctldf;
+  var Time;
+    \end{Sascode}
+    
+
+    
+\end{frame}
+
+\begin{frame}[fragile]{The output}
+  
+    \Listing[store=pevay,objects=quantiles,fontsize=tiny]{pevayy}    
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{CI for median}
+
+  \begin{itemize}
+  \item is 119 to 215.
+  \item Same interval as \texttt{smmr} gave in R.
+  \item   There is no way that 160 would be rejected as the median.
+  \end{itemize}
+  
+  
+\end{frame}
+
+
+%% \begin{frame}[fragile]{Check procedure for null median 160}
+%%   
+%%   \begin{itemize}
+%%   \item How many observations do we have?
+%% <<>>=
+%% n_obs=length(irs$Time)
+%% @     
+%%   \item This:
+%% <<size="footnotesize">>=
+%% irs %>% count(Time>160)
+%% @   
+%% \item but we need the second thing in the \texttt{n} column:
+%% <<>>=
+%% S=irs %>% count(Time>160) %>% slice(2) %>% pull(n) 
+%% S  
+%% @   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{\ldots continued}
+%%   \begin{itemize}
+%% \item then find the probability of \texttt{S} or more:
+%% <<>>=
+%% p1=sum(dbinom(S:n_obs,n_obs,0.5)) ; p1
+%% @   
+%% %$ %$
+%% 
+%% \item and  of \texttt{S} or less:
+%%   
+%% <<>>=
+%% p2=sum(dbinom(0:S,n_obs,0.5)) ; p2
+%% @   
+%% 
+%% \item and the smaller of these, doubled (two-sided):
+%%   
+%% <<>>=
+%% min_p=min(p1,p2) ; 2*min_p
+%% @   
+%% 
+%% \item This is the same two-sided P-value that came from SAS.
+%%   \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Make a function of this}
+%%   
+%%   \begin{itemize}
+%%   \item To calculate the confidence interval, we'll be doing this a
+%%     lot with different null medians.
+%%   \item So need a function that takes the null median as input
+%%     and returns two-sided P-value.
+%%   \item \texttt{smmr} has function \texttt{pval\_sign} that does this,
+%%     with null median \emph{first}:
+%%     
+%% <<>>=
+%% pval_sign(160,irs,Time)
+%% @     
+%% 
+%% This is correct two-sided P-value.
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Doing a whole bunch}
+%%   
+%%   \begin{itemize}
+%%   \item We could do it one at a time:
+%%     
+%% <<>>=
+%% pval_sign(190,irs,Time) ; pval_sign(300,irs,Time)
+%% @     
+%% \item 190 is inside the interval, and 300 is outside.
+%% \item but this is inefficient. Better to choose our null medians first:
+%% <<>>=
+%% null_medians=seq(100,300,20) ; null_medians
+%% @   
+%% \item and then run the function for each of them, which goes like
+%%   this, ``for each null median, run the function \texttt{pval\_sign} for
+%%   that null median and get the P-value'':
+%%   
+%% <<>>=
+%% p=map_dbl(null_medians,pval_sign,irs,Time)
+%% @   
+%%   
+%%   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The results}
+%% \begin{itemize}
+%% \item Data frame of results:
+%% <<size="footnotesize">>=
+%% tibble(median=null_medians,p_value=p)
+%% @   
+%% \item 95\% CI to this accuracy from 120 to 200.
+%% \item Can get it more accurately by looking more closely in intervals
+%%   from 100 to 120, and from 200 to 220.
+%% \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Refining the bottom end of the interval}
+%%   
+%%   \begin{small}
+%% <<>>= 
+%% null_medians=seq(100,120,2)
+%% tibble(median=null_medians,
+%%        p_value=map_dbl(null_medians,pval_sign,irs,Time))
+%% @    
+%%   \end{small}
+%% 
+%% Lower end of CI actually \emph{is} 120 to this accuracy.
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{The top end}
+%%  
+%%   \begin{small}
+%% <<>>=
+%% null_medians=seq(200,220,2)
+%% tibble(median=null_medians,
+%%        p_value=map_dbl(null_medians,pval_sign,irs,Time))
+%% @   
+%% 
+%% Upper end is 214.
+%%   \end{small}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{A more efficient way: bisection}
+%%   
+%%   \begin{itemize}
+%%   \item Know that top end of CI between 200 and 220:
+%%     
+%% <<>>=
+%% lo=200 ; hi=220
+%% @     
+%% \item Try the value halfway between: is it inside or outside?
+%% 
+%%   \begin{small}
+%% <<>>=
+%% try=(lo+hi)/2 ; try
+%% pval_sign(try,irs,Time)
+%% @   
+%%     
+%%   \end{small}
+%% \item Inside, so upper end is between \emph{210} and 220. Repeat:
+%% 
+%%   \begin{small}
+%% <<>>=
+%% lo=try
+%% try=(lo+hi)/2 ; try
+%% pval_sign(try,irs,Time)
+%% @       
+%%   \end{small}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Bisection automatically}
+%%   
+%%   \begin{itemize}
+%%   \item A loop, but not a \texttt{for} since we don't know how many
+%%     times we're going around. Keep going \texttt{while} a condition is true:
+%% 
+%%     \begin{small}
+%% <<>>=
+%% lo=200 ; hi=220
+%% while(hi-lo>1) {
+%%   try=(hi+lo)/2
+%%   ptry=pval_sign(try,irs,Time)
+%%   print(c(try,ptry))
+%%   if (ptry<=0.05) hi=try else lo=try
+%% }
+%% c(lo,hi)
+%% @     
+%% \item 215 inside, 215.625 outside. Upper end of interval to this
+%%   accuracy is 215.
+%%       
+%%     \end{small}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Using \texttt{smmr}}
+%%   
+%%   \begin{itemize}
+%%   \item \texttt{smmr} has function \texttt{ci\_median} that does this
+%%     (by default 95\% CI):
+%%     
+%% <<>>=
+%% ci_median(irs,Time)
+%% @     
+%% 
+%% \item Uses a more accurate bisection than we did.
+%% 
+%% \item Or get, say, 90\% CI for median:
+%%   
+%% <<>>=
+%% ci_median(irs,Time,conf.level=0.90)
+%% @   
+%% 
+%% \item 90\% CI is shorter, as it should be.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+ 
+\begin{frame}[fragile]{Some different data, and a different test}
+
+Take a look at these data (12 rows of 3 columns):
+
+\bigskip
+
+\begin{multicols}{2}
+\begin{verbatim}
+Case Drug A Drug B
+   1    2.0    3.5
+   2    3.6    5.7
+   3    2.6    2.9
+   4    2.6    2.4
+   5    7.3    9.9
+   6    3.4    3.3
+   7   14.9   16.7
+   8    6.6    6.0
+   9    2.3    3.8
+  10    2.0    4.0
+  11    6.8    9.1
+  12    8.5   20.9
+\end{verbatim}
+  
+\end{multicols}
+
+%\includegraphics[width=\textwidth]{matched-pairs}
+
+\end{frame}
+
+\begin{frame}[fragile]{Matched pairs}
+  
+  \begin{itemize}
+  \item Data are comparison of 2 drugs for effectiveness at reducing pain.
+  \item 12 subjects (cases) were arthritis sufferers
+  \item Response is \#hours of pain relief from each drug.
+  \item In reading example, each child tried only \emph{one} reading method.
+  \item But here, each subject tried out \emph{both} drugs, giving us
+    two measurements.
+  \item Possible because, if you wait long enough, one drug has no
+    influence over effect of other.
+  \item Advantage: focused comparison of drugs. Compare one drug with
+    another on \emph{same} person, removes a lot of random variability.
+  \item \textbf{Matched pairs}, requires different analysis.
+  \item Design: randomly choose 6 of 12 subjects to get drug A first,
+    other 6 get drug B first.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Reading data, in SAS}
+
+
+\begin{Datastep}
+proc import
+  datafile='/home/ken/analgesic.txt'
+    dbms=dlm
+    out=pain
+    replace;
+  delimiter=' ';
+  getnames=yes;
+\end{Datastep}
+
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{The data}
+  
+  \begin{Sascode}[store=iz]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=iz,fontsize=footnotesize]{izz}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Matched pairs $t$-test}
+
+  \begin{Sascode}[store=ic]
+proc ttest;
+  paired druga*drugb;
+\end{Sascode}
+
+\Listing[store=ic,fontsize=small]{icc}  
+
+R equivalent: \texttt{t.test(...,paired=T)}
+
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+
+
+  \begin{itemize}
+  \item P-value 0.0530. 
+  \item At $\alpha=0.05$, cannot quite reject null of no
+difference, though result is very close to significance.
+\item ``Hand-calculation'' way of doing this is to find the 12
+  differences, one for each subject, and do 1-sample $t$-test on those
+  differences. Shown on next page.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Alternative way to do matched pairs}
+
+  \begin{itemize}
+  \item Define a new variable to calculate and store differences.
+  \item This is done by creating a \emph{new data set} and then
+    defining the new variable, as shown:
+\begin{Datastep}
+data pain2;
+  set pain;
+  diff=druga-drugb;  
+\end{Datastep}
+
+\item \texttt{set} means ``bring in everything from the old data
+  set''. To that we add the new variable \texttt{diff}.
+  \end{itemize}
+  
+  
+  
+
+\end{frame}
+
+\begin{frame}[fragile]{The new data set \texttt{pain2}}
+  \begin{Sascode}[store=iy]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=iy,fontsize=footnotesize]{iyy}
+\end{frame}
+
+\begin{frame}[fragile]{Now do $t$-test on differences}
+
+
+\begin{Sascode}[store=id]
+  proc ttest h0=0;
+    var diff;
+\end{Sascode}
+
+
+$t$-test is an ordinary 1-sample test on \texttt{diff}. Note that
+null-hypothesis mean has to be given with only one sample.
+
+\Listing[store=id,fontsize=small]{idd}
+
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Paired test in R: reading the data}
+%% 
+%%   Values separated by spaces:
+%%   
+%% <<>>=
+%% pain=read_delim("analgesic.txt"," ")
+%% @ 
+%%     
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The data}
+%% <<>>=
+%% pain
+%% @   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Paired test}
+%% 
+%%   
+%% <<>>=
+%% with(pain,t.test(druga,drugb,paired=T))
+%% @ 
+%% 
+%% P-value as before. Likewise, you can calculate the differences
+%% yourself and do a 1-sample $t$-test on them, over:
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{T-testing the differences}
+%%   
+%%   \begin{itemize}
+%%   \item First calculate a column of differences (in data frame):
+%%     
+%% <<size="footnotesize">>=
+%% pain = pain %>% mutate(diff=druga-drugb)
+%% pain$diff
+%% @   
+%% \item then throw them into \texttt{t.test}, testing that the mean is
+%%   zero, with same result as before: 
+%%   
+%% <<size="footnotesize">>=
+%% with(pain,t.test(diff,mu=0))
+%% @   
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% %\begin{frame}[fragile]{Or, the \texttt{tidyverse} way}
+%% %  
+%% %  \begin{itemize}
+%% %  \item Create a column \emph{in} data frame using \texttt{mutate}
+%% %  \item then pass ``the data frame
+%% %    that came out of the previous step'' into \texttt{t.test}:
+%% %    
+%% %<<>>=
+%% %pain %>% mutate(mydiff=druga-drugb) %>%
+%% %  as.data.frame() %>%
+%% %  t.test(.$mydiff,mu=0)
+%% %@     
+%% %  \end{itemize} 
+%% %  
+%% %\end{frame}
+
+
+\begin{frame}[fragile]{Assessing normality}
+
+  \begin{itemize}
+  \item Matched pairs analyses assume (theoretically) that differences normally
+distributed. 
+\item 1-sample and 2-sample $t$-tests assume (each) group normally distributed.
+\item Though we know that $t$-tests generally behave well even
+without normality. 
+\item Assess normality with a  normal quantile plot.
+\item Idea: scatter of points should follow the straight line, without curving.
+\item Outliers show up at bottom left or top right of plot as points
+  off the line, as over.
+  
+\item R equivalent: \texttt{stat\_qq}.
+  \end{itemize}
+
+
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{The normal quantile plot}
+%% 
+%% <<fig.height=3.5>>=
+%% qqnorm(pain$diff) ; qqline(pain$diff)
+%% @   
+%% 
+%% Points should follow the straight line. Bottom left one way
+%% off, so normality questionable here: outlier.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{And using ``ggplot'', but without line}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(pain,aes(sample=diff))+stat_qq()
+%% @   
+%%   
+%% \end{frame}
+
+
+
+
+\begin{frame}[fragile]{Drawing it in SAS}
+
+\begin{Sascode}[store=ie]
+  proc univariate noprint;
+    qqplot diff;
+\end{Sascode}
+
+\Graphic[store=ie,scale=0.5]{iee}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]{Getting a line on SAS normal quantile plot}
+
+  \begin{itemize}
+  \item SAS doesn't automatically provide a line, but even without
+    one, you see that these data are not normal because of the outlier
+    bottom left.
+  \item SAS can draw lines, but requires you to give a mean and SD to
+    make the line with.
+  \item Simplest way is to have SAS estimate them from the data, but
+    the line is usually not very good.
+  \item Or we can estimate them another way from IQR.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Having SAS estimate them}
+
+\begin{Sascode}[store=if]
+  proc univariate noprint;
+    qqplot diff / normal(mu=est sigma=est);
+\end{Sascode}
+
+\Graphic[store=if,scale=0.5]{iff}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Another way to estimate $\mu$ and $\sigma$}
+
+  \begin{itemize}
+  \item Problem above is that SD was grossly inflated by outlier.
+  \item On standard normal, quartiles about $\pm 0.675$:
+<<>>=
+qnorm(0.25); qnorm(0.75)  
+@ 
+\item So IQR of standard normal about $2(0.675)=1.35$.
+\item Thus IQR of \emph{any} normal about $1.35\sigma$.
+\item Idea: estimate $\sigma$ by taking sample IQR and dividing by
+  1.35. Not affected by outliers.
+\item Here, IQR is 1.95,
+so estimate of $\sigma$ is 1.455.
+\item  In similar spirit, estimate $\mu$ by median, $-1.65$.
+  \end{itemize} 
+  
+\end{frame}
+
+\begin{frame}[fragile]{Using improved $\mu$ and $\sigma$}
+
+\begin{Sascode}[store=ig]
+  proc univariate noprint;
+    qqplot diff / normal(mu=-1.65 sigma=1.455);
+\end{Sascode}
+
+\Graphic[store=ig,scale=0.5]{igg}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{More normal quantile plots}
+%% 
+%%   \begin{itemize}
+%%   \item How straight does a normal quantile plot have to be?
+%%   \item There is randomness in real data, so even a normal quantile
+%%     plot from normal data won't look \emph{perfectly} straight.
+%%   \item With a small sample, can look not very straight even from
+%%     normal data.
+%%   \item Looking for \emph{systematic} departure from a straight line;
+%%     random wiggles ought not to concern us.
+%%   \item Look at some examples where we know the answer, so that we can
+%%     see what to expect.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Normal data, large sample}
+%%   
+%% <<echo=F>>=
+%% set.seed(457299)
+%% @   
+%%   
+%% <<fig.height=3.5>>=
+%% d=tibble(x=rnorm(200))
+%% ggplot(d,aes(x=x))+geom_histogram(bins=10)
+%% @   
+%% 
+%% As normal as you could wish for.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The normal quantile plot}
+%%   
+%% <<fig.height=4>>=
+%% qqnorm(d$x) ; qqline(d$x)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Normal data, small sample}
+%%   
+%% <<echo=F>>=
+%% set.seed(457299)
+%% @   
+%%   
+%% <<fig.height=3.5>>=
+%% d=tibble(x=rnorm(20))
+%% ggplot(d,aes(x=x))+geom_histogram(bins=7)
+%% @   
+%% 
+%% Not so convincingly normal, but not obviously skewed.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The normal quantile plot}
+%%   
+%% <<fig.height=3.7>>=
+%% qqnorm(d$x) ; qqline(d$x)
+%% @   
+%% Good, apart from the highest and lowest points being slightly off. I'd
+%% call this good.
+%% \end{frame}
+%% 
+%%   
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% \begin{frame}[fragile]{Chi-squared data, $df=10$}
+%%   
+%% <<echo=F>>=
+%% set.seed(457299)
+%% @   
+%%   
+%% <<fig.height=3.5>>=
+%% d=tibble(x=rchisq(100,10))
+%% ggplot(d,aes(x=x))+geom_histogram(bins=10)
+%% @   
+%% 
+%% Somewhat skewed to right.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The normal quantile plot}
+%%   
+%% <<fig.height=4>>=
+%% qqnorm(d$x) ; qqline(d$x)
+%% @   
+%% 
+%% Somewhat opening-up curve.
+%%   
+%% \end{frame}
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% \begin{frame}[fragile]{Chi-squared data, $df=3$}
+%%   
+%% <<echo=F>>=
+%% set.seed(457299)
+%% @   
+%%   
+%% <<fig.height=3.5>>=
+%% d=tibble(x=rchisq(100,3))
+%% ggplot(d,aes(x=x))+geom_histogram(bins=10)
+%% @   
+%%   
+%% Definitely skewed to right.
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The normal quantile plot}
+%%   
+%% <<fig.height=4>>=
+%% qqnorm(d$x) ; qqline(d$x)
+%% @   
+%% 
+%% Clear upward-opening curve.
+%%   
+%% \end{frame}
+%% 
+%% 
+%% 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% \begin{frame}[fragile]{$t$-distributed data, $df=3$}
+%%   
+%% <<echo=F>>=
+%% set.seed(457297)
+%% @   
+%%   
+%% <<fig.height=3.5>>=
+%% d=tibble(x=rt(300,3))
+%% ggplot(d,aes(x=x))+geom_histogram(bins=10)
+%% @   
+%%   
+%% Long tails (or a very sharp peak).
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The normal quantile plot}
+%%   
+%% <<fig.height=4>>=
+%% qqnorm(d$x) ; qqline(d$x)
+%% @   
+%% 
+%% Low values too low and high values too high for normal.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Dealing with non-normality}
+%% 
+%%   \begin{itemize}
+%%   \item One approach: do nothing, since the $t$-tests are robust to at
+%%     least some non-normality.
+%%   \item Another: make a sign test, and test whether \emph{median}
+%%     difference is zero. In SAS, calculate differences and ask for it.
+%% %  \item Another: do a randomization test. 
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Matched-pairs sign test in SAS}
+
+
+  \begin{itemize}
+  \item Already have differences in \texttt{diff} (if not, do
+    \texttt{data}-and-\texttt{set} thing to get them), so:
+  \end{itemize}
+  
+\begin{Sascode}[store=ihx]
+proc univariate;
+  var diff;  
+\end{Sascode}
+
+\Listing[store=ihx,objects=TestsforLocation]{ihxx}
+
+  
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Results}
+  
+  \begin{itemize}
+    \item P-value for $t$-test 0.0530, for sign test 0.1460.
+    \item Sign test says ``no evidence of difference between drugs A
+      and B'', while $t$-test says marginal evidence of difference.
+%%   \item Data (differences drug A minus drug B):
+%% 
+%% <<echo=F>>=
+%% options(width=50)
+%% @     
+%%     
+%% <<>>=
+%% pain$diff
+%% @   
+%% \item See the big outlier (at end of list).
+%% 
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Sign test in R}
+%% 
+%%   \begin{itemize}
+%%   \item In R, most easily: calculate differences \emph{in} data frame,
+%%     then use \texttt{smmr}.
+%%   \item Null median difference is 0:
+%% 
+%%     \begin{small}
+%% <<>>=
+%% pain %>% mutate(mydiff=druga-drugb) %>%
+%%   sign_test(mydiff,0)
+%% @           
+%%     \end{small}
+%% 
+%% \item P-value 0.1460, as SAS. Same conclusion.
+%% \item Since we are working in a pipe, input data frame to
+%%   \texttt{sign\_test} is ``whatever came out of previous step''.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% %\begin{frame}[fragile]{Randomization test idea}
+%% %  
+%% %  \begin{itemize}
+%% %  \item Another way of doing a test when you're worried about
+%% %    assumptions is to use ``randomization'' idea.
+%% %  \item Ask ``what could be switched around if $H_0$ true''?
+%% %  \item In matched pairs, each of the matched observations could have
+%% %    come from either treatment (eg.\ drug). 
+%% %  \item In two independent samples, each observation could have come
+%% %    from either sample.
+%% %  \item In ANOVA (multiple groups), each observation could have come
+%% %    from any group.
+%% %  \item Randomization test: randomly shuffle treatments/samples/groups
+%% %    according to experimental design.
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Randomization test for matched pairs}
+%% %
+%% %  \begin{itemize}
+%% %  \item Randomly
+%% %    allocate results for each person to drug A or B.
+%% %  \item Observed sample mean difference:
+%% %<<>>=
+%% %mean(diff)
+%% %@     
+%% %\item Switching drugs (from observed data) means switching \emph{sign}
+%% %  of difference A minus B. So generate random sample of $-1$ and $1$
+%% %  of size 12 (with replacement), like this:
+%% %
+%% %<<echo=F>>=
+%% %set.seed(457299)
+%% %@   
+%% %
+%% %<<>>=
+%% %pm=c(1,-1)
+%% %random.pm=sample(pm,12,replace=T)
+%% %random.pm
+%% %@ 
+%% %
+%% %
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Generating a randomization sample and mean}
+%% %
+%% %  \begin{itemize}
+%% %  \item Then take observed differences and generate randomized ones by
+%% %  multiplying \texttt{diff} by these random signs:
+%% %<<>>=
+%% %  random.diff=diff*random.pm
+%% %  random.diff
+%% %@ 
+%% %<<>>=
+%% %  mean(random.diff)
+%% %@ 
+%% %
+%% %\item This randomization gave a sample mean difference close to $-1$,
+%% %  while our observed value was more negative, $-2.13$.
+%% %
+%% %  \end{itemize}
+%% %
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{One randomization sample}
+%% %
+%% %  \begin{itemize}
+%% %    \item Write a function to do randomization and return statistic,
+%% %      \emph{once}. 
+%% %
+%% %<<>>=
+%% %rand.diff=function(x) {
+%% %  pm=c(-1,1)
+%% %  random.pm=sample(pm,length(x),replace=T)
+%% %  random.diff=diff*random.pm
+%% %  return(mean(random.diff))
+%% %}
+%% %@ 
+%% %
+%% %\item Try it a few times:
+%% %
+%% %  \begin{footnotesize}
+%% %  \begin{multicols}{2}
+%% %<<>>=
+%% %rand.diff(diff)
+%% %rand.diff(diff)
+%% %@   
+%% %
+%% %<<>>=
+%% %rand.diff(diff)
+%% %rand.diff(diff)
+%% %@ 
+%% %    
+%% %  \end{multicols}
+%% %    
+%% %  \end{footnotesize}
+%% %  
+%% %
+%% %\item Each answer different, because of randomization.
+%% %  
+%% %\end{itemize}  
+%% %
+%% %
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Repeating many times}
+%% %  
+%% %  \begin{itemize}
+%% %  \item Function \texttt{replicate} repeats something as many times as
+%% %    you like.
+%% %  \item In this case, repeat \texttt{rand.diff(diff)} many times:
+%% %
+%% %<<cache=T>>=
+%% %replicate(5,rand.diff(diff))
+%% %rand.mean=replicate(1000,rand.diff(diff))
+%% %@   
+%% %
+%% %\item Collection of replicated values called \textbf{randomization
+%% %    distribution}. 
+%% %\item Use this instead of normal, $t$, \ldots to get P-value from.
+%% %
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %
+%% %\begin{frame}[fragile]{Histogram of randomization distribution}
+%% %  
+%% %<<fig.height=3.7>>=
+%% %r=data.frame(mean=rand.mean)
+%% %ggplot(r,aes(x=mean))+geom_histogram(binwidth=0.5)
+%% %@   
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{The randomization distribution}
+%% %
+%% %  \begin{itemize}
+%% %  \item If $t$-test were plausible, this would look normal. Does it?
+%% %\pause
+%% %  \item Why not? The outlier difference, $-12.5$. If counted as
+%% %    positive, mean probably positive; if counted as negative, mean
+%% %    probably negative.
+%% %  \item This true almost regardless of other values (whether plus or minus).
+%% %  \item Randomization test can be trusted, though.
+%% %  \item P-value: how many of randomized means came out less than observed
+%% %    $-2.13$, doubled:
+%% %    
+%% %    \begin{multicols}{2}
+%% %<<>>=
+%% %  tab=table(rand.mean<=
+%% %    mean(diff))
+%% %  tab
+%% %@ 
+%% %
+%% %<<>>=
+%% %  2*tab[2]/1000
+%% %@ 
+%% %\item Randomization P-value small; no doubt now that mean pain relief
+%% %  for two drugs different. 
+%% %      
+%% %    \end{multicols}
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Randomization test for median difference}
+%% %
+%% %  \begin{itemize}
+%% %  \item With outlier, should we be using mean?
+%% %  \item Randomization test flexible; change mean to median:
+%% %
+%% %<<cache=T>>=
+%% %rand.diff.med=function(x) {
+%% %  pm=c(-1,1)
+%% %  random.pm=sample(pm,length(x),replace=T)
+%% %  random.diff=diff*random.pm
+%% %  return(median(random.diff))
+%% %}
+%% %replicate(5,rand.diff.med(diff))
+%% %rand.median=replicate(1000,rand.diff.med(diff))
+%% %@     
+%% %\item Change \texttt{mean} to \texttt{median} everywhere.
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %
+%% %\begin{frame}[fragile]{Histogram of randomization distribution for
+%% %    median}
+%% %
+%% %<<fig.height=3.7>>=
+%% %r=data.frame(med=rand.median)
+%% %ggplot(r,aes(x=med))+
+%% %  geom_histogram(binwidth=0.5)
+%% %@   
+%% %
+%% %  
+%% %\end{frame}
+%% %
+%% %
+%% %\begin{frame}[fragile]{P-value for randomization test for median}
+%% %
+%% %  \begin{itemize}
+%% %  \item Randomization distribution has only one peak now.
+%% %  \item Sample median difference was $-1.65$ (\texttt{median(diff)}).
+%% %  \item P-value is proportion of these at least as extreme:
+%% %<<>>=
+%% %  tab=table(rand.median<=median(diff))
+%% %  tab
+%% %  2*tab[2]/1000
+%% %@ 
+%% %\item Again, reject hypothesis that two drugs equally good.
+%% %
+%% %  \end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% %\begin{frame}[fragile]{Comparison}
+%% %
+%% %Test results seem to be very different:
+%% %
+%% %\bigskip
+%% %
+%% %\begin{tabular}{llr}
+%% %  \hline
+%% %  Test & Statistic & P-value\\
+%% %  \hline
+%% %  $t$-test & mean & 0.053\\
+%% %  randomization & mean & 0.012\\
+%% %  \hline
+%% %  sign test & median & 0.146\\
+%% %  randomization & median & 0.022\\
+%% %  \hline
+%% %\end{tabular}
+%% %
+%% %\bigskip
+%% %
+%% %\begin{itemize}
+%% %\item Not that much agreement, though 2 randomization tests have
+%% %  similar results.
+%% %\item Sign test P-value much larger than others (lack of power?)
+%% %\item $t$-test probably not trustworthy (very non-normal dist.\ of differences).
+%% %\item Using mean probably not wise (outlier difference)
+%% %\item Randomization test for median probably best.
+%% %\end{itemize}
+%% %  
+%% %\end{frame}
+%% %
+%% 
+%% \begin{frame}[fragile]{The kids' reading data, again}
+%% 
+%%   \begin{scriptsize}
+%%     \begin{multicols}{3}
+%% <<>>=
+%% kids %>% slice(1:15)
+%% @     
+%% 
+%% <<>>=
+%% kids %>% slice(16:30)
+%% @ 
+%% 
+%% <<>>=
+%% kids %>% slice(31:44)
+%% @ 
+%%       
+%%     \end{multicols}
+%%   \end{scriptsize}
+%%   
+%%   \begin{itemize}
+%%   \item 21 kids in ``treatment'', new reading method; 23 in
+%%     ``control'', standard reading method.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Assessing assumptions}
+%%   
+%%   \begin{itemize}
+%%   \item We did two-sample $t$-test (Satterthwaite-Welch) before.
+%%   \item Assumes approx.\ normal data \emph{within each group}.
+%%   \item Does \emph{not} assume equal spread.
+%%     
+%%   \item (Pooled $t$-test \emph{does} assume equal spread).
+%%   \item Assess each group separately. I think boxplots good enough,
+%%     since we are looking for \emph{serious} problems with normality
+%%     like outliers or clear skewness.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Boxplots for reading data}
+%%   
+%% <<fig.height=4>>=
+%% ggplot(kids,aes(x=group,y=score))+geom_boxplot()
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Comments}
+%%   
+%%   \begin{itemize}
+%%   \item These boxplots show no problems with normality. They are both
+%%     more or less symmetric (equal whiskers) and there are no outliers.
+%%   \item Equal spreads are questionable, but we don't need that.
+%%   \item We ought be happy with the two-sample $t$-test, which was this:
+%%     
+%% <<size="footnotesize">>=
+%% t.test(score~group,data=kids,alternative="less")
+%% @     
+%% from which we concluded that the new reading method really does help.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Facetted normal quantile plots}
+%%   
+%%   If you really want them, this:
+%%   
+%% <<fig.height=4>>=
+%% ggplot(kids,aes(sample=score))+stat_qq()+
+%%   facet_wrap(~group)
+%% @   
+%%   
+%% \end{frame}
+
+%% \begin{frame}[fragile]{What to do if normality fails}
+%%   
+%%   \begin{itemize}
+%%   \item (On the previous page, the only indication of non-normality is
+%%     the highest score in the control group, which is a little too high
+%%     for normality.)
+%%   \item If normality fails (for one or both of the groups), what do we
+%%     do then?
+%%   \item Again, can compare medians: use the thought process of the
+%%     sign test, which does not depend on normality and is not damaged
+%%     by outliers.
+%%   \item A suitable test called \textbf{Mood's median test}.
+%%   \item Before we get to that, a diversion.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{The chi-squared test for independence}
+%%   
+%%   \begin{itemize}
+%%   \item Suppose we want to know whether people are in favour of having
+%%     daylight savings time all year round. We ask 20 males and 20
+%%     females whether they each agree with having DST all year round
+%%     (``yes'') or not (``no'').
+%%     
+%%   \item Some of the data:
+%% 
+%% <<echo=F,message=F>>=
+%% dst=read_delim("dst.txt"," ")
+%% @     
+%% 
+%% <<>>=
+%% dst %>% sample_n(5) # randomly sample 5 rows
+%% @     
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{\ldots continued}
+%%   
+%%   \begin{itemize}
+%%   \item Count up individuals in each category combination, and arrange
+%%   in \emph{contingency table}:
+%%   
+%% <<>>=
+%% tab=with(dst,table(gender,agree))
+%% tab
+%% @  
+%% 
+%% \item Most of the males say ``yes'', but the females are about evenly
+%%   split. 
+%% \item Looks like males more likely to say ``yes'', ie.\
+%%   an \emph{association} between gender and agreement. 
+%% \item Test an $H_0$ of ``no association'' (``independence'') vs.\
+%%   alternative that there is really some association.
+%% \item Done with \texttt{chisq.test}.
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{\ldots And finally}
+%%   
+%% <<>>=
+%% chisq.test(tab,correct=F)
+%% @   
+%% 
+%% \begin{itemize}
+%% \item Reject null hypothesis of no association
+%% \item therefore there \emph{is} a difference in rates of agreement
+%%   between (all) males and females (or that gender and agreement are
+%%   associated). 
+%% \item Without \texttt{correct=F} uses ``Yates correction''; this way,
+%%   should give same answers as calculated by hand (if you know how).
+%% \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Mood's median test}
+  
+  \begin{itemize}
+  \item Compare medians of two groups.
+  \item R equivalent: \texttt{median\_test} from \texttt{smmr}.
+  \item Recall sign test: \emph{count} number of values above and
+    below something (there, hypothesized median).
+  \item Idea of Mood's median test:
+    \begin{itemize}
+    \item Work out the median of \emph{all} the data, regardless of
+      group (``grand median'').
+    \item Count how many data values \emph{in each group} are
+      above/below this grand median.
+    \item Make contingency table of group vs.\ above/below.
+    \item Test for association.
+    \end{itemize}
+  \item If group medians equal, each group should have about half its
+    observations above/below grand median. If not, one group will be
+    mostly above grand median and other below.
+    
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Mood's median test for kids' reading data}
+%% 
+%%   \begin{itemize}
+%%   \item Find overall median score:
+%%     
+%% <<>>=
+%% m=median(kids$score) ; m
+%% @     
+%% \item Make table of above/below vs.\ group:
+%%   
+%% <<>>=
+%% tab=with(kids,table(group,score>m))
+%% tab
+%% @  
+%% \item Treatment group scores mostly above median, control group scores
+%%   mostly below, as expected.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The test}
+%%   \begin{itemize}
+%% \item Do chi-squared test:
+%%   
+%% <<>>=
+%% chisq.test(tab,correct=F)
+%% @   
+%% \item This test actually \emph{two-sided} (tests for \emph{any}
+%%   association), so entitled to do 1-sided test by halving P-value to
+%%   get 0.017. (This step has to be justified situation-by-situation.)
+%% \item This way too, children do better at learning to read using the
+%%   new method.
+%%   \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Or by \texttt{smmr}}
+%%   
+%%   \begin{itemize}
+%%   \item \texttt{median\_test} does the whole thing:
+%%     
+%% <<>>=
+%% median_test(kids,score,group)
+%% @     
+%% \item P-value again two-sided.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Comments}
+%%   
+%%   \begin{itemize}
+%%     
+%%   \item P-value 0.013 for (1-sided) $t$-test, 0.017 for (1-sided) Mood
+%%     median test.
+%%   \item Like the sign test, Mood's median test doesn't use the data
+%%     very efficiently (only, is each value above or below grand
+%%     median).
+%%   \item Thus, if we can justify doing $t$-test, we should do it. This
+%%     is the case here.
+%%   \item The $t$-test will usually give smaller P-value because it uses
+%%     the data more efficiently.
+%%   \item The time to use Mood's median test is if we are definitely
+%%     unhappy with the normality assumption (and thus the $t$-test
+%%     P-value is not to be trusted).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Mood's median test for kids' reading data}
+  \begin{Datastep}
+proc import
+  datafile='/home/ken/drp.txt'
+  dbms=dlm
+  out=reading
+  replace;
+  delimiter=' ';
+  getnames=yes;
+\end{Datastep}
+%$ %$
+\begin{Sascode}[store=iw]
+  proc print;
+\end{Sascode}
+
+\end{frame}
+
+\begin{frame}[fragile]{The data (tiny)}
+  
+  \Listing[store=iw,fontsize=tiny]{iww}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Doing Mood's median test}
+  
+  \begin{Sascode}[store=iv]
+proc npar1way median;
+  var score;
+  class group;
+  \end{Sascode}
+  
+  
+  \Listing[store=iv,fontsize=footnotesize,objects=medianScores]{ivw}
+
+    ``Sum of scores'' is number of values above median in each group
+    (checks with earlier calculation).
+
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+  \Listing[fontsize=footnotesize,store=iv,
+          objects=medianTest medianAnalysis]{ivv}
+
+          \begin{itemize}
+          \item Same test statistic and (two-sided) P-value as R, more
+            or less (in bottom table). Again can halve it if justified
+            (it is justified here).
+          \item Top table does as $z$-test, which gives 1-sided
+            P-value as well.
+          \end{itemize}
+
+
+\end{frame}
+
+
+%\begin{frame}[fragile]{Randomization test for two-sample data}
+%
+%  
+%  \begin{itemize}
+%  \item Each observation might, under $H_0$, have come from either treatment or control.
+%  \item Means for data:
+%<<>>=
+%aggregate(score~group,kids,mean)
+%@     
+%Differ by 9.95.
+%  \item \emph{If} we assign Treatment and Control to the observations
+%    at random, how likely would we be to see a difference in means of
+%    9.95 or bigger?
+%  \end{itemize}
+%  
+%\end{frame}
+
+% \begin{frame}[fragile]{Randomization test}
+% 
+%   \begin{itemize}
+%   \item Ingredients:
+%     \begin{itemize}
+%     \item \texttt{sample} to shuffle treatment groups
+%     \item \texttt{aggregate} to calculate means for shuffled groups
+%     \item little bit of calculation to get difference in sample means.
+%     \end{itemize}
+% 
+% <<echo=F>>=
+% set.seed(457299)
+% @     
+%     
+% <<>>=
+%   attach(kids)
+%   myshuffle=sample(group)
+%   myshuffle  
+% @     
+% \item This makes shuffled groups. 
+% 
+%   \end{itemize}
+%   
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Randomization difference in means}
+% 
+%   \begin{itemize}
+%   \item Now find group means for \emph{shuffled} groups:
+% 
+% <<>>=
+%   themeans=aggregate(score~myshuffle,data=kids,mean)
+%   themeans
+% @     
+% 
+% \item Difference in means is second thing in second column minus first
+%   thing in second column:
+% 
+% <<>>=
+%   meandiff=themeans[2,2]-themeans[1,2]
+%   meandiff
+% @   
+% 
+% \item Simulated treatment $>$ simulated control.
+% 
+%   \end{itemize}
+%   
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Making into function}
+%   \begin{itemize}
+%   \item We will repeat shuffling process many times, so put it in
+%     \emph{function}. 
+%   \item Input: data frame.
+%   \item Output: difference in means of shuffled groups.
+%     
+% <<>>=
+% shuffle.means=function(x) {
+%   myshuffle=sample(x$group)
+%   themeans=aggregate(score~myshuffle,data=x,mean)
+%   meandiff=themeans[2,2]-themeans[1,2]
+%   return(meandiff)
+% }
+% @     
+%   \end{itemize}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Again, using function!}
+%   
+% <<>>=
+%   shuffle.means(kids)
+%   shuffle.means(kids)
+%   shuffle.means(kids)
+%   replicate(5,shuffle.means(kids))
+% @   
+% 
+% \begin{itemize}
+% \item Each run does different shuffle, so gives different result.
+% \item Last line does whole thing five times, collects results.
+% \item Looks like a
+% difference in means of 10 is improbably large, by chance.
+% \end{itemize}
+% 
+% 
+% \end{frame}
+% 
+% 
+% 
+% \begin{frame}[fragile]{1000 times}
+% 
+% <<cache=T>>=
+% nsim=1000
+% ans=replicate(nsim,shuffle.means(kids))
+% @ 
+%       
+%       \begin{itemize}
+%       \item Investigate randomization by looking at \texttt{ans}.
+%       \end{itemize}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{Histogram of randomized mean differences}
+%   
+% <<fig.height=4>>=
+% ggplot(data.frame(ans=ans),aes(x=ans))+
+%   geom_histogram(binwidth=2)+geom_vline(xintercept=10)
+% @   
+%   
+% \end{frame}
+% 
+% \begin{frame}[fragile]{How many randomizations gave mean difference
+%     $>10$?}
+%   \begin{itemize}
+%   \item By chance, mean difference of 10 or bigger appears unlikely.
+%   \item 
+% Use a logical vector to pick out the elements of \texttt{ans} that we
+% want, then make a table of them:
+% 
+% <<>>=
+%   isbig=(ans>=10);
+%   table(isbig)
+% @ 
+% \item 17 out of 1000.
+% \item  Our randomization test gives a P-value of
+% $17/1000=0.017$, so would reject null hypothesis ``new reading program
+% has no effect'' in favour of alternative ``new reading program
+% helps''.
+% \item P-value similar to 0.013 from two-sample $t$.
+% 
+% 
+%   \end{itemize}
+% 
+% 
+%   
+% \end{frame}
+% 
+% \begin{frame}{Why 1000 randomizations?}
+%   \begin{itemize}
+%   \item No uniquely good answer.
+%   \item More randomizations is better.
+%   \item But didn't want to wait too long for it to finish!
+%   \item If you think 10,000 (or a million) better, replace
+%     \texttt{nsim} in my code by desired value and run again.
+%   \end{itemize}
+% \end{frame}
+
+
+\begin{frame}[fragile]{Jumping rats}
+
+  \begin{itemize}
+\item Link between exercise and healthy bones (many studies).
+\item Exercise stresses bones and causes them to get stronger.
+\item Study (Purdue): effect of jumping on bone density of growing rats.
+\item 30 rats, randomly assigned to 1 of 3 treatments:
+  \begin{itemize}
+  \item No jumping (control)
+  \item Low-jump treatment (30 cm)
+  \item High-jump treatment (60 cm)
+  \end{itemize}
+\item 8 weeks, 10 jumps/day, 5 days/week.
+\item Bone density of rats (mg/cm$^3$) measured at end.
+  \item See whether larger amount of exercise (jumping) went with
+    higher bone density.
+  \item Random assignment: rats in each group similar in all important
+    ways.
+  \item So entitled to draw conclusions about cause and effect.
+
+  \end{itemize}
+
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Reading the data}
+%%   
+%%   Values separated by spaces:
+%% <<>>=
+%% rats=read_delim("jumping.txt"," ")
+%% glimpse(rats)
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Boxplots}
+%% 
+%% <<fig.height=4>>=
+%%     ggplot(rats,aes(y=density,x=group))+geom_boxplot()
+%% @     
+%% 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Analysis of Variance}
+%%   
+%%   \begin{itemize}
+%%   \item Comparing $>2$ groups of independent observations (each rat
+%%     only does one amount of jumping). 
+%%   \item Standard procedure: analysis of variance (ANOVA).
+%%   \item Null hypothesis: all groups have same mean.
+%%   \item Alternative: ``not all means the same'', at least one is
+%%   different from others.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Testing: ANOVA in R}
+%% 
+%% <<>>=
+%%     rats.aov=aov(density~group,data=rats)
+%%     summary(rats.aov)
+%% @   
+%% 
+%% \begin{itemize}
+%% \item Usual ANOVA table, small P-value: significant result.
+%% \item Conclude that the mean bone densities are not all equal.
+%% \item Reject null, but not very useful finding.
+%% \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Analysis in SAS}
+
+Read in data and do ANOVA. R equivalent: \texttt{aov}.
+
+\begin{Datastep}
+proc import
+  datafile='/home/ken/jumping.txt'
+    dbms=dlm
+    out=rats
+    replace;
+  delimiter=' ';
+  getnames=yes;
+\end{Datastep}
+
+%$ %$ %$ 
+
+\begin{Sascode}[store=ih]
+proc anova;
+  class group;
+  model density=group;
+\end{Sascode}
+
+%$ %$
+  
+\end{frame}
+
+\begin{frame}[fragile]{Results (some)}
+
+\Listing[store=ih,fontsize=scriptsize,objects=OverallANOVA ModelANOVA]{ihh}  
+  
+\end{frame}
+
+
+%% \begin{frame}[fragile]{Which groups are different from which?}
+%% 
+%%   \begin{itemize}
+%%   \item ANOVA really only answers half our questions: it says ``there
+%%     are differences'', but doesn't tell us which groups different.
+%%   \item One possibility (not the best): compare \emph{all possible
+%%       pairs} of groups, via two-sample $t$. 
+%%   \item First pick out each group:
+%% 
+%% <<>>=
+%%   controls=rats %>% filter(group=="Control")
+%%   lows=    rats %>% filter(group=="Lowjump")
+%%   highs=   rats %>% filter(group=="Highjump")
+%% @     
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Control vs.\ low}
+%% 
+%% <<>>=
+%%   t.test(controls$density,lows$density)
+%% @   
+%% 
+%% No sig.\ difference here.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Control vs.\ high}
+%% 
+%% <<>>=
+%%   t.test(controls$density,highs$density)
+%% @   
+%% 
+%% These are different. 
+%% 
+%% 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Low vs.\ high}
+%% 
+%% <<>>=
+%%   t.test(lows$density,highs$density)
+%% @   
+%% 
+%% These are different too.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{But\ldots}
+%% 
+%%   \begin{itemize}
+%%   \item We just did 3 tests instead of 1.
+%%   \item So we have given ourselves 3 chances to reject $H_0:$ all
+%%     means equal, instead of 1.
+%%   \item Thus $\alpha$ for this combined test is not 0.05.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{John W.\ Tukey}
+%% 
+%%   \begin{columns}
+%%     \begin{column}{0.4\textwidth}
+%%       \includegraphics[width=\textwidth]{John_Tukey}
+%%     \end{column}
+%%     \begin{column}{0.6\textwidth}
+%%       \begin{itemize}
+%%       \item American statistician, 1915--2000
+%%       \item Big fan of exploratory data analysis
+%%       \item Invented boxplot
+%%       \item Invented ``honestly significant differences''
+%%       \item Invented jackknife estimation
+%%       \item Coined computing term ``bit''
+%%       \item Co-inventor of Fast Fourier Transform
+%%       \end{itemize}
+%%     \end{column}
+%%   \end{columns}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Honestly Significant Differences}
+%% 
+%%   \begin{itemize}
+%%   \item Compare several groups with \emph{one} test, telling you which
+%%     groups differ from which.
+%%   \item Idea: if all population means equal, find distribution of
+%%     highest sample mean minus lowest sample mean.
+%%   \item Any means unusually different compared to that declared
+%%     significantly different.
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Tukey on rat data}
+%% 
+%% <<echo=F>>=
+%% options(width=60)
+%% @   
+%% <<>>=
+%% rats.aov=aov(density~group,data=rats)
+%% TukeyHSD(rats.aov)
+%% @   
+%% 
+%% Again conclude that bone density for \texttt{highjump} group significantly
+%%   higher than for other two groups.
+%%   
+%% \end{frame}
+%% 
+%% 
+%% 
+%% \begin{frame}[fragile]{Why Tukey's procedure better than all
+%%     $t$-tests}
+%% 
+%% Look at P-values for the two tests:
+%% 
+%% \begin{verbatim}
+%% Comparison        Tukey    t-tests
+%% ----------------------------------
+%% Highjump-Control 0.0016     0.0021
+%% Lowjump-Control  0.4744     0.2977
+%% Lowjump-Highjump 0.0298     0.0045
+%% \end{verbatim}
+%% 
+%% \begin{itemize}
+%% \item Tukey P-values (mostly) higher.
+%% \item Proper adjustment for doing \emph{three} $t$-tests at once, not
+%%   just one in isolation.
+%% \item \texttt{lowjump-highjump} comparison no longer significant at
+%%   $\alpha=0.01$. 
+%% \end{itemize}
+%% 
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Tukey in SAS}
+  
+  R equivalent: \texttt{TukeyHSD}.
+
+\begin{Sascode}[store=ii]
+proc anova;
+  class group;
+  model density=group;
+  means group / tukey;
+\end{Sascode}
+
+Strategy: if you intend to do Tukey (if the ANOVA comes out
+significant), submit \emph{all} these lines the first time. If the
+ANOVA $F$-test is not significant, \emph{ignore} the Tukey.
+   
+\end{frame}
+
+\begin{frame}[fragile]{Tukey output (some)}
+
+\Listing[store=ii,objects=MCLines]{iii}
+  
+\end{frame}
+%% 
+%% \begin{frame}[fragile]{Checking assumptions}
+%% 
+%% <<fig.height=3>>=
+%% ggplot(rats,aes(y=density,x=group))+geom_boxplot()
+%% @   
+%% 
+%% 
+%% 
+%% Assumptions:
+%% 
+%% \begin{itemize}
+%% \item Normally distributed data within each group
+%% \item with equal group SDs.
+%% \end{itemize}
+%% 
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The assumptions}
+%% 
+%%   \begin{itemize}
+%%   \item Normally-distributed data within each group
+%%   \item Equal group SDs.
+%%   \end{itemize}
+%% 
+%% These are shaky here because:
+%% 
+%% \begin{itemize}
+%% \item \texttt{control} group has outliers
+%% \item \texttt{highjump} group appears to have less spread than others.
+%% \end{itemize}
+%% 
+%% Possible remedies (in general):
+%% 
+%% \begin{itemize}
+%% \item Transformation of response (usually works best when SD increases
+%%   with mean)
+%% \item If normality OK but equal spreads not, can use \textbf{Welch
+%%     ANOVA}. (Regular ANOVA like pooled $t$-test; Welch ANOVA like
+%%   Welch-Satterthwaite $t$-test.)
+%% \item Can also use Mood's Median Test (see over). This works for any
+%%   number of groups.
+%% \end{itemize}
+%% 
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Mood's median test 1/3}
+%%   
+%%   \begin{itemize}
+%%   \item Find median of \emph{all} bone densities, regardless of group:
+%% <<>>=
+%% m=median(rats$density) ; m
+%% @     
+%% \item Count up how many observations \emph{in each group} above or
+%%   below overall median:
+%%   
+%%   \begin{multicols}{2}
+%% <<>>=
+%% tab=with(rats,
+%%   table(group,density>m))
+%% tab
+%% @   
+%% 
+%% \item All \texttt{Highjump} obs above overall median.
+%% \item Most \texttt{Control} obs \emph{below} overall median.
+%% \item Suggests medians differ by group.
+%%   \end{multicols}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Mood's median test 2/3}
+%%   
+%%   \begin{itemize}
+%%   \item Test whether association between group and being above/below
+%%     overall median significant using \emph{chi-squared test for association}:
+%%     
+%% <<>>=
+%% chisq.test(tab,correct=F)
+%% @     
+%% 
+%% \item Very small P-value says that being above/below overall median
+%%   \emph{depends on group}.
+%% \item That is, groups \emph{do not} all have same median.
+%%   
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Mood's median test 3/3}
+%%   
+%%   Or with \texttt{median\_test} from \texttt{smmr}, same as before:
+%%   
+%% <<>>=
+%% median_test(rats,density,group)
+%% @   
+%% 
+%% No doubt that medians differ by group.
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Comments}
+%%   
+%%   \begin{itemize}
+%%   \item This test is equivalent of $F$-test, not of Tukey.
+%% \item To determine which groups differ from which, can compare all
+%%   possible pairs of groups via (2-sample) Mood's median tests, then
+%%   adjust P-values by multiplying by number of 2-sample Mood tests done.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Welch ANOVA}
+%%   
+%%   \begin{itemize}
+%%   \item For these data, Mood's median test probably best because we
+%%     doubt both normality and equal spreads.
+%%     \item When normality OK but \emph{spreads differ}, Welch ANOVA way
+%%       to go. 
+%%   \item Welch ANOVA done by \texttt{oneway.test} as shown (for illustration):
+%%     
+%% <<>>=
+%% oneway.test(density~group,data=rats)
+%% @     
+%% \item P-value very similar, as expected.
+%% \item Appropriate Tukey-equivalent here called Games-Howell (not done here).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Mood's median test}
+  
+  \begin{Sascode}[store=ja]
+proc npar1way median;
+  var density;
+  class group;
+  \end{Sascode}
+  
+  Output part 1, confirming number of \texttt{density} values above
+  grand median in each group:
+  
+\Listing[store=ja, fontsize=footnotesize, objects=medianScores]{jaa}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Rest of output}
+  
+\Listing[store=ja, fontsize=footnotesize, objects=medianAnalysis]{jab} 
+  
+Because there are more than 2 groups, we only get the chi-squared
+test. This is (strongly) significant, so the median bone densities in
+the three groups are not all the same.
+
+\end{frame}
+
+\begin{frame}[fragile]{Welch ANOVA in SAS}
+  
+R equivalent: \texttt{oneway.test}.  
+  
+The instruction to do the Welch ANOVA
+goes on the \texttt{means} line, where the Tukey would go if we were
+doing that:
+
+\begin{Sascode}[store=jc]
+proc anova;
+  class group;
+  model density=group;
+  means group / hovtest=levene welch;
+\end{Sascode}
+
+Ignore the usual ANOVA in the output, and look right to the end:
+  
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+  
+  \Listing[store=jc, fontsize=footnotesize, objects=Welch Means]{jcc}
+
+The Welch's ANOVA is the same as R's. Also note that the P-values for
+the regular ANOVA (0.0019) and the Welch ANOVA (0.0023) are almost
+identical here, so allowing for unequal spreads has made almost no
+difference, even though the group SDs look different.
+  
+\end{frame}
+%% games-howell
+\begin{frame}[fragile]{Games-Howell}
+  
+  \begin{itemize}
+  \item The approved multiple-comparisons test for Welch's ANOVA is
+    Games-Howell, which can be done this way:
+    
+    \begin{Sascode}[store=rugap]
+proc mixed;
+  class group;
+  model density=group / ddfm=satterth;
+  repeated / group=group;
+  lsmeans group / adjust=tukey adjdfe=row;
+    \end{Sascode}
+    
+    
+  \item In \texttt{group=group}, first \texttt{group} is always
+    \texttt{group}, second one is name of your categorical
+    variable. (Here that \emph{was} \texttt{group}.)
+  \item There are (many other) details in the code, not explained here.
+        
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Results}
+  
+    \Listing[store=rugap, fontsize=footnotesize, objects=diffs]{rugapp}
+  
+    High jumping significantly different from others (again).
+  
+\end{frame}
+%% 
+%\begin{frame}[fragile]{Randomization test}
+%
+%  \begin{itemize}
+%  \item Like two-sample randomization test: randomly shuffle group memberships.
+%  \item Choices about test statistic, eg.\
+%    \begin{itemize}
+%    \item usual ANOVA $F$-statistic
+%    \item Tukey-like highest sample mean minus lowest
+%    \end{itemize}
+%  \item I go with highest minus lowest.
+%
+%
+%  \end{itemize}
+%\end{frame}
+%
+%\begin{frame}[fragile]{Observed means and test statistic}
+%  
+%  \begin{itemize}
+%  \item Calculate observed value of test statistic:
+%
+%<<>>=
+%group.means=aggregate(density~group,data=rats,mean) 
+%group.means
+%@     
+%Actual means in second column of \texttt{group.means}:
+%<<>>=
+%z=group.means[,2]
+%obs=max(z)-min(z)  
+%obs
+%@ 
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Randomly shuffling groups}
+%
+%Actual groups are:
+%
+%{\small
+%<<>>=
+%rats$group
+%@ 
+%}
+%
+%%$ %$
+%
+%Shuffle like this:
+%
+%<<echo=F>>=
+%set.seed(457299)
+%@ 
+%
+%{\small
+%<<>>=
+%shuffled.groups=sample(rats$group) ; shuffled.groups
+%@   
+%}
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Calculate means and highest minus lowest}
+%
+%Same idea as for actual data, but using \texttt{shuffled.groups}
+%instead of \texttt{group}:
+%
+%<<>>=
+%my.group.means=aggregate(density~shuffled.groups,
+%  data=rats,mean)
+%my.group.means
+%z=my.group.means[,2]
+%max(z)-min(z)
+%@ 
+%
+%Need to do this a bunch of times. Idea: write a function to do it
+%once, then run function many times.
+%
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Function to do it once}
+%  
+%  \begin{itemize}
+%  \item Input: original data.
+%  \item Obtain shuffled groups
+%  \item Calculate mean for each group
+%  \item Return largest mean minus smallest mean.
+%    
+%  \item Function:
+%  \end{itemize}
+%  
+%<<>>=
+%shuffle1=function(mydata=rats) {
+%  shuffled.groups=sample(mydata$group)
+%  means=aggregate(density~shuffled.groups,
+%    data=mydata,mean)
+%  z=means[,2]
+%  max(z)-min(z)
+%}
+%@   
+%  
+%\end{frame}
+%
+%
+%
+%\begin{frame}[fragile]{Obtaining randomization distribution}
+%
+%  \begin{itemize}
+%  \item Test (randomizes, so look for ``sane'' answer):
+%    
+%<<>>=
+%shuffle1(rats)
+%@     
+%
+%\item Use \texttt{replicate} to do a few times:
+%  
+%<<>>=
+%replicate(6,shuffle1(rats))
+%@   
+%
+%\item Or many times, like 1000:
+%  
+%<<cache=T>>=
+%test.stat=replicate(1000,shuffle1(rats))
+%@   
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]{Randomization distribution of
+%    \texttt{test.stat}}
+%
+%<<fig.height=3.7>>=
+%vals=data.frame(ts=test.stat)
+%ggplot(vals,aes(x=ts))+geom_histogram(binwidth=5)+
+%  geom_vline(xintercept=obs,colour="red")
+%#hist(test.stat)  
+%#abline(v=obs,col="red")
+%@   
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Comments and P-value}
+%
+%  \begin{itemize}
+%  \item Distribution shape skewed to right (lower limit of 0).
+%  \item Red line marks observed highest minus lowest: seems unusually high.
+%  \item If group means really different (anyhow), highest minus lowest
+%    will be \emph{large}, so one-tailed test.
+%  \item (Same logic as one-sidedness of $F$-test in ANOVA.)
+%  \item P-value the usual way:
+%    
+%<<>>=
+%table(test.stat>=obs)  
+%@     
+%\item P-value $2/1000=0.0020$. Despite outliers, still reject ``all
+%  means equal'', with P-value very similar to ANOVA (0.0019).
+%  \end{itemize}
+%\end{frame}
+%
+
+
+

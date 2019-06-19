@@ -1,0 +1,8 @@
+                              The ANOVA Procedure
+ 
+                           Welch's ANOVA for density
+ 
+                    Source          DF    F Value    Pr > F
+ 
+                    group       2.0000       8.82    0.0023
+                    Error      17.4054

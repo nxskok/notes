@@ -1,0 +1,1165 @@
+\section{Connecting to SAS}
+
+\frame{\sectionpage}
+
+
+\begin{frame}{Recall history}
+  
+  \begin{tabular}{p{0.45\textwidth}p{0.49\textwidth}}
+    \textbf{SAS} & \textbf{R}\\
+    From late 1960s, North Carolina State.&
+From 1993, New Zealand.\\                                            
+    Then: punched cards, ``submit'' job, get output later.
+    Still SAS's way of operating: run list of commands, get lot
+      of output.& R style: enter commands one at a time, see output/graphics
+      right away.\\
+                 
+    Commercialized, corporate ethos.             & Open-source, free. Core group, anyone can contribute.\\
+    Strength: Submitting same commands again gets \emph{exactly}
+      same results. (Government, industry).& 
+    Grew out of commercial software S, which appeared when
+      graphics terminals new (emphasis on graphics).\\
+                                             & Concept of ``function'' lets you add onto R or do
+      non-standard things.\\
+    Long history: well-tested.&Big user community makes sure everything works.
+    
+  \end{tabular}
+  
+  \end{frame}
+
+%% \begin{frame}{Installing R}
+%% 
+%%   \begin{itemize}
+%%   \item Free, open-source. Download and run on own computer.
+%%   \item Two things: R itself (install first) and R Studio (front end).
+%%     \item Go to \url{https://www.r-project.org/}:
+%%       
+%%       \includegraphics[width=4in]{r30}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Click on Download}
+%%   
+%%   \begin{itemize}
+%%   \item R is stored on numerous ``mirrors'', sites around the
+%%     world. Choose one close to you (faster), eg.\ U of T:
+%%     
+%%     \includegraphics[width=4in]{r39}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Click U of T}
+%%   
+%%   \begin{itemize}
+%%   \item Click U of T (or other mirror), get:
+%%     
+%%     \includegraphics[width=4in]{r32}
+%%     
+%%     \item Click on your operating system, eg.\ Windows.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Click on Base}
+%% 
+%%       \includegraphics[width=4in]{r33}
+%% 
+%%   \begin{itemize}
+%%   \item Click on ``base'' here.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{The actual download}
+%%   
+%%   \begin{itemize}
+%%   \item Click the top link below:
+%%     
+%%     \includegraphics[width=4in]{r34}
+%%     
+%%   \item Then install usual way.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Now, R Studio}
+%%   
+%%   \begin{itemize}
+%%   \item Go to \url{https://www.rstudio.com/}.
+%%   \item Scroll down to this, and click Learn More (the left one):
+%%     
+%%     \includegraphics[width=3in]{r35}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Scroll down}
+%%   
+%%   \begin{itemize}
+%%   \item Scroll down to this:
+%%     
+%%     \includegraphics[width=4in]{r37}
+%%     
+%%   \item Click ``Download RStudio Desktop''.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Find the one for you}
+%%   
+%%   \begin{itemize}
+%%   \item Scroll down, and click the installer for your machine
+%%     (Windows, Mac, 4 flavours of Linux). Install as usual.
+%%     
+%%     \includegraphics[width=4in]{r40}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% 
+%% \begin{frame}[fragile]{Running R}
+%%   
+%%   \begin{itemize}
+%%   \item All of above only done \emph{once}.
+%%   \item To run R, run \textbf{R Studio}, which itself runs R.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{How R Studio looks when you run it}
+%%   
+%% \includegraphics[width=0.8\textwidth]{rstudio-startup}
+%%   
+%% First time you run R Studio, click on Console window, and, next to the
+%% \texttt{>}, type \texttt{install.packages("tidyverse")}. Let it do
+%% what it needs to.
+%% \end{frame}
+
+
+\begin{frame}[fragile]{Connecting to SAS}
+
+  \begin{itemize}
+  \item SAS on your own computer big, expensive.
+  \item U of T has ``site licence'' allows us to buy SAS for own
+    computer (re-licensed every year, etc.)
+  \item SAS offers ``SAS Studio'' that is free for the academic
+    world. This runs through a web browser (accessible everywhere)
+    with everything hosted on SAS's servers, or on a ``virtual
+    machine'' on own computer.
+  \item The hard part is getting registered for it.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Getting registered for online version}
+
+  \begin{itemize}
+  \item Go to \url{https://odamid.oda.sas.com}. Get to this:
+
+\includegraphics[height=0.6\textheight]{sas1}
+
+\item Bookmark this page.
+\item Go down to ``Don't have an account?'' and click ``Register Here''.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Enter your name and e-mail}
+
+\ldots and select country (Canada):
+
+\includegraphics[width=3in]{sas2}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Go check your e-mail}
+
+and look for something like this:
+
+\includegraphics[width=3in]{sas3}
+
+Click on the link.
+  
+\end{frame}
+
+\begin{frame}[fragile]{Choose a password}
+
+\includegraphics[height=0.7\textheight]{sas5}
+
+  \begin{itemize}
+  \item Click orange Create Account. You then get a user ID. Make a note of it.
+  \item This completes the registration. You only do this once.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Log into SAS}
+
+Go back to the page you bookmarked earlier:
+
+\includegraphics[height=0.7\textheight]{sas1b}
+
+Type your user ID and password into the boxes, and click Sign In.
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{The dashboard}
+
+\includegraphics[width=\textwidth]{sas6}
+
+On the Dashboard, click SAS Studio. (Ignore the stuff about the
+courses.) 
+  
+\end{frame}
+
+\begin{frame}[fragile]{SAS, as you see it}
+
+Something like this:
+
+\includegraphics[scale=0.3]{sas-webed-opening}
+  
+\end{frame}
+
+
+%\begin{frame}[fragile]{Trying out SAS}
+%
+%Go to the right side of the window, under Program 1, click on Code,
+%and type the following into the window with the numbered lines:
+%
+%\includegraphics[scale=0.4]{prog1}
+%
+%When you have this to your satisfaction, click the ``running
+%humanoid'' under Code. (This is called ``submitting'' in SAS jargon.)
+% 
+%\end{frame}
+%
+%\begin{frame}[fragile]{Output}
+%
+%If everything was correct, the Results tab under Program 1 will be
+%selected, and you'll see your results, thus:
+%
+%\includegraphics[scale=0.35]{results1}
+%
+%These are: a listing of your data (from \texttt{proc print}) and a
+%summary of the data, including mean and SD (from \texttt{proc means}).
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Errors}
+%  
+%  \begin{itemize}
+%  \item Let me make a deliberate mistake: I left off the semicolon on the end
+%of \texttt{proc print}.
+%\item  When I submitted this, the Log tab popped up
+%with a whole bunch of stuff including this:
+%
+%\includegraphics[scale=0.35]{sas-error}
+%
+%\item When SAS hit \texttt{proc means}, expecting a semicolon (to
+%finish off the \texttt{proc print;}), but didn't see one. So error
+%was \emph{just before} where the mark was. 
+%
+%\item Tactic: fix the \emph{first} error and submit again. (That
+%first error might have caused a bunch of others.)  
+%
+%  \end{itemize}
+%
+%
+%
+%
+%\end{frame}
+
+
+\begin{frame}[fragile]{Installing SAS on your own machine}
+
+  \begin{itemize}
+  \item Pro: not dependent on SAS's servers.
+  \item Con: fiendishly complicated!
+  \item On your own computer, SAS runs in ``virtual machine'' (so
+    doesn't matter what OS you have, as long as the virtual machine
+    runs on it).
+  \end{itemize}
+  
+\end{frame}
+
+%%%%%%%%%%%%% 2016 version
+
+\begin{frame}[fragile]{Getting SAS for your own machine}
+  
+  \begin{itemize}
+  \item Go to \url{sas.com} and navigate to Products and Solutions,
+    then SAS University Edition, or
+    go to \url{http://www.sas.com/en_ca/software/university-edition.html}.
+  \item See this:
+    
+    \includegraphics[width=4in]{sas16}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{And then}
+  
+  \begin{itemize}
+  \item Click Get Free Software. See this:
+    
+    \includegraphics[width=3in]{sas28}
+    
+  \item Click Download Now on the \emph{left}.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Select operating system}
+  
+  \begin{itemize}
+  \item by clicking appropriate tab, eg:
+    
+    \includegraphics[width=4in]{sas17}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Starting setup}
+  
+  \begin{itemize}
+  \item Click tab for your operating system, and check that your
+    system is good.
+  \item Scroll down (4 steps):
+    
+    \includegraphics[width=3.5in]{sas18}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Download VirtualBox}
+  
+  \begin{itemize}
+  \item SAS runs on ``virtual machine'' (has own operating system
+    regardless of what yours is). Download and install virtual machine:
+    
+    \includegraphics[width=4in]{sas19}
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Scroll down some more}
+  
+  \begin{itemize}
+  \item You will be downloading a 1.7GB ``app'' (this may take a while). You may
+    have to create a username/password first (next page):
+    
+    \includegraphics[width=2.5in]{sas20}
+  \end{itemize}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Creating a ``profile''}
+  
+  \begin{itemize}
+  \item New User on the right (unless you already have a SAS profile):
+
+      \includegraphics[width=4in]{sas22}
+
+  \end{itemize}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Finally, step 4}
+  
+  \begin{itemize}
+  \item Follow the steps in the Quick Start Guide. Step 1 you probably
+    already did:
+    
+    \includegraphics[width=4in]{sas23}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Quick Start step 2}
+  
+  \begin{itemize}
+  \item Follow the instructions. This attaches the ``app'' to your
+    virtual machine so that it will run:
+    
+    \includegraphics[width=4in]{sas24}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Step 3: setting up file access}
+  
+  \begin{itemize}
+  \item This is kind of complicated, but follow the steps through, and
+    then you can read in data files:
+    
+    \includegraphics[width=4in]{sas25}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Start SAS}
+  
+  \begin{itemize}
+  \item All of the above you only do once (installation).
+  \item To start SAS, do the below (every time):
+    
+    \includegraphics[width=4in]{sas26}
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{SAS Studio online and on your machine}
+
+  \begin{itemize}
+  \item SAS Studio runs identically whether it's online or on your machine.
+  \item With one exception: accessing files (typically data files).
+  \item Otherwise, any reference to SAS Studio applies equally well to
+    either version.
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Accessing data files in SAS Studio}
+
+    \begin{itemize}
+    \item Depends on whether you're running SAS Studio online or on
+      your computer.
+    \item If you're running online, you have a username that you used
+      for logging in, like \texttt{ken} or \texttt{megan3}.
+    \item Online: access file as \texttt{/home/} plus your username
+      plus filename: eg.\ \texttt{/home/megan3/mydata.txt}.
+    \item On your computer: \texttt{/folders/myfolders/} plus
+      filename, eg.\ \texttt{/folders/myfolders/mydata.txt}.
+    \item Slashes in both cases are \emph{forward} slashes, and you
+      need one to start the filename.
+    \end{itemize}
+    
+\end{frame}
+
+%\begin{frame}[fragile]{Using SAS Studio to save a data file}
+%
+%Works on either version of SAS Studio. 
+%
+%Create a new ``SAS Program'' (only it won't be) and
+%type/copy these, as shown, into the Code window:
+%
+%\begin{columns}
+%  
+%  \begin{column}{0.3\textwidth}
+%{\small
+%\begin{verbatim}
+%a 20
+%a 21
+%a 16
+%b 11
+%b 14
+%b 17
+%b 15
+%c 13
+%c 9
+%c 12
+%c 13
+%\end{verbatim}
+%}
+%    
+%  \end{column}
+%
+%  \begin{column}{0.65\textwidth}
+%\begin{itemize}
+%\item Save into file \texttt{three.txt}. Select My Folders as
+%  folder to save in. SAS puts \texttt{.sas} on the
+%  file name. Find the file in the Folders window, right-click, select
+%  Rename, and make the filename what you really wanted.
+%\end{itemize}
+%    
+%  \end{column}
+%
+%  
+%\end{columns}
+%
+%  
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]{Analysis 1(a): reading in and verifying the data}
+%
+%  \begin{itemize}
+%\item This version if you're accessing SAS Studio online.
+%\item Create a new SAS program, and enter its code thus (in the Code
+%  tab):
+%  
+%\begin{semiverbatim}
+%data groups;
+%  infile '/home/ken/three.txt';
+%  input group $ y;
+%
+%proc print;    
+%\end{semiverbatim}
+%  
+%
+%\item Replace \texttt{ken} with your online SAS Studio username.
+%
+%\item Code much cleaner with data in separate file.
+%
+%  \end{itemize}
+%
+%
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]{Analysis 1(b): reading in and verifying the data}
+%
+%  \begin{itemize}
+%\item This version if you're accessing SAS Studio on your own computer
+%  (via virtual machine).
+%\item Create a new SAS program, and enter its code thus (in the Code
+%  tab):
+%  
+%  
+%
+%\begin{Datastep}
+%data groups;
+%  infile '/folders/myfolders/three.txt';
+%  input group $ y;
+%\end{Datastep}
+%
+%\begin{Sascode}[store=threea]
+%proc print;  
+%\end{Sascode}
+%
+%
+%
+%\item We'll see output in a moment. Same both ways.
+%  \end{itemize}
+%
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Output}
+%  
+%\Listing[store=threea]{threeaa}
+%
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Folder menu}
+%
+%\includegraphics[width=\textwidth]{folder-menu}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Code menu}
+%
+%\includegraphics[width=\textwidth]{code-menu}
+%  
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]{Results menu}
+%
+%\includegraphics[width=\textwidth]{results-menu}
+%  
+%\end{frame}
+%
+%
+%\begin{frame}{Other notes}
+%
+%  \begin{itemize}
+%
+%  \item When saving your code, SAS appends a \texttt{.sas} to the name
+%    you supply. You'll see your code file appear on the left, under Folders.
+%  \item To open code, double-click on the code file
+%    name under Folders. A new tab will appear with the code file.
+%  \item These files all live on the SAS server or virtual machine. To make a copy of a
+%    file on your own computer, click the down-arrow ``download'' button.  You'll be
+%    prompted to open or save the file.
+%  \item You can also upload files. Click the up-arrow ``upload''
+%    button, and click Choose Files to select the file to upload. The
+%    folder with a name like \texttt{/home/ken} is your file
+%    storage on the SAS server, or \texttt{/folders/myfolders} on the
+%    virtual machine.
+%  \item You can create subfolders. Click on New SAS Program, select
+%    Folder and give the new folder a name.  
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%
+%
+%\begin{frame}[fragile]{Analysis/output 2: means by group}
+%
+%Go back to Code tab, enter this code below what was there
+%before, and submit whole thing again:
+%
+%
+%\begin{Sascode}[store=threeb]
+%proc means;
+%  class group;
+%  var y;    
+%\end{Sascode}
+%
+%\Listing[store=threeb,fontsize=scriptsize]{threebb}
+%
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Analysis 3: boxplots}
+%\begin{Sascode}[store=threec]
+%proc sgplot;
+%  vbox y / category=group;
+%\end{Sascode}
+%
+%\Graphic[store=threec,scale=0.5]{threecc}
+%
+%\end{frame}
+%
+%\begin{frame}{Conclusions}
+%
+%Both boxplots and \texttt{proc means} support idea that group A has
+%largest values and group C has smallest.
+%  
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]{Copying into SAS}
+%  
+%  \begin{itemize}
+%  \item Copying \emph{into} SAS mostly easy: copy as normal, paste
+%    into Code tab.
+%  \item If copying from spreadsheet, like this,
+%
+%\includegraphics[width=3in]{s-data}
+%
+%values separated by
+%    \emph{tabs}. Steps:
+%    \begin{itemize}
+%    \item Copy into SAS code tab as usual.
+%    \item Save into file, eg.\ \texttt{x.dat}.
+%    \item Read in as below (note \texttt{expandtabs}):
+%    \end{itemize}
+%  \end{itemize}
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading a spreadsheet}
+%
+%\begin{Datastep}
+%data x;
+%  infile '/folders/myfolders/x.dat' expandtabs;
+%  input a b c;  
+%\end{Datastep}
+%  
+%\begin{Sascode}[store=xa]
+%proc print;
+%\end{Sascode}
+%
+%\Listing[store=xa]{xaa}
+%
+%Without \texttt{expandtabs}, get many incomprehensible error messages,
+%or no data at all!
+%  
+%\end{frame}
+%
+%\begin{frame}{Copying \emph{out} of SAS}
+%
+%  \begin{itemize}
+%    \item Results: export as \texttt{.rtf} file and open in eg.\
+%      Word. Can paste several of these together into one Word doc
+%      (eg.\ for assignment).
+%  \item Copy and paste code from Code window. SAS code should be \texttt{fixed-pitch font}
+%    (eg.\ Courier) in your document.
+%  \item If all else fails, take screen shots (alt-PrintScreen), paste
+%    into doc as images.
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Using R}
+%
+%  \begin{itemize}
+%  \item Mimic above ``analysis'' using R.
+%  \item Run commands one at a time, see results right away.
+%  \item See \emph{errors} right away too!
+%  \item Start up R Studio, go to Console window (bottom left). See
+%    \texttt{>} prompt: waiting for you. Try:
+%
+%<<>>=
+%  x=c(1,2,3,5,7)
+%@     
+%    
+%\item ``Glue values together into list, and call it \texttt{x}''.
+%\item No comment equals no error.
+%\pause
+%\item Display anything in R by entering its name:
+%
+%<<>>=
+%x
+%@   
+%
+%\item showing that \texttt{x} really does contain those values.
+%
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Basic statistics}
+%
+%  \begin{itemize}
+%  \item Mean:
+%
+%<<>>=
+%mean(x)
+%@     
+%\pause
+%  \item SD:
+%
+%<<>>=
+%sd(x)
+%@     
+%\pause
+%\item Quartiles also by function \texttt{summary}:
+%
+%<<>>=
+%summary(x)    
+%@   
+%
+%\item Five-number summary plus mean. For percentiles use
+%  \texttt{quantile}, eg.\ 60th percentile:
+%
+%<<>>=
+%quantile(x,0.60)  
+%@   
+%
+%\item Errors come out in red immediately. Output (results) in black.
+%\item Command history: up and down arrows take you to all the commands
+%  you entered.
+%
+%  \end{itemize}
+%  
+%\end{frame}
+
+%\begin{frame}{Projects and R scripts}
+%
+%  **** this may need moving ****
+%  
+%  \begin{itemize}
+%  \item Can use R from Console window, copy commands and output into Word.
+%  \item But better organization by using a Project and R script.
+%  \item \textbf{Project}: container for commands, data, stuff associated with
+%    one piece of work:
+%    \begin{itemize}
+%    \item Project-Create Project.
+%    \item Use current folder for project or create new one. 
+%    \item ``Browse''
+%      to navigate to folder.
+%    \item R Studio switches to new project.
+%    \end{itemize}
+%    \pause
+%  \item \textbf{Script}: like string of commands fed into SAS, but more flexible.
+%    \begin{itemize}
+%    \item File-New-R Script. Creates top left window for commands to
+%      use (and re-use).
+%    \item File-Save as usual. No file extension needed (R Studio
+%      supplies one.)
+%    \end{itemize}
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Running a script}
+%  
+%  \begin{itemize}
+%    \item To run:
+%      \begin{itemize}
+%      \item ``Source'' runs everything.
+%      \item ``Run'' (or Control/Cmd-Enter) runs code on current line.
+%      \item Select several lines: Run or Control-Enter runs selected lines.
+%      \end{itemize}
+%      \pause
+%    \item Commands and output appear in Console window; copy-paste to
+%      a report. 
+%    \item Save a script to be able to rerun any commands later. (Don't
+%      have to remember what you did.)
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading data from a file}
+%  \begin{itemize}
+%  \item ``basic'' way: one observation per line, values for all variables
+%separated by whitespace. (Like SAS.)
+%
+%\item The top-left of R-studio also text editor. 
+%\item Create new data file with File, New, Text File 
+%\item Open existing data file, eg.\ \texttt{threegroups.txt} as
+%we used with SAS. (This file has different name because it has a row
+%of headers.)
+%\item With R, put the variable names on the first line of the data
+%file, like this. Saved as \texttt{threegroups.txt}:
+%
+%\begin{verbatim}
+%group y
+%a 20
+%a 21
+%a 16
+%b 11
+%...
+%\end{verbatim}
+%  \end{itemize}
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading data in}
+%
+%  \begin{itemize}
+%  \item Tell R that first row is headers:
+%
+%<<>>=
+%  mydata=read.table("threegroups.txt",header=T)
+%  mydata  
+%@     
+%
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading data in (2)}
+%  
+%  \begin{itemize}
+%  \item If no headers, say \texttt{header=F}, R supplies column names:
+%    
+%<<>>=
+%  mydata2=read.table("threegroups.dat",header=F)
+%  mydata2 
+%@     
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Data frames}
+%
+%  \begin{itemize}
+%  \item \texttt{mydata} holding data values called
+%\textbf{data frame}: rectangular array with rows and columns,
+%rows observations (individuals) and columns
+%variables.
+%\item Access variable like this:
+%
+%<<>>=
+%  mydata$y
+%@   
+%
+%%$ %$ %$
+%\item Or like this:
+%<<>>=
+%  attach(mydata)
+%  y
+%@ 
+%\item Logic: no variable \texttt{y}, but if \texttt{attach} a
+%data frame, variables looked for there as well. Here, \texttt{y} must
+%be \texttt{mydata\$y}, since there is no other \texttt{y}.
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Polluting the name space}
+%  
+%  \begin{itemize}
+%\item Problem with \texttt{attach}: many extra
+%variables; ``where did
+%that \texttt{y} and \texttt{group} come from
+%anyway?'' (``polluting the name space''.)
+%\item If was \emph{already} a \texttt{y} defined, which one do you
+%  see? Not clear.
+%\item When finished with \texttt{attach}ed
+%variables: \texttt{detach(mydata)},
+%now no ``extra'' \texttt{y} or
+%\texttt{group} any more.
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Means by group}
+%
+%  \begin{itemize}
+%  \item Not quite as easy as SAS, but more flexible:
+%
+%<<>>=
+%  aggregate(y~group,mydata,mean)
+%@     
+%
+%\item This works whether or not you \texttt{attach}ed the data frame.
+%\item Three things:
+%  \begin{itemize}
+%  \item ``Model formula'': variable calculating for, squiggle,
+%    grouping variable.
+%  \item Data frame containing those variables.
+%  \item Thing to calculate.
+%  \end{itemize}
+%\end{itemize}
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Other things by group}
+%
+%  \begin{itemize}
+%\item IQR by group like this:
+%<<>>=
+%aggregate(y~group,data=mydata,IQR)  
+%@   
+%\item Feed in calculation variable, grouping variable, data frame,
+%  thing to calculate.
+%\item See model formula again in a few seconds when we draw a boxplot.
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Boxplot}
+%
+%<<fig.height=4>>=
+%  boxplot(y~group,data=mydata)
+%@ 
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Comments}
+%
+%\begin{itemize}
+%
+%\item ``Silly'' boxplots with not much data.
+%\item Different from SAS because different quartile definition.
+%\item In R Studio, plot appears bottom right.
+%\item Can omit grouping variable to get boxplot of all values.
+%
+%\end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Another boxplot}
+%
+%To get boxplot of \emph{all} values in \texttt{y}, not subdivided by
+%group, do this:
+%
+%<<fig.height=3.5>>=
+%boxplot(mydata$y)
+%@ 
+%%$
+%
+%We see how to get better boxplots as part of \texttt{ggplot} later.
+%
+%%$ %$
+%
+%
+%\end{frame}
+%
+%\begin{frame}{Multiple graphs in R Studio}
+%
+%  \begin{itemize}
+%  \item If you made the last two boxplots in R Studio, second one came
+%    up on top of first one.
+%  \item Use arrows below Plots tab to cycle among your graphs.
+%  \item Limit of 30 graphs saved.
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading data from a spreadsheet}
+%
+%  \begin{itemize}
+%  \item Best way, for R: save data as \texttt{.csv} file (File, Save As)
+%  \item \texttt{.csv} saves values, not formulas.
+%  \item Example:
+%
+%  \includegraphics[width=0.4\textwidth]{small}
+%\item Columns have no names.
+%\item Save as \texttt{small.csv} in project folder.
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading into R}
+%
+%  \begin{columns}
+%    \begin{column}{0.6\textwidth}
+%
+%<<>>=
+%zz=read.csv("small.csv",header=F)
+%zz   
+%@       
+%
+%<<>>=
+%mynames=c("Foo","Blah","Ding")
+%names(zz)=mynames
+%zz 
+%@ 
+%
+%      
+%    \end{column}
+%    \begin{column}{0.4\textwidth}
+%      \begin{itemize}
+%      \item No column names; R supplied some. Can change.
+%        \bigskip
+%        \bigskip
+%        \bigskip
+%      \item Data frame now has supplied names.
+%      \end{itemize}
+%
+%      
+%    \end{column}
+%  \end{columns}
+%
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]{Reading \texttt{.csv} files into SAS}
+%
+%\texttt{dlm} short for ``delimiter'':
+%
+%\begin{Datastep}
+%data stuff;
+%  infile '/folders/myfolders/small.csv' dlm=',';
+%  input foo blah ding;  
+%\end{Datastep}
+%
+%\begin{Sascode}[store=ia]
+%proc print;
+%\end{Sascode}
+%
+%\Listing[store=ia]{iaa}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{Alternatively in R}
+%
+%via copy and paste:
+%
+%\begin{itemize}
+%\item Open new Text File in R Studio.
+%\item Paste spreadsheet values into empty window.
+%\item Save as eg.\ \texttt{small.txt}.
+%\item Into R via \texttt{read.table}
+%\end{itemize}
+%
+%<<>>=
+% fred=read.table("small.txt",header=F)
+% fred
+%@ 
+%
+%Don't know whether pasting introduced tabs, but R handled it OK.
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{\texttt{read.table} vs.\ \texttt{read.csv}}
+%
+%  \begin{itemize}
+%  \item \texttt{read.csv} simplified version of \texttt{read.table},
+%    especially for reading \texttt{.csv} files. These are same:
+%
+%<<>>=
+%fred1=read.csv("small.txt",header=F)
+%fred2=read.table("small.txt",sep=",",header=F)  
+%@     
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{``Compiling a notebook'' 1/4}
+%  
+%  \begin{itemize}
+%  \item   This is the way to handle R code for handing in work.
+%  \item Alternative (later) is R Markdown.
+%  \item Imagine you have an assignment question like this:
+%    \begin{enumerate}
+%    \item The variable $x$ has data values 10,11,13,15,16,17,19,24,32.
+%      \begin{enumerate}
+%      \item[(a)] Read the data into R and demonstrate that you read in the
+%        correct values.
+%      \item[(b)] Obtain the mean and median of $x$. Does the distribution
+%        appear to be skewed or symmetric? Explain briefly.
+%      \item[(c)] Obtain a boxplot of $x$. Does the boxplot support your
+%        conclusion from the previous part? Explain briefly.
+%      \end{enumerate}
+%    \end{enumerate}
+%  \item Create a script window that contains the code to produce
+%    output you want. (You may not get this right the first time;
+%    persevere until you do.) Save the script.
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{``Compiling a notebook'' 2/4}
+%
+%  
+%  \begin{itemize}
+%  \item   My script, called \texttt{xcode.R}:
+%  
+%  \includegraphics[width=0.7\textwidth]{W093}
+%  
+%  
+%\item To your script, add ``comment lines'' that actually answer the
+%  questions asked (in general, that explain what the output
+%  means). 
+%\item The ``comment lines'' begin with the symbols \texttt{\#'}
+%  (shift-3 and single-quote). If you press Enter, you'll get the
+%  comment characters ready for another line. If you don't want them,
+%  delete them.
+%\item A comment line with no text will start a new line in the output.
+%
+%  \end{itemize}
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{``Compiling a notebook'' 3/4}
+%  
+%  \begin{itemize}
+%  \item   This is mine, with text attached:
+%  
+%  \includegraphics[width=0.8\textwidth]{W094}
+%
+%  
+%\item Note the empty lines \emph{before} each part of the answer.
+%\item Find ``Source on Save'' at the top, go right to thing that looks
+%  like paper notebook, click:
+%  \end{itemize}
+%  
+%  
+%\end{frame}
+%
+%\begin{frame}[fragile]{``Compiling a notebook'' 4/4}
+%  
+%  \begin{itemize}
+%    \item \ldots and change Output Format to MS Word:
+%
+%      \includegraphics[width=0.5\textwidth]{W095}
+%      
+%      
+%    \item Click Compile. You'll see a Word document with the code,
+%      output and comments in it, in the right format to form part of
+%      an assignment.
+%    \item For assignment, copy-and-paste into one document all the
+%      \texttt{.rtf} documents that came out of SAS and all the
+%      compiled notebooks that came out of R Studio.
+%  \end{itemize}
+%  
+%  
+%\end{frame}
+
+
+

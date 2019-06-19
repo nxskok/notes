@@ -1,5 +1,5 @@
 ---
-title: "STAC32: Applications of Statistical Methods"
+title: "STAC33: Applications of Statistical Methods"
 author: "Lecture notes"
 header-includes:
    - \usepackage{multicol}
@@ -19,7 +19,7 @@ output:
 
 # Course outline 
 
-```{r, child="outline.Rmd"}
+```{r, child="outline_c32.Rmd"}
 ```
 
 
@@ -92,22 +92,6 @@ output:
 ```{r, child="miscellanea.Rmd"}
 ```
 
-
-# Vector and matrix algebra (for C33)
-
-```{r, child="vector_matrix.Rmd"}
-```
-
-# The bootstrap
-
-```{r, child="bootstrap.Rmd"}
-```
-
-
-# Bayesian statistics with `rstan` 
-
-```{r, child="rstan.Rmd"}
-```
 
 
 # the end of the notes

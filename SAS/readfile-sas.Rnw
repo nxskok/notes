@@ -1,0 +1,684 @@
+\section{Reading data from files}
+
+\frame{\sectionpage}
+
+\begin{frame}[fragile]{Introduction}
+  
+  \begin{itemize}
+  \item First thing we need to do is to read in data, so that we can
+    use our software to analyze.
+  \item Consider these:
+    \begin{itemize}
+    \item Spreadsheet data saved as \texttt{.csv} file.
+    \item ``Delimited'' data such as values separated by spaces.
+    \item Actual Excel spreadsheets.
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{A spreadsheet}
+  
+  \includegraphics[width=0.9\textwidth]{spreadsheet}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Save as \texttt{.csv}}
+  
+  \begin{itemize}
+  \item \texttt{.csv} or ``comma-separated values'' is a way of
+    turning spreadsheet values into plain text.
+  \item but does \emph{not} preserve formulas. (This is a reason for
+    doing \emph{all} your calculations in your statistical software,
+    and \emph{only} having data in your spreadsheet.)
+  \item File, Save As Text CSV (or similar).
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The \texttt{.csv} file}
+  
+\verbatiminput{test1.csv}
+  
+\end{frame}
+
+
+%% \begin{frame}[fragile]{Reading file in R}
+%%   
+%%   
+%%   \begin{itemize}
+%%   \item Start (as always) with
+%% 
+%% <<size="footnotesize",warning=F>>=
+%% library(tidyverse)
+%% @ 
+%% 
+%% \item If you don't get this, do this (should only need it once):
+%% 
+%% <<eval=F>>=
+%% install.packages("tidyverse")
+%% @ 
+%% 
+%% 
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Finding the file}
+%%   \begin{itemize}
+%% \item Run this:
+%%  
+%% <<echo=F>>=
+%% f="/home/ken/teaching/c32/notes/2017/test1.csv"
+%% @   
+%% 
+%% <<eval=F>>=
+%% f=file.choose()
+%% @   
+%% 
+%% This brings up a file selector. Use it to find your \texttt{.csv}
+%% file. Then type the name \texttt{f} to display what it contains:
+%% 
+%% <<>>=
+%% f
+%% @ 
+%% 
+%% (This is Linux. Mac looks similar, Windows different.)
+%% 
+%% \item Now R knows where our file is, and we can read it in (over).
+%%   \end{itemize}
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Reading in the file}
+%%   
+%%   \begin{itemize}
+%%   \item Use \texttt{read\_csv} with the name of the file. Save the
+%%     read-in file in something, here called \texttt{mydata}: 
+%%     
+%% <<>>=
+%% mydata=read_csv(f)
+%% @     
+%% \item \texttt{read\_csv} guesses what kind of thing is in each
+%%   column. Here it correctly guesses that:
+%%   
+%%   \begin{itemize}
+%%   \item   \texttt{id} and
+%%   \texttt{group} are text (categorical variables). \texttt{id} is
+%%   actually ``identifier variable'': identifies
+%%   individuals. 
+%% \item \texttt{x} and \texttt{y} are integers (quantitative variables
+%%   that here have no decimal point). Decimal numbers would be labelled
+%%   \texttt{num} or \texttt{double}. 
+%% 
+%%   \end{itemize}
+%%   
+%% 
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Looking at what we read in}
+%%   
+%%   \begin{itemize}
+%% \item Again, type the name of the thing to display it:
+%%   
+%% <<>>=
+%% mydata
+%% @   
+%% 
+%% \item This is a ``tibble'' or data frame, the standard way of storing
+%%   a data set in R.
+%% \item Tibbles print as much as will display on the screen. If there
+%%   are more rows or columns, it will say so.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{\texttt{View}-ing your data frame}
+%%     
+%%     \begin{itemize}
+%%     \item Another way to examine your data frame is to View it, like this:
+%%       
+%% <<eval=F>>=
+%% View(mydata)
+%% @       
+%% 
+%% \item This pops up a ``data frame viewer'' top left:
+%%   
+%%   \includegraphics[width=0.6\textwidth]{viewview}
+%%     \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{What you can and cannot do with this View}
+%%   
+%%   \begin{itemize}
+%%   \item Read-only: cannot edit data
+%%   \item Can display data satisfying conditions: click on Filter, then:
+%%     \begin{itemize}
+%%     \item for a categorical variable, type name of category you want
+%%     \item for a quantitative variable, use slider to describe values
+%%       you want.
+%%     \end{itemize}
+%%   \item Can sort a column into ascending or descending order (click
+%%     little arrows next to column name).
+%%     
+%%   \item Clicking the symbol with arrow on it left of Filter ``pops
+%%     out'' View into separate (bigger) window.
+%%   \item Cannot include in output to hand in (except by taking
+%%     screenshot and handing \emph{that} in).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Summarizing what we read in}
+%%   
+%%   \begin{itemize}
+%%   \item It is \emph{always} a good idea to look at your data after you
+%%     have read it in, to make sure you have believable numbers (and the
+%%     right number of individuals and variables). 
+%%   \item Sometimes the data set is too big, and you want to summarize it:
+%%     
+%% <<>>=
+%% glimpse(mydata)
+%% @     
+%% 
+%% \item This tells you how many observations and variables, and shows
+%%   you the first few values (almost all of them here).
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Five-number summary}
+%%   
+%%   \begin{itemize}
+%%   \item this way:
+%%     
+%% <<size="footnotesize">>=
+%% summary(mydata)
+%% @     
+%% 
+%% \item For quantitative variables, a five-number summary plus the mean.
+%% \item For categorical variables, count of how many rows.
+%% \item Quick check for errors: these often show up as values too high
+%%   or too low, so the min and/or max will be unreasonable.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Reading from a URL}
+%%   
+%%   \begin{itemize}
+%%   \item Any data file on the Web can be read directly.
+%%   \item Example data:
+%%     \url{http://www.utsc.utoronto.ca/~butler/c32/global.csv}.
+%%   \item Use URL instead of filename:
+%%     
+%% <<>>=
+%% url="http://www.utsc.utoronto.ca/~butler/c32/global.csv"
+%% global=read_csv(url)
+%% @     
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The data}
+%%   
+%% <<>>=
+%% global
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Reading files in SAS}
+  
+  \begin{itemize}
+  \item In SAS Studio, click on Files (Home) and find the Upload
+    button (4th one in top row) (should be not greyed out):
+    
+\includegraphics[width=0.5\textwidth]{upload}
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{\ldots Continued}
+  
+  \begin{itemize}
+\item Click the Upload button, and then Choose Files in the box that
+  pops up. This brings up a file selector as \texttt{file.choose} does
+  in R. Find your \texttt{.csv} file, and click to ``open'' it. It
+  should appear on your Upload Files box:
+  
+\includegraphics[width=0.5\textwidth]{upload-file}
+
+\item Click Upload. When it's done, you should see your \texttt{.csv}
+  file under Files (Home) on the left.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading in the data}
+  
+  \begin{itemize}
+  \item In SAS Studio, click New (leftmost button under Server Files
+    and Folders) and select New SAS Program.
+  \item On the right, in the Code tab, type code like this, only
+    instead of \texttt{ken} put \emph{your} username:
+    
+\begin{Datastep}
+proc import 
+  datafile='/home/ken/test1.csv'
+  dbms=csv
+  out=mydata
+  replace;
+  getnames=yes;
+\end{Datastep}
+    
+\begin{Sascode}[store=ra]
+proc print;
+\end{Sascode}
+  \item Make sure you get \emph{all} the semicolons in the right
+    places!
+  \item This will read in the data that you uploaded, and list the
+    whole data set. Compare R \texttt{read\_csv}.
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}[fragile]{Running the code}
+  
+  \begin{itemize}
+  \item Find the ``running human'' under the word Code. Click it. 
+  \item If all goes well, you should see the data set displayed in a
+    Results tab:
+    
+\includegraphics[width=0.7\textwidth]{sasstudio-results}
+
+\item If not, you'll get taken to the Log tab, which will show you
+  where your error was. Fix it, and try again. (SAS can sometimes
+  guess what you meant, even if it's not what you typed.)
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{That code}
+  
+  \begin{itemize}
+  \item \texttt{proc print} displays the whole data set.
+  \item The \texttt{proc import} organizes reading in the data. I
+    remember DODRG:
+    \begin{itemize}
+    \item \texttt{datafile} says where to find the data file (on SAS
+      Studio's server, where you uploaded it to).
+    \item \texttt{out} gives the data set a name within SAS (that can
+      be used to refer to this data set later)
+    \item \texttt{dbms} says what kind of file it is, a \texttt{.csv}
+      in this case.
+    \item \texttt{replace} says to replace any other SAS data set on
+      your account with this name (the one on \texttt{out}).
+    \item \texttt{getnames} means to take the variable names from the
+      top line of the data file (which is usually where they are). 
+    \end{itemize}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Alternatively}
+  
+  \begin{itemize}
+  \item Click the New button, but then Import Data.
+  \item Find your data file on the left, and drag it across to Select
+    File on the right.
+  \item Some code will appear. This is (basically) the \texttt{proc
+      import} code we used above.
+  \item Copy the text from \texttt{FILENAME} down to \texttt{RUN;}
+    (inclusive).
+  \item Open a New SAS Code window. Paste the copied code into it.
+  \item Add anything else at the bottom, like a \texttt{proc print},
+    and run as before.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Summarizing a data set}
+  
+  \begin{itemize}
+  \item Replace the \texttt{proc print} with \texttt{proc means}:
+    
+    \begin{Sascode}[store=rb]
+proc means;      
+    \end{Sascode}
+    
+    That gives the mean, SD, min, max and \#observations for each
+    variable (below). Like R \texttt{group\_by}, \texttt{summarize}.
+    
+    \item Note that you only get means for quantitative variables.
+    \item \texttt{proc print}, \texttt{proc means} etc.\ work on
+      \emph{the most recently created data set} (usually what you
+      want). 
+    
+\Listing[store=rb,fontsize=scriptsize]{rbb}    
+
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading from a URL}
+  
+  \begin{itemize}
+  \item A little extra setup:
+    
+    \begin{small}
+    \begin{Sascode}[store=ua]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/global.csv";
+
+proc import 
+  datafile=myurl 
+  dbms=csv
+  out=global
+  replace;
+  getnames=yes;
+  
+proc print;
+    \end{Sascode}
+      
+    \end{small}
+    
+    
+  \item The \texttt{filename} line says that the piece of text is
+    actually a URL rather than a filename on this computer.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Did it work?}
+  
+\Listing[store=ua,fontsize=footnotesize]{uaa}  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Space-delimited files}
+  
+  \begin{itemize}
+  \item Another common format for data is a text file with the values
+    separated by spaces. Data below in two long columns with right
+    side below left side:
+    
+    \begin{footnotesize}
+    \begin{multicols}{2}
+\verbatiminput{/home/ken/coffee.txt}      
+    \end{multicols}
+      
+    \end{footnotesize}
+    
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading in these data}
+  
+  \begin{itemize}
+  \item Change the \texttt{proc import}:
+    
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/coffee.txt'
+  dbms=dlm
+  out=coffee
+  replace;
+  delimiter=' ';
+  getnames=yes;
+    \end{Datastep}
+  \item On \texttt{dbms}, \texttt{dlm} means ``delimited file'', that
+    is, ``values separated by something''. So we have to say what the
+    values are separated by, namely exactly one space. (The values
+    could be separated by anything.) 
+  \item Equivalent to R \texttt{read\_delim}.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Did it work?}
+  
+  \begin{itemize}
+  \item The first 15 (of 32) lines. It seems to have worked:
+    
+    \begin{Sascode}[store=rc]
+proc print data=coffee(obs=15);      
+    \end{Sascode}
+    
+    \Listing[store=rc,fontsize=footnotesize]{rcc}
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Reading the coffee data into R}
+%%   
+%%   \begin{itemize}
+%%   \item Save the text file somewhere and then find it:
+%% <<echo=F>>=
+%% f="/home/ken/teaching/c32/notes/2017/coffee.txt"
+%% @   
+%% <<eval=F>>=
+%% f=file.choose()
+%% @   
+%% <<>>=
+%% f
+%% @
+%% \item This time, \texttt{read\_delim}, and again we have to say what
+%%   the thing is separating the values:
+%%   
+%% <<>>=
+%% coffee=read_delim(f," ")
+%% @   
+%% 
+%% \item Name of the cup, text, and \texttt{tempdiff}, a decimal number.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Looking at the values}
+%%   
+%% <<>>=
+%% coffee
+%% @   
+%% 
+%% These were four brands of travel mug (in \texttt{cup}), and for each,
+%% how much the temperature of the coffee in the mug decreased over 30
+%% minutes. 
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Reading from the Web}
+%%   
+%%   \begin{itemize}
+%%   \item For R, use the URL in place of the filename (or in place of
+%%     the \texttt{f} saved from \texttt{file.choose()}). 
+%%   \item for SAS, do the \texttt{filename} thing, which works for any
+%%     type of file.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Reading soap data in R}
+%%   
+%% <<>>=
+%% url="http://www.utsc.utoronto.ca/~butler/c32/soap.txt"
+%% soap=read_delim(url," ")
+%% @   
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{The soap data}
+%%   
+%% <<>>=
+%% soap
+%% @   
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Reading soap data in SAS}
+  
+  \begin{Sascode}[store=ub]
+filename myurl 
+ url 
+ "http://www.utsc.utoronto.ca/~butler/c32/soap.txt";
+
+proc import 
+  datafile=myurl 
+  dbms=dlm
+  out=soap
+  replace;
+  delimiter=' ';
+  getnames=yes;
+  
+proc print data=soap(obs=10);
+
+  \end{Sascode}
+  
+\end{frame}
+
+\begin{frame}[fragile]{Ten rows of the soap data}
+  
+\Listing[store=ub,fontsize=footnotesize]{ubb}  
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Data aligned in columns}
+%%   
+%%   \begin{itemize}
+%%   \item Sometimes you see data aligned in columns, thus:
+%%     
+%%     \begin{small}
+%% \begin{verbatim}
+%% DrugA DrugB DrugC
+%%   4     6     6
+%%   5     8     7
+%%   4     4     6
+%%   3     5     6
+%%   2     4     7
+%%   4     6     5
+%%   3     5     6
+%%   4     8     5
+%%   4     6     5
+%% \end{verbatim}      
+%%       \item \texttt{read\_delim} \emph{will not} work: values
+%%         separated by \emph{more than one} space.
+%%       \item In R, \texttt{read\_table} works for this.
+%%       \item In SAS, not possible with \texttt{proc import}.
+%%     \end{small}
+%%   \end{itemize}
+%%   
+%% \end{frame}
+%% 
+%% \begin{frame}[fragile]{Reading in column-aligned data}
+%%   
+%%   \begin{multicols}{2}
+%% <<size="small">>=
+%% drugs=read_table("migraine.txt")
+%% @   
+%% 
+%% <<>>=
+%% drugs
+%% @ 
+%%     
+%%   \end{multicols}
+%% 
+%% \end{frame}
+
+\begin{frame}[fragile]{Reading an Excel sheet directly}
+  
+  \begin{itemize}
+  \item Here is my spreadsheet from before, but tarted up a bit:
+
+    \begin{center}
+\includegraphics[width=0.4\textwidth]{excel}      
+    \end{center}
+    
+\item It is now a workbook with a second sheet called ``notes'' (that
+  we don't want).
+  \end{itemize}
+  
+\end{frame}
+
+%% \begin{frame}[fragile]{Reading it in}
+%%   
+%%   \begin{itemize}
+%% \item Read into R, saying that we only want the sheet ``data''. Start
+%%   with \texttt{file.choose} as before (omitted):
+%%   
+%% <<echo=F>>=
+%% f="/home/ken/teaching/c32/notes/2017/test2.xlsx"
+%% @   
+%% <<>>=
+%% library(readxl)
+%% mydata2=read_excel(f,sheet="data")
+%% mydata2
+%% @   
+%% \item That has worked properly.
+%%   \end{itemize}
+%%   
+%% \end{frame}
+
+\begin{frame}[fragile]{Reading Excel spreadsheet into SAS}
+  
+  \begin{itemize}
+  \item Upload the spreadsheet file (as for uploading \texttt{.csv}
+    file)
+  \item Then, like this:
+    
+    \begin{Datastep}
+proc import 
+  datafile='/home/ken/test2.xlsx'
+  dbms=xlsx
+  out=mydata
+  replace;
+  sheet=data;
+  getnames=yes;
+    \end{Datastep}
+    
+    
+  \item \texttt{dbms} is now \texttt{xlsx} for reading this type of
+    file (or \texttt{xls} if you have old-style spreadsheet).
+  \item Use \texttt{sheet=} to say which worksheet you want (no quotes).
+    
+  \item Equivalent to R \texttt{read\_excel}.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]{The spreadsheet as data set}
+
+  
+  \begin{itemize}
+  \item Did it work? Yes:
+
+    \begin{Sascode}[store=re]
+proc print;    
+  \end{Sascode}
+  
+  \Listing[store=re]{ree}
+
+
+  \end{itemize}
+  
+  
+\end{frame}
+
+\begin{frame}[fragile]{Reading Excel files from the Web}
+  
+  \begin{itemize}
+  \item Recall that R's \texttt{read\_excel} required us to
+    download-save spreadsheet first then read it from local file.
+  \item SAS has no such requirements here.
+  \item Define a \texttt{filename myurl url} as before, and use it in
+    the appropriate \texttt{proc import}.
+    
+  \end{itemize}
+  
+\end{frame}

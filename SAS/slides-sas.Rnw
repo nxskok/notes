@@ -1,0 +1,99 @@
+\documentclass[unknownkeysallowed]{beamer}
+
+\usetheme{default}
+\useoutertheme{infolines}
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{headline}{}
+
+\usepackage{amsmath}
+\usepackage{statrep}
+\usepackage{parskip,xspace}
+\newcommand*{\Statrep}{\mbox{\textsf{StatRep}}\xspace}
+\newcommand*{\Code}[1]{\texttt{\textbf{#1}}}
+\newcommand*{\cs}[1]{\texttt{\textbf{\textbackslash#1}}}
+\setcounter{secnumdepth}{0}
+\def\SRrootdir{.}
+\def\SRmacropath{./statrep_macros.sas}
+\newcommand{\mytilde}{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}
+\usepackage[utf8]{inputenc}
+% \DeclareUnicodeCharacter{00D7}{$\times$}
+% \DeclareUnicodeCharacter{221A}{\checkmark}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{pbox}
+\usepackage{verbatim}
+
+\title{STAC32}
+\subtitle{Applications of Statistical Methods}
+\author{Ken Butler}
+
+\begin{document}
+
+%\maketitle
+
+
+
+
+
+% installing our software
+
+<<install, child="install-sas.Rnw">>=
+@
+
+% reading in datafiles
+
+<<readfile, child="readfile-sas.Rnw">>=
+@
+
+% making graphs
+
+<<graphs, child="graphs-sas.Rnw">>=
+@  
+
+
+% numerical summaries
+
+<<numsum, child="numsum-sas.Rnw">>=
+@  
+
+
+% statistical inference
+
+<<inference, child="inference-sas.Rnw">>=
+@  
+
+ 
+% tidying and organizing data
+<<tidying, child="tidying-sas.Rnw">>=
+@ 
+
+% case studies
+
+<<case1, child="case1-sas.Rnw">>=
+@ 
+
+<<catreg, child="catreg-sas.Rnw">>=
+@ 
+
+
+% dates and times
+
+<<datetime, child="datetime-sas.Rnw">>=
+@ 
+
+
+% miscellanea in R and SAS
+
+<<miscellanea, child="miscellanea-sas.Rnw">>=
+@ 
+
+
+% vector-matrix algebra in R and maybe SAS proc IML?
+
+<<vecmat, child="vecmat-sas.Rnw">>=
+@ 
+
+
+\end{document}

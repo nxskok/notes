@@ -1,0 +1,12 @@
+                               The GLM Procedure
+ 
+                       Dependent Variable: pulse_rate
+ 
+                                       Sum of
+ Source                     DF        Squares    Mean Square   F Value   Pr > F
+ 
+ Model                       2    8492.824970    4246.412485   1330.72   <.0001
+ 
+ Error                      28      89.349869       3.191067
+ 
+ Corrected Total            30    8582.174839

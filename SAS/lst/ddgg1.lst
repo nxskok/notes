@@ -1,0 +1,7 @@
+                              Parameter Estimates
+ 
+                           Parameter       Standard
+      Variable     DF       Estimate          Error    t Value    Pr > |t|
+ 
+      Intercept     1        0.58223        0.12993       4.48      <.0001
+      usage         1     0.00095286     0.00009824       9.70      <.0001

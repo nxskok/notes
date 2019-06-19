@@ -1,0 +1,18 @@
+                              The Mixed Procedure
+ 
+                       Differences of Least Squares Means
+ 
+                                          Standard
+  Effect   group     _group    Estimate      Error     DF   t Value   Pr > |t|
+ 
+  group    Control   Highjum   -37.6000    10.1198   14.8     -3.72     0.0021
+  group    Control   Lowjump   -11.4000    10.5942   16.2     -1.08     0.2977
+  group    Highjum   Lowjump    26.2000     8.0558   17.6      3.25     0.0045
+ 
+                      Differences of Least Squares Means
+ 
+              Effect   group     _group    Adjustment       Adj P
+ 
+              group    Control   Highjum   Tukey-Kramer    0.0056
+              group    Control   Lowjump   Tukey-Kramer    0.5417
+              group    Highjum   Lowjump   Tukey-Kramer    0.0120

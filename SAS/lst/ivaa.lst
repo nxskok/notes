@@ -1,0 +1,17 @@
+                              The TTEST Procedure
+ 
+                                  Variable:  y
+ 
+    group         Method               Mean       90% CL Mean        Std Dev
+ 
+    1                               13.0000     11.7603  14.2397      2.0000
+    2                               15.6667     13.4798  17.8535      2.6583
+    Diff (1-2)    Pooled            -2.6667     -4.7909  -0.5425      2.2758
+    Diff (1-2)    Satterthwaite     -2.6667     -5.0103  -0.3230
+ 
+                group         Method             90% CL Std Dev
+ 
+                1                                1.4365   3.4220
+                2                                1.7865   5.5539
+                Diff (1-2)    Pooled             1.7352   3.3806
+                Diff (1-2)    Satterthwaite

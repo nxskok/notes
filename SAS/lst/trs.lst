@@ -1,0 +1,12 @@
+                              The ANOVA Procedure
+ 
+                         Dependent Variable: weight
+ 
+                                       Sum of
+ Source                     DF        Squares    Mean Square   F Value   Pr > F
+ 
+ Model                       3    3520.525500    1173.508500    119.14   <.0001
+ 
+ Error                      16     157.600000       9.850000
+ 
+ Corrected Total            19    3678.125500

@@ -543,6 +543,7 @@ control-shift-C or Mac equivalent with Cmd.)
 ## Looking at what we read in
 - Again, type the name of the thing to display it:
 
+\scriptsize
 
 ```r
 mydata
@@ -559,6 +560,7 @@ mydata
 ## 5 p5       16    30 upper
 ## 6 p6       17    31 lower
 ```
+\normalsize
 
 - This is a “tibble” or data frame, the standard way of storing a data
 set in R.
@@ -633,6 +635,7 @@ summary(mydata)
 - I like to save the URL in a variable first (because URLs tend to be
 long), and then put that variable in the `read_` function:
 
+\small
 
 ```r
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/global.csv"
@@ -647,6 +650,7 @@ global <- read_csv(my_url)
 ##   cost = col_double()
 ## )
 ```
+\normalsize
 
 ## The data
 
@@ -907,6 +911,7 @@ library(tidyverse)
 - Use `read_tsv` (“tab-separated values”), like `read_csv`.
 - Data in `ais.txt`:
 
+\scriptsize
 
 ```r
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/ais.txt"
@@ -931,9 +936,11 @@ athletes <- read_tsv(my_url)
 ##   Wt = col_double()
 ## )
 ```
+\normalsize
 
 ## The data (some)
 
+\footnotesize
 
 ```r
 athletes
@@ -957,6 +964,7 @@ athletes
 ## #   SSF <dbl>, `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 ```
+\normalsize
 
 ## Types of graph
 
@@ -1082,6 +1090,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
 Default uses same scale for each facet. To use different scales for each
 facet, this:
 
+\small
 
 ```r
 ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
@@ -1089,7 +1098,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
 ```
 
 ![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.pdf)
-
+\normalsize
 
 # Numerical summaries: more detailed
 
@@ -1218,6 +1227,7 @@ athletes %>% count(Sport)
 Another way (which will make sense
 in a moment):
 
+\small
 
 ```r
 athletes %>% group_by(Sport) %>%
@@ -1239,6 +1249,7 @@ athletes %>% group_by(Sport) %>%
 ##  9 TSprnt     15
 ## 10 WPolo      17
 ```
+\normalsize
 
 ## Summaries by group
 - Might want separate summaries for each “group”, eg. mean and SD
@@ -1266,6 +1277,7 @@ sport, how many athletes were there?”
 
 - Standard deviation of each (numeric) column: 
 
+\small
 
 ```r
 athletes %>% summarize_if(is.numeric, sd)
@@ -1279,8 +1291,11 @@ athletes %>% summarize_if(is.numeric, sd)
 ## # … with 3 more variables: LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 ```
+\normalsize
 
 - Median and IQR of all columns whose name starts with H: 
+
+\small
 
 ```r
 athletes %>% summarize_at(vars(starts_with("H")),
@@ -1293,7 +1308,7 @@ athletes %>% summarize_at(vars(starts_with("H")),
 ##    <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
 ## 1   43.5   14.7   180.   4.98   2.07   12.2
 ```
-
+\normalsize
 
 # Statistical Inference
 
@@ -1363,6 +1378,7 @@ jays = read_csv("jays15-home.csv")
 
 ## Taking a look
 
+\scriptsize
 
 ```r
 jays
@@ -1389,9 +1405,11 @@ jays
 ## #   time` <time>, Daynight <chr>, attendance <dbl>,
 ## #   streak <chr>
 ```
+\normalsize
 
 ## Another way
 
+\tiny
 
 ```r
 glimpse(jays)
@@ -1422,6 +1440,7 @@ glimpse(jays)
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
 ```
+\normalsize
 
 ## Attendance histogram
 
@@ -1494,7 +1513,7 @@ t.test(jays$attendance, conf.level = 0.90)
 
 
 ## Comments
-- Need to say “column attendance within data frame jays” using $.
+- Need to say “column attendance within data frame `jays`” using $.
 - 95% CI from about 20,000 to about 30,000.
 - Not estimating mean attendance well at all!
 - Generally want confidence interval to be shorter, which happens if:
@@ -1644,7 +1663,10 @@ approx. normal even if data distribution somewhat non-normal.
 - So look at shape of data distribution, and make a call about whether
 it is normal enough, given the sample size.
 
-## Blue Jays attendances
+## Blue Jays attendances again:
+
+- You might say that this is not normal enough for a sample size of $n = 25$,
+in which case you don’t trust the $t$-test result:
 
 
 ```r
@@ -1653,8 +1675,7 @@ ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 
 ![plot of chunk unnamed-chunk-65](figure/unnamed-chunk-65-1.pdf)
 
-- You might say that this is not normal enough for a sample size of $n = 25$,
-in which case you don’t trust the $t$-test result.
+
 
 ## Another example: learning to read
 
@@ -1867,7 +1888,7 @@ experiment. Low $\beta$ good.
 - Prob. of not making type II error called **power** (= $1 - \beta$). *High* power
 good.
 
-## Power
+## Power 
 
 - Suppose $H_0 : \theta = 10$, $H a : \theta \ne 10$ for some parameter $\theta$.
 - Suppose $H_0$ wrong. What does that say about $\theta$?
@@ -1927,11 +1948,11 @@ x
 ## [13] 13.074996 11.353573  5.015575
 ```
 
-
-
-## ...continued 
-
 - Test whether `x` from population with mean 10 or not (over):
+
+
+## ...continued
+
 
 
 
@@ -2010,6 +2031,7 @@ different each time because of randomness.
 be calculated.
 - `power.t.test`. delta difference between null and true mean: 
 
+\small
 
 ```r
 power.t.test(n = 15, delta = 10-8, sd = 4, type = "one.sample")
@@ -2026,6 +2048,7 @@ power.t.test(n = 15, delta = 10-8, sd = 4, type = "one.sample")
 ##           power = 0.4378466
 ##     alternative = two.sided
 ```
+\normalsize
 
 ## Comparison of results
 
@@ -2207,13 +2230,15 @@ combos
 - Calculate the powers, carefully:
 
 ```r
-ans=with(combos, power.t.test(n=n, delta=mean-10, sd=4, type="one.sample"))
+ans=with(combos, power.t.test(n=n, delta=mean-10, sd=4, 
+                              type="one.sample"))
 ```
 
 - Make a data frame to plot, pulling things from the right places:
 
 ```r
-d=tibble(n=factor(combos$n), mean=combos$mean, power=ans$power)
+d=tibble(n=factor(combos$n), mean=combos$mean, 
+         power=ans$power)
 ```
 
 - then make the plot:
@@ -2255,9 +2280,12 @@ Similar procedure to before:
 means=c(7, 8)
 ns=seq(10, 40, 5)
 combos=crossing(mean=means, n=ns)
-ans=with(combos, power.t.test(n=n, delta=10-mean, sd=4, type="one.sample"))
-d=tibble(mean=factor(combos$mean), n=combos$n, power=ans$power)
-g=ggplot(d, aes(x=n, y=power, colour=mean)) + geom_point() + geom_line() +
+ans=with(combos, power.t.test(n=n, delta=10-mean, sd=4, 
+                              type="one.sample"))
+d=tibble(mean=factor(combos$mean), n=combos$n, 
+         power=ans$power)
+g=ggplot(d, aes(x=n, y=power, colour=mean)) + 
+  geom_point() + geom_line() +
   geom_hline(yintercept=1,linetype="dashed")  
 ```
 
@@ -2289,11 +2317,13 @@ kids %>% group_by(group) %>%
 ## 2 t        21  11.0
 ```
 
+## Setting up
+
 - suppose a 5-point improvement in reading score was considered important (on this scale)
 - in a 2-sample test, null (difference of) mean is zero, so `delta` is true difference in means
 - what is power for these sample sizes, and what sample size would be needed to get power up to 0.80?
 
-## calculating power for sample size 22 (per group) 
+## Calculating power for sample size 22 (per group) 
 
 
 ```r
@@ -2337,7 +2367,7 @@ power.t.test(power=0.80, delta=5, sd=14, type="two.sample",
 ## NOTE: n is number in *each* group
 ```
 
-## comments
+## Comments
 
 - The power for the sample sizes we have is very small (to detect a 5-point increase).
 - To get power 0.80, we need 98 kids in *each* group!
@@ -2362,8 +2392,9 @@ twogroups=read_delim(my_url," ")
 ```
 
 
-## The data (some) 
+## The data
 
+\footnotesize
 
 ```r
 twogroups
@@ -2389,6 +2420,7 @@ twogroups
 ## 14    18     2
 ## 15    19     2
 ```
+\normalsize
 
 ## 95% CI (default)
 
@@ -2528,7 +2560,10 @@ ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
 
 ![plot of chunk unnamed-chunk-99](figure/unnamed-chunk-99-1.pdf)
 
-Skewed to right. Should look at median.
+## Comments
+
+- Skewed to right. 
+- Should look at *median*, not mean.
 
 ## The sign test
 - But how to test whether the median is greater than 160?
@@ -2602,7 +2637,8 @@ library(devtools)
 install_github("nxskok/smmr")
 ```
 - Then load it:
-```{r, eval=F
+
+```r
 library(smmr)
 ```
 
@@ -2719,6 +2755,8 @@ pval_sign(300, irs, Time)
 ## Doing a whole bunch
 - Choose our null medians first:
 
+\small
+
 ```r
 (d=tibble(null_median=seq(100,300,20)))
 ```
@@ -2739,6 +2777,7 @@ pval_sign(300, irs, Time)
 ## 10         280
 ## 11         300
 ```
+\normalsize
 
 ## ... and then
 
@@ -3069,7 +3108,7 @@ line.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-123](figure/unnamed-chunk-123-1.pdf)
+![plot of chunk unnamed-chunk-124](figure/unnamed-chunk-124-1.pdf)
 
 - Points should follow the straight line. Bottom left one way off, so
 normality questionable here: outlier.
@@ -3085,7 +3124,7 @@ ought not to concern us.
 - Look at some examples where we know the answer, so that we can
 see what to expect.
 
-## Normal data, large sample check randomness from here
+## Normal data, large sample
 
 
 
@@ -3096,9 +3135,7 @@ d=tibble(x=rnorm(200))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-124](figure/unnamed-chunk-124-1.pdf)
-
-As normal as you could wish for.
+![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.pdf)
 
 ## The normal quantile plot
 
@@ -3107,36 +3144,40 @@ As normal as you could wish for.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.pdf)
+![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.pdf)
 
-## Normal data, small sample 
+## Normal data, small sample
 
 
+
+- Not so convincingly normal, but not obviously skewed:
 
 
 
 ```r
 d=tibble(x=rnorm(20))
-ggplot(d,aes(x=x))+geom_histogram(bins=10)
+ggplot(d,aes(x=x))+geom_histogram(bins=5)
 ```
 
 ![plot of chunk normal-small](figure/normal-small-1.pdf)
 
-- Not so convincingly normal, but not obviously skewed.
 
 ## The normal quantile plot
+
+Good, apart from the highest and lowest points being slightly off. I’d call
+this good:
+
 
 
 ```r
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127-1.pdf)
+![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128-1.pdf)
 
-Good, apart from the highest and lowest points being slightly off. I’d call
-this good.
+## Chi-squared data, *df* = 10 xxx
 
-## Chi-squared data, *df* = 10
+Somewhat skewed to right:
 
 
 ```r
@@ -3144,22 +3185,25 @@ d=tibble(x=rchisq(100,10))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128-1.pdf)
+![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.pdf)
 
-Somewhat skewed to right.
+
 
 ## The normal quantile plot
+
+Somewhat opening-up curve:
 
 
 ```r
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.pdf)
+![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
 
-Somewhat opening-up curve.
 
-## Chi-squared data, df = 3 
+## Chi-squared data, df = 3 xxx
+
+Definitely skewed to right:
 
 
 ```r
@@ -3170,21 +3214,24 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ![plot of chunk chisq-small-df](figure/chisq-small-df-1.pdf)
 
 
-Definitely skewed to right.
 
-## The normal quantile plot
+## The normal quantile plot xxx
+
+Clear upward-opening curve:
 
 
 ```r
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
+![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
 
 
-Clear upward-opening curve.
 
-## t-distributed data, df = 3 
+## t-distributed data, df = 3
+
+Long tails (or a very sharp peak):
+
 
 ```r
 d=tibble(x=rt(300,3))
@@ -3194,20 +3241,20 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ![plot of chunk t-small](figure/t-small-1.pdf)
 
 
-Long tails (or a very sharp peak).
 
 ## The normal quantile plot
+
+Low values too low and high values too high for normal.
 
 
 ```r
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
+![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.pdf)
 
-Low values too low and high values too high for normal.
 
-## Our pain-relief data 
+## Our pain-relief data
 
 
 ```r
@@ -3216,6 +3263,7 @@ ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 
 ![plot of chunk pain-relief-qq](figure/pain-relief-qq-1.pdf)
 
+## Comments
 
 - Definitely not normal. What to do?
 - Sign test on differences, null median 0.
@@ -3295,7 +3343,7 @@ standard reading method.
 ggplot(kids,aes(x=group,y=score))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.pdf)
+![plot of chunk unnamed-chunk-135](figure/unnamed-chunk-135-1.pdf)
 
 ## Facetted normal quantile plots
 Done this way:
@@ -3306,7 +3354,7 @@ ggplot(kids,aes(sample=score))+stat_qq()+stat_qq_line()+
 facet_wrap(~group)
 ```
 
-![plot of chunk unnamed-chunk-135](figure/unnamed-chunk-135-1.pdf)
+![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.pdf)
 
 ## Comments
 - These plots show no problems with normality. Both groups are more
@@ -3557,6 +3605,7 @@ rats=read_delim(my_url," ")
 
 ## The data (some random rows) 
 
+\small
 
 ```r
 rats %>% sample_n(12)
@@ -3579,6 +3628,7 @@ rats %>% sample_n(12)
 ## 11 Lowjump      588
 ## 12 Highjump     626
 ```
+\normalsize
 
 ## Boxplots
 
@@ -3587,16 +3637,17 @@ rats %>% sample_n(12)
 ggplot(rats,aes(y=density,x=group))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-146](figure/unnamed-chunk-146-1.pdf)
+![plot of chunk unnamed-chunk-147](figure/unnamed-chunk-147-1.pdf)
 
 ## Or, arranging groups in data (logical) order
+
 
 ```r
 ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-147](figure/unnamed-chunk-147-1.pdf)
+![plot of chunk unnamed-chunk-148](figure/unnamed-chunk-148-1.pdf)
 
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
@@ -3747,6 +3798,10 @@ different.
 ## Tukey on rat data
 
 
+
+
+\small
+
 ```r
 rats.aov=aov(density~group,data=rats)
 TukeyHSD(rats.aov)
@@ -3759,18 +3814,16 @@ TukeyHSD(rats.aov)
 ## Fit: aov(formula = density ~ group, data = rats)
 ## 
 ## $group
-##                   diff       lwr       upr
-## Highjump-Control  37.6  13.66604 61.533957
-## Lowjump-Control   11.4 -12.53396 35.333957
-## Lowjump-Highjump -26.2 -50.13396 -2.266043
-##                      p adj
-## Highjump-Control 0.0016388
-## Lowjump-Control  0.4744032
-## Lowjump-Highjump 0.0297843
+##                   diff       lwr       upr     p adj
+## Highjump-Control  37.6  13.66604 61.533957 0.0016388
+## Lowjump-Control   11.4 -12.53396 35.333957 0.4744032
+## Lowjump-Highjump -26.2 -50.13396 -2.266043 0.0297843
 ```
+\normalsize
 
 
-Again conclude that bone density for highjump group significantly higher
+
+- Again conclude that bone density for highjump group significantly higher
 than for other two groups.
 
 ## Why Tukey’s procedure better than all t-tests 
@@ -3799,21 +3852,21 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-154](figure/unnamed-chunk-154-1.pdf)
+![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.pdf)
 
 Assumptions:
 - Normally distributed data within each group
 - with equal group SDs.
 
-## Normal quantile plots by group
+## Normal quantile plots by group xxx
 
 
 ```r
-ggplot(rats, aes(sample = density)) + stat_qq() + stat_qq_line() +
-  facet_wrap( ~ group)
+ggplot(rats, aes(sample = density)) + stat_qq() + 
+  stat_qq_line() + facet_wrap( ~ group)
 ```
 
-![plot of chunk unnamed-chunk-155](figure/unnamed-chunk-155-1.pdf)
+![plot of chunk unnamed-chunk-158](figure/unnamed-chunk-158-1.pdf)
 
 ## The assumptions
 - Normally-distributed data within each group
@@ -3830,9 +3883,10 @@ Welch-Satterthwaite t-test.)
 - Can also use Mood’s Median Test (see over). This works for any
 number of groups.
 
-## Mood’s median test 1/3
+## Mood’s median test 1/4 xxx
 - Find median of all bone densities, regardless of group:
 
+\small
 
 ```r
 (rats %>% summarize(med = median(density)) %>% pull(med) -> m)
@@ -3841,6 +3895,7 @@ number of groups.
 ```
 ## [1] 621.5
 ```
+\normalsize
 
 - Count up how many observations in each group above or below
 overall median:
@@ -4378,17 +4433,19 @@ pigs2 %>%
 
 Feed 3 is best, feed 1 worst.
 
-## Should we have any concerns about the ANOVA?  
+## Should we have any concerns about the ANOVA?
+
+Feed 2 has an outlier, but there are only 5 pigs in each group, and the
+conclusion is so clear that I am OK with this.
 
 
 ```r
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-171](figure/unnamed-chunk-171-1.pdf)
+![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174-1.pdf)
 
-Feed 2 has an outlier, but there are only 5 pigs in each group, and the
-conclusion is so clear that I am OK with this.
+
 
 ## Tuberculosis
 
@@ -4789,14 +4846,17 @@ weather_tidy
 ## # … with 23 more rows
 ```
 
-## Plotting the temperatures
+## Plotting the temperatures xxx
 - Plot temperature against date joined by lines, but with separate lines
-for max and min.
-- ggplot requires something like
+for max and min. `ggplot` requires something like
+
+\footnotesize
 
 ```r
-ggplot(..., aes(x = date, y = temperature)) + geom_point() + geom_line()
+ggplot(..., aes(x = date, y = temperature)) + geom_point() + 
+  geom_line()
 ```
+\normalsize
 
 only we have two temperatures, one a max and one a min, that we
 want to keep separate.
@@ -4807,10 +4867,12 @@ untidy `weather`.) Are making `weather_tidy`
 untidy for purposes of drawing graph only.
 - Then can do something like
 
+\footnotesize
+
 ```r
 ggplot(d, aes(x = date, y = temperature, colour = maxmin)) + geom_point() + geom_line()
 ```
-
+\normalsize
 to distinguish max and min on graph.
 
 ## Setting up plot
@@ -4830,14 +4892,14 @@ weather_tidy %>%
   geom_line() -> g
 ```
 
-## The plot 
+## The plot xxx
 
 
 ```r
 g
 ```
 
-![plot of chunk unnamed-chunk-193](figure/unnamed-chunk-193-1.pdf)
+![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196-1.pdf)
 
 ## Summary of tidying “verbs”
 
@@ -4881,6 +4943,7 @@ Let’s go back to our Australian athletes:
 ## )
 ```
 
+\footnotesize
 
 
 ```r
@@ -4905,6 +4968,7 @@ athletes
 ## #   SSF <dbl>, `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 ```
+\normalsize
 
 ## Choosing a column
 
@@ -5115,7 +5179,7 @@ athletes %>% select(matches("^.t$"))
 ## # … with 192 more rows
 ```
 
-## Displaying some numbered columns 1/2
+## Displaying some numbered columns
 
 Make up a data frame to illustrate. This `sample` generates 5 random values
 equally likely to be anything 0–9 (without replacement): 
@@ -5227,6 +5291,7 @@ athletes %>% sample_n(8)
 
 ## Rows for which something is true
 
+\footnotesize
 
 ```r
 athletes %>% filter(Sport == "Tennis")
@@ -5250,6 +5315,7 @@ athletes %>% filter(Sport == "Tennis")
 ## # … with 5 more variables: SSF <dbl>,
 ## #   `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>, Wt <dbl>
 ```
+\normalsize
 
 ## More complicated selections
 
@@ -5480,6 +5546,7 @@ athletes %>%
 ## To find the mean height of the women athletes
 Two ways:
 
+\small
 
 ```r
 athletes %>% group_by(Sex) %>% summarize(m = mean(Ht))
@@ -5492,8 +5559,6 @@ athletes %>% group_by(Sex) %>% summarize(m = mean(Ht))
 ## 1 female  175.
 ## 2 male    186.
 ```
-
-or
 
 
 ```r
@@ -5508,6 +5573,8 @@ athletes %>%
 ##   <dbl>
 ## 1  175.
 ```
+
+\normalsize
 
 ## Summary of data selection/arrangement "verbs"
 
@@ -5555,13 +5622,21 @@ tb3
 
 What are actual names of those countries in `iso2`?
 
-## Actual country names
+## Actual country names xxx
 Found actual country names to go with those abbreviations, in spreadsheet: 
+
+\footnotesize
+
+```r
+my_url <- 
+  "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
+```
+
+\normalsize
 
 
 ```r
 f <- tempfile()
-my_url <- "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
 download.file(my_url, f)
 country_names <- read_excel(f)
 ```
@@ -5680,6 +5755,7 @@ tb3 %>%
   - the 1994-1995 thing
   - there is at least one country in `tb3` that was not in `country_names` (the NA above). Which?
   
+\footnotesize  
 
 ```r
 tb3 %>%
@@ -5698,9 +5774,8 @@ tb3 %>%
 ## 5 <NA> 
 ## 6 TL
 ```
-  
+\normalsize
 
-xxx end of section; check from here
 
 
 # Case study 1: the windmill data
@@ -5780,7 +5855,7 @@ methods.
   - Put `DC_output` on vertical scale.
 - Add trend, but don’t want to assume linear.
 
-## Scatterplot
+## Scatterplot xxx
 
 
 ```r
@@ -5792,7 +5867,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-228-1.pdf)
+![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-232-1.pdf)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -5803,8 +5878,9 @@ squares” which downweights outliers. Not constrained to be straight.)
 - Trend more or less linear for while, then curves downwards (levelling off?). Straight
 line not so good here.
 
-## Fit a straight line (and see what happens) 
+## Fit a straight line (and see what happens) xxx
 
+\footnotesize
 
 ```r
 DC.1 <- lm(DC_output ~ wind_velocity, data = windmill)
@@ -5835,11 +5911,13 @@ summary(DC.1)
 ## Multiple R-squared:  0.8745,	Adjusted R-squared:  0.869 
 ## F-statistic: 160.3 on 1 and 23 DF,  p-value: 7.546e-12
 ```
+\normalsize
 
-## Another way of looking at the output
+## Another way of looking at the output xxx
 
 - The standard output tends to go off the bottom of the page rather easily. Package `broom` has these:
 
+\small
 
 ```r
 glance(DC.1)
@@ -5854,9 +5932,11 @@ glance(DC.1)
 ## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
 ## #   df.residual <int>
 ```
+\normalsize
 
 showing that the R-squared is 87%, and
 
+\footnotesize
 
 ```r
 tidy(DC.1)
@@ -5869,6 +5949,7 @@ tidy(DC.1)
 ## 1 (Intercept)     0.131    0.126       1.04 3.10e- 1
 ## 2 wind_veloci…    0.241    0.0190     12.7  7.55e-12
 ```
+\normalsize
 
 showing the intercept and slope and their significance.
 
@@ -5884,14 +5965,14 @@ R-squared (87%) high.
 residuals, observed minus predicted, plotted against fitted (predicted).
 - Plot using the regression object as “data frame” (see over).
 
-## Plot of residuals against fitted values
+## Plot of residuals against fitted values xxx
 
 
 ```r
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-232-1.pdf)
+![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -5964,7 +6045,7 @@ glance(DC.2)
 - Parabola model better than linear one.
 - But...need to check residuals again.
 
-## Residual plot from parabola model
+## Residual plot from parabola model xxx
 
 
 ```r
@@ -5972,9 +6053,9 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236-1.pdf)
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.pdf)
 
-## Scatterplot with fitted line and curve
+## Scatterplot with fitted line and curve xxx
 - Residual plot basically random. Good.
 - Scatterplot with fitted line and curve like this:
 
@@ -5984,6 +6065,8 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_point() + geom_smooth(method = "lm", se = F) +
   geom_line(data = DC.2, aes(y = .fitted))
 ```
+
+## Comments xxx
 
 - This plots: 
   - scatterplot (`geom_point`); 
@@ -5998,7 +6081,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-237-1.pdf)
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6047,9 +6130,10 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 ## Scatterplot for wind_pace
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238-1.pdf)
+Pretty straight. Blue actually smooth curve not line:
 
-That’s pretty straight. Blue actually smooth curve not line.
+![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
+
 
 
 
@@ -6090,7 +6174,7 @@ parabola model (`wind.velocity` and its square).
 - Looks good, but check residual plot (over). 
 
 
-## Residual plot for asymptote model
+## Residual plot for asymptote model xxx
 
 
 ```r
@@ -6160,9 +6244,9 @@ w2 %>%
   geom_line(aes(y = fit, colour = model))
 ```
 
-## Scatterplot with fitted curves
+## Scatterplot with fitted curves xxx
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
+![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-246-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6356,17 +6440,20 @@ g + geom_rect(
 )
 ```
 
-## The plot
+## The plot xxx
 
-![plot of chunk unnamed-chunk-252](figure/unnamed-chunk-252-1.pdf)
+![plot of chunk unnamed-chunk-256](figure/unnamed-chunk-256-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
 - Outside range of data, they disagree violently!
 - For larger `wind.velocity`, asymptote model behaves reasonably,
 parabola model does not.
-I What happens as `wind.velocity` goes to zero? Should find
+- What happens as `wind.velocity` goes to zero? Should find
 `DC.output` goes to zero as well. Does it?
+
+## Comments (2) xxx
+
 - For parabola model:
 
 
@@ -6386,9 +6473,9 @@ tidy(DC.2)
 - Nope, goes to −1.15 (intercept), actually significantly different from
 zero.
 
-## Comments (2)
-- What about asymptote model?
+## Comments (3): asymptote model xxx
 
+\small
 
 ```r
 tidy(DC.3)
@@ -6401,6 +6488,7 @@ tidy(DC.3)
 ## 1 (Intercept)     2.98    0.0449      66.3 8.92e-28
 ## 2 wind_pace      -6.93    0.206      -33.6 4.74e-21
 ```
+\normalsize
 
 - As `wind.velocity` heads to 0, wind.pace heads to $+\infty$, so
 DC.output heads to $−\infty$! 
@@ -6526,7 +6614,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-259](figure/unnamed-chunk-259-1.pdf)
+![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6570,7 +6658,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-261](figure/unnamed-chunk-261-1.pdf)
+![plot of chunk unnamed-chunk-265](figure/unnamed-chunk-265-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6639,7 +6727,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-264](figure/unnamed-chunk-264-1.pdf)
+![plot of chunk unnamed-chunk-268](figure/unnamed-chunk-268-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6702,7 +6790,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-268](figure/unnamed-chunk-268-1.pdf)
+![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6733,7 +6821,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-269](figure/unnamed-chunk-269-1.pdf)
+![plot of chunk unnamed-chunk-273](figure/unnamed-chunk-273-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -6775,7 +6863,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
+![plot of chunk unnamed-chunk-276](figure/unnamed-chunk-276-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7159,7 +7247,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-290](figure/unnamed-chunk-290-1.pdf)
+![plot of chunk unnamed-chunk-294](figure/unnamed-chunk-294-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7182,7 +7270,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-292](figure/unnamed-chunk-292-1.pdf)
+![plot of chunk unnamed-chunk-296](figure/unnamed-chunk-296-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7466,7 +7554,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-303](figure/unnamed-chunk-303-1.pdf)
+![plot of chunk unnamed-chunk-307](figure/unnamed-chunk-307-1.pdf)
 
 
 # Functions
@@ -8929,7 +9017,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-377](figure/unnamed-chunk-377-1.pdf)
+![plot of chunk unnamed-chunk-381](figure/unnamed-chunk-381-1.pdf)
 
 ## Labelling points on a plot
 
@@ -8964,7 +9052,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-379](figure/unnamed-chunk-379-1.pdf)
+![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -8974,7 +9062,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-380](figure/unnamed-chunk-380-1.pdf)
+![plot of chunk unnamed-chunk-384](figure/unnamed-chunk-384-1.pdf)
 
 ## Make labels smaller
 
@@ -8984,7 +9072,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-381](figure/unnamed-chunk-381-1.pdf)
+![plot of chunk unnamed-chunk-385](figure/unnamed-chunk-385-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9010,7 +9098,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.pdf)
+![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9034,7 +9122,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-385](figure/unnamed-chunk-385-1.pdf)
+![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9059,7 +9147,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.pdf)
+![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9072,7 +9160,7 @@ We use previous graph as base (to save drawing again).
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-388](figure/unnamed-chunk-388-1.pdf)
+![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.pdf)
 
 ## Axis labels
 
@@ -9081,7 +9169,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.pdf)
+![plot of chunk unnamed-chunk-393](figure/unnamed-chunk-393-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your

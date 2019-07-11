@@ -1101,6 +1101,8 @@ mydata=read_csv(f)
   Again, type the name of the thing to display it:
 \end{itemize}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mydata}
@@ -1118,6 +1120,8 @@ mydata=read_csv(f)
 ## 5 p5       16    30 upper
 ## 6 p6       17    31 lower
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -1245,6 +1249,8 @@ click it. - This pops up a ``data frame viewer'' top left:
   long), and then put that variable in the \texttt{read\_} function:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{my_url <-}\StringTok{ "http://www.utsc.utoronto.ca/~butler/c32/global.csv"}
@@ -1260,6 +1266,8 @@ click it. - This pops up a ``data frame viewer'' top left:
 ##   cost = col_double()
 ## )
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -1632,6 +1640,8 @@ the temperature of the coffee in the mug decreased over 30 minutes.
   Data in \texttt{ais.txt}:
 \end{itemize}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{my_url <-}\StringTok{ "http://www.utsc.utoronto.ca/~butler/c32/ais.txt"}
@@ -1658,10 +1668,14 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 ## )
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
 \begin{frame}[fragile]{The data (some)}
 \protect\hypertarget{the-data-some}{}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1687,6 +1701,8 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 ## #   SSF <dbl>, `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -1897,6 +1913,8 @@ Scatterplot:
 Default uses same scale for each facet. To use different scales for each
 facet, this:
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(athletes, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Ht, }\DataTypeTok{y =}\NormalTok{ Wt, }\DataTypeTok{colour =}\NormalTok{ Sex)) }\OperatorTok{+}
@@ -1904,11 +1922,7 @@ facet, this:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-\centering
-\includegraphics{figure/unnamed-chunk-44-1.pdf}
-\caption{plot of chunk unnamed-chunk-44}
-\end{figure}
+\includegraphics{figure/unnamed-chunk-44-1.pdf} \normalsize
 
 \end{frame}
 
@@ -2093,6 +2107,8 @@ for example, number of athletes in each sport:
 
 Another way (which will make sense in a moment):
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Sport) }\OperatorTok{%>%}
@@ -2115,6 +2131,8 @@ Another way (which will make sense in a moment):
 ##  9 TSprnt     15
 ## 10 WPolo      17
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -2162,6 +2180,8 @@ Another way (which will make sense in a moment):
   Standard deviation of each (numeric) column:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarize_if}\NormalTok{(is.numeric, sd)}
@@ -2177,11 +2197,15 @@ Another way (which will make sense in a moment):
 ## #   Wt <dbl>
 \end{verbatim}
 
+\normalsize
+
 \begin{itemize}
 \tightlist
 \item
   Median and IQR of all columns whose name starts with H:
 \end{itemize}
+
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2196,6 +2220,8 @@ Another way (which will make sense in a moment):
 ##    <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
 ## 1   43.5   14.7   180.   4.98   2.07   12.2
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -2309,6 +2335,8 @@ Another way (which will make sense in a moment):
 \begin{frame}[fragile]{Taking a look}
 \protect\hypertarget{taking-a-look}{}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{jays}
@@ -2337,10 +2365,14 @@ Another way (which will make sense in a moment):
 ## #   streak <chr>
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
 \begin{frame}[fragile]{Another way}
 \protect\hypertarget{another-way}{}
+
+\tiny
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2373,6 +2405,8 @@ Another way (which will make sense in a moment):
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -2495,13 +2529,14 @@ Another way (which will make sense in a moment):
 
 \end{frame}
 
-\begin{frame}{Comments}
+\begin{frame}[fragile]{Comments}
 \protect\hypertarget{comments-1}{}
 
 \begin{itemize}
 \tightlist
 \item
-  Need to say ``column attendance within data frame jays'' using \$.
+  Need to say ``column attendance within data frame \texttt{jays}''
+  using \$.
 \item
   95\% CI from about 20,000 to about 30,000.
 \item
@@ -2766,8 +2801,15 @@ Null false & Type II error & Correct\\
 
 \end{frame}
 
-\begin{frame}[fragile]{Blue Jays attendances}
-\protect\hypertarget{blue-jays-attendances}{}
+\begin{frame}[fragile]{Blue Jays attendances again:}
+\protect\hypertarget{blue-jays-attendances-again}{}
+
+\begin{itemize}
+\tightlist
+\item
+  You might say that this is not normal enough for a sample size of
+  \(n = 25\), in which case you don't trust the \(t\)-test result:
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2780,13 +2822,6 @@ Null false & Type II error & Correct\\
 \includegraphics{figure/unnamed-chunk-65-1.pdf}
 \caption{plot of chunk unnamed-chunk-65}
 \end{figure}
-
-\begin{itemize}
-\tightlist
-\item
-  You might say that this is not normal enough for a sample size of
-  \(n = 25\), in which case you don't trust the \(t\)-test result.
-\end{itemize}
 
 \end{frame}
 
@@ -3239,16 +3274,16 @@ Tension between truth and decision about truth (imperfect).
 ## [13] 13.074996 11.353573  5.015575
 \end{verbatim}
 
-\end{frame}
-
-\begin{frame}[fragile]{\ldots{}continued}
-\protect\hypertarget{continued}{}
-
 \begin{itemize}
 \tightlist
 \item
   Test whether \texttt{x} from population with mean 10 or not (over):
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{\ldots{}continued}
+\protect\hypertarget{continued}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3363,6 +3398,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
   \texttt{power.t.test}. delta difference between null and true mean:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{15}\NormalTok{, }\DataTypeTok{delta =} \DecValTok{10-8}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{4}\NormalTok{, }\DataTypeTok{type =} \StringTok{"one.sample"}\NormalTok{)}
@@ -3380,6 +3417,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 ##           power = 0.4378466
 ##     alternative = two.sided
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -3670,7 +3709,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\NormalTok{mean}\DecValTok{-10}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }\DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
+\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\NormalTok{mean}\DecValTok{-10}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }
+                              \DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3682,7 +3722,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{n), }\DataTypeTok{mean=}\NormalTok{combos}\OperatorTok{$}\NormalTok{mean, }\DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
+\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{n), }\DataTypeTok{mean=}\NormalTok{combos}\OperatorTok{$}\NormalTok{mean, }
+         \DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3756,9 +3797,12 @@ Similar procedure to before:
 \NormalTok{means=}\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)}
 \NormalTok{ns=}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{5}\NormalTok{)}
 \NormalTok{combos=}\KeywordTok{crossing}\NormalTok{(}\DataTypeTok{mean=}\NormalTok{means, }\DataTypeTok{n=}\NormalTok{ns)}
-\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\DecValTok{10}\OperatorTok{-}\NormalTok{mean, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }\DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
-\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{mean=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{mean), }\DataTypeTok{n=}\NormalTok{combos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
-\NormalTok{g=}\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{n, }\DataTypeTok{y=}\NormalTok{power, }\DataTypeTok{colour=}\NormalTok{mean)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\DecValTok{10}\OperatorTok{-}\NormalTok{mean, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }
+                              \DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
+\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{mean=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{mean), }\DataTypeTok{n=}\NormalTok{combos}\OperatorTok{$}\NormalTok{n, }
+         \DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
+\NormalTok{g=}\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{n, }\DataTypeTok{y=}\NormalTok{power, }\DataTypeTok{colour=}\NormalTok{mean)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept=}\DecValTok{1}\NormalTok{,}\DataTypeTok{linetype=}\StringTok{"dashed"}\NormalTok{)  }
 \end{Highlighting}
 \end{Shaded}
@@ -3809,6 +3853,11 @@ Similar procedure to before:
 ## 2 t        21  11.0
 \end{verbatim}
 
+\end{frame}
+
+\begin{frame}[fragile]{Setting up}
+\protect\hypertarget{setting-up}{}
+
 \begin{itemize}
 \tightlist
 \item
@@ -3824,7 +3873,7 @@ Similar procedure to before:
 
 \end{frame}
 
-\begin{frame}[fragile]{calculating power for sample size 22 (per group)}
+\begin{frame}[fragile]{Calculating power for sample size 22 (per group)}
 \protect\hypertarget{calculating-power-for-sample-size-22-per-group}{}
 
 \begin{Shaded}
@@ -3876,7 +3925,7 @@ Similar procedure to before:
 
 \end{frame}
 
-\begin{frame}{comments}
+\begin{frame}{Comments}
 \protect\hypertarget{comments-4}{}
 
 \begin{itemize}
@@ -3921,8 +3970,10 @@ hypothesis tests}
 
 \end{frame}
 
-\begin{frame}[fragile]{The data (some)}
-\protect\hypertarget{the-data-some-2}{}
+\begin{frame}[fragile]{The data}
+\protect\hypertarget{the-data-2}{}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3950,6 +4001,8 @@ hypothesis tests}
 ## 14    18     2
 ## 15    19     2
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -4161,7 +4214,18 @@ Reject null; mean greater than 160.
 \caption{plot of chunk unnamed-chunk-99}
 \end{figure}
 
-Skewed to right. Should look at median.
+\end{frame}
+
+\begin{frame}{Comments}
+\protect\hypertarget{comments-5}{}
+
+\begin{itemize}
+\tightlist
+\item
+  Skewed to right.
+\item
+  Should look at \emph{median}, not mean.
+\end{itemize}
 
 \end{frame}
 
@@ -4296,8 +4360,14 @@ Skewed to right. Should look at median.
 \begin{itemize}
 \tightlist
 \item
-  Then load it: \texttt{\{r,\ eval=F\ library(smmr)}
+  Then load it:
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(smmr)}
+\end{Highlighting}
+\end{Shaded}
 
 \end{frame}
 
@@ -4495,6 +4565,8 @@ Skewed to right. Should look at median.
   Choose our null medians first:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{(}\DataTypeTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{null_median=}\KeywordTok{seq}\NormalTok{(}\DecValTok{100}\NormalTok{,}\DecValTok{300}\NormalTok{,}\DecValTok{20}\NormalTok{)))}
@@ -4517,6 +4589,8 @@ Skewed to right. Should look at median.
 ## 10         280
 ## 11         300
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -4842,7 +4916,7 @@ Values aligned in columns:
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-2}{}
+\protect\hypertarget{the-data-3}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5012,8 +5086,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-123-1.pdf}
-\caption{plot of chunk unnamed-chunk-123}
+\includegraphics{figure/unnamed-chunk-124-1.pdf}
+\caption{plot of chunk unnamed-chunk-124}
 \end{figure}
 
 \begin{itemize}
@@ -5047,9 +5121,8 @@ and do a 1-sample t-test on them, over:
 
 \end{frame}
 
-\begin{frame}[fragile]{Normal data, large sample check randomness from
-here}
-\protect\hypertarget{normal-data-large-sample-check-randomness-from-here}{}
+\begin{frame}[fragile]{Normal data, large sample}
+\protect\hypertarget{normal-data-large-sample}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5060,11 +5133,9 @@ here}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-124-1.pdf}
-\caption{plot of chunk unnamed-chunk-124}
+\includegraphics{figure/unnamed-chunk-125-1.pdf}
+\caption{plot of chunk unnamed-chunk-125}
 \end{figure}
-
-As normal as you could wish for.
 
 \end{frame}
 
@@ -5079,8 +5150,8 @@ As normal as you could wish for.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-125-1.pdf}
-\caption{plot of chunk unnamed-chunk-125}
+\includegraphics{figure/unnamed-chunk-126-1.pdf}
+\caption{plot of chunk unnamed-chunk-126}
 \end{figure}
 
 \end{frame}
@@ -5088,10 +5159,16 @@ As normal as you could wish for.
 \begin{frame}[fragile]{Normal data, small sample}
 \protect\hypertarget{normal-data-small-sample}{}
 
+\begin{itemize}
+\tightlist
+\item
+  Not so convincingly normal, but not obviously skewed:
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{))}
-\KeywordTok{ggplot}\NormalTok{(d,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x))}\OperatorTok{+}\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{bins=}\DecValTok{10}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(d,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x))}\OperatorTok{+}\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{bins=}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5101,16 +5178,13 @@ As normal as you could wish for.
 \caption{plot of chunk normal-small}
 \end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  Not so convincingly normal, but not obviously skewed.
-\end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
 \protect\hypertarget{the-normal-quantile-plot-2}{}
+
+Good, apart from the highest and lowest points being slightly off. I'd
+call this good:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5120,17 +5194,16 @@ As normal as you could wish for.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-127-1.pdf}
-\caption{plot of chunk unnamed-chunk-127}
+\includegraphics{figure/unnamed-chunk-128-1.pdf}
+\caption{plot of chunk unnamed-chunk-128}
 \end{figure}
-
-Good, apart from the highest and lowest points being slightly off. I'd
-call this good.
 
 \end{frame}
 
-\begin{frame}[fragile]{Chi-squared data, \emph{df} = 10}
-\protect\hypertarget{chi-squared-data-df-10}{}
+\begin{frame}[fragile]{Chi-squared data, \emph{df} = 10 xxx}
+\protect\hypertarget{chi-squared-data-df-10-xxx}{}
+
+Somewhat skewed to right:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5141,16 +5214,16 @@ call this good.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-128-1.pdf}
-\caption{plot of chunk unnamed-chunk-128}
+\includegraphics{figure/unnamed-chunk-129-1.pdf}
+\caption{plot of chunk unnamed-chunk-129}
 \end{figure}
-
-Somewhat skewed to right.
 
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
 \protect\hypertarget{the-normal-quantile-plot-3}{}
+
+Somewhat opening-up curve:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5160,16 +5233,16 @@ Somewhat skewed to right.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-129-1.pdf}
-\caption{plot of chunk unnamed-chunk-129}
+\includegraphics{figure/unnamed-chunk-130-1.pdf}
+\caption{plot of chunk unnamed-chunk-130}
 \end{figure}
-
-Somewhat opening-up curve.
 
 \end{frame}
 
-\begin{frame}[fragile]{Chi-squared data, df = 3}
-\protect\hypertarget{chi-squared-data-df-3}{}
+\begin{frame}[fragile]{Chi-squared data, df = 3 xxx}
+\protect\hypertarget{chi-squared-data-df-3-xxx}{}
+
+Definitely skewed to right:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5184,12 +5257,12 @@ Somewhat opening-up curve.
 \caption{plot of chunk chisq-small-df}
 \end{figure}
 
-Definitely skewed to right.
-
 \end{frame}
 
-\begin{frame}[fragile]{The normal quantile plot}
-\protect\hypertarget{the-normal-quantile-plot-4}{}
+\begin{frame}[fragile]{The normal quantile plot xxx}
+\protect\hypertarget{the-normal-quantile-plot-xxx}{}
+
+Clear upward-opening curve:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5199,16 +5272,16 @@ Definitely skewed to right.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-130-1.pdf}
-\caption{plot of chunk unnamed-chunk-130}
+\includegraphics{figure/unnamed-chunk-131-1.pdf}
+\caption{plot of chunk unnamed-chunk-131}
 \end{figure}
-
-Clear upward-opening curve.
 
 \end{frame}
 
 \begin{frame}[fragile]{t-distributed data, df = 3}
 \protect\hypertarget{t-distributed-data-df-3}{}
+
+Long tails (or a very sharp peak):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5223,12 +5296,12 @@ Clear upward-opening curve.
 \caption{plot of chunk t-small}
 \end{figure}
 
-Long tails (or a very sharp peak).
-
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
-\protect\hypertarget{the-normal-quantile-plot-5}{}
+\protect\hypertarget{the-normal-quantile-plot-4}{}
+
+Low values too low and high values too high for normal.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5238,11 +5311,9 @@ Long tails (or a very sharp peak).
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-131-1.pdf}
-\caption{plot of chunk unnamed-chunk-131}
+\includegraphics{figure/unnamed-chunk-132-1.pdf}
+\caption{plot of chunk unnamed-chunk-132}
 \end{figure}
-
-Low values too low and high values too high for normal.
 
 \end{frame}
 
@@ -5260,6 +5331,11 @@ Low values too low and high values too high for normal.
 \includegraphics{figure/pain-relief-qq-1.pdf}
 \caption{plot of chunk pain-relief-qq}
 \end{figure}
+
+\end{frame}
+
+\begin{frame}{Comments}
+\protect\hypertarget{comments-6}{}
 
 \begin{itemize}
 \tightlist
@@ -5305,7 +5381,7 @@ Low values too low and high values too high for normal.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-5}{}
+\protect\hypertarget{comments-7}{}
 
 \begin{itemize}
 \tightlist
@@ -5385,8 +5461,8 @@ Low values too low and high values too high for normal.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-134-1.pdf}
-\caption{plot of chunk unnamed-chunk-134}
+\includegraphics{figure/unnamed-chunk-135-1.pdf}
+\caption{plot of chunk unnamed-chunk-135}
 \end{figure}
 
 \end{frame}
@@ -5405,14 +5481,14 @@ Done this way:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-135-1.pdf}
-\caption{plot of chunk unnamed-chunk-135}
+\includegraphics{figure/unnamed-chunk-136-1.pdf}
+\caption{plot of chunk unnamed-chunk-136}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-6}{}
+\protect\hypertarget{comments-8}{}
 
 \begin{itemize}
 \tightlist
@@ -5735,7 +5811,7 @@ contingency table:
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-7}{}
+\protect\hypertarget{comments-9}{}
 
 \begin{itemize}
 \tightlist
@@ -5822,6 +5898,8 @@ Values separated by spaces:
 \begin{frame}[fragile]{The data (some random rows)}
 \protect\hypertarget{the-data-some-random-rows}{}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sample_n}\NormalTok{(}\DecValTok{12}\NormalTok{)}
@@ -5846,6 +5924,8 @@ Values separated by spaces:
 ## 12 Highjump     626
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
 \begin{frame}[fragile]{Boxplots}
@@ -5859,8 +5939,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-146-1.pdf}
-\caption{plot of chunk unnamed-chunk-146}
+\includegraphics{figure/unnamed-chunk-147-1.pdf}
+\caption{plot of chunk unnamed-chunk-147}
 \end{figure}
 
 \end{frame}
@@ -5877,8 +5957,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-147-1.pdf}
-\caption{plot of chunk unnamed-chunk-147}
+\includegraphics{figure/unnamed-chunk-148-1.pdf}
+\caption{plot of chunk unnamed-chunk-148}
 \end{figure}
 
 \end{frame}
@@ -6098,6 +6178,8 @@ These are different too.
 \begin{frame}[fragile]{Tukey on rat data}
 \protect\hypertarget{tukey-on-rat-data}{}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rats.aov=}\KeywordTok{aov}\NormalTok{(density}\OperatorTok{~}\NormalTok{group,}\DataTypeTok{data=}\NormalTok{rats)}
@@ -6112,18 +6194,20 @@ These are different too.
 ## Fit: aov(formula = density ~ group, data = rats)
 ## 
 ## $group
-##                   diff       lwr       upr
-## Highjump-Control  37.6  13.66604 61.533957
-## Lowjump-Control   11.4 -12.53396 35.333957
-## Lowjump-Highjump -26.2 -50.13396 -2.266043
-##                      p adj
-## Highjump-Control 0.0016388
-## Lowjump-Control  0.4744032
-## Lowjump-Highjump 0.0297843
+##                   diff       lwr       upr     p adj
+## Highjump-Control  37.6  13.66604 61.533957 0.0016388
+## Lowjump-Control   11.4 -12.53396 35.333957 0.4744032
+## Lowjump-Highjump -26.2 -50.13396 -2.266043 0.0297843
 \end{verbatim}
 
-Again conclude that bone density for highjump group significantly higher
-than for other two groups.
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  Again conclude that bone density for highjump group significantly
+  higher than for other two groups.
+\end{itemize}
 
 \end{frame}
 
@@ -6166,8 +6250,8 @@ Lowjump-Highjump 0.0298     0.0045
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-154-1.pdf}
-\caption{plot of chunk unnamed-chunk-154}
+\includegraphics{figure/unnamed-chunk-157-1.pdf}
+\caption{plot of chunk unnamed-chunk-157}
 \end{figure}
 
 Assumptions: - Normally distributed data within each group - with equal
@@ -6175,20 +6259,20 @@ group SDs.
 
 \end{frame}
 
-\begin{frame}[fragile]{Normal quantile plots by group}
-\protect\hypertarget{normal-quantile-plots-by-group}{}
+\begin{frame}[fragile]{Normal quantile plots by group xxx}
+\protect\hypertarget{normal-quantile-plots-by-group-xxx}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(rats, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ density)) }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_qq_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{( }\OperatorTok{~}\StringTok{ }\NormalTok{group)}
+\KeywordTok{ggplot}\NormalTok{(rats, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ density)) }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{stat_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{( }\OperatorTok{~}\StringTok{ }\NormalTok{group)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-155-1.pdf}
-\caption{plot of chunk unnamed-chunk-155}
+\includegraphics{figure/unnamed-chunk-158-1.pdf}
+\caption{plot of chunk unnamed-chunk-158}
 \end{figure}
 
 \end{frame}
@@ -6221,14 +6305,16 @@ group SDs.
 
 \end{frame}
 
-\begin{frame}[fragile]{Mood's median test 1/3}
-\protect\hypertarget{moods-median-test-13}{}
+\begin{frame}[fragile]{Mood's median test 1/4 xxx}
+\protect\hypertarget{moods-median-test-14-xxx}{}
 
 \begin{itemize}
 \tightlist
 \item
   Find median of all bone densities, regardless of group:
 \end{itemize}
+
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6239,6 +6325,8 @@ group SDs.
 \begin{verbatim}
 ## [1] 621.5
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -6357,7 +6445,7 @@ Or with \texttt{median\_test} from \texttt{smmr}, same as before.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-8}{}
+\protect\hypertarget{comments-10}{}
 
 \begin{itemize}
 \tightlist
@@ -7057,6 +7145,9 @@ Feed 3 is best, feed 1 worst.
 \begin{frame}[fragile]{Should we have any concerns about the ANOVA?}
 \protect\hypertarget{should-we-have-any-concerns-about-the-anova}{}
 
+Feed 2 has an outlier, but there are only 5 pigs in each group, and the
+conclusion is so clear that I am OK with this.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(pigs2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ feed, }\DataTypeTok{y =}\NormalTok{ weight)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_boxplot}\NormalTok{()}
@@ -7065,12 +7156,9 @@ Feed 3 is best, feed 1 worst.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-171-1.pdf}
-\caption{plot of chunk unnamed-chunk-171}
+\includegraphics{figure/unnamed-chunk-174-1.pdf}
+\caption{plot of chunk unnamed-chunk-174}
 \end{figure}
-
-Feed 2 has an outlier, but there are only 5 pigs in each group, and the
-conclusion is so clear that I am OK with this.
 
 \end{frame}
 
@@ -7118,7 +7206,7 @@ conclusion is so clear that I am OK with this.
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-3}{}
+\protect\hypertarget{the-data-4}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7365,7 +7453,7 @@ years)}
 \end{frame}
 
 \begin{frame}[fragile]{The data (some)}
-\protect\hypertarget{the-data-some-3}{}
+\protect\hypertarget{the-data-some-2}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7624,23 +7712,26 @@ years)}
 
 \end{frame}
 
-\begin{frame}[fragile]{Plotting the temperatures}
-\protect\hypertarget{plotting-the-temperatures}{}
+\begin{frame}[fragile]{Plotting the temperatures xxx}
+\protect\hypertarget{plotting-the-temperatures-xxx}{}
 
 \begin{itemize}
 \tightlist
 \item
   Plot temperature against date joined by lines, but with separate lines
-  for max and min.
-\item
-  ggplot requires something like
+  for max and min. \texttt{ggplot} requires something like
 \end{itemize}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(..., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(..., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
 
 only we have two temperatures, one a max and one a min, that we want to
 keep separate.
@@ -7656,11 +7747,15 @@ keep separate.
   Then can do something like
 \end{itemize}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature, }\DataTypeTok{colour =}\NormalTok{ maxmin)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
 
 to distinguish max and min on graph.
 
@@ -7697,8 +7792,8 @@ to distinguish max and min on graph.
 
 \end{frame}
 
-\begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot}{}
+\begin{frame}[fragile]{The plot xxx}
+\protect\hypertarget{the-plot-xxx}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7708,8 +7803,8 @@ to distinguish max and min on graph.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-193-1.pdf}
-\caption{plot of chunk unnamed-chunk-193}
+\includegraphics{figure/unnamed-chunk-196-1.pdf}
+\caption{plot of chunk unnamed-chunk-196}
 \end{figure}
 
 \end{frame}
@@ -7760,6 +7855,8 @@ Let's go back to our Australian athletes:
 ## )
 \end{verbatim}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes}
@@ -7784,6 +7881,8 @@ Let's go back to our Australian athletes:
 ## #   SSF <dbl>, `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -8048,8 +8147,8 @@ In regular expression terms, this is \texttt{\^{}.t\$}:
 
 \end{frame}
 
-\begin{frame}[fragile]{Displaying some numbered columns 1/2}
-\protect\hypertarget{displaying-some-numbered-columns-12}{}
+\begin{frame}[fragile]{Displaying some numbered columns}
+\protect\hypertarget{displaying-some-numbered-columns}{}
 
 Make up a data frame to illustrate. This \texttt{sample} generates 5
 random values equally likely to be anything 0--9 (without replacement):
@@ -8182,6 +8281,8 @@ random values equally likely to be anything 0--9 (without replacement):
 \begin{frame}[fragile]{Rows for which something is true}
 \protect\hypertarget{rows-for-which-something-is-true}{}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Sport }\OperatorTok{==}\StringTok{ "Tennis"}\NormalTok{)}
@@ -8206,6 +8307,8 @@ random values equally likely to be anything 0--9 (without replacement):
 ## # … with 5 more variables: SSF <dbl>,
 ## #   `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>, Wt <dbl>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -8477,6 +8580,8 @@ it contains).
 
 Two ways:
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Sex) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{m =} \KeywordTok{mean}\NormalTok{(Ht))}
@@ -8490,8 +8595,6 @@ Two ways:
 ## 1 female  175.
 ## 2 male    186.
 \end{verbatim}
-
-or
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8507,6 +8610,8 @@ or
 ##   <dbl>
 ## 1  175.
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -8564,16 +8669,26 @@ What are actual names of those countries in \texttt{iso2}?
 
 \end{frame}
 
-\begin{frame}[fragile]{Actual country names}
-\protect\hypertarget{actual-country-names}{}
+\begin{frame}[fragile]{Actual country names xxx}
+\protect\hypertarget{actual-country-names-xxx}{}
 
 Found actual country names to go with those abbreviations, in
 spreadsheet:
 
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_url <-}\StringTok{ }
+\StringTok{  "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{f <-}\StringTok{ }\KeywordTok{tempfile}\NormalTok{()}
-\NormalTok{my_url <-}\StringTok{ "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"}
 \KeywordTok{download.file}\NormalTok{(my_url, f)}
 \NormalTok{country_names <-}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(f)}
 \end{Highlighting}
@@ -8706,7 +8821,7 @@ Matching a variable in one data frame to one in another is called a
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-9}{}
+\protect\hypertarget{comments-11}{}
 
 \begin{itemize}
 \tightlist
@@ -8722,6 +8837,8 @@ Matching a variable in one data frame to one in another is called a
     \texttt{country\_names} (the NA above). Which?
   \end{itemize}
 \end{itemize}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8743,7 +8860,7 @@ Matching a variable in one data frame to one in another is called a
 ## 6 TL
 \end{verbatim}
 
-xxx end of section; check from here
+\normalsize
 
 \end{frame}
 
@@ -8813,7 +8930,7 @@ data}\label{case-study-1-the-windmill-data}}
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-4}{}
+\protect\hypertarget{the-data-5}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8870,8 +8987,8 @@ data}\label{case-study-1-the-windmill-data}}
 
 \end{frame}
 
-\begin{frame}[fragile]{Scatterplot}
-\protect\hypertarget{scatterplot}{}
+\begin{frame}[fragile]{Scatterplot xxx}
+\protect\hypertarget{scatterplot-xxx}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8886,14 +9003,14 @@ data}\label{case-study-1-the-windmill-data}}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-228-1.pdf}
-\caption{plot of chunk unnamed-chunk-228}
+\includegraphics{figure/unnamed-chunk-232-1.pdf}
+\caption{plot of chunk unnamed-chunk-232}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-10}{}
+\protect\hypertarget{comments-12}{}
 
 \begin{itemize}
 \tightlist
@@ -8911,8 +9028,10 @@ data}\label{case-study-1-the-windmill-data}}
 
 \end{frame}
 
-\begin{frame}[fragile]{Fit a straight line (and see what happens)}
-\protect\hypertarget{fit-a-straight-line-and-see-what-happens}{}
+\begin{frame}[fragile]{Fit a straight line (and see what happens) xxx}
+\protect\hypertarget{fit-a-straight-line-and-see-what-happens-xxx}{}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8946,10 +9065,12 @@ data}\label{case-study-1-the-windmill-data}}
 ## F-statistic: 160.3 on 1 and 23 DF,  p-value: 7.546e-12
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
-\begin{frame}[fragile]{Another way of looking at the output}
-\protect\hypertarget{another-way-of-looking-at-the-output}{}
+\begin{frame}[fragile]{Another way of looking at the output xxx}
+\protect\hypertarget{another-way-of-looking-at-the-output-xxx}{}
 
 \begin{itemize}
 \tightlist
@@ -8957,6 +9078,8 @@ data}\label{case-study-1-the-windmill-data}}
   The standard output tends to go off the bottom of the page rather
   easily. Package \texttt{broom} has these:
 \end{itemize}
+
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8974,7 +9097,11 @@ data}\label{case-study-1-the-windmill-data}}
 ## #   df.residual <int>
 \end{verbatim}
 
+\normalsize
+
 showing that the R-squared is 87\%, and
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8990,12 +9117,14 @@ showing that the R-squared is 87\%, and
 ## 2 wind_veloci…    0.241    0.0190     12.7  7.55e-12
 \end{verbatim}
 
+\normalsize
+
 showing the intercept and slope and their significance.
 
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-11}{}
+\protect\hypertarget{comments-14}{}
 
 \begin{itemize}
 \tightlist
@@ -9019,8 +9148,8 @@ showing the intercept and slope and their significance.
 
 \end{frame}
 
-\begin{frame}[fragile]{Plot of residuals against fitted values}
-\protect\hypertarget{plot-of-residuals-against-fitted-values}{}
+\begin{frame}[fragile]{Plot of residuals against fitted values xxx}
+\protect\hypertarget{plot-of-residuals-against-fitted-values-xxx}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9030,8 +9159,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-232-1.pdf}
-\caption{plot of chunk unnamed-chunk-232}
+\includegraphics{figure/unnamed-chunk-236-1.pdf}
+\caption{plot of chunk unnamed-chunk-236}
 \end{figure}
 
 \end{frame}
@@ -9160,8 +9289,8 @@ showing the intercept and slope and their significance.
 
 \end{frame}
 
-\begin{frame}[fragile]{Residual plot from parabola model}
-\protect\hypertarget{residual-plot-from-parabola-model}{}
+\begin{frame}[fragile]{Residual plot from parabola model xxx}
+\protect\hypertarget{residual-plot-from-parabola-model-xxx}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9172,14 +9301,14 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-236-1.pdf}
-\caption{plot of chunk unnamed-chunk-236}
+\includegraphics{figure/unnamed-chunk-240-1.pdf}
+\caption{plot of chunk unnamed-chunk-240}
 \end{figure}
 
 \end{frame}
 
-\begin{frame}[fragile]{Scatterplot with fitted line and curve}
-\protect\hypertarget{scatterplot-with-fitted-line-and-curve}{}
+\begin{frame}[fragile]{Scatterplot with fitted line and curve xxx}
+\protect\hypertarget{scatterplot-with-fitted-line-and-curve-xxx}{}
 
 \begin{itemize}
 \tightlist
@@ -9196,6 +9325,11 @@ showing the intercept and slope and their significance.
 \StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ DC}\FloatTok{.2}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ .fitted))}
 \end{Highlighting}
 \end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{Comments xxx}
+\protect\hypertarget{comments-xxx}{}
 
 \begin{itemize}
 \tightlist
@@ -9224,12 +9358,12 @@ showing the intercept and slope and their significance.
 \end{frame}
 
 \begin{frame}{Scatterplot with fitted line and curve}
-\protect\hypertarget{scatterplot-with-fitted-line-and-curve-1}{}
+\protect\hypertarget{scatterplot-with-fitted-line-and-curve}{}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-237-1.pdf}
-\caption{plot of chunk unnamed-chunk-237}
+\includegraphics{figure/unnamed-chunk-241-1.pdf}
+\caption{plot of chunk unnamed-chunk-241}
 \end{figure}
 
 Curve clearly fits better than line.
@@ -9320,13 +9454,13 @@ velocity, the more electricity generated.
 \begin{frame}{Scatterplot for wind\_pace}
 \protect\hypertarget{scatterplot-for-wind_pace}{}
 
+Pretty straight. Blue actually smooth curve not line:
+
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-238-1.pdf}
-\caption{plot of chunk unnamed-chunk-238}
+\includegraphics{figure/unnamed-chunk-242-1.pdf}
+\caption{plot of chunk unnamed-chunk-242}
 \end{figure}
-
-That's pretty straight. Blue actually smooth curve not line.
 
 \end{frame}
 
@@ -9366,7 +9500,7 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-12}{}
+\protect\hypertarget{comments-15}{}
 
 \begin{itemize}
 \tightlist
@@ -9383,8 +9517,8 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \end{frame}
 
-\begin{frame}[fragile]{Residual plot for asymptote model}
-\protect\hypertarget{residual-plot-for-asymptote-model}{}
+\begin{frame}[fragile]{Residual plot for asymptote model xxx}
+\protect\hypertarget{residual-plot-for-asymptote-model-xxx}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9486,19 +9620,19 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \end{frame}
 
-\begin{frame}{Scatterplot with fitted curves}
-\protect\hypertarget{scatterplot-with-fitted-curves}{}
+\begin{frame}{Scatterplot with fitted curves xxx}
+\protect\hypertarget{scatterplot-with-fitted-curves-xxx}{}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-242-1.pdf}
-\caption{plot of chunk unnamed-chunk-242}
+\includegraphics{figure/unnamed-chunk-246-1.pdf}
+\caption{plot of chunk unnamed-chunk-246}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-14}{}
+\protect\hypertarget{comments-16}{}
 
 \begin{itemize}
 \tightlist
@@ -9533,7 +9667,7 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-15}{}
+\protect\hypertarget{comments-17}{}
 
 \begin{itemize}
 \tightlist
@@ -9817,13 +9951,13 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \end{frame}
 
-\begin{frame}{The plot}
-\protect\hypertarget{the-plot-1}{}
+\begin{frame}{The plot xxx}
+\protect\hypertarget{the-plot-xxx-1}{}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-252-1.pdf}
-\caption{plot of chunk unnamed-chunk-252}
+\includegraphics{figure/unnamed-chunk-256-1.pdf}
+\caption{plot of chunk unnamed-chunk-256}
 \end{figure}
 
 \end{frame}
@@ -9839,8 +9973,19 @@ That's pretty straight. Blue actually smooth curve not line.
   Outside range of data, they disagree violently!
 \item
   For larger \texttt{wind.velocity}, asymptote model behaves reasonably,
-  parabola model does not. I What happens as \texttt{wind.velocity} goes
-  to zero? Should find \texttt{DC.output} goes to zero as well. Does it?
+  parabola model does not.
+\item
+  What happens as \texttt{wind.velocity} goes to zero? Should find
+  \texttt{DC.output} goes to zero as well. Does it?
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Comments (2) xxx}
+\protect\hypertarget{comments-2-xxx}{}
+
+\begin{itemize}
+\tightlist
 \item
   For parabola model:
 \end{itemize}
@@ -9869,14 +10014,10 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \end{frame}
 
-\begin{frame}[fragile]{Comments (2)}
-\protect\hypertarget{comments-2-1}{}
+\begin{frame}[fragile]{Comments (3): asymptote model xxx}
+\protect\hypertarget{comments-3-asymptote-model-xxx}{}
 
-\begin{itemize}
-\tightlist
-\item
-  What about asymptote model?
-\end{itemize}
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9891,6 +10032,8 @@ That's pretty straight. Blue actually smooth curve not line.
 ## 1 (Intercept)     2.98    0.0449      66.3 8.92e-28
 ## 2 wind_pace      -6.93    0.206      -33.6 4.74e-21
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -10016,7 +10159,7 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{frame}
 
 \begin{frame}[fragile]{The data (some)}
-\protect\hypertarget{the-data-some-4}{}
+\protect\hypertarget{the-data-some-3}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10071,7 +10214,7 @@ I saved this graph to plot later (on the next page).
 \end{frame}
 
 \begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot-2}{}
+\protect\hypertarget{the-plot}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10081,8 +10224,8 @@ I saved this graph to plot later (on the next page).
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-259-1.pdf}
-\caption{plot of chunk unnamed-chunk-259}
+\includegraphics{figure/unnamed-chunk-263-1.pdf}
+\caption{plot of chunk unnamed-chunk-263}
 \end{figure}
 
 \end{frame}
@@ -10159,8 +10302,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-261-1.pdf}
-\caption{plot of chunk unnamed-chunk-261}
+\includegraphics{figure/unnamed-chunk-265-1.pdf}
+\caption{plot of chunk unnamed-chunk-265}
 \end{figure}
 
 \end{frame}
@@ -10230,7 +10373,7 @@ from here on, eg.:
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-16}{}
+\protect\hypertarget{comments-18}{}
 
 \begin{itemize}
 \tightlist
@@ -10282,8 +10425,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-264-1.pdf}
-\caption{plot of chunk unnamed-chunk-264}
+\includegraphics{figure/unnamed-chunk-268-1.pdf}
+\caption{plot of chunk unnamed-chunk-268}
 \end{figure}
 
 \end{frame}
@@ -10360,7 +10503,7 @@ from here on, eg.:
 \end{frame}
 
 \begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot-3}{}
+\protect\hypertarget{the-plot-1}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10370,14 +10513,14 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-268-1.pdf}
-\caption{plot of chunk unnamed-chunk-268}
+\includegraphics{figure/unnamed-chunk-272-1.pdf}
+\caption{plot of chunk unnamed-chunk-272}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-17}{}
+\protect\hypertarget{comments-19}{}
 
 \begin{itemize}
 \tightlist
@@ -10431,8 +10574,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-269-1.pdf}
-\caption{plot of chunk unnamed-chunk-269}
+\includegraphics{figure/unnamed-chunk-273-1.pdf}
+\caption{plot of chunk unnamed-chunk-273}
 \end{figure}
 
 \end{frame}
@@ -10510,8 +10653,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-272-1.pdf}
-\caption{plot of chunk unnamed-chunk-272}
+\includegraphics{figure/unnamed-chunk-276-1.pdf}
+\caption{plot of chunk unnamed-chunk-276}
 \end{figure}
 
 \end{frame}
@@ -10818,7 +10961,7 @@ Again, can't take out intercept, so largest P-value is for
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-18}{}
+\protect\hypertarget{comments-20}{}
 
 \begin{itemize}
 \tightlist
@@ -10957,7 +11100,7 @@ Uses package \texttt{leaps}:
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-19}{}
+\protect\hypertarget{comments-21}{}
 
 \begin{itemize}
 \tightlist
@@ -11076,8 +11219,8 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-290-1.pdf}
-\caption{plot of chunk unnamed-chunk-290}
+\includegraphics{figure/unnamed-chunk-294-1.pdf}
+\caption{plot of chunk unnamed-chunk-294}
 \end{figure}
 
 \end{frame}
@@ -11116,14 +11259,14 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-292-1.pdf}
-\caption{plot of chunk unnamed-chunk-292}
+\includegraphics{figure/unnamed-chunk-296-1.pdf}
+\caption{plot of chunk unnamed-chunk-296}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-20}{}
+\protect\hypertarget{comments-22}{}
 
 \begin{itemize}
 \tightlist
@@ -11532,8 +11675,8 @@ Read the data:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-303-1.pdf}
-\caption{plot of chunk unnamed-chunk-303}
+\includegraphics{figure/unnamed-chunk-307-1.pdf}
+\caption{plot of chunk unnamed-chunk-307}
 \end{figure}
 
 \end{frame}
@@ -12470,7 +12613,7 @@ The mean of each column, with the columns labelled.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-21}{}
+\protect\hypertarget{comments-24}{}
 
 \begin{itemize}
 \tightlist
@@ -13519,7 +13662,7 @@ admit,discharge
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-22}{}
+\protect\hypertarget{comments-25}{}
 
 \begin{itemize}
 \tightlist
@@ -13678,7 +13821,7 @@ rat5T12
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-5}{}
+\protect\hypertarget{the-data-6}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13736,7 +13879,7 @@ rat5T12
 \end{frame}
 
 \begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot-4}{}
+\protect\hypertarget{the-plot-2}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13746,8 +13889,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-377-1.pdf}
-\caption{plot of chunk unnamed-chunk-377}
+\includegraphics{figure/unnamed-chunk-381-1.pdf}
+\caption{plot of chunk unnamed-chunk-381}
 \end{figure}
 
 \end{frame}
@@ -13801,8 +13944,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-379-1.pdf}
-\caption{plot of chunk unnamed-chunk-379}
+\includegraphics{figure/unnamed-chunk-383-1.pdf}
+\caption{plot of chunk unnamed-chunk-383}
 \end{figure}
 
 \end{frame}
@@ -13819,8 +13962,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-380-1.pdf}
-\caption{plot of chunk unnamed-chunk-380}
+\includegraphics{figure/unnamed-chunk-384-1.pdf}
+\caption{plot of chunk unnamed-chunk-384}
 \end{figure}
 
 \end{frame}
@@ -13837,8 +13980,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-381-1.pdf}
-\caption{plot of chunk unnamed-chunk-381}
+\includegraphics{figure/unnamed-chunk-385-1.pdf}
+\caption{plot of chunk unnamed-chunk-385}
 \end{figure}
 
 \end{frame}
@@ -13886,7 +14029,7 @@ rat5T12
 \end{frame}
 
 \begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot-5}{}
+\protect\hypertarget{the-plot-3}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13896,8 +14039,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-383-1.pdf}
-\caption{plot of chunk unnamed-chunk-383}
+\includegraphics{figure/unnamed-chunk-387-1.pdf}
+\caption{plot of chunk unnamed-chunk-387}
 \end{figure}
 
 \end{frame}
@@ -13929,7 +14072,7 @@ rat5T12
 \end{frame}
 
 \begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot-6}{}
+\protect\hypertarget{the-plot-4}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13939,8 +14082,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-385-1.pdf}
-\caption{plot of chunk unnamed-chunk-385}
+\includegraphics{figure/unnamed-chunk-389-1.pdf}
+\caption{plot of chunk unnamed-chunk-389}
 \end{figure}
 
 \end{frame}
@@ -13972,7 +14115,7 @@ rat5T12
 \end{frame}
 
 \begin{frame}[fragile]{The plot}
-\protect\hypertarget{the-plot-7}{}
+\protect\hypertarget{the-plot-5}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13982,8 +14125,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-387-1.pdf}
-\caption{plot of chunk unnamed-chunk-387}
+\includegraphics{figure/unnamed-chunk-391-1.pdf}
+\caption{plot of chunk unnamed-chunk-391}
 \end{figure}
 
 \end{frame}
@@ -14012,8 +14155,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-388-1.pdf}
-\caption{plot of chunk unnamed-chunk-388}
+\includegraphics{figure/unnamed-chunk-392-1.pdf}
+\caption{plot of chunk unnamed-chunk-392}
 \end{figure}
 
 \end{frame}
@@ -14029,8 +14172,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-389-1.pdf}
-\caption{plot of chunk unnamed-chunk-389}
+\includegraphics{figure/unnamed-chunk-393-1.pdf}
+\caption{plot of chunk unnamed-chunk-393}
 \end{figure}
 
 \end{frame}

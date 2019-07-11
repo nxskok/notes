@@ -1704,62 +1704,32 @@ $(document).ready(function () {
 <h2>Packages and setup</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
-<pre class="r"><code>library(tidyverse)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM3beKUgOKUgCBcdTAwMWJbMW1BdHRhY2hpbmcgcGFja2FnZXNcdTAwMWJbMjJtIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2UgMS4yLjEg4pSA4pSAXHUwMDFiWzM5bVxuXHUwMDFiWzM3bVx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1nZ3Bsb3QyXHUwMDFiWzM3bSAzLjEuMSAgICAgICAgICBcdTAwMWJbMzJt4pyUXHUwMDFiWzM3bSBcdTAwMWJbMzRtcHVycnIgIFx1MDAxYlszN20gMC4zLjIgICAgIFxuXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bXRpYmJsZSBcdTAwMWJbMzdtIDIuMS4xICAgICAgICAgIFx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1kcGx5ciAgXHUwMDFiWzM3bSAwLjguMC5cdTAwMWJbMzFtMVx1MDAxYlszN20gICBcblx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG10aWR5ciAgXHUwMDFiWzM3bSAwLjguMy5cdTAwMWJbMzFtOTAwMFx1MDAxYlszN20gICAgIFx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1zdHJpbmdyXHUwMDFiWzM3bSAxLjQuMCAgICAgXG5cdTAwMWJbMzJt4pyUXHUwMDFiWzM3bSBcdTAwMWJbMzRtcmVhZHIgIFx1MDAxYlszN20gMS4zLjEgICAgICAgICAgXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bWZvcmNhdHNcdTAwMWJbMzdtIDAuMy4wICAgICBcdTAwMWJbMzltXG5wYWNrYWdlIOKAmGdncGxvdDLigJkgd2FzIGJ1aWx0IHVuZGVyIFIgdmVyc2lvbiAzLjUuM3BhY2thZ2Ug4oCYdGliYmxl4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy41LjNwYWNrYWdlIOKAmHRpZHly4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy41LjNwYWNrYWdlIOKAmHJlYWRy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy41LjJwYWNrYWdlIOKAmHB1cnJy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy41LjNwYWNrYWdlIOKAmGRwbHly4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy41LjJwYWNrYWdlIOKAmHN0cmluZ3LigJkgd2FzIGJ1aWx0IHVuZGVyIFIgdmVyc2lvbiAzLjUuMnBhY2thZ2Ug4oCYZm9yY2F0c+KAmSB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDMuNS4xXHUwMDFiWzM3beKUgOKUgCBcdTAwMWJbMW1Db25mbGljdHNcdTAwMWJbMjJtIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG5cdTAwMWJbMzFt4pyWXHUwMDFiWzM3bSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzdtOjpcdTAwMWJbMzJtZmlsdGVyKClcdTAwMWJbMzdtIG1hc2tzIFx1MDAxYlszNG1zdGF0c1x1MDAxYlszN206OmZpbHRlcigpXG5cdTAwMWJbMzFt4pyWXHUwMDFiWzM3bSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzdtOjpcdTAwMWJbMzJtbGFnKClcdTAwMWJbMzdtICAgIG1hc2tzIFx1MDAxYlszNG1zdGF0c1x1MDAxYlszN206OmxhZygpXHUwMDFiWzM5bVxuIn0= -->
-<pre><code>[37m── [1mAttaching packages[22m ─────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──[39m
-[37m[32m✔[37m [34mggplot2[37m 3.1.1          [32m✔[37m [34mpurrr  [37m 0.3.2     
-[32m✔[37m [34mtibble [37m 2.1.1          [32m✔[37m [34mdplyr  [37m 0.8.0.[31m1[37m   
-[32m✔[37m [34mtidyr  [37m 0.8.3.[31m9000[37m     [32m✔[37m [34mstringr[37m 1.4.0     
-[32m✔[37m [34mreadr  [37m 1.3.1          [32m✔[37m [34mforcats[37m 0.3.0     [39m
-package ‘ggplot2’ was built under R version 3.5.3package ‘tibble’ was built under R version 3.5.3package ‘tidyr’ was built under R version 3.5.3package ‘readr’ was built under R version 3.5.2package ‘purrr’ was built under R version 3.5.3package ‘dplyr’ was built under R version 3.5.2package ‘stringr’ was built under R version 3.5.2package ‘forcats’ was built under R version 3.5.1[37m── [1mConflicts[22m ────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-[31m✖[37m [34mdplyr[37m::[32mfilter()[37m masks [34mstats[37m::filter()
-[31m✖[37m [34mdplyr[37m::[32mlag()[37m    masks [34mstats[37m::lag()[39m</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGV4ZmlsZT1cInNsaWRlcy1zYXMudGV4XCJcbmBgYCJ9 -->
-<pre class="r"><code>texfile=&quot;slides-sas.tex&quot;</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG50ZXhmaWxlPVwic2xpZGVzLXNhcy50ZXhcIlxuYGBgIn0= -->
+<pre class="r"><code>library(tidyverse)
+texfile=&quot;slides-sas.tex&quot;</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Read in the tex file:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>what does <code>toString</code> actually do?</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG9TdHJpbmcobGV0dGVyc1sxOjZdKSBcblxuYGBgIn0= -->
-<pre class="r"><code>toString(letters[1:6]) 
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHhmID0gcmVhZExpbmVzKHRleGZpbGUpXG5kID0gdGliYmxlKGxpbmUgPSB0eGYpXG5kICU+JSBmaWx0ZXIoIXN0cl9kZXRlY3QobGluZSwgXCJeJVwiKSkgLT4gZGRcbmRkICU+JSBcbiAgbXV0YXRlKGlzX3Nhc19jb2RlPXN0cl9kZXRlY3QobGluZSwgXCJTYXNjb2RlfERhdGFzdGVwXCIpKSAlPiUgXG4gIG11dGF0ZShpbm91dD1jdW1zdW0oaXNfc2FzX2NvZGUpKSAlPiUgIyBpZiBpbm91dCBpcyAqb2RkKiwgaW5zaWRlIGEgY29kZSBibG9ja1xuICBmaWx0ZXIoIWlzX3Nhc19jb2RlLCBpbm91dCAlJSAyID09IDEpICU+JSBwdWxsKGxpbmUpIC0+IGxpbmVzXG5cbndyaXRlX2xpbmVzKGxpbmVzLCBcInNhc19sZWN0dXJlX2NvZGUudHh0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>txf = readLines(texfile)
+d = tibble(line = txf)
+d %&gt;% filter(!str_detect(line, &quot;^%&quot;)) -&gt; dd
+dd %&gt;% 
+  mutate(is_sas_code=str_detect(line, &quot;Sascode|Datastep&quot;)) %&gt;% 
+  mutate(inout=cumsum(is_sas_code)) %&gt;% # if inout is *odd*, inside a code block
+  filter(!is_sas_code, inout %% 2 == 1) %&gt;% pull(line) -&gt; lines
+
+write_lines(lines, &quot;sas_lecture_code.txt&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYSwgYiwgYywgZCwgZSwgZlwiXG4ifQ== -->
-<pre><code>[1] &quot;a, b, c, d, e, f&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>separated by comma-space, which I would like to turn into a newline and actually display as such?</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG9TdHJpbmcobGV0dGVyc1sxOjZdKSAlPiUgc3RyX3JlcGxhY2VfYWxsKFwiLCBcIiwgXCJcXG5cIikgJT4lIGNhdCgpXG5cbmBgYCJ9 -->
-<pre class="r"><code>toString(letters[1:6]) %&gt;% str_replace_all(&quot;, &quot;, &quot;\n&quot;) %&gt;% cat()
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiYVxuYlxuY1xuZFxuZVxuZlxuIn0= -->
-<pre><code>a
-b
-c
-d
-e
-f</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiY29kZSBjaHVua3MiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCkNhbiBJIGV4dHJhY3QgY29kZSBjaHVua3MgZnJvbSBhIC50ZXggZmlsZT8KCiMjIFBhY2thZ2VzIGFuZCBzZXR1cAoKYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQp0ZXhmaWxlPSJzbGlkZXMtc2FzLnRleCIKYGBgCgpSZWFkIGluIHRoZSB0ZXggZmlsZToKCmBgYHtyfQp0eGYgPSByZWFkTGluZXModGV4ZmlsZSkKZCA9IHRpYmJsZShsaW5lID0gdHhmKQpkICU+JSBmaWx0ZXIoIXN0cl9kZXRlY3QobGluZSwgIl4lIikpIC0+IGRkCmRkICU+JSAKICBtdXRhdGUoaXNfc2FzX2NvZGU9c3RyX2RldGVjdChsaW5lLCAiU2FzY29kZXxEYXRhc3RlcCIpKSAlPiUgCiAgbXV0YXRlKGlub3V0PWN1bXN1bShpc19zYXNfY29kZSkpICU+JSAjIGlmIGlub3V0IGlzICpvZGQqLCBpbnNpZGUgYSBjb2RlIGJsb2NrCiAgZmlsdGVyKCFpc19zYXNfY29kZSwgaW5vdXQgJSUgMiA9PSAxKSAlPiUgcHVsbChsaW5lKSAtPiBsaW5lcwoKd3JpdGVfbGluZXMobGluZXMsICJzYXNfbGVjdHVyZV9jb2RlLnR4dCIpCmBgYAoKd2hhdCBkb2VzIGB0b1N0cmluZ2AgYWN0dWFsbHkgZG8/CgpgYGB7cn0KdG9TdHJpbmcobGV0dGVyc1sxOjZdKSAKYGBgCgpzZXBhcmF0ZWQgYnkgY29tbWEtc3BhY2UsIHdoaWNoIEkgd291bGQgbGlrZSB0byB0dXJuIGludG8gYSBuZXdsaW5lIGFuZCBhY3R1YWxseSBkaXNwbGF5IGFzIHN1Y2g/CgpgYGB7cn0KdG9TdHJpbmcobGV0dGVyc1sxOjZdKSAlPiUgc3RyX3JlcGxhY2VfYWxsKCIsICIsICJcbiIpICU+JSBjYXQoKQoKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiY29kZSBjaHVua3MiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCkNhbiBJIGV4dHJhY3QgY29kZSBjaHVua3MgZnJvbSBhIC50ZXggZmlsZT8KCiMjIFBhY2thZ2VzIGFuZCBzZXR1cAoKYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQp0ZXhmaWxlPSJzbGlkZXMtc2FzLnRleCIKYGBgCgpSZWFkIGluIHRoZSB0ZXggZmlsZToKCmBgYHtyfQp0eGYgPSByZWFkTGluZXModGV4ZmlsZSkKZCA9IHRpYmJsZShsaW5lID0gdHhmKQpkICU+JSBmaWx0ZXIoIXN0cl9kZXRlY3QobGluZSwgIl4lIikpIC0+IGRkCmRkICU+JSAKICBtdXRhdGUoaXNfc2FzX2NvZGU9c3RyX2RldGVjdChsaW5lLCAiU2FzY29kZXxEYXRhc3RlcCIpKSAlPiUgCiAgbXV0YXRlKGlub3V0PWN1bXN1bShpc19zYXNfY29kZSkpICU+JSAjIGlmIGlub3V0IGlzICpvZGQqLCBpbnNpZGUgYSBjb2RlIGJsb2NrCiAgZmlsdGVyKCFpc19zYXNfY29kZSwgaW5vdXQgJSUgMiA9PSAxKSAlPiUgcHVsbChsaW5lKSAtPiBsaW5lcwoKd3JpdGVfbGluZXMobGluZXMsICJzYXNfbGVjdHVyZV9jb2RlLnR4dCIpCmBgYAoKCgo=</div>
 
 
 

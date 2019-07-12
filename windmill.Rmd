@@ -46,7 +46,7 @@ methods.
 
 ## Scatterplot xxx
 
-```{r, fig.height=3.5}
+```{r, fig.height=3.2}
 ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_point() + geom_smooth(se = F)
 ```

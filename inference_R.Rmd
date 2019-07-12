@@ -1152,7 +1152,7 @@ this good:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-## Chi-squared data, *df* = 10 xxx
+## Chi-squared data, *df* = 10
 
 Somewhat skewed to right:
 
@@ -1172,7 +1172,7 @@ ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
 
-## Chi-squared data, df = 3 xxx
+## Chi-squared data, df = 3
 
 Definitely skewed to right:
 
@@ -1183,7 +1183,7 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 
 
 
-## The normal quantile plot xxx
+## The normal quantile plot
 
 Clear upward-opening curve:
 
@@ -1593,7 +1593,7 @@ Assumptions:
 - Normally distributed data within each group
 - with equal group SDs.
 
-## Normal quantile plots by group xxx
+## Normal quantile plots by group
 
 ```{r, fig.height=3.5}
 ggplot(rats, aes(sample = density)) + stat_qq() + 
@@ -1615,7 +1615,7 @@ Welch-Satterthwaite t-test.)
 - Can also use Mood’s Median Test (see over). This works for any
 number of groups.
 
-## Mood’s median test 1/4 xxx
+## Mood’s median test 1/4
 - Find median of all bone densities, regardless of group:
 
 \small

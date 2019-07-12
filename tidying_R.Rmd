@@ -313,7 +313,8 @@ untidy for purposes of drawing graph only.
 
 \footnotesize
 ```{r, eval=F}
-ggplot(d, aes(x = date, y = temperature, colour = maxmin)) + geom_point() + geom_line()
+ggplot(d, aes(x = date, y = temperature, colour = maxmin)) 
+  + geom_point() + geom_line()
 ```
 \normalsize
 to distinguish max and min on graph.

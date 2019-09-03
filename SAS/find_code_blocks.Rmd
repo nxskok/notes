@@ -1,0 +1,30 @@
+---
+title: "code chunks"
+output: html_notebook
+---
+
+Can I extract code chunks from a .tex file?
+
+## Packages and setup
+
+```{r}
+library(tidyverse)
+texfile="slides-sas.tex"
+```
+
+Read in the tex file:
+
+```{r}
+txf = readLines(texfile)
+d = tibble(line = txf)
+d %>% filter(!str_detect(line, "^%")) -> dd
+dd %>% 
+  mutate(is_sas_code=str_detect(line, "Sascode|Datastep")) %>% 
+  mutate(inout=cumsum(is_sas_code)) %>% # if inout is *odd*, inside a code block
+  filter(!is_sas_code, inout %% 2 == 1) %>% pull(line) -> lines
+
+write_lines(lines, "sas_lecture_code.txt")
+```
+
+
+

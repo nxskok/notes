@@ -1,5 +1,5 @@
 ---
-title: "STAC33: Applications of Statistical Methods"
+title: "STAC32: Applications of Statistical Methods"
 author: "Lecture notes"
 header-includes:
    - \usepackage{multicol}

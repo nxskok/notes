@@ -260,7 +260,7 @@ Recommended:
 \item ``R for Data Science'' by Hadley Wickham and Garrett Grolemund,
   publ.\ O'Reilly, ISBN 978-1-491-91039-9. Also available (free)
   online at \url{http://r4ds.had.co.nz/}.
-  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{ritsokiguess.site/pasias}
+  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{http://ritsokiguess.site/pasias}
 \end{itemize}
     \end{column}
     \begin{column}{0.3\textwidth}
@@ -1101,6 +1101,8 @@ mydata=read_csv(f)
   Again, type the name of the thing to display it:
 \end{itemize}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{mydata}
@@ -1118,6 +1120,8 @@ mydata=read_csv(f)
 ## 5 p5       16    30 upper
 ## 6 p6       17    31 lower
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -1245,6 +1249,8 @@ click it. - This pops up a ``data frame viewer'' top left:
   long), and then put that variable in the \texttt{read\_} function:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{my_url <-}\StringTok{ "http://www.utsc.utoronto.ca/~butler/c32/global.csv"}
@@ -1260,6 +1266,8 @@ click it. - This pops up a ``data frame viewer'' top left:
 ##   cost = col_double()
 ## )
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -1632,6 +1640,8 @@ the temperature of the coffee in the mug decreased over 30 minutes.
   Data in \texttt{ais.txt}:
 \end{itemize}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{my_url <-}\StringTok{ "http://www.utsc.utoronto.ca/~butler/c32/ais.txt"}
@@ -1658,10 +1668,14 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 ## )
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
 \begin{frame}[fragile]{The data (some)}
 \protect\hypertarget{the-data-some}{}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1687,6 +1701,8 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 ## #   SSF <dbl>, `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -1897,6 +1913,8 @@ Scatterplot:
 Default uses same scale for each facet. To use different scales for each
 facet, this:
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(athletes, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Ht, }\DataTypeTok{y =}\NormalTok{ Wt, }\DataTypeTok{colour =}\NormalTok{ Sex)) }\OperatorTok{+}
@@ -1904,11 +1922,7 @@ facet, this:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-\centering
-\includegraphics{figure/unnamed-chunk-44-1.pdf}
-\caption{plot of chunk unnamed-chunk-44}
-\end{figure}
+\includegraphics{figure/unnamed-chunk-44-1.pdf} \normalsize
 
 \end{frame}
 
@@ -2093,6 +2107,8 @@ for example, number of athletes in each sport:
 
 Another way (which will make sense in a moment):
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Sport) }\OperatorTok{%>%}
@@ -2115,6 +2131,8 @@ Another way (which will make sense in a moment):
 ##  9 TSprnt     15
 ## 10 WPolo      17
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -2162,6 +2180,8 @@ Another way (which will make sense in a moment):
   Standard deviation of each (numeric) column:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarize_if}\NormalTok{(is.numeric, sd)}
@@ -2177,11 +2197,15 @@ Another way (which will make sense in a moment):
 ## #   Wt <dbl>
 \end{verbatim}
 
+\normalsize
+
 \begin{itemize}
 \tightlist
 \item
   Median and IQR of all columns whose name starts with H:
 \end{itemize}
+
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2196,6 +2220,8 @@ Another way (which will make sense in a moment):
 ##    <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
 ## 1   43.5   14.7   180.   4.98   2.07   12.2
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -2309,6 +2335,8 @@ Another way (which will make sense in a moment):
 \begin{frame}[fragile]{Taking a look}
 \protect\hypertarget{taking-a-look}{}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{jays}
@@ -2333,14 +2361,18 @@ Another way (which will make sense in a moment):
 ## #   runs <dbl>, Oppruns <dbl>, innings <dbl>,
 ## #   wl <chr>, position <dbl>, gb <chr>,
 ## #   winner <chr>, loser <chr>, save <chr>, `game
-## #   time` <time>, Daynight <chr>, attendance <dbl>,
+## #   time` <drtn>, Daynight <chr>, attendance <dbl>,
 ## #   streak <chr>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
 \begin{frame}[fragile]{Another way}
 \protect\hypertarget{another-way}{}
+
+\tiny
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2368,11 +2400,13 @@ Another way (which will make sense in a moment):
 ## $ winner      <chr> "Odorizzi", "Geltz", "Buehrle…
 ## $ loser       <chr> "Dickey", "Castro", "Ramirez"…
 ## $ save        <chr> "Boxberger", "Jepsen", NA, "B…
-## $ `game time` <time> 02:30:00, 03:06:00, 03:02:00…
+## $ `game time` <drtn> 02:30:00, 03:06:00, 03:02:00…
 ## $ Daynight    <chr> "N", "N", "N", "N", "N", "D",…
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -2495,13 +2529,14 @@ Another way (which will make sense in a moment):
 
 \end{frame}
 
-\begin{frame}{Comments}
+\begin{frame}[fragile]{Comments}
 \protect\hypertarget{comments-1}{}
 
 \begin{itemize}
 \tightlist
 \item
-  Need to say ``column attendance within data frame jays'' using \$.
+  Need to say ``column attendance within data frame \texttt{jays}''
+  using \$.
 \item
   95\% CI from about 20,000 to about 30,000.
 \item
@@ -2766,8 +2801,15 @@ Null false & Type II error & Correct\\
 
 \end{frame}
 
-\begin{frame}[fragile]{Blue Jays attendances}
-\protect\hypertarget{blue-jays-attendances}{}
+\begin{frame}[fragile]{Blue Jays attendances again:}
+\protect\hypertarget{blue-jays-attendances-again}{}
+
+\begin{itemize}
+\tightlist
+\item
+  You might say that this is not normal enough for a sample size of
+  \(n = 25\), in which case you don't trust the \(t\)-test result:
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2780,13 +2822,6 @@ Null false & Type II error & Correct\\
 \includegraphics{figure/unnamed-chunk-65-1.pdf}
 \caption{plot of chunk unnamed-chunk-65}
 \end{figure}
-
-\begin{itemize}
-\tightlist
-\item
-  You might say that this is not normal enough for a sample size of
-  \(n = 25\), in which case you don't trust the \(t\)-test result.
-\end{itemize}
 
 \end{frame}
 
@@ -3239,16 +3274,16 @@ Tension between truth and decision about truth (imperfect).
 ## [13] 13.074996 11.353573  5.015575
 \end{verbatim}
 
-\end{frame}
-
-\begin{frame}[fragile]{\ldots{}continued}
-\protect\hypertarget{continued}{}
-
 \begin{itemize}
 \tightlist
 \item
   Test whether \texttt{x} from population with mean 10 or not (over):
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{\ldots{}continued}
+\protect\hypertarget{continued}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3363,6 +3398,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
   \texttt{power.t.test}. delta difference between null and true mean:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{15}\NormalTok{, }\DataTypeTok{delta =} \DecValTok{10-8}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{4}\NormalTok{, }\DataTypeTok{type =} \StringTok{"one.sample"}\NormalTok{)}
@@ -3380,6 +3417,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 ##           power = 0.4378466
 ##     alternative = two.sided
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -3670,7 +3709,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\NormalTok{mean}\DecValTok{-10}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }\DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
+\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\NormalTok{mean}\DecValTok{-10}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }
+                              \DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3682,7 +3722,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{n), }\DataTypeTok{mean=}\NormalTok{combos}\OperatorTok{$}\NormalTok{mean, }\DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
+\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{n), }\DataTypeTok{mean=}\NormalTok{combos}\OperatorTok{$}\NormalTok{mean, }
+         \DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3756,9 +3797,12 @@ Similar procedure to before:
 \NormalTok{means=}\KeywordTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{)}
 \NormalTok{ns=}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{5}\NormalTok{)}
 \NormalTok{combos=}\KeywordTok{crossing}\NormalTok{(}\DataTypeTok{mean=}\NormalTok{means, }\DataTypeTok{n=}\NormalTok{ns)}
-\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\DecValTok{10}\OperatorTok{-}\NormalTok{mean, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }\DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
-\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{mean=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{mean), }\DataTypeTok{n=}\NormalTok{combos}\OperatorTok{$}\NormalTok{n, }\DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
-\NormalTok{g=}\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{n, }\DataTypeTok{y=}\NormalTok{power, }\DataTypeTok{colour=}\NormalTok{mean)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\DecValTok{10}\OperatorTok{-}\NormalTok{mean, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }
+                              \DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
+\NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{mean=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{mean), }\DataTypeTok{n=}\NormalTok{combos}\OperatorTok{$}\NormalTok{n, }
+         \DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
+\NormalTok{g=}\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{n, }\DataTypeTok{y=}\NormalTok{power, }\DataTypeTok{colour=}\NormalTok{mean)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept=}\DecValTok{1}\NormalTok{,}\DataTypeTok{linetype=}\StringTok{"dashed"}\NormalTok{)  }
 \end{Highlighting}
 \end{Shaded}
@@ -3809,6 +3853,11 @@ Similar procedure to before:
 ## 2 t        21  11.0
 \end{verbatim}
 
+\end{frame}
+
+\begin{frame}[fragile]{Setting up}
+\protect\hypertarget{setting-up}{}
+
 \begin{itemize}
 \tightlist
 \item
@@ -3824,7 +3873,7 @@ Similar procedure to before:
 
 \end{frame}
 
-\begin{frame}[fragile]{calculating power for sample size 22 (per group)}
+\begin{frame}[fragile]{Calculating power for sample size 22 (per group)}
 \protect\hypertarget{calculating-power-for-sample-size-22-per-group}{}
 
 \begin{Shaded}
@@ -3876,7 +3925,7 @@ Similar procedure to before:
 
 \end{frame}
 
-\begin{frame}{comments}
+\begin{frame}{Comments}
 \protect\hypertarget{comments-4}{}
 
 \begin{itemize}
@@ -3921,8 +3970,10 @@ hypothesis tests}
 
 \end{frame}
 
-\begin{frame}[fragile]{The data (some)}
-\protect\hypertarget{the-data-some-2}{}
+\begin{frame}[fragile]{The data}
+\protect\hypertarget{the-data-2}{}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3950,6 +4001,8 @@ hypothesis tests}
 ## 14    18     2
 ## 15    19     2
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -4161,7 +4214,18 @@ Reject null; mean greater than 160.
 \caption{plot of chunk unnamed-chunk-99}
 \end{figure}
 
-Skewed to right. Should look at median.
+\end{frame}
+
+\begin{frame}{Comments}
+\protect\hypertarget{comments-5}{}
+
+\begin{itemize}
+\tightlist
+\item
+  Skewed to right.
+\item
+  Should look at \emph{median}, not mean.
+\end{itemize}
 
 \end{frame}
 
@@ -4296,8 +4360,14 @@ Skewed to right. Should look at median.
 \begin{itemize}
 \tightlist
 \item
-  Then load it: \texttt{\{r,\ eval=F\ library(smmr)}
+  Then load it:
 \end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(smmr)}
+\end{Highlighting}
+\end{Shaded}
 
 \end{frame}
 
@@ -4495,6 +4565,8 @@ Skewed to right. Should look at median.
   Choose our null medians first:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{(}\DataTypeTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{null_median=}\KeywordTok{seq}\NormalTok{(}\DecValTok{100}\NormalTok{,}\DecValTok{300}\NormalTok{,}\DecValTok{20}\NormalTok{)))}
@@ -4517,6 +4589,8 @@ Skewed to right. Should look at median.
 ## 10         280
 ## 11         300
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -4842,7 +4916,7 @@ Values aligned in columns:
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-2}{}
+\protect\hypertarget{the-data-3}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5012,8 +5086,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-123-1.pdf}
-\caption{plot of chunk unnamed-chunk-123}
+\includegraphics{figure/unnamed-chunk-124-1.pdf}
+\caption{plot of chunk unnamed-chunk-124}
 \end{figure}
 
 \begin{itemize}
@@ -5047,9 +5121,8 @@ and do a 1-sample t-test on them, over:
 
 \end{frame}
 
-\begin{frame}[fragile]{Normal data, large sample check randomness from
-here}
-\protect\hypertarget{normal-data-large-sample-check-randomness-from-here}{}
+\begin{frame}[fragile]{Normal data, large sample}
+\protect\hypertarget{normal-data-large-sample}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5060,11 +5133,9 @@ here}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-124-1.pdf}
-\caption{plot of chunk unnamed-chunk-124}
+\includegraphics{figure/unnamed-chunk-125-1.pdf}
+\caption{plot of chunk unnamed-chunk-125}
 \end{figure}
-
-As normal as you could wish for.
 
 \end{frame}
 
@@ -5079,8 +5150,8 @@ As normal as you could wish for.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-125-1.pdf}
-\caption{plot of chunk unnamed-chunk-125}
+\includegraphics{figure/unnamed-chunk-126-1.pdf}
+\caption{plot of chunk unnamed-chunk-126}
 \end{figure}
 
 \end{frame}
@@ -5088,10 +5159,16 @@ As normal as you could wish for.
 \begin{frame}[fragile]{Normal data, small sample}
 \protect\hypertarget{normal-data-small-sample}{}
 
+\begin{itemize}
+\tightlist
+\item
+  Not so convincingly normal, but not obviously skewed:
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{))}
-\KeywordTok{ggplot}\NormalTok{(d,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x))}\OperatorTok{+}\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{bins=}\DecValTok{10}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(d,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x))}\OperatorTok{+}\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{bins=}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5101,16 +5178,13 @@ As normal as you could wish for.
 \caption{plot of chunk normal-small}
 \end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  Not so convincingly normal, but not obviously skewed.
-\end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
 \protect\hypertarget{the-normal-quantile-plot-2}{}
+
+Good, apart from the highest and lowest points being slightly off. I'd
+call this good:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5120,17 +5194,16 @@ As normal as you could wish for.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-127-1.pdf}
-\caption{plot of chunk unnamed-chunk-127}
+\includegraphics{figure/unnamed-chunk-128-1.pdf}
+\caption{plot of chunk unnamed-chunk-128}
 \end{figure}
-
-Good, apart from the highest and lowest points being slightly off. I'd
-call this good.
 
 \end{frame}
 
 \begin{frame}[fragile]{Chi-squared data, \emph{df} = 10}
 \protect\hypertarget{chi-squared-data-df-10}{}
+
+Somewhat skewed to right:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5141,16 +5214,16 @@ call this good.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-128-1.pdf}
-\caption{plot of chunk unnamed-chunk-128}
+\includegraphics{figure/unnamed-chunk-129-1.pdf}
+\caption{plot of chunk unnamed-chunk-129}
 \end{figure}
-
-Somewhat skewed to right.
 
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
 \protect\hypertarget{the-normal-quantile-plot-3}{}
+
+Somewhat opening-up curve:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5160,16 +5233,16 @@ Somewhat skewed to right.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-129-1.pdf}
-\caption{plot of chunk unnamed-chunk-129}
+\includegraphics{figure/unnamed-chunk-130-1.pdf}
+\caption{plot of chunk unnamed-chunk-130}
 \end{figure}
-
-Somewhat opening-up curve.
 
 \end{frame}
 
 \begin{frame}[fragile]{Chi-squared data, df = 3}
 \protect\hypertarget{chi-squared-data-df-3}{}
+
+Definitely skewed to right:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5184,12 +5257,12 @@ Somewhat opening-up curve.
 \caption{plot of chunk chisq-small-df}
 \end{figure}
 
-Definitely skewed to right.
-
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
 \protect\hypertarget{the-normal-quantile-plot-4}{}
+
+Clear upward-opening curve:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5199,16 +5272,16 @@ Definitely skewed to right.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-130-1.pdf}
-\caption{plot of chunk unnamed-chunk-130}
+\includegraphics{figure/unnamed-chunk-131-1.pdf}
+\caption{plot of chunk unnamed-chunk-131}
 \end{figure}
-
-Clear upward-opening curve.
 
 \end{frame}
 
 \begin{frame}[fragile]{t-distributed data, df = 3}
 \protect\hypertarget{t-distributed-data-df-3}{}
+
+Long tails (or a very sharp peak):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5223,12 +5296,12 @@ Clear upward-opening curve.
 \caption{plot of chunk t-small}
 \end{figure}
 
-Long tails (or a very sharp peak).
-
 \end{frame}
 
 \begin{frame}[fragile]{The normal quantile plot}
 \protect\hypertarget{the-normal-quantile-plot-5}{}
+
+Low values too low and high values too high for normal.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5238,11 +5311,9 @@ Long tails (or a very sharp peak).
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-131-1.pdf}
-\caption{plot of chunk unnamed-chunk-131}
+\includegraphics{figure/unnamed-chunk-132-1.pdf}
+\caption{plot of chunk unnamed-chunk-132}
 \end{figure}
-
-Low values too low and high values too high for normal.
 
 \end{frame}
 
@@ -5260,6 +5331,11 @@ Low values too low and high values too high for normal.
 \includegraphics{figure/pain-relief-qq-1.pdf}
 \caption{plot of chunk pain-relief-qq}
 \end{figure}
+
+\end{frame}
+
+\begin{frame}{Comments}
+\protect\hypertarget{comments-6}{}
 
 \begin{itemize}
 \tightlist
@@ -5305,7 +5381,7 @@ Low values too low and high values too high for normal.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-5}{}
+\protect\hypertarget{comments-7}{}
 
 \begin{itemize}
 \tightlist
@@ -5385,8 +5461,8 @@ Low values too low and high values too high for normal.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-134-1.pdf}
-\caption{plot of chunk unnamed-chunk-134}
+\includegraphics{figure/unnamed-chunk-135-1.pdf}
+\caption{plot of chunk unnamed-chunk-135}
 \end{figure}
 
 \end{frame}
@@ -5405,14 +5481,14 @@ Done this way:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-135-1.pdf}
-\caption{plot of chunk unnamed-chunk-135}
+\includegraphics{figure/unnamed-chunk-136-1.pdf}
+\caption{plot of chunk unnamed-chunk-136}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-6}{}
+\protect\hypertarget{comments-8}{}
 
 \begin{itemize}
 \tightlist
@@ -5735,7 +5811,7 @@ contingency table:
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-7}{}
+\protect\hypertarget{comments-9}{}
 
 \begin{itemize}
 \tightlist
@@ -5822,6 +5898,8 @@ Values separated by spaces:
 \begin{frame}[fragile]{The data (some random rows)}
 \protect\hypertarget{the-data-some-random-rows}{}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sample_n}\NormalTok{(}\DecValTok{12}\NormalTok{)}
@@ -5846,6 +5924,8 @@ Values separated by spaces:
 ## 12 Highjump     626
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
 \begin{frame}[fragile]{Boxplots}
@@ -5859,8 +5939,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-146-1.pdf}
-\caption{plot of chunk unnamed-chunk-146}
+\includegraphics{figure/unnamed-chunk-147-1.pdf}
+\caption{plot of chunk unnamed-chunk-147}
 \end{figure}
 
 \end{frame}
@@ -5877,8 +5957,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-147-1.pdf}
-\caption{plot of chunk unnamed-chunk-147}
+\includegraphics{figure/unnamed-chunk-148-1.pdf}
+\caption{plot of chunk unnamed-chunk-148}
 \end{figure}
 
 \end{frame}
@@ -6098,6 +6178,8 @@ These are different too.
 \begin{frame}[fragile]{Tukey on rat data}
 \protect\hypertarget{tukey-on-rat-data}{}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rats.aov=}\KeywordTok{aov}\NormalTok{(density}\OperatorTok{~}\NormalTok{group,}\DataTypeTok{data=}\NormalTok{rats)}
@@ -6112,18 +6194,20 @@ These are different too.
 ## Fit: aov(formula = density ~ group, data = rats)
 ## 
 ## $group
-##                   diff       lwr       upr
-## Highjump-Control  37.6  13.66604 61.533957
-## Lowjump-Control   11.4 -12.53396 35.333957
-## Lowjump-Highjump -26.2 -50.13396 -2.266043
-##                      p adj
-## Highjump-Control 0.0016388
-## Lowjump-Control  0.4744032
-## Lowjump-Highjump 0.0297843
+##                   diff       lwr       upr     p adj
+## Highjump-Control  37.6  13.66604 61.533957 0.0016388
+## Lowjump-Control   11.4 -12.53396 35.333957 0.4744032
+## Lowjump-Highjump -26.2 -50.13396 -2.266043 0.0297843
 \end{verbatim}
 
-Again conclude that bone density for highjump group significantly higher
-than for other two groups.
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  Again conclude that bone density for highjump group significantly
+  higher than for other two groups.
+\end{itemize}
 
 \end{frame}
 
@@ -6166,8 +6250,8 @@ Lowjump-Highjump 0.0298     0.0045
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-154-1.pdf}
-\caption{plot of chunk unnamed-chunk-154}
+\includegraphics{figure/unnamed-chunk-157-1.pdf}
+\caption{plot of chunk unnamed-chunk-157}
 \end{figure}
 
 Assumptions: - Normally distributed data within each group - with equal
@@ -6180,15 +6264,15 @@ group SDs.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(rats, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ density)) }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_qq_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{( }\OperatorTok{~}\StringTok{ }\NormalTok{group)}
+\KeywordTok{ggplot}\NormalTok{(rats, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{sample =}\NormalTok{ density)) }\OperatorTok{+}\StringTok{ }\KeywordTok{stat_qq}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{stat_qq_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{( }\OperatorTok{~}\StringTok{ }\NormalTok{group)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-155-1.pdf}
-\caption{plot of chunk unnamed-chunk-155}
+\includegraphics{figure/unnamed-chunk-158-1.pdf}
+\caption{plot of chunk unnamed-chunk-158}
 \end{figure}
 
 \end{frame}
@@ -6221,14 +6305,16 @@ group SDs.
 
 \end{frame}
 
-\begin{frame}[fragile]{Mood's median test 1/3}
-\protect\hypertarget{moods-median-test-13}{}
+\begin{frame}[fragile]{Mood's median test 1/4}
+\protect\hypertarget{moods-median-test-14}{}
 
 \begin{itemize}
 \tightlist
 \item
   Find median of all bone densities, regardless of group:
 \end{itemize}
+
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6239,6 +6325,8 @@ group SDs.
 \begin{verbatim}
 ## [1] 621.5
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -6357,7 +6445,7 @@ Or with \texttt{median\_test} from \texttt{smmr}, same as before.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-8}{}
+\protect\hypertarget{comments-10}{}
 
 \begin{itemize}
 \tightlist
@@ -7057,6 +7145,9 @@ Feed 3 is best, feed 1 worst.
 \begin{frame}[fragile]{Should we have any concerns about the ANOVA?}
 \protect\hypertarget{should-we-have-any-concerns-about-the-anova}{}
 
+Feed 2 has an outlier, but there are only 5 pigs in each group, and the
+conclusion is so clear that I am OK with this.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(pigs2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ feed, }\DataTypeTok{y =}\NormalTok{ weight)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_boxplot}\NormalTok{()}
@@ -7065,12 +7156,9 @@ Feed 3 is best, feed 1 worst.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-171-1.pdf}
-\caption{plot of chunk unnamed-chunk-171}
+\includegraphics{figure/unnamed-chunk-174-1.pdf}
+\caption{plot of chunk unnamed-chunk-174}
 \end{figure}
-
-Feed 2 has an outlier, but there are only 5 pigs in each group, and the
-conclusion is so clear that I am OK with this.
 
 \end{frame}
 
@@ -7118,7 +7206,7 @@ conclusion is so clear that I am OK with this.
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-3}{}
+\protect\hypertarget{the-data-4}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7365,7 +7453,7 @@ years)}
 \end{frame}
 
 \begin{frame}[fragile]{The data (some)}
-\protect\hypertarget{the-data-some-3}{}
+\protect\hypertarget{the-data-some-2}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7631,16 +7719,19 @@ years)}
 \tightlist
 \item
   Plot temperature against date joined by lines, but with separate lines
-  for max and min.
-\item
-  ggplot requires something like
+  for max and min. \texttt{ggplot} requires something like
 \end{itemize}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(..., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(..., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
 
 only we have two temperatures, one a max and one a min, that we want to
 keep separate.
@@ -7656,11 +7747,16 @@ keep separate.
   Then can do something like
 \end{itemize}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature, }\DataTypeTok{colour =}\NormalTok{ maxmin)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
+\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ temperature, }\DataTypeTok{colour =}\NormalTok{ maxmin)) }
+  \OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
 
 to distinguish max and min on graph.
 
@@ -7708,8 +7804,8 @@ to distinguish max and min on graph.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-193-1.pdf}
-\caption{plot of chunk unnamed-chunk-193}
+\includegraphics{figure/unnamed-chunk-196-1.pdf}
+\caption{plot of chunk unnamed-chunk-196}
 \end{figure}
 
 \end{frame}
@@ -7760,6 +7856,8 @@ Let's go back to our Australian athletes:
 ## )
 \end{verbatim}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes}
@@ -7784,6 +7882,8 @@ Let's go back to our Australian athletes:
 ## #   SSF <dbl>, `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>,
 ## #   Wt <dbl>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -8048,8 +8148,8 @@ In regular expression terms, this is \texttt{\^{}.t\$}:
 
 \end{frame}
 
-\begin{frame}[fragile]{Displaying some numbered columns 1/2}
-\protect\hypertarget{displaying-some-numbered-columns-12}{}
+\begin{frame}[fragile]{Displaying some numbered columns}
+\protect\hypertarget{displaying-some-numbered-columns}{}
 
 Make up a data frame to illustrate. This \texttt{sample} generates 5
 random values equally likely to be anything 0--9 (without replacement):
@@ -8182,6 +8282,8 @@ random values equally likely to be anything 0--9 (without replacement):
 \begin{frame}[fragile]{Rows for which something is true}
 \protect\hypertarget{rows-for-which-something-is-true}{}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Sport }\OperatorTok{==}\StringTok{ "Tennis"}\NormalTok{)}
@@ -8206,6 +8308,8 @@ random values equally likely to be anything 0--9 (without replacement):
 ## # … with 5 more variables: SSF <dbl>,
 ## #   `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>, Wt <dbl>
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -8477,6 +8581,8 @@ it contains).
 
 Two ways:
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Sex) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{m =} \KeywordTok{mean}\NormalTok{(Ht))}
@@ -8490,8 +8596,6 @@ Two ways:
 ## 1 female  175.
 ## 2 male    186.
 \end{verbatim}
-
-or
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8507,6 +8611,8 @@ or
 ##   <dbl>
 ## 1  175.
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -8570,10 +8676,20 @@ What are actual names of those countries in \texttt{iso2}?
 Found actual country names to go with those abbreviations, in
 spreadsheet:
 
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_url <-}\StringTok{ }
+\StringTok{  "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{f <-}\StringTok{ }\KeywordTok{tempfile}\NormalTok{()}
-\NormalTok{my_url <-}\StringTok{ "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"}
 \KeywordTok{download.file}\NormalTok{(my_url, f)}
 \NormalTok{country_names <-}\StringTok{ }\KeywordTok{read_excel}\NormalTok{(f)}
 \end{Highlighting}
@@ -8706,7 +8822,7 @@ Matching a variable in one data frame to one in another is called a
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-9}{}
+\protect\hypertarget{comments-11}{}
 
 \begin{itemize}
 \tightlist
@@ -8722,6 +8838,8 @@ Matching a variable in one data frame to one in another is called a
     \texttt{country\_names} (the NA above). Which?
   \end{itemize}
 \end{itemize}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8743,7 +8861,7 @@ Matching a variable in one data frame to one in another is called a
 ## 6 TL
 \end{verbatim}
 
-xxx end of section; check from here
+\normalsize
 
 \end{frame}
 
@@ -8813,7 +8931,7 @@ data}\label{case-study-1-the-windmill-data}}
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-4}{}
+\protect\hypertarget{the-data-5}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8886,14 +9004,14 @@ data}\label{case-study-1-the-windmill-data}}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-228-1.pdf}
-\caption{plot of chunk unnamed-chunk-228}
+\includegraphics{figure/unnamed-chunk-232-1.pdf}
+\caption{plot of chunk unnamed-chunk-232}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-10}{}
+\protect\hypertarget{comments-12}{}
 
 \begin{itemize}
 \tightlist
@@ -8914,6 +9032,8 @@ data}\label{case-study-1-the-windmill-data}}
 \begin{frame}[fragile]{Fit a straight line (and see what happens)}
 \protect\hypertarget{fit-a-straight-line-and-see-what-happens}{}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{DC}\FloatTok{.1}\NormalTok{ <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(DC_output }\OperatorTok{~}\StringTok{ }\NormalTok{wind_velocity, }\DataTypeTok{data =}\NormalTok{ windmill)}
@@ -8931,12 +9051,9 @@ data}\label{case-study-1-the-windmill-data}}
 ## -0.59869 -0.14099  0.06059  0.17262  0.32184 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)
-## (Intercept)    0.13088    0.12599   1.039     0.31
-## wind_velocity  0.24115    0.01905  12.659 7.55e-12
-##                  
-## (Intercept)      
-## wind_velocity ***
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    0.13088    0.12599   1.039     0.31    
+## wind_velocity  0.24115    0.01905  12.659 7.55e-12 ***
 ## ---
 ## Signif. codes:  
 ## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -8944,6 +9061,12 @@ data}\label{case-study-1-the-windmill-data}}
 ## Residual standard error: 0.2361 on 23 degrees of freedom
 ## Multiple R-squared:  0.8745, Adjusted R-squared:  0.869 
 ## F-statistic: 160.3 on 1 and 23 DF,  p-value: 7.546e-12
+\end{verbatim}
+
+\normalsize
+
+\begin{verbatim}
+## Error in options(wid): invalid argument
 \end{verbatim}
 
 \end{frame}
@@ -8958,6 +9081,8 @@ data}\label{case-study-1-the-windmill-data}}
   easily. Package \texttt{broom} has these:
 \end{itemize}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{glance}\NormalTok{(DC}\FloatTok{.1}\NormalTok{)}
@@ -8966,15 +9091,18 @@ data}\label{case-study-1-the-windmill-data}}
 
 \begin{verbatim}
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
-## 1     0.874         0.869 0.236      160. 7.55e-12
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.874         0.869 0.236      160. 7.55e-12     2
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 \end{verbatim}
 
+\normalsize
+
 showing that the R-squared is 87\%, and
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8984,18 +9112,20 @@ showing that the R-squared is 87\%, and
 
 \begin{verbatim}
 ## # A tibble: 2 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)     0.131    0.126       1.04 3.10e- 1
-## 2 wind_veloci…    0.241    0.0190     12.7  7.55e-12
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)      0.131    0.126       1.04 3.10e- 1
+## 2 wind_velocity    0.241    0.0190     12.7  7.55e-12
 \end{verbatim}
+
+\normalsize
 
 showing the intercept and slope and their significance.
 
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-11}{}
+\protect\hypertarget{comments-14}{}
 
 \begin{itemize}
 \tightlist
@@ -9030,8 +9160,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-232-1.pdf}
-\caption{plot of chunk unnamed-chunk-232}
+\includegraphics{figure/unnamed-chunk-238-1.pdf}
+\caption{plot of chunk unnamed-chunk-238}
 \end{figure}
 
 \end{frame}
@@ -9115,11 +9245,11 @@ showing the intercept and slope and their significance.
 
 \begin{verbatim}
 ## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   -1.16     0.175       -6.62 1.18e- 6
-## 2 wind_veloci…   0.723    0.0614      11.8  5.77e-11
-## 3 I(wind_velo…  -0.0381   0.00480     -7.95 6.59e- 8
+##   term               estimate std.error statistic  p.value
+##   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)         -1.16     0.175       -6.62 1.18e- 6
+## 2 wind_velocity        0.723    0.0614      11.8  5.77e-11
+## 3 I(wind_velocity^2)  -0.0381   0.00480     -7.95 6.59e- 8
 \end{verbatim}
 
 \begin{Shaded}
@@ -9130,12 +9260,11 @@ showing the intercept and slope and their significance.
 
 \begin{verbatim}
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
-## 1     0.968         0.965 0.123      328. 4.16e-17
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.968         0.965 0.123      328. 4.16e-17     3
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 \end{verbatim}
 
 \end{frame}
@@ -9172,8 +9301,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-236-1.pdf}
-\caption{plot of chunk unnamed-chunk-236}
+\includegraphics{figure/unnamed-chunk-242-1.pdf}
+\caption{plot of chunk unnamed-chunk-242}
 \end{figure}
 
 \end{frame}
@@ -9197,6 +9326,11 @@ showing the intercept and slope and their significance.
 \end{Highlighting}
 \end{Shaded}
 
+\end{frame}
+
+\begin{frame}[fragile]{Comments}
+\protect\hypertarget{comments-15}{}
+
 \begin{itemize}
 \tightlist
 \item
@@ -9210,8 +9344,8 @@ showing the intercept and slope and their significance.
     straight line (via tweak to \texttt{geom\_smooth}, which draws
     best-fitting line);
   \item
-    fitted curve, using the predicted \texttt{DC\_output\ values},
-    joined by lines (with points not shown).
+    fitted curve, using the predicted \texttt{DC\_output} values, joined
+    by lines (with points not shown).
   \end{itemize}
 \item
   Trick in the \texttt{geom\_line} is use the predictions as the
@@ -9228,8 +9362,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-237-1.pdf}
-\caption{plot of chunk unnamed-chunk-237}
+\includegraphics{figure/unnamed-chunk-243-1.pdf}
+\caption{plot of chunk unnamed-chunk-243}
 \end{figure}
 
 Curve clearly fits better than line.
@@ -9320,13 +9454,13 @@ velocity, the more electricity generated.
 \begin{frame}{Scatterplot for wind\_pace}
 \protect\hypertarget{scatterplot-for-wind_pace}{}
 
+Pretty straight. Blue actually smooth curve not line:
+
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-238-1.pdf}
-\caption{plot of chunk unnamed-chunk-238}
+\includegraphics{figure/unnamed-chunk-244-1.pdf}
+\caption{plot of chunk unnamed-chunk-244}
 \end{figure}
-
-That's pretty straight. Blue actually smooth curve not line.
 
 \end{frame}
 
@@ -9341,12 +9475,11 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \begin{verbatim}
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared  sigma statistic  p.value
-##       <dbl>         <dbl>  <dbl>     <dbl>    <dbl>
-## 1     0.980         0.979 0.0942     1128. 4.74e-21
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared  sigma statistic  p.value    df
+##       <dbl>         <dbl>  <dbl>     <dbl>    <dbl> <int>
+## 1     0.980         0.979 0.0942     1128. 4.74e-21     2
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 \end{verbatim}
 
 \begin{Shaded}
@@ -9366,7 +9499,7 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-12}{}
+\protect\hypertarget{comments-16}{}
 
 \begin{itemize}
 \tightlist
@@ -9491,14 +9624,14 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-242-1.pdf}
-\caption{plot of chunk unnamed-chunk-242}
+\includegraphics{figure/unnamed-chunk-248-1.pdf}
+\caption{plot of chunk unnamed-chunk-248}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-14}{}
+\protect\hypertarget{comments-17}{}
 
 \begin{itemize}
 \tightlist
@@ -9533,7 +9666,7 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-15}{}
+\protect\hypertarget{comments-18}{}
 
 \begin{itemize}
 \tightlist
@@ -9625,10 +9758,9 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0
-## [10]  5.5  6.0  6.5  7.0  7.5  8.0  8.5  9.0  9.5
-## [19] 10.0 10.5 11.0 11.5 12.0 12.5 13.0 13.5 14.0
-## [28] 14.5 15.0 15.5 16.0
+##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0
+## [12]  6.5  7.0  7.5  8.0  8.5  9.0  9.5 10.0 10.5 11.0 11.5
+## [23] 12.0 12.5 13.0 13.5 14.0 14.5 15.0 15.5 16.0
 \end{verbatim}
 
 \begin{itemize}
@@ -9822,8 +9954,8 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-252-1.pdf}
-\caption{plot of chunk unnamed-chunk-252}
+\includegraphics{figure/unnamed-chunk-258-1.pdf}
+\caption{plot of chunk unnamed-chunk-258}
 \end{figure}
 
 \end{frame}
@@ -9839,8 +9971,19 @@ That's pretty straight. Blue actually smooth curve not line.
   Outside range of data, they disagree violently!
 \item
   For larger \texttt{wind.velocity}, asymptote model behaves reasonably,
-  parabola model does not. I What happens as \texttt{wind.velocity} goes
-  to zero? Should find \texttt{DC.output} goes to zero as well. Does it?
+  parabola model does not.
+\item
+  What happens as \texttt{wind.velocity} goes to zero? Should find
+  \texttt{DC.output} goes to zero as well. Does it?
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Comments (2)}
+\protect\hypertarget{comments-2-1}{}
+
+\begin{itemize}
+\tightlist
 \item
   For parabola model:
 \end{itemize}
@@ -9853,30 +9996,26 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \begin{verbatim}
 ## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   -1.16     0.175       -6.62 1.18e- 6
-## 2 wind_veloci…   0.723    0.0614      11.8  5.77e-11
-## 3 I(wind_velo…  -0.0381   0.00480     -7.95 6.59e- 8
+##   term               estimate std.error statistic  p.value
+##   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)         -1.16     0.175       -6.62 1.18e- 6
+## 2 wind_velocity        0.723    0.0614      11.8  5.77e-11
+## 3 I(wind_velocity^2)  -0.0381   0.00480     -7.95 6.59e- 8
 \end{verbatim}
 
 \begin{itemize}
 \tightlist
 \item
-  Nope, goes to −1.15 (intercept), actually significantly different from
+  Nope, goes to −1.16 (intercept), actually significantly different from
   zero.
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}[fragile]{Comments (2)}
-\protect\hypertarget{comments-2-1}{}
+\begin{frame}[fragile]{Comments (3): asymptote model}
+\protect\hypertarget{comments-3-asymptote-model}{}
 
-\begin{itemize}
-\tightlist
-\item
-  What about asymptote model?
-\end{itemize}
+\small
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9891,6 +10030,8 @@ That's pretty straight. Blue actually smooth curve not line.
 ## 1 (Intercept)     2.98    0.0449      66.3 8.92e-28
 ## 2 wind_pace      -6.93    0.206      -33.6 4.74e-21
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -10016,7 +10157,7 @@ That's pretty straight. Blue actually smooth curve not line.
 \end{frame}
 
 \begin{frame}[fragile]{The data (some)}
-\protect\hypertarget{the-data-some-4}{}
+\protect\hypertarget{the-data-some-3}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10026,20 +10167,19 @@ That's pretty straight. Blue actually smooth curve not line.
 
 \begin{verbatim}
 ## # A tibble: 31 x 7
-##    pct.a.surf pct.a.base fines voids rut.depth
-##         <dbl>      <dbl> <dbl> <dbl>     <dbl>
-##  1       4.68       4.87   8.4  4.92      6.75
-##  2       5.19       4.5    6.5  4.56     13   
-##  3       4.82       4.73   7.9  5.32     14.8 
-##  4       4.85       4.76   8.3  4.86     12.6 
-##  5       4.86       4.95   8.4  3.78      8.25
-##  6       5.16       4.45   7.4  4.40     10.7 
-##  7       4.82       5.05   6.8  4.87      7.28
-##  8       4.86       4.7    8.6  4.83     12.7 
-##  9       4.78       4.84   6.7  4.86     12.6 
-## 10       5.16       4.76   7.7  4.03     20.6 
-## # … with 21 more rows, and 2 more variables:
-## #   viscosity <dbl>, run <dbl>
+##    pct.a.surf pct.a.base fines voids rut.depth viscosity
+##         <dbl>      <dbl> <dbl> <dbl>     <dbl>     <dbl>
+##  1       4.68       4.87   8.4  4.92      6.75      2.8 
+##  2       5.19       4.5    6.5  4.56     13         1.4 
+##  3       4.82       4.73   7.9  5.32     14.8       1.4 
+##  4       4.85       4.76   8.3  4.86     12.6       3.3 
+##  5       4.86       4.95   8.4  3.78      8.25      1.7 
+##  6       5.16       4.45   7.4  4.40     10.7       2.9 
+##  7       4.82       5.05   6.8  4.87      7.28      3.7 
+##  8       4.86       4.7    8.6  4.83     12.7       1.7 
+##  9       4.78       4.84   6.7  4.86     12.6       0.92
+## 10       5.16       4.76   7.7  4.03     20.6       0.68
+## # … with 21 more rows, and 1 more variable: run <dbl>
 \end{verbatim}
 
 \end{frame}
@@ -10081,8 +10221,8 @@ I saved this graph to plot later (on the next page).
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-259-1.pdf}
-\caption{plot of chunk unnamed-chunk-259}
+\includegraphics{figure/unnamed-chunk-265-1.pdf}
+\caption{plot of chunk unnamed-chunk-265}
 \end{figure}
 
 \end{frame}
@@ -10159,8 +10299,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-261-1.pdf}
-\caption{plot of chunk unnamed-chunk-261}
+\includegraphics{figure/unnamed-chunk-267-1.pdf}
+\caption{plot of chunk unnamed-chunk-267}
 \end{figure}
 
 \end{frame}
@@ -10192,6 +10332,8 @@ from here on, eg.:
 \begin{frame}[fragile]{Regression output: \texttt{summary(rut.1)} or:}
 \protect\hypertarget{regression-output-summaryrut.1-or}{}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{glance}\NormalTok{(rut}\FloatTok{.1}\NormalTok{)}
@@ -10200,12 +10342,11 @@ from here on, eg.:
 
 \begin{verbatim}
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value
-##       <dbl>         <dbl> <dbl>     <dbl>   <dbl>
-## 1     0.806         0.758  3.32      16.6 1.74e-7
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>
+## 1     0.806         0.758  3.32      16.6 1.74e-7     7
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 \end{verbatim}
 
 \begin{Shaded}
@@ -10227,10 +10368,12 @@ from here on, eg.:
 ## 7 run             -1.97      3.65     -0.539 0.595
 \end{verbatim}
 
+\normalsize
+
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-16}{}
+\protect\hypertarget{comments-19}{}
 
 \begin{itemize}
 \tightlist
@@ -10282,8 +10425,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-264-1.pdf}
-\caption{plot of chunk unnamed-chunk-264}
+\includegraphics{figure/unnamed-chunk-270-1.pdf}
+\caption{plot of chunk unnamed-chunk-270}
 \end{figure}
 
 \end{frame}
@@ -10314,6 +10457,8 @@ from here on, eg.:
 \begin{frame}[fragile]{What does rut.1a contain?}
 \protect\hypertarget{what-does-rut.1a-contain}{}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{glimpse}\NormalTok{(rut}\FloatTok{.1}\NormalTok{a)}
@@ -10323,22 +10468,24 @@ from here on, eg.:
 \begin{verbatim}
 ## Observations: 31
 ## Variables: 15
-## $ pct.a.surf    <dbl> 4.68, 5.19, 4.82, 4.85, 4.8…
-## $ pct.a.base    <dbl> 4.87, 4.50, 4.73, 4.76, 4.9…
-## $ fines         <dbl> 8.4, 6.5, 7.9, 8.3, 8.4, 7.…
-## $ voids         <dbl> 4.916, 4.563, 5.321, 4.865,…
-## $ rut.depth     <dbl> 6.75, 13.00, 14.75, 12.60, …
-## $ viscosity     <dbl> 2.80, 1.40, 1.40, 3.30, 1.7…
-## $ run           <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-## $ log.viscosity <dbl> 1.02961942, 0.33647224, 0.3…
-## $ .fitted       <dbl> 10.404663, 13.717501, 13.14…
-## $ .se.fit       <dbl> 1.262454, 1.617838, 1.34207…
-## $ .resid        <dbl> -3.6546631, -0.7175010, 1.6…
-## $ .hat          <dbl> 0.1442888, 0.2369584, 0.163…
-## $ .sigma        <dbl> 3.293545, 3.390685, 3.37533…
-## $ .cooksd       <dbl> 0.0340389900, 0.0027097205,…
-## $ .std.resid    <dbl> -1.18873388, -0.24714358, 0…
+## $ pct.a.surf    <dbl> 4.68, 5.19, 4.82, 4.85, 4.86, 5.16,…
+## $ pct.a.base    <dbl> 4.87, 4.50, 4.73, 4.76, 4.95, 4.45,…
+## $ fines         <dbl> 8.4, 6.5, 7.9, 8.3, 8.4, 7.4, 6.8, …
+## $ voids         <dbl> 4.916, 4.563, 5.321, 4.865, 3.776, …
+## $ rut.depth     <dbl> 6.75, 13.00, 14.75, 12.60, 8.25, 10…
+## $ viscosity     <dbl> 2.80, 1.40, 1.40, 3.30, 1.70, 2.90,…
+## $ run           <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ log.viscosity <dbl> 1.02961942, 0.33647224, 0.33647224,…
+## $ .fitted       <dbl> 10.4046631, 13.7175010, 13.1485937,…
+## $ .se.fit       <dbl> 1.262454, 1.617838, 1.342073, 1.260…
+## $ .resid        <dbl> -3.6546631, -0.7175010, 1.6014063, …
+## $ .hat          <dbl> 0.1442888, 0.2369584, 0.1630624, 0.…
+## $ .sigma        <dbl> 3.293545, 3.390685, 3.375330, 3.357…
+## $ .cooksd       <dbl> 0.0340389900, 0.0027097205, 0.00772…
+## $ .std.resid    <dbl> -1.18873388, -0.24714358, 0.5266910…
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -10370,14 +10517,14 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-268-1.pdf}
-\caption{plot of chunk unnamed-chunk-268}
+\includegraphics{figure/unnamed-chunk-274-1.pdf}
+\caption{plot of chunk unnamed-chunk-274}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-17}{}
+\protect\hypertarget{comments-20}{}
 
 \begin{itemize}
 \tightlist
@@ -10431,8 +10578,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-269-1.pdf}
-\caption{plot of chunk unnamed-chunk-269}
+\includegraphics{figure/unnamed-chunk-275-1.pdf}
+\caption{plot of chunk unnamed-chunk-275}
 \end{figure}
 
 \end{frame}
@@ -10510,8 +10657,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-272-1.pdf}
-\caption{plot of chunk unnamed-chunk-272}
+\includegraphics{figure/unnamed-chunk-278-1.pdf}
+\caption{plot of chunk unnamed-chunk-278}
 \end{figure}
 
 \end{frame}
@@ -10563,15 +10710,15 @@ From package \texttt{MASS}:
 
 \begin{verbatim}
 ## # A tibble: 7 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 (Intercept)  -1.57      2.44      -0.646   5.25e-1
-## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
-## 3 pct.a.base   -0.103     0.369     -0.280   7.82e-1
-## 4 fines         0.0978    0.0941     1.04    3.09e-1
-## 5 voids         0.199     0.123      1.62    1.19e-1
-## 6 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
-## 7 run           0.340     0.339      1.00    3.26e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 (Intercept)    -1.57      2.44      -0.646 0.525      
+## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
+## 3 pct.a.base     -0.103     0.369     -0.280 0.782      
+## 4 fines           0.0978    0.0941     1.04  0.309      
+## 5 voids           0.199     0.123      1.62  0.119      
+## 6 log.viscosity  -0.558     0.0854    -6.53  0.000000945
+## 7 run             0.340     0.339      1.00  0.326
 \end{verbatim}
 
 \end{frame}
@@ -10585,11 +10732,17 @@ From package \texttt{MASS}:
   Try: remove everything but pct.a.surf and log.viscosity:
 \end{itemize}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rut}\FloatTok{.3}\NormalTok{ <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(log.rut.depth }\OperatorTok{~}\StringTok{ }\NormalTok{pct.a.surf }\OperatorTok{+}\StringTok{ }\NormalTok{log.viscosity, }\DataTypeTok{data =}\NormalTok{ asphalt_}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
+
+\footnotesize
 
 \begin{itemize}
 \tightlist
@@ -10614,6 +10767,8 @@ From package \texttt{MASS}:
 ## 2     24 2.2888  4   0.59216 1.5523 0.2191
 \end{verbatim}
 
+\normalsize
+
 \begin{itemize}
 \tightlist
 \item
@@ -10636,15 +10791,15 @@ From package \texttt{MASS}:
 
 \begin{verbatim}
 ## # A tibble: 7 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 (Intercept)  -1.57      2.44      -0.646   5.25e-1
-## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
-## 3 pct.a.base   -0.103     0.369     -0.280   7.82e-1
-## 4 fines         0.0978    0.0941     1.04    3.09e-1
-## 5 voids         0.199     0.123      1.62    1.19e-1
-## 6 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
-## 7 run           0.340     0.339      1.00    3.26e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 (Intercept)    -1.57      2.44      -0.646 0.525      
+## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
+## 3 pct.a.base     -0.103     0.369     -0.280 0.782      
+## 4 fines           0.0978    0.0941     1.04  0.309      
+## 5 voids           0.199     0.123      1.62  0.119      
+## 6 log.viscosity  -0.558     0.0854    -6.53  0.000000945
+## 7 run             0.340     0.339      1.00  0.326
 \end{verbatim}
 
 \begin{itemize}
@@ -10677,15 +10832,15 @@ you}
 
 \begin{verbatim}
 ## # A tibble: 7 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
-## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
-## 3 voids         0.199     0.123      1.62    1.19e-1
-## 4 fines         0.0978    0.0941     1.04    3.09e-1
-## 5 run           0.340     0.339      1.00    3.26e-1
-## 6 (Intercept)  -1.57      2.44      -0.646   5.25e-1
-## 7 pct.a.base   -0.103     0.369     -0.280   7.82e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 log.viscosity  -0.558     0.0854    -6.53  0.000000945
+## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
+## 3 voids           0.199     0.123      1.62  0.119      
+## 4 fines           0.0978    0.0941     1.04  0.309      
+## 5 run             0.340     0.339      1.00  0.326      
+## 6 (Intercept)    -1.57      2.44      -0.646 0.525      
+## 7 pct.a.base     -0.103     0.369     -0.280 0.782
 \end{verbatim}
 
 \begin{itemize}
@@ -10705,6 +10860,8 @@ you}
   Copy and paste the \texttt{lm} code and remove what you're removing:
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{rut}\FloatTok{.4}\NormalTok{ <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(log.rut.depth }\OperatorTok{~}\StringTok{ }\NormalTok{pct.a.surf }\OperatorTok{+}\StringTok{ }\NormalTok{fines }\OperatorTok{+}\StringTok{ }\NormalTok{voids }\OperatorTok{+}\StringTok{ }\NormalTok{log.viscosity }\OperatorTok{+}\StringTok{ }\NormalTok{run,}
@@ -10716,15 +10873,17 @@ you}
 
 \begin{verbatim}
 ## # A tibble: 6 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 log.viscos…  -0.552     0.0818     -6.75   4.48e-7
-## 2 pct.a.surf    0.593     0.225       2.63   1.43e-2
-## 3 voids         0.200     0.121       1.66   1.09e-1
-## 4 (Intercept)  -2.08      1.61       -1.29   2.08e-1
-## 5 run           0.360     0.325       1.11   2.79e-1
-## 6 fines         0.0889    0.0870      1.02   3.16e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 log.viscosity  -0.552     0.0818     -6.75 0.000000448
+## 2 pct.a.surf      0.593     0.225       2.63 0.0143     
+## 3 voids           0.200     0.121       1.66 0.109      
+## 4 (Intercept)    -2.08      1.61       -1.29 0.208      
+## 5 run             0.360     0.325       1.11 0.279      
+## 6 fines           0.0889    0.0870      1.02 0.316
 \end{verbatim}
+
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -10748,14 +10907,14 @@ Another way to do the same thing:
 
 \begin{verbatim}
 ## # A tibble: 6 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 log.viscos…  -0.552     0.0818     -6.75   4.48e-7
-## 2 pct.a.surf    0.593     0.225       2.63   1.43e-2
-## 3 voids         0.200     0.121       1.66   1.09e-1
-## 4 (Intercept)  -2.08      1.61       -1.29   2.08e-1
-## 5 run           0.360     0.325       1.11   2.79e-1
-## 6 fines         0.0889    0.0870      1.02   3.16e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 log.viscosity  -0.552     0.0818     -6.75 0.000000448
+## 2 pct.a.surf      0.593     0.225       2.63 0.0143     
+## 3 voids           0.200     0.121       1.66 0.109      
+## 4 (Intercept)    -2.08      1.61       -1.29 0.208      
+## 5 run             0.360     0.325       1.11 0.279      
+## 6 fines           0.0889    0.0870      1.02 0.316
 \end{verbatim}
 
 \begin{itemize}
@@ -10778,13 +10937,13 @@ Another way to do the same thing:
 
 \begin{verbatim}
 ## # A tibble: 5 x 5
-##   term       estimate std.error statistic    p.value
-##   <chr>         <dbl>     <dbl>     <dbl>      <dbl>
-## 1 log.visco…   -0.580    0.0772    -7.52     5.59e-8
-## 2 pct.a.surf    0.548    0.221      2.48     2.00e-2
-## 3 voids         0.232    0.117      1.99     5.77e-2
-## 4 run           0.295    0.319      0.923    3.65e-1
-## 5 (Intercep…   -1.26     1.39      -0.902    3.75e-1
+##   term          estimate std.error statistic      p.value
+##   <chr>            <dbl>     <dbl>     <dbl>        <dbl>
+## 1 log.viscosity   -0.580    0.0772    -7.52  0.0000000559
+## 2 pct.a.surf       0.548    0.221      2.48  0.0200      
+## 3 voids            0.232    0.117      1.99  0.0577      
+## 4 run              0.295    0.319      0.923 0.365       
+## 5 (Intercept)     -1.26     1.39      -0.902 0.375
 \end{verbatim}
 
 Can't take out intercept, so \texttt{run}, with P-value 0.36, goes next.
@@ -10803,12 +10962,12 @@ Can't take out intercept, so \texttt{run}, with P-value 0.36, goes next.
 
 \begin{verbatim}
 ## # A tibble: 4 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 log.viscosi…   -0.646    0.0288   -22.5   5.29e-19
-## 2 pct.a.surf      0.555    0.220      2.52  1.80e- 2
-## 3 voids           0.245    0.116      2.12  4.36e- 2
-## 4 (Intercept)    -1.02     1.36      -0.748 4.61e- 1
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 log.viscosity   -0.646    0.0288   -22.5   5.29e-19
+## 2 pct.a.surf       0.555    0.220      2.52  1.80e- 2
+## 3 voids            0.245    0.116      2.12  4.36e- 2
+## 4 (Intercept)     -1.02     1.36      -0.748 4.61e- 1
 \end{verbatim}
 
 Again, can't take out intercept, so largest P-value is for
@@ -10818,7 +10977,7 @@ Again, can't take out intercept, so largest P-value is for
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-18}{}
+\protect\hypertarget{comments-21}{}
 
 \begin{itemize}
 \tightlist
@@ -10838,10 +10997,8 @@ Again, can't take out intercept, so largest P-value is for
 \end{Shaded}
 
 \begin{verbatim}
-##   (Intercept)    pct.a.surf         voids 
-##    -1.0207945     0.5554686     0.2447934 
-## log.viscosity 
-##    -0.6464911
+##   (Intercept)    pct.a.surf         voids log.viscosity 
+##    -1.0207945     0.5554686     0.2447934    -0.6464911
 \end{verbatim}
 
 \begin{Shaded}
@@ -10875,8 +11032,8 @@ Again, can't take out intercept, so largest P-value is for
   Best automatic method: what we did, ``backward selection''.
 \item
   Do not learn about ``stepwise regression''!
-  \href{https://towardsdatascience.com/stopping-stepwise-why-stepwise-selection-is-bad-and-what-you-should-use-instead-90818b3f52df}{eg.
-  here}
+  \href{https://towardsdatascience.com/stopping-stepwise-why-stepwise-selection-is-bad-and-what-you-should-use-instead-90818b3f52df}{\textbf{eg.
+  here}}
 \item
   R has function \texttt{step} that does backward selection, like this:
 \end{itemize}
@@ -10921,6 +11078,8 @@ Uses package \texttt{leaps}:
 \begin{frame}[fragile]{The output}
 \protect\hypertarget{the-output}{}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{d }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rownames_to_column}\NormalTok{(}\StringTok{"model"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(rsq))}
@@ -10928,36 +11087,26 @@ Uses package \texttt{leaps}:
 \end{Shaded}
 
 \begin{verbatim}
-##       model       rsq pct.a.surf pct.a.base fines
-## 1  6  ( 1 ) 0.9609642          *          *     *
-## 2  5  ( 1 ) 0.9608365          *                *
-## 3  5  ( 2 ) 0.9593265          *          *     *
-## 4  4  ( 1 ) 0.9591996          *                 
-## 5  4  ( 2 ) 0.9589206          *                *
-## 6  3  ( 1 ) 0.9578631          *                 
-## 7  3  ( 2 ) 0.9534561          *                *
-## 8  2  ( 1 ) 0.9508647          *                 
-## 9  2  ( 2 ) 0.9479541                            
-## 10 1  ( 1 ) 0.9452562                            
-## 11 1  ( 2 ) 0.8624107                            
-##    voids log.viscosity run
-## 1      *             *   *
-## 2      *             *   *
-## 3      *             *    
-## 4      *             *   *
-## 5      *             *    
-## 6      *             *    
-## 7                    *    
-## 8                    *    
-## 9      *             *    
-## 10                   *    
-## 11                       *
+##       model       rsq pct.a.surf pct.a.base fines voids log.viscosity run
+## 1  6  ( 1 ) 0.9609642          *          *     *     *             *   *
+## 2  5  ( 1 ) 0.9608365          *                *     *             *   *
+## 3  5  ( 2 ) 0.9593265          *          *     *     *             *    
+## 4  4  ( 1 ) 0.9591996          *                      *             *   *
+## 5  4  ( 2 ) 0.9589206          *                *     *             *    
+## 6  3  ( 1 ) 0.9578631          *                      *             *    
+## 7  3  ( 2 ) 0.9534561          *                *                   *    
+## 8  2  ( 1 ) 0.9508647          *                                    *    
+## 9  2  ( 2 ) 0.9479541                                 *             *    
+## 10 1  ( 1 ) 0.9452562                                               *    
+## 11 1  ( 2 ) 0.8624107                                                   *
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-19}{}
+\protect\hypertarget{comments-22}{}
 
 \begin{itemize}
 \tightlist
@@ -10979,6 +11128,8 @@ Uses package \texttt{leaps}:
 \begin{frame}[fragile]{All possible regressions, adjusted R-squared}
 \protect\hypertarget{all-possible-regressions-adjusted-r-squared}{}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{with}\NormalTok{(s, }\KeywordTok{data.frame}\NormalTok{(adjr2, outmat))}
@@ -10986,31 +11137,21 @@ Uses package \texttt{leaps}:
 \end{Shaded}
 
 \begin{verbatim}
-##              adjr2 pct.a.surf pct.a.base fines
-## 1  ( 1 ) 0.9433685                            
-## 1  ( 2 ) 0.8576662                            
-## 2  ( 1 ) 0.9473550          *                 
-## 2  ( 2 ) 0.9442365                            
-## 3  ( 1 ) 0.9531812          *                 
-## 3  ( 2 ) 0.9482845          *                *
-## 4  ( 1 ) 0.9529226          *                 
-## 4  ( 2 ) 0.9526007          *                *
-## 5  ( 1 ) 0.9530038          *                *
-## 5  ( 2 ) 0.9511918          *          *     *
-## 6  ( 1 ) 0.9512052          *          *     *
-##          voids log.viscosity run
-## 1  ( 1 )                   *    
-## 1  ( 2 )                       *
-## 2  ( 1 )                   *    
-## 2  ( 2 )     *             *    
-## 3  ( 1 )     *             *    
-## 3  ( 2 )                   *    
-## 4  ( 1 )     *             *   *
-## 4  ( 2 )     *             *    
-## 5  ( 1 )     *             *   *
-## 5  ( 2 )     *             *    
-## 6  ( 1 )     *             *   *
+##              adjr2 pct.a.surf pct.a.base fines voids log.viscosity run
+## 1  ( 1 ) 0.9433685                                               *    
+## 1  ( 2 ) 0.8576662                                                   *
+## 2  ( 1 ) 0.9473550          *                                    *    
+## 2  ( 2 ) 0.9442365                                 *             *    
+## 3  ( 1 ) 0.9531812          *                      *             *    
+## 3  ( 2 ) 0.9482845          *                *                   *    
+## 4  ( 1 ) 0.9529226          *                      *             *   *
+## 4  ( 2 ) 0.9526007          *                *     *             *    
+## 5  ( 1 ) 0.9530038          *                *     *             *   *
+## 5  ( 2 ) 0.9511918          *          *     *     *             *    
+## 6  ( 1 ) 0.9512052          *          *     *     *             *   *
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -11031,12 +11172,12 @@ Uses package \texttt{leaps}:
 
 \begin{verbatim}
 ## # A tibble: 4 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)    -1.02     1.36      -0.748 4.61e- 1
-## 2 pct.a.surf      0.555    0.220      2.52  1.80e- 2
-## 3 voids           0.245    0.116      2.12  4.36e- 2
-## 4 log.viscosi…   -0.646    0.0288   -22.5   5.29e-19
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)     -1.02     1.36      -0.748 4.61e- 1
+## 2 pct.a.surf       0.555    0.220      2.52  1.80e- 2
+## 3 voids            0.245    0.116      2.12  4.36e- 2
+## 4 log.viscosity   -0.646    0.0288   -22.5   5.29e-19
 \end{verbatim}
 
 \end{frame}
@@ -11076,8 +11217,8 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-290-1.pdf}
-\caption{plot of chunk unnamed-chunk-290}
+\includegraphics{figure/unnamed-chunk-300-1.pdf}
+\caption{plot of chunk unnamed-chunk-300}
 \end{figure}
 
 \end{frame}
@@ -11116,14 +11257,14 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-292-1.pdf}
-\caption{plot of chunk unnamed-chunk-292}
+\includegraphics{figure/unnamed-chunk-302-1.pdf}
+\caption{plot of chunk unnamed-chunk-302}
 \end{figure}
 
 \end{frame}
 
 \begin{frame}{Comments}
-\protect\hypertarget{comments-20}{}
+\protect\hypertarget{comments-24}{}
 
 \begin{itemize}
 \tightlist
@@ -11292,6 +11433,8 @@ variables}\label{regression-with-categorical-variables}}
 \begin{frame}[fragile]{and now \texttt{lm}}
 \protect\hypertarget{and-now-lm}{}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{pigs}\FloatTok{.2}\NormalTok{ <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(weight }\OperatorTok{~}\StringTok{ }\NormalTok{feed, }\DataTypeTok{data =}\NormalTok{ pigs)}
@@ -11308,6 +11451,23 @@ variables}\label{regression-with-categorical-variables}}
 ## 3 feedfeed3      33.5       1.98     16.9  1.30e-11
 ## 4 feedfeed4      25.6       1.98     12.9  7.11e-10
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glance}\NormalTok{(pigs}\FloatTok{.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.957         0.949  3.14      119. 3.72e-11     4
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+\end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -11344,8 +11504,10 @@ variables}\label{regression-with-categorical-variables}}
 \begin{itemize}
 \tightlist
 \item
-  Pass the fitted model object into anova:
+  Pass the fitted model object into \texttt{anova}:
 \end{itemize}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11365,6 +11527,8 @@ variables}\label{regression-with-categorical-variables}}
 ## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
+\normalsize
+
 \begin{itemize}
 \tightlist
 \item
@@ -11372,6 +11536,8 @@ variables}\label{regression-with-categorical-variables}}
 \item
   But no Tukey this way:
 \end{itemize}
+
+\footnotesize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11382,6 +11548,8 @@ variables}\label{regression-with-categorical-variables}}
 \begin{verbatim}
 ## Error in UseMethod("TukeyHSD"): no applicable method for 'TukeyHSD' applied to an object of class "lm"
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -11410,30 +11578,33 @@ variables}\label{regression-with-categorical-variables}}
 
 Read the data:
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{my_url=}\StringTok{"http://www.utsc.utoronto.ca/~butler/c32/crickets2.csv"}
 \NormalTok{crickets <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(my_url)}
-\NormalTok{crickets}
+\NormalTok{crickets }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sample_n}\NormalTok{(}\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 31 x 3
+## # A tibble: 10 x 3
 ##    species       temperature pulse_rate
 ##    <chr>               <dbl>      <dbl>
-##  1 exclamationis        20.8       67.9
-##  2 exclamationis        20.8       65.1
-##  3 exclamationis        24         77.3
+##  1 exclamationis        20.8       65.1
+##  2 niveus               18.9       50.3
+##  3 exclamationis        20.8       67.9
 ##  4 exclamationis        24         78.7
-##  5 exclamationis        24         79.4
-##  6 exclamationis        24         80.4
-##  7 exclamationis        26.2       85.8
-##  8 exclamationis        26.2       86.6
-##  9 exclamationis        26.2       87.5
-## 10 exclamationis        26.2       89.1
-## # … with 21 more rows
+##  5 exclamationis        29        101. 
+##  6 niveus               26.5       76.1
+##  7 niveus               18.3       47.6
+##  8 niveus               17.2       44.3
+##  9 niveus               26.5       77.7
+## 10 niveus               26.5       77
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -11475,12 +11646,11 @@ Read the data:
 
 \begin{verbatim}
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
-## 1     0.990         0.989  1.79     1331. 1.76e-28
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.990         0.989  1.79     1331. 1.76e-28     3
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 \end{verbatim}
 
 \begin{Shaded}
@@ -11491,11 +11661,11 @@ Read the data:
 
 \begin{verbatim}
 ## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)     -7.21    2.55       -2.83 8.58e- 3
-## 2 temperature      3.60    0.0973     37.0  2.49e-25
-## 3 speciesnive…   -10.1     0.735     -13.7  6.27e-14
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)      -7.21    2.55       -2.83 8.58e- 3
+## 2 temperature       3.60    0.0973     37.0  2.49e-25
+## 3 speciesniveus   -10.1     0.735     -13.7  6.27e-14
 \end{verbatim}
 
 \end{frame}
@@ -11532,8 +11702,8 @@ Read the data:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-303-1.pdf}
-\caption{plot of chunk unnamed-chunk-303}
+\includegraphics{figure/unnamed-chunk-313-1.pdf}
+\caption{plot of chunk unnamed-chunk-313}
 \end{figure}
 
 \end{frame}
@@ -12312,8 +12482,8 @@ Check by looking at the summary output from the regression:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068
-##  [6] 2.449490 2.645751 2.828427 3.000000 3.162278
+##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490
+##  [7] 2.645751 2.828427 3.000000 3.162278
 \end{verbatim}
 
 \end{frame}
@@ -12470,7 +12640,7 @@ The mean of each column, with the columns labelled.
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-21}{}
+\protect\hypertarget{comments-25}{}
 
 \begin{itemize}
 \tightlist
@@ -12641,7 +12811,7 @@ The mean of each column, with the columns labelled.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =} \KeywordTok{map_int}\NormalTok{(x, hotpo))}
+\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{x =} \DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{y =} \KeywordTok{map_int}\NormalTok{(x, }\OperatorTok{~}\KeywordTok{hotpo}\NormalTok{(.)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -12730,6 +12900,8 @@ The mean of each column, with the columns labelled.
   Start at 27:
 \end{itemize}
 
+\footnotesize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{hotpo_seq}\NormalTok{(}\DecValTok{27}\NormalTok{)}
@@ -12737,20 +12909,20 @@ The mean of each column, with the columns labelled.
 \end{Shaded}
 
 \begin{verbatim}
-##   [1]   27   82   41  124   62   31   94   47  142
-##  [10]   71  214  107  322  161  484  242  121  364
-##  [19]  182   91  274  137  412  206  103  310  155
-##  [28]  466  233  700  350  175  526  263  790  395
-##  [37] 1186  593 1780  890  445 1336  668  334  167
-##  [46]  502  251  754  377 1132  566  283  850  425
-##  [55] 1276  638  319  958  479 1438  719 2158 1079
-##  [64] 3238 1619 4858 2429 7288 3644 1822  911 2734
-##  [73] 1367 4102 2051 6154 3077 9232 4616 2308 1154
-##  [82]  577 1732  866  433 1300  650  325  976  488
-##  [91]  244  122   61  184   92   46   23   70   35
-## [100]  106   53  160   80   40   20   10    5   16
-## [109]    8    4    2    1
+##   [1]   27   82   41  124   62   31   94   47  142   71  214
+##  [12]  107  322  161  484  242  121  364  182   91  274  137
+##  [23]  412  206  103  310  155  466  233  700  350  175  526
+##  [34]  263  790  395 1186  593 1780  890  445 1336  668  334
+##  [45]  167  502  251  754  377 1132  566  283  850  425 1276
+##  [56]  638  319  958  479 1438  719 2158 1079 3238 1619 4858
+##  [67] 2429 7288 3644 1822  911 2734 1367 4102 2051 6154 3077
+##  [78] 9232 4616 2308 1154  577 1732  866  433 1300  650  325
+##  [89]  976  488  244  122   61  184   92   46   23   70   35
+## [100]  106   53  160   80   40   20   10    5   16    8    4
+## [111]    2    1
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -12768,17 +12940,19 @@ sequences?}
   sequence?
 \end{itemize}
 
+\small
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{tibble}\NormalTok{(}\DataTypeTok{start =} \DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{seq_length =} \KeywordTok{map_int}\NormalTok{(start, }\OperatorTok{~}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{hotpo_seq}\NormalTok{(.)))) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(seq_length)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
+\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 2
+## # A tibble: 5 x 2
 ##   start seq_length
 ##   <int>      <int>
 ## 1    97        119
@@ -12786,8 +12960,9 @@ sequences?}
 ## 3    54        113
 ## 4    55        113
 ## 5    27        112
-## 6    82        111
 \end{verbatim}
+
+\normalsize
 
 \end{frame}
 
@@ -12913,11 +13088,11 @@ its max}
 
 \begin{verbatim}
 ## # A tibble: 3 x 5
-##   text       d          numbers plus30     diffs    
-##   <chr>      <date>       <dbl> <date>     <time>   
-## 1 1970-01-01 1970-01-01       0 1970-01-31 13760 da…
-## 2 2007-09-04 2007-09-04   13760 2007-10-04     0 da…
-## 3 1931-08-05 1931-08-05  -14029 1931-09-04 27789 da…
+##   text       d          numbers plus30     diffs     
+##   <chr>      <date>       <dbl> <date>     <drtn>    
+## 1 1970-01-01 1970-01-01       0 1970-01-31 13760 days
+## 2 2007-09-04 2007-09-04   13760 2007-10-04     0 days
+## 3 1931-08-05 1931-08-05  -14029 1931-09-04 27789 days
 \end{verbatim}
 
 \end{frame}
@@ -13123,11 +13298,11 @@ date,status,dunno
 
 \begin{verbatim}
 ## # A tibble: 3 x 5
-##   date       status    dunno        date2      equal
-##   <date>     <chr>     <chr>        <date>     <lgl>
-## 1 2011-08-03 hello     August 3 20… 2011-08-03 TRUE 
-## 2 2011-11-15 still he… November 15… 2011-11-15 TRUE 
-## 3 2012-02-01 goodbye   February 1 … 2012-02-01 TRUE
+##   date       status     dunno            date2      equal
+##   <date>     <chr>      <chr>            <date>     <lgl>
+## 1 2011-08-03 hello      August 3 2011    2011-08-03 TRUE 
+## 2 2011-11-15 still here November 15 2011 2011-11-15 TRUE 
+## 3 2012-02-01 goodbye    February 1 2012  2012-02-01 TRUE
 \end{verbatim}
 
 \begin{itemize}
@@ -13332,12 +13507,12 @@ year month day
 
 \begin{verbatim}
 ## # A tibble: 4 x 3
-##   text              dt                  zone        
-##   <chr>             <dttm>              <chr>       
-## 1 1970-01-01 07:50… 1970-01-01 07:50:01 America/Tor…
-## 2 2007-09-04 15:30… 2007-09-04 15:30:00 America/Tor…
-## 3 1940-04-15 06:45… 1940-04-15 06:45:10 America/Tor…
-## 4 2016-02-10 12:26… 2016-02-10 12:26:40 America/Tor…
+##   text                dt                  zone           
+##   <chr>               <dttm>              <chr>          
+## 1 1970-01-01 07:50:01 1970-01-01 07:50:01 America/Toronto
+## 2 2007-09-04 15:30:00 2007-09-04 15:30:00 America/Toronto
+## 3 1940-04-15 06:45:10 1940-04-15 06:45:10 America/Toronto
+## 4 2016-02-10 12:26:40 2016-02-10 12:26:40 America/Toronto
 \end{verbatim}
 
 \end{frame}
@@ -13366,12 +13541,12 @@ year month day
 
 \begin{verbatim}
 ## # A tibble: 4 x 5
-##   dt                      h   sec   min zone        
-##   <dttm>              <int> <dbl> <int> <chr>       
-## 1 1970-01-01 07:50:01     7     1    50 America/Tor…
-## 2 2007-09-04 15:30:00    15     0    30 America/Tor…
-## 3 1940-04-15 06:45:10     6    10    45 America/Tor…
-## 4 2016-02-10 12:26:40    12    40    26 America/Tor…
+##   dt                      h   sec   min zone           
+##   <dttm>              <int> <dbl> <int> <chr>          
+## 1 1970-01-01 07:50:01     7     1    50 America/Toronto
+## 2 2007-09-04 15:30:00    15     0    30 America/Toronto
+## 3 1940-04-15 06:45:10     6    10    45 America/Toronto
+## 4 2016-02-10 12:26:40    12    40    26 America/Toronto
 \end{verbatim}
 
 \end{frame}
@@ -13400,10 +13575,8 @@ year month day
 In more detail:
 
 \begin{verbatim}
-## [1] "1970-01-01 22:50:01 AEST"
-## [2] "2007-09-05 05:30:00 AEST"
-## [3] "1940-04-15 21:45:10 AEST"
-## [4] "2016-02-11 04:26:40 AEDT"
+## [1] "1970-01-01 22:50:01 AEST" "2007-09-05 05:30:00 AEST"
+## [3] "1940-04-15 21:45:10 AEST" "2016-02-11 04:26:40 AEDT"
 \end{verbatim}
 
 \end{frame}
@@ -13477,11 +13650,11 @@ admit,discharge
 
 \begin{verbatim}
 ## # A tibble: 3 x 3
-##   admit               discharge           stay      
-##   <dttm>              <dttm>              <time>    
-## 1 1981-12-10 22:00:00 1982-01-03 14:00:00 568.0 hou…
-## 2 2014-03-07 14:00:00 2014-03-08 09:30:00  19.5 hou…
-## 3 2016-08-31 21:00:00 2016-09-02 17:00:00  44.0 hou…
+##   admit               discharge           stay       
+##   <dttm>              <dttm>              <drtn>     
+## 1 1981-12-10 22:00:00 1982-01-03 14:00:00 568.0 hours
+## 2 2014-03-07 14:00:00 2014-03-08 09:30:00  19.5 hours
+## 3 2016-08-31 21:00:00 2016-09-02 17:00:00  44.0 hours
 \end{verbatim}
 
 \begin{itemize}
@@ -13519,7 +13692,7 @@ admit,discharge
 \end{frame}
 
 \begin{frame}[fragile]{Comments}
-\protect\hypertarget{comments-22}{}
+\protect\hypertarget{comments-26}{}
 
 \begin{itemize}
 \tightlist
@@ -13678,7 +13851,7 @@ rat5T12
 \end{frame}
 
 \begin{frame}[fragile]{The data}
-\protect\hypertarget{the-data-5}{}
+\protect\hypertarget{the-data-6}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13702,8 +13875,8 @@ rat5T12
 \begin{itemize}
 \tightlist
 \item
-  These are diameters of five different trees at five different ages
-  (days).
+  These are circumferences of five different trees at seven different
+  ages (days).
 \end{itemize}
 
 \end{frame}
@@ -13713,7 +13886,8 @@ rat5T12
 
 \begin{itemize}
 \item
-  Want to plot orange circumferences against age for each orange tree.
+  Want to plot orange tree circumferences against age for each orange
+  tree.
 \item
   Recall ggplot wants one column of x values and one column of y values,
   which we do not have.
@@ -13746,8 +13920,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-377-1.pdf}
-\caption{plot of chunk unnamed-chunk-377}
+\includegraphics{figure/unnamed-chunk-387-1.pdf}
+\caption{plot of chunk unnamed-chunk-387}
 \end{figure}
 
 \end{frame}
@@ -13801,8 +13975,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-379-1.pdf}
-\caption{plot of chunk unnamed-chunk-379}
+\includegraphics{figure/unnamed-chunk-389-1.pdf}
+\caption{plot of chunk unnamed-chunk-389}
 \end{figure}
 
 \end{frame}
@@ -13819,8 +13993,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-380-1.pdf}
-\caption{plot of chunk unnamed-chunk-380}
+\includegraphics{figure/unnamed-chunk-390-1.pdf}
+\caption{plot of chunk unnamed-chunk-390}
 \end{figure}
 
 \end{frame}
@@ -13837,8 +14011,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-381-1.pdf}
-\caption{plot of chunk unnamed-chunk-381}
+\includegraphics{figure/unnamed-chunk-391-1.pdf}
+\caption{plot of chunk unnamed-chunk-391}
 \end{figure}
 
 \end{frame}
@@ -13896,8 +14070,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-383-1.pdf}
-\caption{plot of chunk unnamed-chunk-383}
+\includegraphics{figure/unnamed-chunk-393-1.pdf}
+\caption{plot of chunk unnamed-chunk-393}
 \end{figure}
 
 \end{frame}
@@ -13939,8 +14113,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-385-1.pdf}
-\caption{plot of chunk unnamed-chunk-385}
+\includegraphics{figure/unnamed-chunk-395-1.pdf}
+\caption{plot of chunk unnamed-chunk-395}
 \end{figure}
 
 \end{frame}
@@ -13982,8 +14156,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-387-1.pdf}
-\caption{plot of chunk unnamed-chunk-387}
+\includegraphics{figure/unnamed-chunk-397-1.pdf}
+\caption{plot of chunk unnamed-chunk-397}
 \end{figure}
 
 \end{frame}
@@ -13996,7 +14170,9 @@ rat5T12
 \item
   Title for graph
 \item
-  Axis labels We use previous graph as base (to save drawing again).
+  Axis labels
+\item
+  We use previous graph as base (to save drawing again).
 \end{itemize}
 
 \end{frame}
@@ -14012,8 +14188,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-388-1.pdf}
-\caption{plot of chunk unnamed-chunk-388}
+\includegraphics{figure/unnamed-chunk-398-1.pdf}
+\caption{plot of chunk unnamed-chunk-398}
 \end{figure}
 
 \end{frame}
@@ -14029,8 +14205,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-389-1.pdf}
-\caption{plot of chunk unnamed-chunk-389}
+\includegraphics{figure/unnamed-chunk-399-1.pdf}
+\caption{plot of chunk unnamed-chunk-399}
 \end{figure}
 
 \end{frame}
@@ -14087,7 +14263,7 @@ rat5T12
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  3 10  4  9  7
+## [1] 7 4 2 1 3
 \end{verbatim}
 
 \begin{Shaded}
@@ -14110,7 +14286,7 @@ rat5T12
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  3 10  4  9  7
+## [1] 7 4 2 1 3
 \end{verbatim}
 
 \end{frame}

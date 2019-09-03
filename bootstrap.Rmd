@@ -1,11 +1,3 @@
-## Sources and Notes 
-
-[ref](https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests)
-
-xxx PASIAS: add some problems, eg. based on actually normal data, the mean for some skewed data
-an unfamiliar stat (eg. correlation, regression slope)
-
-
 
 ## Packages for this section
 
@@ -13,6 +5,8 @@ an unfamiliar stat (eg. correlation, regression slope)
 library(tidyverse)
 library(bootstrap)
 ```
+
+[ref](https://www.researchgate.net/publication/265399426_Bootstrap_Methods_and_Permutation_Tests)
 
 
 ## Is my sampling distribution normal enough?
@@ -205,14 +199,23 @@ o_c=with(line_b, cor.test(speed, scrap))$conf.int
 ```
 
 
-## Bootstrapping a correlation
+## Bootstrapping a correlation 1/2
 
-- Sample from data with replacement, but have to keep the `speed`-`scrap` *pairs* together
-- Sample *rows* at random, then take the variable values that belong to those rows:
+- This illustrates a different technique: we need to keep the $x$ and $y$ values *together*.
+- Sample *rows* of the data frame rather than individual values of `speed` and `scrap`:
+
+\scriptsize
+```{r}
+line_b %>% sample_frac(replace=T)
+```
+\normalsize
+
+## Bootstrapping a correlation 2/2
+
+1000 times:
 
 ```{r}
-rerun(1000, sample(1:nrow(line_b), replace=T)) %>%
-  map(~slice(line_b, .)) %>% 
+rerun(1000, sample_frac(line_b, replace=T)) %>%
   map_dbl(~with(.,cor(speed, scrap))) -> cors
 ```
 

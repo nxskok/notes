@@ -99,14 +99,16 @@ pigs2 %>%
 
 Feed 3 is best, feed 1 worst.
 
-## Should we have any concerns about the ANOVA?  
-
-```{r, fig.height=4.1}
-ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
-```
+## Should we have any concerns about the ANOVA?
 
 Feed 2 has an outlier, but there are only 5 pigs in each group, and the
 conclusion is so clear that I am OK with this.
+
+```{r, fig.height=3.2}
+ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
+```
+
+
 
 ## Tuberculosis
 
@@ -291,11 +293,14 @@ weather_tidy
 
 ## Plotting the temperatures
 - Plot temperature against date joined by lines, but with separate lines
-for max and min.
-- ggplot requires something like
+for max and min. `ggplot` requires something like
+
+\footnotesize
 ```{r, eval=F}
-ggplot(..., aes(x = date, y = temperature)) + geom_point() + geom_line()
+ggplot(..., aes(x = date, y = temperature)) + geom_point() + 
+  geom_line()
 ```
+\normalsize
 
 only we have two temperatures, one a max and one a min, that we
 want to keep separate.
@@ -305,10 +310,13 @@ track of what kind of temp they are. (This actually same format as
 untidy `weather`.) Are making `weather_tidy`
 untidy for purposes of drawing graph only.
 - Then can do something like
-```{r, eval=F}
-ggplot(d, aes(x = date, y = temperature, colour = maxmin)) + geom_point() + geom_line()
-```
 
+\footnotesize
+```{r, eval=F}
+ggplot(d, aes(x = date, y = temperature, colour = maxmin)) 
+  + geom_point() + geom_line()
+```
+\normalsize
 to distinguish max and min on graph.
 
 ## Setting up plot
@@ -327,9 +335,9 @@ weather_tidy %>%
   geom_line() -> g
 ```
 
-## The plot 
+## The plot
 
-```{r, fig.height=4.5}
+```{r, fig.height=3.9}
 g
 ```
 
@@ -360,10 +368,12 @@ my_url="http://www.utsc.utoronto.ca/~butler/c32/ais.txt"
 athletes=read_tsv(my_url)
 ```
 
+\footnotesize
 
 ```{r}
 athletes
 ```
+\normalsize
 
 ## Choosing a column
 
@@ -430,7 +440,7 @@ In regular expression terms, this is `^.t$`:
 athletes %>% select(matches("^.t$"))
 ```
 
-## Displaying some numbered columns 1/2
+## Displaying some numbered columns
 
 Make up a data frame to illustrate. This `sample` generates 5 random values
 equally likely to be anything 0–9 (without replacement): 
@@ -469,9 +479,11 @@ athletes %>% sample_n(8)
 
 ## Rows for which something is true
 
+\footnotesize
 ```{r}
 athletes %>% filter(Sport == "Tennis")
 ```
+\normalsize
 
 ## More complicated selections
 
@@ -553,17 +565,18 @@ athletes %>%
 ## To find the mean height of the women athletes
 Two ways:
 
+\small
 ```{r}
 athletes %>% group_by(Sex) %>% summarize(m = mean(Ht))
 ```
-
-or
 
 ```{r}
 athletes %>%
   filter(Sex == "female") %>%
   summarize(m = mean(Ht))
 ```
+
+\normalsize
 
 ## Summary of data selection/arrangement "verbs"
 
@@ -596,9 +609,16 @@ What are actual names of those countries in `iso2`?
 ## Actual country names
 Found actual country names to go with those abbreviations, in spreadsheet: 
 
+\footnotesize
+```{r}
+my_url <- 
+  "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
+```
+
+\normalsize
+
 ```{r country-codes}
 f <- tempfile()
-my_url <- "http://www.utsc.utoronto.ca/~butler/c32/ISOCountryCodes081507.xlsx"
 download.file(my_url, f)
 country_names <- read_excel(f)
 ```
@@ -645,12 +665,12 @@ tb3 %>%
   - the 1994-1995 thing
   - there is at least one country in `tb3` that was not in `country_names` (the NA above). Which?
   
+\footnotesize  
 ```{r}
 tb3 %>%
   anti_join(country_names, by = c("iso2" = "Code_UC")) %>%
   distinct(iso2)
 ```
-  
+\normalsize
 
-xxx end of section; check from here
 

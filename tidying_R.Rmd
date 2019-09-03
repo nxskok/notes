@@ -291,7 +291,7 @@ weather %>%
 weather_tidy
 ```
 
-## Plotting the temperatures xxx
+## Plotting the temperatures
 - Plot temperature against date joined by lines, but with separate lines
 for max and min. `ggplot` requires something like
 
@@ -335,7 +335,7 @@ weather_tidy %>%
   geom_line() -> g
 ```
 
-## The plot xxx
+## The plot
 
 ```{r, fig.height=3.9}
 g
@@ -606,7 +606,7 @@ tb3
 
 What are actual names of those countries in `iso2`?
 
-## Actual country names xxx
+## Actual country names
 Found actual country names to go with those abbreviations, in spreadsheet: 
 
 \footnotesize

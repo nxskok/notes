@@ -49,7 +49,7 @@ Recommended:
 \item ``R for Data Science'' by Hadley Wickham and Garrett Grolemund,
   publ.\ O'Reilly, ISBN 978-1-491-91039-9. Also available (free)
   online at \url{http://r4ds.had.co.nz/}.
-  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{ritsokiguess.site/pasias}
+  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{http://ritsokiguess.site/pasias}
 \end{itemize}
     \end{column}
     \begin{column}{0.3\textwidth}

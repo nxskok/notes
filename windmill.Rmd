@@ -44,9 +44,9 @@ methods.
   - Put `DC_output` on vertical scale.
 - Add trend, but don’t want to assume linear.
 
-## Scatterplot xxx
+## Scatterplot
 
-```{r, fig.height=3.2}
+```{r, fig.height=3.1}
 ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_point() + geom_smooth(se = F)
 ```
@@ -60,7 +60,13 @@ squares” which downweights outliers. Not constrained to be straight.)
 - Trend more or less linear for while, then curves downwards (levelling off?). Straight
 line not so good here.
 
-## Fit a straight line (and see what happens) xxx
+## Fit a straight line (and see what happens)
+
+```{r, echo=F}
+wid=getOption("width")
+options(width=60)
+```
+
 
 \footnotesize
 ```{r}
@@ -69,11 +75,16 @@ summary(DC.1)
 ```
 \normalsize
 
-## Another way of looking at the output xxx
+```{r, echo=F}
+options(wid)
+```
+
+
+## Another way of looking at the output
 
 - The standard output tends to go off the bottom of the page rather easily. Package `broom` has these:
 
-\small
+\footnotesize
 ```{r, paged.print=F}
 glance(DC.1)
 ```
@@ -101,9 +112,9 @@ R-squared (87%) high.
 residuals, observed minus predicted, plotted against fitted (predicted).
 - Plot using the regression object as “data frame” (see over).
 
-## Plot of residuals against fitted values xxx
+## Plot of residuals against fitted values
 
-```{r, fig.height=4}
+```{r, fig.height=3.8}
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
@@ -156,14 +167,15 @@ glance(DC.2)
 - Parabola model better than linear one.
 - But...need to check residuals again.
 
-## Residual plot from parabola model xxx
+## Residual plot from parabola model
 
-```{r, fig.height=4}
+```{r, fig.height=3.5}
 ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-## Scatterplot with fitted line and curve xxx
+## Scatterplot with fitted line and curve 
+
 - Residual plot basically random. Good.
 - Scatterplot with fitted line and curve like this:
 
@@ -173,14 +185,14 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_line(data = DC.2, aes(y = .fitted))
 ```
 
-## Comments xxx
+## Comments
 
 - This plots: 
   - scatterplot (`geom_point`); 
   - straight line (via tweak to
 `geom_smooth`, which draws best-fitting line); 
   - fitted curve, using the
-predicted `DC_output values`, joined by lines (with points not shown).
+predicted `DC_output` values, joined by lines (with points not shown).
 - Trick in the `geom_line` is use the predictions as the `y`-points to join
 by lines (from `DC.2`), instead of the original data points. Without the
 `data` and `aes` in the `geom_line`, original data points would be joined
@@ -261,9 +273,9 @@ parabola model (`wind.velocity` and its square).
 - Looks good, but check residual plot (over). 
 
 
-## Residual plot for asymptote model xxx
+## Residual plot for asymptote model
 
-```{r resida, fig.height=4}
+```{r resida, fig.height=3.6}
 ggplot(DC.3, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
@@ -308,7 +320,7 @@ w2 %>%
   geom_line(aes(y = fit, colour = model))
 ```
 
-## Scatterplot with fitted curves xxx
+## Scatterplot with fitted curves
 
 ```{r, ref.label= "allcurves", echo=F, fig.height=4}
 
@@ -443,7 +455,7 @@ g + geom_rect(
 )
 ```
 
-## The plot xxx
+## The plot
 
 ```{r, ref.label="rectangle", echo=F, fig.height=4}
 ```
@@ -456,7 +468,7 @@ parabola model does not.
 - What happens as `wind.velocity` goes to zero? Should find
 `DC.output` goes to zero as well. Does it?
 
-## Comments (2) xxx
+## Comments (2)
 
 - For parabola model:
 
@@ -464,10 +476,10 @@ parabola model does not.
 tidy(DC.2)
 ```
 
-- Nope, goes to −1.15 (intercept), actually significantly different from
+- Nope, goes to −1.16 (intercept), actually significantly different from
 zero.
 
-## Comments (3): asymptote model xxx
+## Comments (3): asymptote model
 
 \small
 ```{r, paged.print=F}

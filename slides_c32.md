@@ -75,7 +75,7 @@ Recommended:
 \item ``R for Data Science'' by Hadley Wickham and Garrett Grolemund,
   publ.\ O'Reilly, ISBN 978-1-491-91039-9. Also available (free)
   online at \url{http://r4ds.had.co.nz/}.
-  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{ritsokiguess.site/pasias}
+  \item ``Problems and Solutions in Applied Statistics'' by your instructor, free online at \url{http://ritsokiguess.site/pasias}
 \end{itemize}
     \end{column}
     \begin{column}{0.3\textwidth}
@@ -1402,7 +1402,7 @@ jays
 ## #   runs <dbl>, Oppruns <dbl>, innings <dbl>,
 ## #   wl <chr>, position <dbl>, gb <chr>,
 ## #   winner <chr>, loser <chr>, save <chr>, `game
-## #   time` <time>, Daynight <chr>, attendance <dbl>,
+## #   time` <drtn>, Daynight <chr>, attendance <dbl>,
 ## #   streak <chr>
 ```
 \normalsize
@@ -1435,7 +1435,7 @@ glimpse(jays)
 ## $ winner      <chr> "Odorizzi", "Geltz", "Buehrle…
 ## $ loser       <chr> "Dickey", "Castro", "Ramirez"…
 ## $ save        <chr> "Boxberger", "Jepsen", NA, "B…
-## $ `game time` <time> 02:30:00, 03:06:00, 03:02:00…
+## $ `game time` <drtn> 02:30:00, 03:06:00, 03:02:00…
 ## $ Daynight    <chr> "N", "N", "N", "N", "N", "D",…
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
@@ -4846,7 +4846,7 @@ weather_tidy
 ## # … with 23 more rows
 ```
 
-## Plotting the temperatures xxx
+## Plotting the temperatures
 - Plot temperature against date joined by lines, but with separate lines
 for max and min. `ggplot` requires something like
 
@@ -4870,7 +4870,8 @@ untidy for purposes of drawing graph only.
 \footnotesize
 
 ```r
-ggplot(d, aes(x = date, y = temperature, colour = maxmin)) + geom_point() + geom_line()
+ggplot(d, aes(x = date, y = temperature, colour = maxmin)) 
+  + geom_point() + geom_line()
 ```
 \normalsize
 to distinguish max and min on graph.
@@ -4892,7 +4893,7 @@ weather_tidy %>%
   geom_line() -> g
 ```
 
-## The plot xxx
+## The plot
 
 
 ```r
@@ -5622,7 +5623,7 @@ tb3
 
 What are actual names of those countries in `iso2`?
 
-## Actual country names xxx
+## Actual country names
 Found actual country names to go with those abbreviations, in spreadsheet: 
 
 \footnotesize
@@ -5855,7 +5856,7 @@ methods.
   - Put `DC_output` on vertical scale.
 - Add trend, but don’t want to assume linear.
 
-## Scatterplot xxx
+## Scatterplot
 
 
 ```r
@@ -5878,7 +5879,10 @@ squares” which downweights outliers. Not constrained to be straight.)
 - Trend more or less linear for while, then curves downwards (levelling off?). Straight
 line not so good here.
 
-## Fit a straight line (and see what happens) xxx
+## Fit a straight line (and see what happens)
+
+
+
 
 \footnotesize
 
@@ -5897,12 +5901,9 @@ summary(DC.1)
 ## -0.59869 -0.14099  0.06059  0.17262  0.32184 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)
-## (Intercept)    0.13088    0.12599   1.039     0.31
-## wind_velocity  0.24115    0.01905  12.659 7.55e-12
-##                  
-## (Intercept)      
-## wind_velocity ***
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    0.13088    0.12599   1.039     0.31    
+## wind_velocity  0.24115    0.01905  12.659 7.55e-12 ***
 ## ---
 ## Signif. codes:  
 ## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -5913,11 +5914,17 @@ summary(DC.1)
 ```
 \normalsize
 
-## Another way of looking at the output xxx
+
+```
+## Error in options(wid): invalid argument
+```
+
+
+## Another way of looking at the output
 
 - The standard output tends to go off the bottom of the page rather easily. Package `broom` has these:
 
-\small
+\footnotesize
 
 ```r
 glance(DC.1)
@@ -5925,12 +5932,11 @@ glance(DC.1)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
-## 1     0.874         0.869 0.236      160. 7.55e-12
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.874         0.869 0.236      160. 7.55e-12     2
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 ```
 \normalsize
 
@@ -5944,10 +5950,10 @@ tidy(DC.1)
 
 ```
 ## # A tibble: 2 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)     0.131    0.126       1.04 3.10e- 1
-## 2 wind_veloci…    0.241    0.0190     12.7  7.55e-12
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)      0.131    0.126       1.04 3.10e- 1
+## 2 wind_velocity    0.241    0.0190     12.7  7.55e-12
 ```
 \normalsize
 
@@ -5965,14 +5971,14 @@ R-squared (87%) high.
 residuals, observed minus predicted, plotted against fitted (predicted).
 - Plot using the regression object as “data frame” (see over).
 
-## Plot of residuals against fitted values xxx
+## Plot of residuals against fitted values
 
 
 ```r
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236-1.pdf)
+![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -6014,11 +6020,11 @@ tidy(DC.2)
 
 ```
 ## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   -1.16     0.175       -6.62 1.18e- 6
-## 2 wind_veloci…   0.723    0.0614      11.8  5.77e-11
-## 3 I(wind_velo…  -0.0381   0.00480     -7.95 6.59e- 8
+##   term               estimate std.error statistic  p.value
+##   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)         -1.16     0.175       -6.62 1.18e- 6
+## 2 wind_velocity        0.723    0.0614      11.8  5.77e-11
+## 3 I(wind_velocity^2)  -0.0381   0.00480     -7.95 6.59e- 8
 ```
 
 
@@ -6028,12 +6034,11 @@ glance(DC.2)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
-## 1     0.968         0.965 0.123      328. 4.16e-17
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.968         0.965 0.123      328. 4.16e-17     3
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 ```
 
 ## Comments on output
@@ -6045,7 +6050,7 @@ glance(DC.2)
 - Parabola model better than linear one.
 - But...need to check residuals again.
 
-## Residual plot from parabola model xxx
+## Residual plot from parabola model
 
 
 ```r
@@ -6053,9 +6058,10 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240-1.pdf)
+![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
 
-## Scatterplot with fitted line and curve xxx
+## Scatterplot with fitted line and curve 
+
 - Residual plot basically random. Good.
 - Scatterplot with fitted line and curve like this:
 
@@ -6066,14 +6072,14 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_line(data = DC.2, aes(y = .fitted))
 ```
 
-## Comments xxx
+## Comments
 
 - This plots: 
   - scatterplot (`geom_point`); 
   - straight line (via tweak to
 `geom_smooth`, which draws best-fitting line); 
   - fitted curve, using the
-predicted `DC_output values`, joined by lines (with points not shown).
+predicted `DC_output` values, joined by lines (with points not shown).
 - Trick in the `geom_line` is use the predictions as the `y`-points to join
 by lines (from `DC.2`), instead of the original data points. Without the
 `data` and `aes` in the `geom_line`, original data points would be joined
@@ -6081,7 +6087,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241-1.pdf)
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6132,7 +6138,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 Pretty straight. Blue actually smooth curve not line:
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
+![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244-1.pdf)
 
 
 
@@ -6146,12 +6152,11 @@ glance(DC.3)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared  sigma statistic  p.value
-##       <dbl>         <dbl>  <dbl>     <dbl>    <dbl>
-## 1     0.980         0.979 0.0942     1128. 4.74e-21
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared  sigma statistic  p.value    df
+##       <dbl>         <dbl>  <dbl>     <dbl>    <dbl> <int>
+## 1     0.980         0.979 0.0942     1128. 4.74e-21     2
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 ```
 
 ```r
@@ -6174,7 +6179,7 @@ parabola model (`wind.velocity` and its square).
 - Looks good, but check residual plot (over). 
 
 
-## Residual plot for asymptote model xxx
+## Residual plot for asymptote model
 
 
 ```r
@@ -6244,9 +6249,9 @@ w2 %>%
   geom_line(aes(y = fit, colour = model))
 ```
 
-## Scatterplot with fitted curves xxx
+## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-246-1.pdf)
+![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6307,10 +6312,9 @@ wv
 ```
 
 ```
-##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0
-## [10]  5.5  6.0  6.5  7.0  7.5  8.0  8.5  9.0  9.5
-## [19] 10.0 10.5 11.0 11.5 12.0 12.5 13.0 13.5 14.0
-## [28] 14.5 15.0 15.5 16.0
+##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0
+## [12]  6.5  7.0  7.5  8.0  8.5  9.0  9.5 10.0 10.5 11.0 11.5
+## [23] 12.0 12.5 13.0 13.5 14.0 14.5 15.0 15.5 16.0
 ```
 
 - R has `predict`, which requires what to predict for, as data frame.
@@ -6440,9 +6444,9 @@ g + geom_rect(
 )
 ```
 
-## The plot xxx
+## The plot
 
-![plot of chunk unnamed-chunk-256](figure/unnamed-chunk-256-1.pdf)
+![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-258-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6452,7 +6456,7 @@ parabola model does not.
 - What happens as `wind.velocity` goes to zero? Should find
 `DC.output` goes to zero as well. Does it?
 
-## Comments (2) xxx
+## Comments (2)
 
 - For parabola model:
 
@@ -6463,17 +6467,17 @@ tidy(DC.2)
 
 ```
 ## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)   -1.16     0.175       -6.62 1.18e- 6
-## 2 wind_veloci…   0.723    0.0614      11.8  5.77e-11
-## 3 I(wind_velo…  -0.0381   0.00480     -7.95 6.59e- 8
+##   term               estimate std.error statistic  p.value
+##   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)         -1.16     0.175       -6.62 1.18e- 6
+## 2 wind_velocity        0.723    0.0614      11.8  5.77e-11
+## 3 I(wind_velocity^2)  -0.0381   0.00480     -7.95 6.59e- 8
 ```
 
-- Nope, goes to −1.15 (intercept), actually significantly different from
+- Nope, goes to −1.16 (intercept), actually significantly different from
 zero.
 
-## Comments (3): asymptote model xxx
+## Comments (3): asymptote model
 
 \small
 
@@ -6569,20 +6573,19 @@ asphalt
 
 ```
 ## # A tibble: 31 x 7
-##    pct.a.surf pct.a.base fines voids rut.depth
-##         <dbl>      <dbl> <dbl> <dbl>     <dbl>
-##  1       4.68       4.87   8.4  4.92      6.75
-##  2       5.19       4.5    6.5  4.56     13   
-##  3       4.82       4.73   7.9  5.32     14.8 
-##  4       4.85       4.76   8.3  4.86     12.6 
-##  5       4.86       4.95   8.4  3.78      8.25
-##  6       5.16       4.45   7.4  4.40     10.7 
-##  7       4.82       5.05   6.8  4.87      7.28
-##  8       4.86       4.7    8.6  4.83     12.7 
-##  9       4.78       4.84   6.7  4.86     12.6 
-## 10       5.16       4.76   7.7  4.03     20.6 
-## # … with 21 more rows, and 2 more variables:
-## #   viscosity <dbl>, run <dbl>
+##    pct.a.surf pct.a.base fines voids rut.depth viscosity
+##         <dbl>      <dbl> <dbl> <dbl>     <dbl>     <dbl>
+##  1       4.68       4.87   8.4  4.92      6.75      2.8 
+##  2       5.19       4.5    6.5  4.56     13         1.4 
+##  3       4.82       4.73   7.9  5.32     14.8       1.4 
+##  4       4.85       4.76   8.3  4.86     12.6       3.3 
+##  5       4.86       4.95   8.4  3.78      8.25      1.7 
+##  6       5.16       4.45   7.4  4.40     10.7       2.9 
+##  7       4.82       5.05   6.8  4.87      7.28      3.7 
+##  8       4.86       4.7    8.6  4.83     12.7       1.7 
+##  9       4.78       4.84   6.7  4.86     12.6       0.92
+## 10       5.16       4.76   7.7  4.03     20.6       0.68
+## # … with 21 more rows, and 1 more variable: run <dbl>
 ```
 
 ## Plotting response “rut depth” against everything else
@@ -6614,7 +6617,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.pdf)
+![plot of chunk unnamed-chunk-265](figure/unnamed-chunk-265-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6658,7 +6661,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-265](figure/unnamed-chunk-265-1.pdf)
+![plot of chunk unnamed-chunk-267](figure/unnamed-chunk-267-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6675,6 +6678,7 @@ rut.1 <- lm(rut.depth ~ pct.a.surf + pct.a.base + fines +
 
 ## Regression output: `summary(rut.1)` or:
 
+\footnotesize
 
 ```r
 glance(rut.1)
@@ -6682,12 +6686,11 @@ glance(rut.1)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value
-##       <dbl>         <dbl> <dbl>     <dbl>   <dbl>
-## 1     0.806         0.758  3.32      16.6 1.74e-7
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>
+## 1     0.806         0.758  3.32      16.6 1.74e-7     7
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 ```
 
 ```r
@@ -6706,6 +6709,7 @@ tidy(rut.1)
 ## 6 log.viscosity   -3.15      0.919    -3.43  0.00220
 ## 7 run             -1.97      3.65     -0.539 0.595
 ```
+\normalsize
 
 ## Comments
 - R-squared 81%, not so bad. 
@@ -6727,7 +6731,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-268](figure/unnamed-chunk-268-1.pdf)
+![plot of chunk unnamed-chunk-270](figure/unnamed-chunk-270-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6744,6 +6748,7 @@ rut.1 %>% augment(asphalt_lv) -> rut.1a
 
 ## What does rut.1a contain?
 
+\footnotesize
 
 ```r
 glimpse(rut.1a)
@@ -6752,22 +6757,23 @@ glimpse(rut.1a)
 ```
 ## Observations: 31
 ## Variables: 15
-## $ pct.a.surf    <dbl> 4.68, 5.19, 4.82, 4.85, 4.8…
-## $ pct.a.base    <dbl> 4.87, 4.50, 4.73, 4.76, 4.9…
-## $ fines         <dbl> 8.4, 6.5, 7.9, 8.3, 8.4, 7.…
-## $ voids         <dbl> 4.916, 4.563, 5.321, 4.865,…
-## $ rut.depth     <dbl> 6.75, 13.00, 14.75, 12.60, …
-## $ viscosity     <dbl> 2.80, 1.40, 1.40, 3.30, 1.7…
-## $ run           <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-## $ log.viscosity <dbl> 1.02961942, 0.33647224, 0.3…
-## $ .fitted       <dbl> 10.404663, 13.717501, 13.14…
-## $ .se.fit       <dbl> 1.262454, 1.617838, 1.34207…
-## $ .resid        <dbl> -3.6546631, -0.7175010, 1.6…
-## $ .hat          <dbl> 0.1442888, 0.2369584, 0.163…
-## $ .sigma        <dbl> 3.293545, 3.390685, 3.37533…
-## $ .cooksd       <dbl> 0.0340389900, 0.0027097205,…
-## $ .std.resid    <dbl> -1.18873388, -0.24714358, 0…
+## $ pct.a.surf    <dbl> 4.68, 5.19, 4.82, 4.85, 4.86, 5.16,…
+## $ pct.a.base    <dbl> 4.87, 4.50, 4.73, 4.76, 4.95, 4.45,…
+## $ fines         <dbl> 8.4, 6.5, 7.9, 8.3, 8.4, 7.4, 6.8, …
+## $ voids         <dbl> 4.916, 4.563, 5.321, 4.865, 3.776, …
+## $ rut.depth     <dbl> 6.75, 13.00, 14.75, 12.60, 8.25, 10…
+## $ viscosity     <dbl> 2.80, 1.40, 1.40, 3.30, 1.70, 2.90,…
+## $ run           <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ log.viscosity <dbl> 1.02961942, 0.33647224, 0.33647224,…
+## $ .fitted       <dbl> 10.4046631, 13.7175010, 13.1485937,…
+## $ .se.fit       <dbl> 1.262454, 1.617838, 1.342073, 1.260…
+## $ .resid        <dbl> -3.6546631, -0.7175010, 1.6014063, …
+## $ .hat          <dbl> 0.1442888, 0.2369584, 0.1630624, 0.…
+## $ .sigma        <dbl> 3.293545, 3.390685, 3.375330, 3.357…
+## $ .cooksd       <dbl> 0.0340389900, 0.0027097205, 0.00772…
+## $ .std.resid    <dbl> -1.18873388, -0.24714358, 0.5266910…
 ```
+\normalsize
 
 ## Plotting residuals against $x$-variables 
 
@@ -6790,7 +6796,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
+![plot of chunk unnamed-chunk-274](figure/unnamed-chunk-274-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6821,7 +6827,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-273](figure/unnamed-chunk-273-1.pdf)
+![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -6863,7 +6869,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-276](figure/unnamed-chunk-276-1.pdf)
+![plot of chunk unnamed-chunk-278](figure/unnamed-chunk-278-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -6888,26 +6894,28 @@ tidy(rut.2)
 
 ```
 ## # A tibble: 7 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 (Intercept)  -1.57      2.44      -0.646   5.25e-1
-## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
-## 3 pct.a.base   -0.103     0.369     -0.280   7.82e-1
-## 4 fines         0.0978    0.0941     1.04    3.09e-1
-## 5 voids         0.199     0.123      1.62    1.19e-1
-## 6 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
-## 7 run           0.340     0.339      1.00    3.26e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 (Intercept)    -1.57      2.44      -0.646 0.525      
+## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
+## 3 pct.a.base     -0.103     0.369     -0.280 0.782      
+## 4 fines           0.0978    0.0941     1.04  0.309      
+## 5 voids           0.199     0.123      1.62  0.119      
+## 6 log.viscosity  -0.558     0.0854    -6.53  0.000000945
+## 7 run             0.340     0.339      1.00  0.326
 ```
 
 ## Taking out everything non-significant
 - Try: remove everything but pct.a.surf and log.viscosity:
 
+\footnotesize
 
 ```r
 rut.3 <- lm(log.rut.depth ~ pct.a.surf + log.viscosity, data = asphalt_2)
 ```
+\normalsize
 
-
+\footnotesize
 - Check that removing all those variables wasn’t too much:
 
 ```r
@@ -6924,6 +6932,7 @@ anova(rut.3, rut.2)
 ## 1     28 2.8809                           
 ## 2     24 2.2888  4   0.59216 1.5523 0.2191
 ```
+\normalsize
 
 - $H_0$ : two models equally good; $H_a$ : bigger model better.
 - Null not rejected here; small model as good as the big one, so prefer
@@ -6939,15 +6948,15 @@ tidy(rut.2)
 
 ```
 ## # A tibble: 7 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 (Intercept)  -1.57      2.44      -0.646   5.25e-1
-## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
-## 3 pct.a.base   -0.103     0.369     -0.280   7.82e-1
-## 4 fines         0.0978    0.0941     1.04    3.09e-1
-## 5 voids         0.199     0.123      1.62    1.19e-1
-## 6 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
-## 7 run           0.340     0.339      1.00    3.26e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 (Intercept)    -1.57      2.44      -0.646 0.525      
+## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
+## 3 pct.a.base     -0.103     0.369     -0.280 0.782      
+## 4 fines           0.0978    0.0941     1.04  0.309      
+## 5 voids           0.199     0.123      1.62  0.119      
+## 6 log.viscosity  -0.558     0.0854    -6.53  0.000000945
+## 7 run             0.340     0.339      1.00  0.326
 ```
 
 - Largest P-value is 0.78 for `pct.a.base`, not significant.
@@ -6965,15 +6974,15 @@ tidy(rut.2) %>% arrange(p.value)
 
 ```
 ## # A tibble: 7 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
-## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
-## 3 voids         0.199     0.123      1.62    1.19e-1
-## 4 fines         0.0978    0.0941     1.04    3.09e-1
-## 5 run           0.340     0.339      1.00    3.26e-1
-## 6 (Intercept)  -1.57      2.44      -0.646   5.25e-1
-## 7 pct.a.base   -0.103     0.369     -0.280   7.82e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 log.viscosity  -0.558     0.0854    -6.53  0.000000945
+## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
+## 3 voids           0.199     0.123      1.62  0.119      
+## 4 fines           0.0978    0.0941     1.04  0.309      
+## 5 run             0.340     0.339      1.00  0.326      
+## 6 (Intercept)    -1.57      2.44      -0.646 0.525      
+## 7 pct.a.base     -0.103     0.369     -0.280 0.782
 ```
 
 - Largest P-value at the bottom.
@@ -6982,6 +6991,7 @@ tidy(rut.2) %>% arrange(p.value)
 
 - Copy and paste the `lm` code and remove what you're removing:
 
+\small
 
 ```r
 rut.4 <- lm(log.rut.depth ~ pct.a.surf + fines + voids + log.viscosity + run,
@@ -6992,15 +7002,16 @@ tidy(rut.4) %>% arrange(p.value)
 
 ```
 ## # A tibble: 6 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 log.viscos…  -0.552     0.0818     -6.75   4.48e-7
-## 2 pct.a.surf    0.593     0.225       2.63   1.43e-2
-## 3 voids         0.200     0.121       1.66   1.09e-1
-## 4 (Intercept)  -2.08      1.61       -1.29   2.08e-1
-## 5 run           0.360     0.325       1.11   2.79e-1
-## 6 fines         0.0889    0.0870      1.02   3.16e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 log.viscosity  -0.552     0.0818     -6.75 0.000000448
+## 2 pct.a.surf      0.593     0.225       2.63 0.0143     
+## 3 voids           0.200     0.121       1.66 0.109      
+## 4 (Intercept)    -2.08      1.61       -1.29 0.208      
+## 5 run             0.360     0.325       1.11 0.279      
+## 6 fines           0.0889    0.0870      1.02 0.316
 ```
+\normalsize
 
 - `fines` is next to go, P-value 0.32.
 
@@ -7015,14 +7026,14 @@ tidy(rut.4) %>% arrange(p.value)
 
 ```
 ## # A tibble: 6 x 5
-##   term        estimate std.error statistic   p.value
-##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-## 1 log.viscos…  -0.552     0.0818     -6.75   4.48e-7
-## 2 pct.a.surf    0.593     0.225       2.63   1.43e-2
-## 3 voids         0.200     0.121       1.66   1.09e-1
-## 4 (Intercept)  -2.08      1.61       -1.29   2.08e-1
-## 5 run           0.360     0.325       1.11   2.79e-1
-## 6 fines         0.0889    0.0870      1.02   3.16e-1
+##   term          estimate std.error statistic     p.value
+##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
+## 1 log.viscosity  -0.552     0.0818     -6.75 0.000000448
+## 2 pct.a.surf      0.593     0.225       2.63 0.0143     
+## 3 voids           0.200     0.121       1.66 0.109      
+## 4 (Intercept)    -2.08      1.61       -1.29 0.208      
+## 5 run             0.360     0.325       1.11 0.279      
+## 6 fines           0.0889    0.0870      1.02 0.316
 ```
 
 - Again, fines is the one to go. (Output identical as it should be.)
@@ -7037,13 +7048,13 @@ tidy(rut.5) %>% arrange(p.value)
 
 ```
 ## # A tibble: 5 x 5
-##   term       estimate std.error statistic    p.value
-##   <chr>         <dbl>     <dbl>     <dbl>      <dbl>
-## 1 log.visco…   -0.580    0.0772    -7.52     5.59e-8
-## 2 pct.a.surf    0.548    0.221      2.48     2.00e-2
-## 3 voids         0.232    0.117      1.99     5.77e-2
-## 4 run           0.295    0.319      0.923    3.65e-1
-## 5 (Intercep…   -1.26     1.39      -0.902    3.75e-1
+##   term          estimate std.error statistic      p.value
+##   <chr>            <dbl>     <dbl>     <dbl>        <dbl>
+## 1 log.viscosity   -0.580    0.0772    -7.52  0.0000000559
+## 2 pct.a.surf       0.548    0.221      2.48  0.0200      
+## 3 voids            0.232    0.117      1.99  0.0577      
+## 4 run              0.295    0.319      0.923 0.365       
+## 5 (Intercept)     -1.26     1.39      -0.902 0.375
 ```
 
 Can’t take out intercept, so `run`, with P-value 0.36, goes next.
@@ -7059,12 +7070,12 @@ tidy(rut.6) %>% arrange(p.value)
 
 ```
 ## # A tibble: 4 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 log.viscosi…   -0.646    0.0288   -22.5   5.29e-19
-## 2 pct.a.surf      0.555    0.220      2.52  1.80e- 2
-## 3 voids           0.245    0.116      2.12  4.36e- 2
-## 4 (Intercept)    -1.02     1.36      -0.748 4.61e- 1
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 log.viscosity   -0.646    0.0288   -22.5   5.29e-19
+## 2 pct.a.surf       0.555    0.220      2.52  1.80e- 2
+## 3 voids            0.245    0.116      2.12  4.36e- 2
+## 4 (Intercept)     -1.02     1.36      -0.748 4.61e- 1
 ```
 
 Again, can’t take out intercept, so largest P-value is for `voids`, 0.044. But
@@ -7082,10 +7093,8 @@ coef(rut.6)
 ```
 
 ```
-##   (Intercept)    pct.a.surf         voids 
-##    -1.0207945     0.5554686     0.2447934 
-## log.viscosity 
-##    -0.6464911
+##   (Intercept)    pct.a.surf         voids log.viscosity 
+##    -1.0207945     0.5554686     0.2447934    -0.6464911
 ```
 
 ```r
@@ -7103,7 +7112,7 @@ coef(rut.3)
 - Best way to decide which $x$’s belong: expert knowledge: which of
 them should be important.
 - Best automatic method: what we did, “backward selection”.
-- Do not learn about “stepwise regression”! [eg. here](https://towardsdatascience.com/stopping-stepwise-why-stepwise-selection-is-bad-and-what-you-should-use-instead-90818b3f52df)
+- Do not learn about “stepwise regression”! [**eg. here**](https://towardsdatascience.com/stopping-stepwise-why-stepwise-selection-is-bad-and-what-you-should-use-instead-90818b3f52df)
 - R has function `step` that does backward selection, like this:
 
 ```r
@@ -7133,36 +7142,32 @@ with(s, data.frame(rsq, outmat)) -> d
 ## The output
 
 
+
+
+\scriptsize
+
 ```r
 d %>% rownames_to_column("model") %>% arrange(desc(rsq))
 ```
 
 ```
-##       model       rsq pct.a.surf pct.a.base fines
-## 1  6  ( 1 ) 0.9609642          *          *     *
-## 2  5  ( 1 ) 0.9608365          *                *
-## 3  5  ( 2 ) 0.9593265          *          *     *
-## 4  4  ( 1 ) 0.9591996          *                 
-## 5  4  ( 2 ) 0.9589206          *                *
-## 6  3  ( 1 ) 0.9578631          *                 
-## 7  3  ( 2 ) 0.9534561          *                *
-## 8  2  ( 1 ) 0.9508647          *                 
-## 9  2  ( 2 ) 0.9479541                            
-## 10 1  ( 1 ) 0.9452562                            
-## 11 1  ( 2 ) 0.8624107                            
-##    voids log.viscosity run
-## 1      *             *   *
-## 2      *             *   *
-## 3      *             *    
-## 4      *             *   *
-## 5      *             *    
-## 6      *             *    
-## 7                    *    
-## 8                    *    
-## 9      *             *    
-## 10                   *    
-## 11                       *
+##       model       rsq pct.a.surf pct.a.base fines voids log.viscosity run
+## 1  6  ( 1 ) 0.9609642          *          *     *     *             *   *
+## 2  5  ( 1 ) 0.9608365          *                *     *             *   *
+## 3  5  ( 2 ) 0.9593265          *          *     *     *             *    
+## 4  4  ( 1 ) 0.9591996          *                      *             *   *
+## 5  4  ( 2 ) 0.9589206          *                *     *             *    
+## 6  3  ( 1 ) 0.9578631          *                      *             *    
+## 7  3  ( 2 ) 0.9534561          *                *                   *    
+## 8  2  ( 1 ) 0.9508647          *                                    *    
+## 9  2  ( 2 ) 0.9479541                                 *             *    
+## 10 1  ( 1 ) 0.9452562                                               *    
+## 11 1  ( 2 ) 0.8624107                                                   *
 ```
+\normalsize
+
+
+
 
 ## Comments
 - Problem: even adding a worthless x increases R-squared. So try for
@@ -7177,36 +7182,30 @@ variable makes it go down.
 ## All possible regressions, adjusted R-squared
 
 
+
+\scriptsize
+
 ```r
 with(s, data.frame(adjr2, outmat))
 ```
 
 ```
-##              adjr2 pct.a.surf pct.a.base fines
-## 1  ( 1 ) 0.9433685                            
-## 1  ( 2 ) 0.8576662                            
-## 2  ( 1 ) 0.9473550          *                 
-## 2  ( 2 ) 0.9442365                            
-## 3  ( 1 ) 0.9531812          *                 
-## 3  ( 2 ) 0.9482845          *                *
-## 4  ( 1 ) 0.9529226          *                 
-## 4  ( 2 ) 0.9526007          *                *
-## 5  ( 1 ) 0.9530038          *                *
-## 5  ( 2 ) 0.9511918          *          *     *
-## 6  ( 1 ) 0.9512052          *          *     *
-##          voids log.viscosity run
-## 1  ( 1 )                   *    
-## 1  ( 2 )                       *
-## 2  ( 1 )                   *    
-## 2  ( 2 )     *             *    
-## 3  ( 1 )     *             *    
-## 3  ( 2 )                   *    
-## 4  ( 1 )     *             *   *
-## 4  ( 2 )     *             *    
-## 5  ( 1 )     *             *   *
-## 5  ( 2 )     *             *    
-## 6  ( 1 )     *             *   *
+##              adjr2 pct.a.surf pct.a.base fines voids log.viscosity run
+## 1  ( 1 ) 0.9433685                                               *    
+## 1  ( 2 ) 0.8576662                                                   *
+## 2  ( 1 ) 0.9473550          *                                    *    
+## 2  ( 2 ) 0.9442365                                 *             *    
+## 3  ( 1 ) 0.9531812          *                      *             *    
+## 3  ( 2 ) 0.9482845          *                *                   *    
+## 4  ( 1 ) 0.9529226          *                      *             *   *
+## 4  ( 2 ) 0.9526007          *                *     *             *    
+## 5  ( 1 ) 0.9530038          *                *     *             *   *
+## 5  ( 2 ) 0.9511918          *          *     *     *             *    
+## 6  ( 1 ) 0.9512052          *          *     *     *             *   *
 ```
+\normalsize
+
+
 
 ## Revisiting the best model
 - Best model was our rut.6:
@@ -7218,12 +7217,12 @@ tidy(rut.6)
 
 ```
 ## # A tibble: 4 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)    -1.02     1.36      -0.748 4.61e- 1
-## 2 pct.a.surf      0.555    0.220      2.52  1.80e- 2
-## 3 voids           0.245    0.116      2.12  4.36e- 2
-## 4 log.viscosi…   -0.646    0.0288   -22.5   5.29e-19
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)     -1.02     1.36      -0.748 4.61e- 1
+## 2 pct.a.surf       0.555    0.220      2.52  1.80e- 2
+## 3 voids            0.245    0.116      2.12  4.36e- 2
+## 4 log.viscosity   -0.646    0.0288   -22.5   5.29e-19
 ```
 
 ## Revisiting (2)
@@ -7247,7 +7246,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-294](figure/unnamed-chunk-294-1.pdf)
+![plot of chunk unnamed-chunk-300](figure/unnamed-chunk-300-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7270,7 +7269,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-296](figure/unnamed-chunk-296-1.pdf)
+![plot of chunk unnamed-chunk-302](figure/unnamed-chunk-302-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7390,6 +7389,7 @@ summary(pigs.1)
 
 ## and now `lm`
 
+\footnotesize
 
 ```r
 pigs.2 <- lm(weight ~ feed, data = pigs)
@@ -7406,6 +7406,20 @@ tidy(pigs.2)
 ## 4 feedfeed4      25.6       1.98     12.9  7.11e-10
 ```
 
+```r
+glance(pigs.2)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.957         0.949  3.14      119. 3.72e-11     4
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+```
+\normalsize
+
 ## Understanding those slopes
 - Get one slope for each category of categorical variable feed, except
 for first.
@@ -7418,7 +7432,9 @@ for first.
 feed 1.
 
 ## Reproducing the ANOVA
-- Pass the fitted model object into anova:
+- Pass the fitted model object into `anova`:
+
+\footnotesize
 
 ```r
 anova(pigs.2)
@@ -7435,10 +7451,12 @@ anova(pigs.2)
 ## Signif. codes:  
 ## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
+\normalsize
 
 - Same as before.
 - But no Tukey this way:
 
+\footnotesize
 
 ```r
 TukeyHSD(pigs.2)
@@ -7447,6 +7465,7 @@ TukeyHSD(pigs.2)
 ```
 ## Error in UseMethod("TukeyHSD"): no applicable method for 'TukeyHSD' applied to an object of class "lm"
 ```
+\normalsize
 
 ## The crickets
 - Male crickets rub their wings together to produce a chirping sound.
@@ -7460,29 +7479,30 @@ accounted for?
 ## The crickets data
 Read the data:
 
+\small
+
 ```r
 my_url="http://www.utsc.utoronto.ca/~butler/c32/crickets2.csv"
 crickets <- read_csv(my_url)
-crickets
+crickets %>% sample_n(10)
 ```
 
 ```
-## # A tibble: 31 x 3
+## # A tibble: 10 x 3
 ##    species       temperature pulse_rate
 ##    <chr>               <dbl>      <dbl>
-##  1 exclamationis        20.8       67.9
-##  2 exclamationis        20.8       65.1
-##  3 exclamationis        24         77.3
+##  1 exclamationis        20.8       65.1
+##  2 niveus               18.9       50.3
+##  3 exclamationis        20.8       67.9
 ##  4 exclamationis        24         78.7
-##  5 exclamationis        24         79.4
-##  6 exclamationis        24         80.4
-##  7 exclamationis        26.2       85.8
-##  8 exclamationis        26.2       86.6
-##  9 exclamationis        26.2       87.5
-## 10 exclamationis        26.2       89.1
-## # … with 21 more rows
+##  5 exclamationis        29        101. 
+##  6 niveus               26.5       76.1
+##  7 niveus               18.3       47.6
+##  8 niveus               17.2       44.3
+##  9 niveus               26.5       77.7
+## 10 niveus               26.5       77
 ```
-
+\normalsize
 ## Fit model with `lm` 
 
 
@@ -7515,12 +7535,11 @@ glance(crickets.1)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
-## 1     0.990         0.989  1.79     1331. 1.76e-28
-## # … with 6 more variables: df <int>, logLik <dbl>,
-## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
-## #   df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value    df
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
+## 1     0.990         0.989  1.79     1331. 1.76e-28     3
+## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
+## #   BIC <dbl>, deviance <dbl>, df.residual <int>
 ```
 
 ```r
@@ -7529,11 +7548,11 @@ tidy(crickets.1)
 
 ```
 ## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)     -7.21    2.55       -2.83 8.58e- 3
-## 2 temperature      3.60    0.0973     37.0  2.49e-25
-## 3 speciesnive…   -10.1     0.735     -13.7  6.27e-14
+##   term          estimate std.error statistic  p.value
+##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)      -7.21    2.55       -2.83 8.58e- 3
+## 2 temperature       3.60    0.0973     37.0  2.49e-25
+## 3 speciesniveus   -10.1     0.735     -13.7  6.27e-14
 ```
 
 ## Conclusions
@@ -7545,7 +7564,7 @@ is baseline).
 - R-squared of almost 0.99 is very high, so that the prediction of pulse
 rate from species and temperature is very good.
 
-## To end with a graph 
+## To end with a graph
 
 
 ```r
@@ -7554,7 +7573,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-307](figure/unnamed-chunk-307-1.pdf)
+![plot of chunk unnamed-chunk-313](figure/unnamed-chunk-313-1.pdf)
 
 
 # Functions
@@ -8036,8 +8055,8 @@ map_dbl(1:10, ~ sqrt(.))
 ```
 
 ```
-##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068
-##  [6] 2.449490 2.645751 2.828427 3.000000 3.162278
+##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490
+##  [7] 2.645751 2.828427 3.000000 3.162278
 ```
 
 ## Summarizing all columns of a data frame, two ways
@@ -8252,7 +8271,7 @@ hotpo(4.5)
 
 
 ```r
-tibble(x = 1:10) %>% mutate(y = map_int(x, hotpo))
+tibble(x = 1:10) %>% mutate(y = map_int(x, ~hotpo(.)))
 ```
 
 ```
@@ -8309,26 +8328,26 @@ hotpo_seq(6)
 
 - Start at 27:
 
+\footnotesize
 
 ```r
 hotpo_seq(27)
 ```
 
 ```
-##   [1]   27   82   41  124   62   31   94   47  142
-##  [10]   71  214  107  322  161  484  242  121  364
-##  [19]  182   91  274  137  412  206  103  310  155
-##  [28]  466  233  700  350  175  526  263  790  395
-##  [37] 1186  593 1780  890  445 1336  668  334  167
-##  [46]  502  251  754  377 1132  566  283  850  425
-##  [55] 1276  638  319  958  479 1438  719 2158 1079
-##  [64] 3238 1619 4858 2429 7288 3644 1822  911 2734
-##  [73] 1367 4102 2051 6154 3077 9232 4616 2308 1154
-##  [82]  577 1732  866  433 1300  650  325  976  488
-##  [91]  244  122   61  184   92   46   23   70   35
-## [100]  106   53  160   80   40   20   10    5   16
-## [109]    8    4    2    1
+##   [1]   27   82   41  124   62   31   94   47  142   71  214
+##  [12]  107  322  161  484  242  121  364  182   91  274  137
+##  [23]  412  206  103  310  155  466  233  700  350  175  526
+##  [34]  263  790  395 1186  593 1780  890  445 1336  668  334
+##  [45]  167  502  251  754  377 1132  566  283  850  425 1276
+##  [56]  638  319  958  479 1438  719 2158 1079 3238 1619 4858
+##  [67] 2429 7288 3644 1822  911 2734 1367 4102 2051 6154 3077
+##  [78] 9232 4616 2308 1154  577 1732  866  433 1300  650  325
+##  [89]  976  488  244  122   61  184   92   46   23   70   35
+## [100]  106   53  160   80   40   20   10    5   16    8    4
+## [111]    2    1
 ```
+\normalsize
 
 ## Which starting points have the longest sequences?
 - The `length` of the vector returned from `hotpo_seq` says how long it
@@ -8336,15 +8355,17 @@ took to get to 1.
 - Out of the starting points 1 to 100, which one has the longest
 sequence?
 
+\small
+
 ```r
 tibble(start = 1:100) %>%
   mutate(seq_length = map_int(start, ~ length(hotpo_seq(.)))) %>%
   arrange(desc(seq_length)) %>%
-  slice(1:6)
+  slice(1:5)
 ```
 
 ```
-## # A tibble: 6 x 2
+## # A tibble: 5 x 2
 ##   start seq_length
 ##   <int>      <int>
 ## 1    97        119
@@ -8352,9 +8373,8 @@ tibble(start = 1:100) %>%
 ## 3    54        113
 ## 4    55        113
 ## 5    27        112
-## 6    82        111
 ```
-
+\normalsize
 ## What happens if we save the entire sequence? 
 
 
@@ -8433,11 +8453,11 @@ somedates %>% mutate(plus30 = d + 30, diffs = d[2] - d)
 
 ```
 ## # A tibble: 3 x 5
-##   text       d          numbers plus30     diffs    
-##   <chr>      <date>       <dbl> <date>     <time>   
-## 1 1970-01-01 1970-01-01       0 1970-01-31 13760 da…
-## 2 2007-09-04 2007-09-04   13760 2007-10-04     0 da…
-## 3 1931-08-05 1931-08-05  -14029 1931-09-04 27789 da…
+##   text       d          numbers plus30     diffs     
+##   <chr>      <date>       <dbl> <date>     <drtn>    
+## 1 1970-01-01 1970-01-01       0 1970-01-31 13760 days
+## 2 2007-09-04 2007-09-04   13760 2007-10-04     0 days
+## 3 1931-08-05 1931-08-05  -14029 1931-09-04 27789 days
 ```
 
 ## Reading in dates from a file
@@ -8579,11 +8599,11 @@ d4 %>% mutate(equal = identical(date, date2))
 
 ```
 ## # A tibble: 3 x 5
-##   date       status    dunno        date2      equal
-##   <date>     <chr>     <chr>        <date>     <lgl>
-## 1 2011-08-03 hello     August 3 20… 2011-08-03 TRUE 
-## 2 2011-11-15 still he… November 15… 2011-11-15 TRUE 
-## 3 2012-02-01 goodbye   February 1 … 2012-02-01 TRUE
+##   date       status     dunno            date2      equal
+##   <date>     <chr>      <chr>            <date>     <lgl>
+## 1 2011-08-03 hello      August 3 2011    2011-08-03 TRUE 
+## 2 2011-11-15 still here November 15 2011 2011-11-15 TRUE 
+## 3 2012-02-01 goodbye    February 1 2012  2012-02-01 TRUE
 ```
 
 - The two columns of dates are all the same.
@@ -8734,12 +8754,12 @@ dd %>% mutate(zone = tz(dt))
 
 ```
 ## # A tibble: 4 x 3
-##   text              dt                  zone        
-##   <chr>             <dttm>              <chr>       
-## 1 1970-01-01 07:50… 1970-01-01 07:50:01 America/Tor…
-## 2 2007-09-04 15:30… 2007-09-04 15:30:00 America/Tor…
-## 3 1940-04-15 06:45… 1940-04-15 06:45:10 America/Tor…
-## 4 2016-02-10 12:26… 2016-02-10 12:26:40 America/Tor…
+##   text                dt                  zone           
+##   <chr>               <dttm>              <chr>          
+## 1 1970-01-01 07:50:01 1970-01-01 07:50:01 America/Toronto
+## 2 2007-09-04 15:30:00 2007-09-04 15:30:00 America/Toronto
+## 3 1940-04-15 06:45:10 1940-04-15 06:45:10 America/Toronto
+## 4 2016-02-10 12:26:40 2016-02-10 12:26:40 America/Toronto
 ```
 
 ## Extracting time parts
@@ -8758,12 +8778,12 @@ dd %>%
 
 ```
 ## # A tibble: 4 x 5
-##   dt                      h   sec   min zone        
-##   <dttm>              <int> <dbl> <int> <chr>       
-## 1 1970-01-01 07:50:01     7     1    50 America/Tor…
-## 2 2007-09-04 15:30:00    15     0    30 America/Tor…
-## 3 1940-04-15 06:45:10     6    10    45 America/Tor…
-## 4 2016-02-10 12:26:40    12    40    26 America/Tor…
+##   dt                      h   sec   min zone           
+##   <dttm>              <int> <dbl> <int> <chr>          
+## 1 1970-01-01 07:50:01     7     1    50 America/Toronto
+## 2 2007-09-04 15:30:00    15     0    30 America/Toronto
+## 3 1940-04-15 06:45:10     6    10    45 America/Toronto
+## 4 2016-02-10 12:26:40    12    40    26 America/Toronto
 ```
 
 ## Same times, but different time zone: 
@@ -8789,10 +8809,8 @@ In more detail:
 
 
 ```
-## [1] "1970-01-01 22:50:01 AEST"
-## [2] "2007-09-05 05:30:00 AEST"
-## [3] "1940-04-15 21:45:10 AEST"
-## [4] "2016-02-11 04:26:40 AEDT"
+## [1] "1970-01-01 22:50:01 AEST" "2007-09-05 05:30:00 AEST"
+## [3] "1940-04-15 21:45:10 AEST" "2016-02-11 04:26:40 AEDT"
 ```
 
 
@@ -8838,11 +8856,11 @@ stays %>% mutate(stay = discharge - admit)
 
 ```
 ## # A tibble: 3 x 3
-##   admit               discharge           stay      
-##   <dttm>              <dttm>              <time>    
-## 1 1981-12-10 22:00:00 1982-01-03 14:00:00 568.0 hou…
-## 2 2014-03-07 14:00:00 2014-03-08 09:30:00  19.5 hou…
-## 3 2016-08-31 21:00:00 2016-09-02 17:00:00  44.0 hou…
+##   admit               discharge           stay       
+##   <dttm>              <dttm>              <drtn>     
+## 1 1981-12-10 22:00:00 1982-01-03 14:00:00 568.0 hours
+## 2 2014-03-07 14:00:00 2014-03-08 09:30:00  19.5 hours
+## 3 2016-08-31 21:00:00 2016-09-02 17:00:00  44.0 hours
 ```
 
 - Number of hours; hard to interpret. 
@@ -8991,11 +9009,11 @@ oranges
 ## 7  1582   140   145   177   203   214
 ```
 
-- These are diameters of five different trees at five different ages (days).
+- These are circumferences of five different trees at seven different ages (days).
 
-## Plotting series 
+## Plotting series
 
-- Want to plot orange circumferences against age for each orange tree.
+- Want to plot orange tree circumferences against age for each orange tree.
 - Recall ggplot wants one column of x values and one column of y
 values, which we do not have.
 
@@ -9017,7 +9035,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-381](figure/unnamed-chunk-381-1.pdf)
+![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.pdf)
 
 ## Labelling points on a plot
 
@@ -9052,7 +9070,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-383](figure/unnamed-chunk-383-1.pdf)
+![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -9062,7 +9080,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-384](figure/unnamed-chunk-384-1.pdf)
+![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.pdf)
 
 ## Make labels smaller
 
@@ -9072,7 +9090,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-385](figure/unnamed-chunk-385-1.pdf)
+![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9098,7 +9116,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.pdf)
+![plot of chunk unnamed-chunk-393](figure/unnamed-chunk-393-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9122,7 +9140,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.pdf)
+![plot of chunk unnamed-chunk-395](figure/unnamed-chunk-395-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9147,12 +9165,12 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.pdf)
+![plot of chunk unnamed-chunk-397](figure/unnamed-chunk-397-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
 - Axis labels
-We use previous graph as base (to save drawing again).
+- We use previous graph as base (to save drawing again).
 
 ## With title
 
@@ -9160,7 +9178,7 @@ We use previous graph as base (to save drawing again).
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.pdf)
+![plot of chunk unnamed-chunk-398](figure/unnamed-chunk-398-1.pdf)
 
 ## Axis labels
 
@@ -9169,7 +9187,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-393](figure/unnamed-chunk-393-1.pdf)
+![plot of chunk unnamed-chunk-399](figure/unnamed-chunk-399-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your
@@ -9199,7 +9217,7 @@ xx
 ```
 
 ```
-## [1]  3 10  4  9  7
+## [1] 7 4 2 1 3
 ```
 
 ```r
@@ -9218,7 +9236,7 @@ xx # back
 ```
 
 ```
-## [1]  3 10  4  9  7
+## [1] 7 4 2 1 3
 ```
 
 

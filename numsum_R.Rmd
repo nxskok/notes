@@ -24,6 +24,10 @@ my_url="http://www.utsc.utoronto.ca/~butler/c32/ais.txt"
 athletes=read_tsv(my_url)
 ```
 
+```{r}
+View(athletes)
+```
+
 
 ## Summarizing one column
 - Mean height: 

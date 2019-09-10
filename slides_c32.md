@@ -43,7 +43,16 @@ about these.
   - MGEB12
   - PSYC08
 - I check prerequisites.
-- If you have STAB57, you may take this course, but *be careful about exclusions*. Read the second line again if this applies to you. 
+- If you have STAB57, you may take this course, but *be careful about exclusions*. Read the second line again if this applies to you.  
+
+## STAC53
+
+- If you are in the Statistics Applied Minor program, check your Degree Explorer.
+- This might have STAC50 as a requirement (for which you don't now have the prereq)
+- If you have not already taken C50, you need to take *STAC53*.
+- To get this reflected in your Degree Explorer: email me `butler@utsc.utoronto.ca`:
+   - with your name and student number
+   - and explaining that you would like me to make this change.
 
 ## The instructor
 - Ken Butler, office IC 471, e-mail:
@@ -630,7 +639,7 @@ summary(mydata)
 
 ## Reading from a URL
 - Any data file on the Web can be read directly.
-- [Example data:](http://www.utsc.utoronto.ca/~butler/c32/global.csv).
+- [Example data link:](http://www.utsc.utoronto.ca/~butler/c32/global.csv)
 - Use URL instead of filename.
 - I like to save the URL in a variable first (because URLs tend to be
 long), and then put that variable in the `read_` function:

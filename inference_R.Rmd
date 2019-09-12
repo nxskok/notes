@@ -615,12 +615,12 @@ g
 actually true, and the probability of rejecting it then is $\alpha = 0.05$.
 - As the null gets more wrong (mean decreases), it becomes easier to
 correctly reject it.
-- The blue power curve is above the red one for any mean > 10, meaning
+- The blue power curve is above the red one for any mean < 10, meaning
 that no matter how wrong $H_0$ is, you always have a greater chance of
 correctly rejecting it with a larger sample size.
 - Previously, we had $H_0 : \mu = 10$ and a true $\mu = 8$, so a mean of 8
 produces power 0.42 and 0.80 as shown on the graph.
-- With $n = 34$, a true mean that is less than about 7
+- With $n = 30$, a true mean that is less than about 7
 is almost certain to be correctly rejected. (With $n = 15$, the
 difference needs to be less than 6.)
 

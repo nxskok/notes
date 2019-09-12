@@ -35,7 +35,7 @@ athletes
 ```
 \normalsize
 
-## Types of graph
+## Types of graph (73)
 
 Depends on number and type of variables:
 
@@ -120,7 +120,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point()
 ```
 
-## Height by weight for each sport, with facets
+## Height by weight for each sport and gender, with facets
 
 ```{r, fig.height=3.6}
 ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +

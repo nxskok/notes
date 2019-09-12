@@ -96,6 +96,14 @@ athletes %>% group_by(Sex) %>%
   summarize(m=mean(Ht), s=sd(Ht))
 ```
 
+If you want number of observations per group plus some stats, you need to go the `n()` way:
+
+```{r}
+athletes %>% group_by(Sex) %>% 
+  summarize(n=n(), m=mean(Ht), s=sd(Ht))
+```
+
+
 - This explains second variation on counting within group: “within each
 sport, how many athletes were there?”
 

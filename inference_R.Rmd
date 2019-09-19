@@ -27,8 +27,8 @@ Certainly not. Actual attendance depends on many things, eg.:
 
 ```{r, eval=F}
 library(tidyverse)
-library(smmr)
-library(PMCMRplus)
+# library(smmr)
+# library(PMCMRplus)
 ```
 
 
@@ -450,7 +450,7 @@ t.test(x, mu = 10)$p.value
 
 
 ```{r}
-rerun(1000, rnorm(15, 8, 4)) %>%
+rerun(10000, rnorm(15, 8, 4)) %>%
   map( ~ t.test(., mu = 10)) %>%
   map_dbl("p.value") ->
   pvals
@@ -536,6 +536,7 @@ calculation for each one.
 
 ```{r}
 ns=seq(10,100,10)
+ns
 ```
 
 - Calculate powers:
@@ -544,10 +545,14 @@ ans=power.t.test(n=ns, delta=10-8, sd=4, type="one.sample")
 ans$power
 ```
 
+
+
+
 ## Building a plot
 - Make a data frame out of the values to plot:
 ```{r}
 d=tibble(n=ns, power=ans$power)
+d
 ```
 
 - Plot these as points joined by lines, and add horizontal line at 1
@@ -561,6 +566,16 @@ g = ggplot(d, aes(x = n, y = power)) + geom_point() +
 ## The power curve
 ```{r, fig.height=3.8}
 g
+```
+
+Another way to do it:
+
+```{r}
+tibble(n=ns) %>% 
+  mutate(power_output=map(n, ~power.t.test(n=., delta=10-8, sd=4, type="one.sample"))) %>% 
+  mutate(power=map_dbl(power_output, "power")) %>% 
+  ggplot(aes(x=n, y=power)) + geom_point() + geom_line() +
+    geom_hline(yintercept=1, linetype="dashed")
 ```
 
 ## Power curves for means
@@ -591,19 +606,24 @@ combos
 ```{r}
 ans=with(combos, power.t.test(n=n, delta=mean-10, sd=4, 
                               type="one.sample"))
+ans
+names(ans)
+ans$power
 ```
 
 - Make a data frame to plot, pulling things from the right places:
 ```{r}
 d=tibble(n=factor(combos$n), mean=combos$mean, 
          power=ans$power)
+d
 ```
 
 - then make the plot:
 ```{r}
 g = ggplot(d, aes(x = mean, y = power, colour = n)) +
   geom_point() + geom_line() +
-  geom_hline(yintercept = 1, linetype = "dashed")
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  geom_vline(xintercept = 10, linetype = "dotted")
 ```
 
 ## The power curves
@@ -663,6 +683,7 @@ kids %>% group_by(group) %>%
 - suppose a 5-point improvement in reading score was considered important (on this scale)
 - in a 2-sample test, null (difference of) mean is zero, so `delta` is true difference in means
 - what is power for these sample sizes, and what sample size would be needed to get power up to 0.80?
+- SD in both groups has to be same in `power.t.test`, so take as 14.
 
 ## Calculating power for sample size 22 (per group) 
 
@@ -768,7 +789,7 @@ irs %>% glimpse()
 t.test(irs$Time, mu = 160, alternative = "greater")
 ```
 
-Reject null; mean greater than 160.
+Reject null; mean (for all people to complete form) greater than 160.
 
 ## But, look at a graph
 ```{r, fig.height=3.5}

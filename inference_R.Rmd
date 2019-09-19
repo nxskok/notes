@@ -622,7 +622,7 @@ correctly rejecting it with a larger sample size.
 produces power 0.42 and 0.80 as shown on the graph.
 - With $n = 30$, a true mean that is less than about 7
 is almost certain to be correctly rejected. (With $n = 15$, the
-difference needs to be less than 6.)
+true mean needs to be less than 6.)
 
 ## Power by sample size for means 7 and 8
 Similar procedure to before:

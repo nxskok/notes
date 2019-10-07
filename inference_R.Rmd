@@ -27,7 +27,7 @@ Certainly not. Actual attendance depends on many things, eg.:
 
 ```{r, eval=F}
 library(tidyverse)
-# library(smmr)
+library(smmr)
 # library(PMCMRplus)
 ```
 
@@ -674,6 +674,7 @@ g
 - and these group SDs:
 
 ```{r}
+kids
 kids %>% group_by(group) %>% 
   summarize(n=n(), s=sd(score))
 ```
@@ -732,6 +733,15 @@ t.test(y ~ group, data = twogroups)
 ```{r}
 t.test(y ~ group, data = twogroups, conf.level = 0.90)
 ```
+
+## Hypothesis test
+
+Null is that difference in means is zero:
+
+```{r}
+t.test(y ~ group, mu=0, data = twogroups)
+```
+
 
 ## Comparing results
 

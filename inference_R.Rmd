@@ -454,8 +454,6 @@ rerun(10000, rnorm(15, 8, 4)) %>%
   map( ~ t.test(., mu = 10)) %>%
   map_dbl("p.value") ->
   pvals
-pvals
-format(pvals, scientific = F)
 tibble(pvals) %>% count(pvals <= 0.05)
 ```
 
@@ -732,6 +730,15 @@ t.test(y ~ group, data = twogroups)
 ```{r}
 t.test(y ~ group, data = twogroups, conf.level = 0.90)
 ```
+
+## Hypothesis test
+
+Null difference in means is zero:
+
+```{r}
+t.test(y ~ group, data = twogroups, mu=0)
+```
+
 
 ## Comparing results
 

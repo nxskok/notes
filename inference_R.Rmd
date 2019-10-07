@@ -454,8 +454,6 @@ rerun(10000, rnorm(15, 8, 4)) %>%
   map( ~ t.test(., mu = 10)) %>%
   map_dbl("p.value") ->
   pvals
-pvals
-format(pvals, scientific = F)
 tibble(pvals) %>% count(pvals <= 0.05)
 ```
 
@@ -644,7 +642,7 @@ correctly rejecting it with a larger sample size.
 produces power 0.42 and 0.80 as shown on the graph.
 - With $n = 30$, a true mean that is less than about 7
 is almost certain to be correctly rejected. (With $n = 15$, the
-difference needs to be less than 6.)
+true mean needs to be less than 6.)
 
 ## Power by sample size for means 7 and 8
 Similar procedure to before:
@@ -736,10 +734,17 @@ t.test(y ~ group, data = twogroups, conf.level = 0.90)
 
 ## Hypothesis test
 
+<<<<<<< HEAD
 Null is that difference in means is zero:
 
 ```{r}
 t.test(y ~ group, mu=0, data = twogroups)
+=======
+Null difference in means is zero:
+
+```{r}
+t.test(y ~ group, data = twogroups, mu=0)
+>>>>>>> baa9c54a4402383e3112e75f7f3d53d05d826a42
 ```
 
 

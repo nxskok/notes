@@ -639,7 +639,7 @@ summary(mydata)
 
 ## Reading from a URL
 - Any data file on the Web can be read directly.
-- [Example data link:](http://www.utsc.utoronto.ca/~butler/c32/global.csv)
+- [Example data:](http://www.utsc.utoronto.ca/~butler/c32/global.csv).
 - Use URL instead of filename.
 - I like to save the URL in a variable first (because URLs tend to be
 long), and then put that variable in the `read_` function:
@@ -894,6 +894,15 @@ mydata2
 ```
 
 
+```r
+list.files("*.Rmd")
+```
+
+```
+## character(0)
+```
+
+
 # Making graphs
 
 
@@ -975,7 +984,7 @@ athletes
 ```
 \normalsize
 
-## Types of graph
+## Types of graph (73)
 
 Depends on number and type of variables:
 
@@ -1010,7 +1019,7 @@ graphs.
 ggplot(athletes, aes(x = Sport)) + geom_bar()
 ```
 
-![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35-1.pdf)
+![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.pdf)
 
 
 ## Histogram of body mass index
@@ -1020,7 +1029,7 @@ ggplot(athletes, aes(x = Sport)) + geom_bar()
 ggplot(athletes, aes(x = BMI)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36-1.pdf)
+![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.pdf)
 
 ## Which sports are played by males and females?
 
@@ -1032,7 +1041,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
   geom_bar(position = "dodge")
 ```
 
-![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37-1.pdf)
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.pdf)
 
 ## BMI by gender
 
@@ -1041,7 +1050,7 @@ ggplot(athletes, aes(x = Sport, fill = Sex)) +
 ggplot(athletes, aes(x = Sex, y = BMI)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38-1.pdf)
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.pdf)
 
 ## Height vs. weight
 
@@ -1052,7 +1061,7 @@ Scatterplot:
 ggplot(athletes, aes(x = Ht, y = Wt)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39-1.pdf)
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.pdf)
 
 ## With regression line
 
@@ -1062,7 +1071,7 @@ ggplot(athletes, aes(x = Ht, y = Wt)) +
   geom_point() + geom_smooth(method = "lm")
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40-1.pdf)
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.pdf)
 
 ## BMI by sport and gender
 
@@ -1072,7 +1081,7 @@ ggplot(athletes, aes(x = Sport, y = BMI, colour = Sex)) +
   geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-41-1.pdf)
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.pdf)
 
 ## Height and weight by gender
 
@@ -1082,9 +1091,9 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42-1.pdf)
+![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.pdf)
 
-## Height by weight for each sport, with facets
+## Height by weight for each sport and gender, with facets
 
 
 ```r
@@ -1092,7 +1101,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport)
 ```
 
-![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43-1.pdf)
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.pdf)
 
 ## Filling each facet
 
@@ -1106,7 +1115,7 @@ ggplot(athletes, aes(x = Ht, y = Wt, colour = Sex)) +
   geom_point() + facet_wrap(~Sport, scales = "free")
 ```
 
-![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44-1.pdf)
+![plot of chunk unnamed-chunk-45](figure/unnamed-chunk-45-1.pdf)
 \normalsize
 
 # Numerical summaries: more detailed
@@ -1135,6 +1144,11 @@ library(tidyverse)
 ```
 
 
+
+
+```r
+View(athletes)
+```
 
 
 ## Summarizing one column
@@ -1279,6 +1293,23 @@ athletes %>% group_by(Sex) %>%
 ## 2 male    186.  7.90
 ```
 
+If you want number of observations per group plus some stats, you need to go the `n()` way:
+
+
+```r
+athletes %>% group_by(Sex) %>% 
+  summarize(n=n(), m=mean(Ht), s=sd(Ht))
+```
+
+```
+## # A tibble: 2 x 4
+##   Sex        n     m     s
+##   <chr>  <int> <dbl> <dbl>
+## 1 female   100  175.  8.24
+## 2 male     102  186.  7.90
+```
+
+
 - This explains second variation on counting within group: “within each
 sport, how many athletes were there?”
 
@@ -1352,8 +1383,8 @@ Certainly not. Actual attendance depends on many things, eg.:
 
 ```r
 library(tidyverse)
-library(smmr)
-library(PMCMRplus)
+# library(smmr)
+# library(PMCMRplus)
 ```
 
 
@@ -1411,7 +1442,7 @@ jays
 ## #   runs <dbl>, Oppruns <dbl>, innings <dbl>,
 ## #   wl <chr>, position <dbl>, gb <chr>,
 ## #   winner <chr>, loser <chr>, save <chr>, `game
-## #   time` <drtn>, Daynight <chr>, attendance <dbl>,
+## #   time` <time>, Daynight <chr>, attendance <dbl>,
 ## #   streak <chr>
 ```
 \normalsize
@@ -1444,7 +1475,7 @@ glimpse(jays)
 ## $ winner      <chr> "Odorizzi", "Geltz", "Buehrle…
 ## $ loser       <chr> "Dickey", "Castro", "Ramirez"…
 ## $ save        <chr> "Boxberger", "Jepsen", NA, "B…
-## $ `game time` <drtn> 02:30:00, 03:06:00, 03:02:00…
+## $ `game time` <time> 02:30:00, 03:06:00, 03:02:00…
 ## $ Daynight    <chr> "N", "N", "N", "N", "N", "D",…
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
@@ -1458,7 +1489,7 @@ glimpse(jays)
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-60-1.pdf)
+![plot of chunk unnamed-chunk-63](figure/unnamed-chunk-63-1.pdf)
 
 
 ## Comments
@@ -1682,7 +1713,7 @@ in which case you don’t trust the $t$-test result:
 ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-65](figure/unnamed-chunk-65-1.pdf)
+![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68-1.pdf)
 
 
 
@@ -1750,7 +1781,7 @@ kids
 ggplot(kids, aes(x = group, y = score)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68-1.pdf)
+![plot of chunk unnamed-chunk-71](figure/unnamed-chunk-71-1.pdf)
 
 ## Two kinds of two-sample t-test
 
@@ -2014,7 +2045,7 @@ t.test(x, mu = 10)$p.value
 
 
 ```r
-rerun(1000, rnorm(15, 8, 4)) %>%
+rerun(10000, rnorm(15, 8, 4)) %>%
   map( ~ t.test(., mu = 10)) %>%
   map_dbl("p.value") ->
   pvals
@@ -2025,8 +2056,8 @@ tibble(pvals) %>% count(pvals <= 0.05)
 ## # A tibble: 2 x 2
 ##   `pvals <= 0.05`     n
 ##   <lgl>           <int>
-## 1 FALSE             578
-## 2 TRUE              422
+## 1 FALSE            5547
+## 2 TRUE             4453
 ```
 
 We correctly rejected 422 times out of 1000, so the estimated power is
@@ -2133,6 +2164,11 @@ calculation for each one.
 
 ```r
 ns=seq(10,100,10)
+ns
+```
+
+```
+##  [1]  10  20  30  40  50  60  70  80  90 100
 ```
 
 - Calculate powers:
@@ -2148,11 +2184,31 @@ ans$power
 ##  [9] 0.9968496 0.9986097
 ```
 
+
+
+
 ## Building a plot
 - Make a data frame out of the values to plot:
 
 ```r
 d=tibble(n=ns, power=ans$power)
+d
+```
+
+```
+## # A tibble: 10 x 2
+##        n power
+##    <dbl> <dbl>
+##  1    10 0.293
+##  2    20 0.564
+##  3    30 0.754
+##  4    40 0.869
+##  5    50 0.934
+##  6    60 0.968
+##  7    70 0.985
+##  8    80 0.993
+##  9    90 0.997
+## 10   100 0.999
 ```
 
 - Plot these as points joined by lines, and add horizontal line at 1
@@ -2170,7 +2226,20 @@ g = ggplot(d, aes(x = n, y = power)) + geom_point() +
 g
 ```
 
-![plot of chunk unnamed-chunk-83](figure/unnamed-chunk-83-1.pdf)
+![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86-1.pdf)
+
+Another way to do it:
+
+
+```r
+tibble(n=ns) %>% 
+  mutate(power_output=map(n, ~power.t.test(n=., delta=10-8, sd=4, type="one.sample"))) %>% 
+  mutate(power=map_dbl(power_output, "power")) %>% 
+  ggplot(aes(x=n, y=power)) + geom_point() + geom_line() +
+    geom_hline(yintercept=1, linetype="dashed")
+```
+
+![plot of chunk unnamed-chunk-87](figure/unnamed-chunk-87-1.pdf)
 
 ## Power curves for means
 
@@ -2241,6 +2310,41 @@ combos
 ```r
 ans=with(combos, power.t.test(n=n, delta=mean-10, sd=4, 
                               type="one.sample"))
+ans
+```
+
+```
+## 
+##      One-sample t test power calculation 
+## 
+##               n = 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30
+##           delta = 4.0, 4.0, 3.5, 3.5, 3.0, 3.0, 2.5, 2.5, 2.0, 2.0, 1.5, 1.5, 1.0, 1.0, 0.5, 0.5, 0.0, 0.0
+##              sd = 4
+##       sig.level = 0.05
+##           power = 0.94908647, 0.99956360, 0.88277128, 0.99619287, 0.77070660, 0.97770385, 0.61513033, 0.91115700, 0.43784659, 0.75396272, 0.27216777, 0.51028173, 0.14530058, 0.26245348, 0.06577280, 0.09719303, 0.02500000, 0.02500000
+##     alternative = two.sided
+```
+
+```r
+names(ans)
+```
+
+```
+## [1] "n"           "delta"       "sd"         
+## [4] "sig.level"   "power"       "alternative"
+## [7] "note"        "method"
+```
+
+```r
+ans$power
+```
+
+```
+##  [1] 0.94908647 0.99956360 0.88277128 0.99619287
+##  [5] 0.77070660 0.97770385 0.61513033 0.91115700
+##  [9] 0.43784659 0.75396272 0.27216777 0.51028173
+## [13] 0.14530058 0.26245348 0.06577280 0.09719303
+## [17] 0.02500000 0.02500000
 ```
 
 - Make a data frame to plot, pulling things from the right places:
@@ -2248,6 +2352,31 @@ ans=with(combos, power.t.test(n=n, delta=mean-10, sd=4,
 ```r
 d=tibble(n=factor(combos$n), mean=combos$mean, 
          power=ans$power)
+d
+```
+
+```
+## # A tibble: 18 x 3
+##    n      mean  power
+##    <fct> <dbl>  <dbl>
+##  1 15      6   0.949 
+##  2 30      6   1.000 
+##  3 15      6.5 0.883 
+##  4 30      6.5 0.996 
+##  5 15      7   0.771 
+##  6 30      7   0.978 
+##  7 15      7.5 0.615 
+##  8 30      7.5 0.911 
+##  9 15      8   0.438 
+## 10 30      8   0.754 
+## 11 15      8.5 0.272 
+## 12 30      8.5 0.510 
+## 13 15      9   0.145 
+## 14 30      9   0.262 
+## 15 15      9.5 0.0658
+## 16 30      9.5 0.0972
+## 17 15     10   0.0250
+## 18 30     10   0.025
 ```
 
 - then make the plot:
@@ -2255,7 +2384,8 @@ d=tibble(n=factor(combos$n), mean=combos$mean,
 ```r
 g = ggplot(d, aes(x = mean, y = power, colour = n)) +
   geom_point() + geom_line() +
-  geom_hline(yintercept = 1, linetype = "dashed")
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  geom_vline(xintercept = 10, linetype = "dotted")
 ```
 
 ## The power curves
@@ -2265,7 +2395,7 @@ g = ggplot(d, aes(x = mean, y = power, colour = n)) +
 g
 ```
 
-![plot of chunk unnamed-chunk-89](figure/unnamed-chunk-89-1.pdf)
+![plot of chunk unnamed-chunk-93](figure/unnamed-chunk-93-1.pdf)
 
 ## Comments
 - When `mean=10`, that is, the true mean equals the null mean, $H_0$ is
@@ -2279,7 +2409,7 @@ correctly rejecting it with a larger sample size.
 produces power 0.42 and 0.80 as shown on the graph.
 - With $n = 30$, a true mean that is less than about 7
 is almost certain to be correctly rejected. (With $n = 15$, the
-difference needs to be less than 6.)
+true mean needs to be less than 6.)
 
 ## Power by sample size for means 7 and 8
 Similar procedure to before:
@@ -2305,7 +2435,7 @@ g=ggplot(d, aes(x=n, y=power, colour=mean)) +
 g
 ```
 
-![plot of chunk unnamed-chunk-91](figure/unnamed-chunk-91-1.pdf)
+![plot of chunk unnamed-chunk-95](figure/unnamed-chunk-95-1.pdf)
 
 ## Two-sample power
 
@@ -2331,6 +2461,7 @@ kids %>% group_by(group) %>%
 - suppose a 5-point improvement in reading score was considered important (on this scale)
 - in a 2-sample test, null (difference of) mean is zero, so `delta` is true difference in means
 - what is power for these sample sizes, and what sample size would be needed to get power up to 0.80?
+- SD in both groups has to be same in `power.t.test`, so take as 14.
 
 ## Calculating power for sample size 22 (per group) 
 
@@ -2471,6 +2602,30 @@ t.test(y ~ group, data = twogroups, conf.level = 0.90)
 ##        13.00000        15.66667
 ```
 
+## Hypothesis test
+
+Null difference in means is zero:
+
+
+```r
+t.test(y ~ group, data = twogroups, mu=0)
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  y by group
+## t = -2.0937, df = 8.7104, p-value = 0.0668
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.5625675  0.2292342
+## sample estimates:
+## mean in group 1 mean in group 2 
+##        13.00000        15.66667
+```
+
+
 ## Comparing results
 
 Recall null here is $H_0 : \mu_1 - \mu_2 = 0$. P-value 0.0668. 
@@ -2559,7 +2714,7 @@ t.test(irs$Time, mu = 160, alternative = "greater")
 ##  201.2333
 ```
 
-Reject null; mean greater than 160.
+Reject null; mean (for all people to complete form) greater than 160.
 
 ## But, look at a graph
 
@@ -2567,7 +2722,7 @@ Reject null; mean greater than 160.
 ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-99](figure/unnamed-chunk-99-1.pdf)
+![plot of chunk unnamed-chunk-104](figure/unnamed-chunk-104-1.pdf)
 
 ## Comments
 
@@ -3117,7 +3272,7 @@ line.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-124](figure/unnamed-chunk-124-1.pdf)
+![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.pdf)
 
 - Points should follow the straight line. Bottom left one way off, so
 normality questionable here: outlier.
@@ -3144,7 +3299,7 @@ d=tibble(x=rnorm(200))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-125](figure/unnamed-chunk-125-1.pdf)
+![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
 
 ## The normal quantile plot
 
@@ -3153,7 +3308,7 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-126](figure/unnamed-chunk-126-1.pdf)
+![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
 
 ## Normal data, small sample
 
@@ -3182,7 +3337,7 @@ this good:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128-1.pdf)
+![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.pdf)
 
 ## Chi-squared data, *df* = 10
 
@@ -3194,7 +3349,7 @@ d=tibble(x=rchisq(100,10))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.pdf)
+![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.pdf)
 
 
 
@@ -3207,7 +3362,7 @@ Somewhat opening-up curve:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
+![plot of chunk unnamed-chunk-135](figure/unnamed-chunk-135-1.pdf)
 
 
 ## Chi-squared data, df = 3
@@ -3233,7 +3388,7 @@ Clear upward-opening curve:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
+![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.pdf)
 
 
 
@@ -3260,7 +3415,7 @@ Low values too low and high values too high for normal.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.pdf)
+![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.pdf)
 
 
 ## Our pain-relief data
@@ -3352,7 +3507,7 @@ standard reading method.
 ggplot(kids,aes(x=group,y=score))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-135](figure/unnamed-chunk-135-1.pdf)
+![plot of chunk unnamed-chunk-140](figure/unnamed-chunk-140-1.pdf)
 
 ## Facetted normal quantile plots
 Done this way:
@@ -3363,7 +3518,7 @@ ggplot(kids,aes(sample=score))+stat_qq()+stat_qq_line()+
 facet_wrap(~group)
 ```
 
-![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.pdf)
+![plot of chunk unnamed-chunk-141](figure/unnamed-chunk-141-1.pdf)
 
 ## Comments
 - These plots show no problems with normality. Both groups are more
@@ -3646,7 +3801,7 @@ rats %>% sample_n(12)
 ggplot(rats,aes(y=density,x=group))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-147](figure/unnamed-chunk-147-1.pdf)
+![plot of chunk unnamed-chunk-152](figure/unnamed-chunk-152-1.pdf)
 
 ## Or, arranging groups in data (logical) order
 
@@ -3656,7 +3811,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-148](figure/unnamed-chunk-148-1.pdf)
+![plot of chunk unnamed-chunk-153](figure/unnamed-chunk-153-1.pdf)
 
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
@@ -3861,7 +4016,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157-1.pdf)
+![plot of chunk unnamed-chunk-162](figure/unnamed-chunk-162-1.pdf)
 
 Assumptions:
 - Normally distributed data within each group
@@ -3875,7 +4030,7 @@ ggplot(rats, aes(sample = density)) + stat_qq() +
   stat_qq_line() + facet_wrap( ~ group)
 ```
 
-![plot of chunk unnamed-chunk-158](figure/unnamed-chunk-158-1.pdf)
+![plot of chunk unnamed-chunk-163](figure/unnamed-chunk-163-1.pdf)
 
 ## The assumptions
 - Normally-distributed data within each group
@@ -4452,7 +4607,7 @@ conclusion is so clear that I am OK with this.
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174-1.pdf)
+![plot of chunk unnamed-chunk-179](figure/unnamed-chunk-179-1.pdf)
 
 
 
@@ -4909,7 +5064,7 @@ weather_tidy %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196-1.pdf)
+![plot of chunk unnamed-chunk-201](figure/unnamed-chunk-201-1.pdf)
 
 ## Summary of tidying “verbs”
 
@@ -5717,16 +5872,16 @@ tb3 %>%
 ## # A tibble: 213 x 2
 ##    Country               cases
 ##    <chr>                 <dbl>
-##  1 <NA>                  58581
-##  2 Andorra                  64
-##  3 United Arab Emirates    487
-##  4 Afghanistan           80005
-##  5 Antigua and Barbuda      21
-##  6 Anguilla                  1
-##  7 Albania                2467
-##  8 Armenia                6757
-##  9 Netherlands Antilles     81
-## 10 Angola               195512
+##  1 Andorra                  64
+##  2 United Arab Emirates    487
+##  3 Afghanistan           80005
+##  4 Antigua and Barbuda      21
+##  5 Anguilla                  1
+##  6 Albania                2467
+##  7 Armenia                6757
+##  8 Netherlands Antilles     81
+##  9 Angola               195512
+## 10 Argentina             64894
 ## # … with 203 more rows
 ```
 
@@ -5877,7 +6032,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-232-1.pdf)
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-237-1.pdf)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -5987,7 +6142,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238-1.pdf)
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -6067,7 +6222,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
+![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-247-1.pdf)
 
 ## Scatterplot with fitted line and curve 
 
@@ -6096,7 +6251,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243-1.pdf)
+![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6147,7 +6302,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 Pretty straight. Blue actually smooth curve not line:
 
-![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244-1.pdf)
+![plot of chunk unnamed-chunk-249](figure/unnamed-chunk-249-1.pdf)
 
 
 
@@ -6260,7 +6415,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
+![plot of chunk unnamed-chunk-253](figure/unnamed-chunk-253-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6455,7 +6610,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-258-1.pdf)
+![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6626,7 +6781,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-265](figure/unnamed-chunk-265-1.pdf)
+![plot of chunk unnamed-chunk-270](figure/unnamed-chunk-270-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6670,7 +6825,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-267](figure/unnamed-chunk-267-1.pdf)
+![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6740,7 +6895,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-270](figure/unnamed-chunk-270-1.pdf)
+![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6805,7 +6960,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-274](figure/unnamed-chunk-274-1.pdf)
+![plot of chunk unnamed-chunk-279](figure/unnamed-chunk-279-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6836,7 +6991,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
+![plot of chunk unnamed-chunk-280](figure/unnamed-chunk-280-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -6878,7 +7033,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-278](figure/unnamed-chunk-278-1.pdf)
+![plot of chunk unnamed-chunk-283](figure/unnamed-chunk-283-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7255,7 +7410,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-300](figure/unnamed-chunk-300-1.pdf)
+![plot of chunk unnamed-chunk-305](figure/unnamed-chunk-305-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7278,7 +7433,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-302](figure/unnamed-chunk-302-1.pdf)
+![plot of chunk unnamed-chunk-307](figure/unnamed-chunk-307-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7582,7 +7737,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-313](figure/unnamed-chunk-313-1.pdf)
+![plot of chunk unnamed-chunk-318](figure/unnamed-chunk-318-1.pdf)
 
 
 # Functions
@@ -9044,7 +9199,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-387](figure/unnamed-chunk-387-1.pdf)
+![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.pdf)
 
 ## Labelling points on a plot
 
@@ -9079,7 +9234,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-389](figure/unnamed-chunk-389-1.pdf)
+![plot of chunk unnamed-chunk-394](figure/unnamed-chunk-394-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -9089,7 +9244,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-390](figure/unnamed-chunk-390-1.pdf)
+![plot of chunk unnamed-chunk-395](figure/unnamed-chunk-395-1.pdf)
 
 ## Make labels smaller
 
@@ -9099,7 +9254,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-391](figure/unnamed-chunk-391-1.pdf)
+![plot of chunk unnamed-chunk-396](figure/unnamed-chunk-396-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9125,7 +9280,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-393](figure/unnamed-chunk-393-1.pdf)
+![plot of chunk unnamed-chunk-398](figure/unnamed-chunk-398-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9149,7 +9304,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-395](figure/unnamed-chunk-395-1.pdf)
+![plot of chunk unnamed-chunk-400](figure/unnamed-chunk-400-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9174,7 +9329,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-397](figure/unnamed-chunk-397-1.pdf)
+![plot of chunk unnamed-chunk-402](figure/unnamed-chunk-402-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9187,7 +9342,7 @@ g
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-398](figure/unnamed-chunk-398-1.pdf)
+![plot of chunk unnamed-chunk-403](figure/unnamed-chunk-403-1.pdf)
 
 ## Axis labels
 
@@ -9196,7 +9351,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-399](figure/unnamed-chunk-399-1.pdf)
+![plot of chunk unnamed-chunk-404](figure/unnamed-chunk-404-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your

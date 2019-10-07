@@ -1268,8 +1268,8 @@ click it. - This pops up a ``data frame viewer'' top left:
 \item
   Any data file on the Web can be read directly.
 \item
-  \href{http://www.utsc.utoronto.ca/~butler/c32/global.csv}{Example data
-  link:}
+  \href{http://www.utsc.utoronto.ca/~butler/c32/global.csv}{Example
+  data:}.
 \item
   Use URL instead of filename.
 \item
@@ -1612,6 +1612,16 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 ## 6 p6       17    31 lower
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{list.files}\NormalTok{(}\StringTok{"*.Rmd"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## character(0)
+\end{verbatim}
+
 \end{frame}
 
 \hypertarget{making-graphs}{%
@@ -1734,8 +1744,8 @@ the temperature of the coffee in the mug decreased over 30 minutes.
 
 \end{frame}
 
-\begin{frame}[fragile]{Types of graph}
-\protect\hypertarget{types-of-graph}{}
+\begin{frame}[fragile]{Types of graph (73)}
+\protect\hypertarget{types-of-graph-73}{}
 
 Depends on number and type of variables:
 
@@ -1784,8 +1794,8 @@ called \texttt{facetting} in R.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-35-1.pdf}
-\caption{plot of chunk unnamed-chunk-35}
+\includegraphics{figure/unnamed-chunk-36-1.pdf}
+\caption{plot of chunk unnamed-chunk-36}
 \end{figure}
 
 \end{frame}
@@ -1801,8 +1811,8 @@ called \texttt{facetting} in R.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-36-1.pdf}
-\caption{plot of chunk unnamed-chunk-36}
+\includegraphics{figure/unnamed-chunk-37-1.pdf}
+\caption{plot of chunk unnamed-chunk-37}
 \end{figure}
 
 \end{frame}
@@ -1821,8 +1831,8 @@ Grouped bar chart:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-37-1.pdf}
-\caption{plot of chunk unnamed-chunk-37}
+\includegraphics{figure/unnamed-chunk-38-1.pdf}
+\caption{plot of chunk unnamed-chunk-38}
 \end{figure}
 
 \end{frame}
@@ -1838,8 +1848,8 @@ Grouped bar chart:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-38-1.pdf}
-\caption{plot of chunk unnamed-chunk-38}
+\includegraphics{figure/unnamed-chunk-39-1.pdf}
+\caption{plot of chunk unnamed-chunk-39}
 \end{figure}
 
 \end{frame}
@@ -1857,8 +1867,8 @@ Scatterplot:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-39-1.pdf}
-\caption{plot of chunk unnamed-chunk-39}
+\includegraphics{figure/unnamed-chunk-40-1.pdf}
+\caption{plot of chunk unnamed-chunk-40}
 \end{figure}
 
 \end{frame}
@@ -1875,8 +1885,8 @@ Scatterplot:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-40-1.pdf}
-\caption{plot of chunk unnamed-chunk-40}
+\includegraphics{figure/unnamed-chunk-41-1.pdf}
+\caption{plot of chunk unnamed-chunk-41}
 \end{figure}
 
 \end{frame}
@@ -1893,8 +1903,8 @@ Scatterplot:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-41-1.pdf}
-\caption{plot of chunk unnamed-chunk-41}
+\includegraphics{figure/unnamed-chunk-42-1.pdf}
+\caption{plot of chunk unnamed-chunk-42}
 \end{figure}
 
 \end{frame}
@@ -1911,14 +1921,15 @@ Scatterplot:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-42-1.pdf}
-\caption{plot of chunk unnamed-chunk-42}
+\includegraphics{figure/unnamed-chunk-43-1.pdf}
+\caption{plot of chunk unnamed-chunk-43}
 \end{figure}
 
 \end{frame}
 
-\begin{frame}[fragile]{Height by weight for each sport, with facets}
-\protect\hypertarget{height-by-weight-for-each-sport-with-facets}{}
+\begin{frame}[fragile]{Height by weight for each sport and gender, with
+facets}
+\protect\hypertarget{height-by-weight-for-each-sport-and-gender-with-facets}{}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1929,8 +1940,8 @@ Scatterplot:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-43-1.pdf}
-\caption{plot of chunk unnamed-chunk-43}
+\includegraphics{figure/unnamed-chunk-44-1.pdf}
+\caption{plot of chunk unnamed-chunk-44}
 \end{figure}
 
 \end{frame}
@@ -1950,7 +1961,7 @@ facet, this:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{figure/unnamed-chunk-44-1.pdf} \normalsize
+\includegraphics{figure/unnamed-chunk-45-1.pdf} \normalsize
 
 \end{frame}
 
@@ -2000,6 +2011,12 @@ detailed}\label{numerical-summaries-more-detailed}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{View}\NormalTok{(athletes)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2190,6 +2207,24 @@ Another way (which will make sense in a moment):
 ## 2 male    186.  7.90
 \end{verbatim}
 
+If you want number of observations per group plus some stats, you need
+to go the \texttt{n()} way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{athletes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Sex) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{n}\NormalTok{(), }\DataTypeTok{m=}\KeywordTok{mean}\NormalTok{(Ht), }\DataTypeTok{s=}\KeywordTok{sd}\NormalTok{(Ht))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 4
+##   Sex        n     m     s
+##   <chr>  <int> <dbl> <dbl>
+## 1 female   100  175.  8.24
+## 2 male     102  186.  7.90
+\end{verbatim}
+
 \begin{itemize}
 \tightlist
 \item
@@ -2320,8 +2355,8 @@ Another way (which will make sense in a moment):
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
-\KeywordTok{library}\NormalTok{(smmr)}
-\KeywordTok{library}\NormalTok{(PMCMRplus)}
+\CommentTok{# library(smmr)}
+\CommentTok{# library(PMCMRplus)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2389,7 +2424,7 @@ Another way (which will make sense in a moment):
 ## #   runs <dbl>, Oppruns <dbl>, innings <dbl>,
 ## #   wl <chr>, position <dbl>, gb <chr>,
 ## #   winner <chr>, loser <chr>, save <chr>, `game
-## #   time` <drtn>, Daynight <chr>, attendance <dbl>,
+## #   time` <time>, Daynight <chr>, attendance <dbl>,
 ## #   streak <chr>
 \end{verbatim}
 
@@ -2428,7 +2463,7 @@ Another way (which will make sense in a moment):
 ## $ winner      <chr> "Odorizzi", "Geltz", "Buehrle…
 ## $ loser       <chr> "Dickey", "Castro", "Ramirez"…
 ## $ save        <chr> "Boxberger", "Jepsen", NA, "B…
-## $ `game time` <drtn> 02:30:00, 03:06:00, 03:02:00…
+## $ `game time` <time> 02:30:00, 03:06:00, 03:02:00…
 ## $ Daynight    <chr> "N", "N", "N", "N", "N", "D",…
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
@@ -2449,8 +2484,8 @@ Another way (which will make sense in a moment):
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-60-1.pdf}
-\caption{plot of chunk unnamed-chunk-60}
+\includegraphics{figure/unnamed-chunk-63-1.pdf}
+\caption{plot of chunk unnamed-chunk-63}
 \end{figure}
 
 \end{frame}
@@ -2847,8 +2882,8 @@ Null false & Type II error & Correct\\
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-65-1.pdf}
-\caption{plot of chunk unnamed-chunk-65}
+\includegraphics{figure/unnamed-chunk-68-1.pdf}
+\caption{plot of chunk unnamed-chunk-68}
 \end{figure}
 
 \end{frame}
@@ -2950,8 +2985,8 @@ Null false & Type II error & Correct\\
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-68-1.pdf}
-\caption{plot of chunk unnamed-chunk-68}
+\includegraphics{figure/unnamed-chunk-71-1.pdf}
+\caption{plot of chunk unnamed-chunk-71}
 \end{figure}
 
 \end{frame}
@@ -3390,7 +3425,7 @@ Tension between truth and decision about truth (imperfect).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{rerun}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{)) }\OperatorTok{%>%}
+\KeywordTok{rerun}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{map}\NormalTok{( }\OperatorTok{~}\StringTok{ }\KeywordTok{t.test}\NormalTok{(., }\DataTypeTok{mu =} \DecValTok{10}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{map_dbl}\NormalTok{(}\StringTok{"p.value"}\NormalTok{) ->}
 \StringTok{  }\NormalTok{pvals}
@@ -3402,8 +3437,8 @@ Tension between truth and decision about truth (imperfect).
 ## # A tibble: 2 x 2
 ##   `pvals <= 0.05`     n
 ##   <lgl>           <int>
-## 1 FALSE             578
-## 2 TRUE              422
+## 1 FALSE            5547
+## 2 TRUE             4453
 \end{verbatim}
 
 We correctly rejected 422 times out of 1000, so the estimated power is
@@ -3574,8 +3609,13 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{ns=}\KeywordTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{100}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\NormalTok{ns}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+##  [1]  10  20  30  40  50  60  70  80  90 100
+\end{verbatim}
 
 \begin{itemize}
 \tightlist
@@ -3610,8 +3650,25 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\NormalTok{ns, }\DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
+\NormalTok{d}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 2
+##        n power
+##    <dbl> <dbl>
+##  1    10 0.293
+##  2    20 0.564
+##  3    30 0.754
+##  4    40 0.869
+##  5    50 0.934
+##  6    60 0.968
+##  7    70 0.985
+##  8    80 0.993
+##  9    90 0.997
+## 10   100 0.999
+\end{verbatim}
 
 \begin{itemize}
 \tightlist
@@ -3641,8 +3698,26 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-83-1.pdf}
-\caption{plot of chunk unnamed-chunk-83}
+\includegraphics{figure/unnamed-chunk-86-1.pdf}
+\caption{plot of chunk unnamed-chunk-86}
+\end{figure}
+
+Another way to do it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\NormalTok{ns) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{power_output=}\KeywordTok{map}\NormalTok{(n, }\OperatorTok{~}\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{., }\DataTypeTok{delta=}\DecValTok{10-8}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }\DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{power=}\KeywordTok{map_dbl}\NormalTok{(power_output, }\StringTok{"power"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{n, }\DataTypeTok{y=}\NormalTok{power)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept=}\DecValTok{1}\NormalTok{, }\DataTypeTok{linetype=}\StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{figure/unnamed-chunk-87-1.pdf}
+\caption{plot of chunk unnamed-chunk-87}
 \end{figure}
 
 \end{frame}
@@ -3739,8 +3814,47 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 \begin{Highlighting}[]
 \NormalTok{ans=}\KeywordTok{with}\NormalTok{(combos, }\KeywordTok{power.t.test}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n, }\DataTypeTok{delta=}\NormalTok{mean}\DecValTok{-10}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{4}\NormalTok{, }
                               \DataTypeTok{type=}\StringTok{"one.sample"}\NormalTok{))}
+\NormalTok{ans}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## 
+##      One-sample t test power calculation 
+## 
+##               n = 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30, 15, 30
+##           delta = 4.0, 4.0, 3.5, 3.5, 3.0, 3.0, 2.5, 2.5, 2.0, 2.0, 1.5, 1.5, 1.0, 1.0, 0.5, 0.5, 0.0, 0.0
+##              sd = 4
+##       sig.level = 0.05
+##           power = 0.94908647, 0.99956360, 0.88277128, 0.99619287, 0.77070660, 0.97770385, 0.61513033, 0.91115700, 0.43784659, 0.75396272, 0.27216777, 0.51028173, 0.14530058, 0.26245348, 0.06577280, 0.09719303, 0.02500000, 0.02500000
+##     alternative = two.sided
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(ans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "n"           "delta"       "sd"         
+## [4] "sig.level"   "power"       "alternative"
+## [7] "note"        "method"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ans}\OperatorTok{$}\NormalTok{power}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0.94908647 0.99956360 0.88277128 0.99619287
+##  [5] 0.77070660 0.97770385 0.61513033 0.91115700
+##  [9] 0.43784659 0.75396272 0.27216777 0.51028173
+## [13] 0.14530058 0.26245348 0.06577280 0.09719303
+## [17] 0.02500000 0.02500000
+\end{verbatim}
 
 \begin{itemize}
 \tightlist
@@ -3752,8 +3866,33 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 \begin{Highlighting}[]
 \NormalTok{d=}\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{factor}\NormalTok{(combos}\OperatorTok{$}\NormalTok{n), }\DataTypeTok{mean=}\NormalTok{combos}\OperatorTok{$}\NormalTok{mean, }
          \DataTypeTok{power=}\NormalTok{ans}\OperatorTok{$}\NormalTok{power)}
+\NormalTok{d}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 18 x 3
+##    n      mean  power
+##    <fct> <dbl>  <dbl>
+##  1 15      6   0.949 
+##  2 30      6   1.000 
+##  3 15      6.5 0.883 
+##  4 30      6.5 0.996 
+##  5 15      7   0.771 
+##  6 30      7   0.978 
+##  7 15      7.5 0.615 
+##  8 30      7.5 0.911 
+##  9 15      8   0.438 
+## 10 30      8   0.754 
+## 11 15      8.5 0.272 
+## 12 30      8.5 0.510 
+## 13 15      9   0.145 
+## 14 30      9   0.262 
+## 15 15      9.5 0.0658
+## 16 30      9.5 0.0972
+## 17 15     10   0.0250
+## 18 30     10   0.025
+\end{verbatim}
 
 \begin{itemize}
 \tightlist
@@ -3765,7 +3904,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 \begin{Highlighting}[]
 \NormalTok{g =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(d, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ mean, }\DataTypeTok{y =}\NormalTok{ power, }\DataTypeTok{colour =}\NormalTok{ n)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{1}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{)}
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =} \DecValTok{1}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =} \DecValTok{10}\NormalTok{, }\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3782,8 +3922,8 @@ We correctly rejected 422 times out of 1000, so the estimated power is
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-89-1.pdf}
-\caption{plot of chunk unnamed-chunk-89}
+\includegraphics{figure/unnamed-chunk-93-1.pdf}
+\caption{plot of chunk unnamed-chunk-93}
 \end{figure}
 
 \end{frame}
@@ -3809,7 +3949,7 @@ We correctly rejected 422 times out of 1000, so the estimated power is
   mean of 8 produces power 0.42 and 0.80 as shown on the graph.
 \item
   With \(n = 30\), a true mean that is less than about 7 is almost
-  certain to be correctly rejected. (With \(n = 15\), the difference
+  certain to be correctly rejected. (With \(n = 15\), the true mean
   needs to be less than 6.)
 \end{itemize}
 
@@ -3848,8 +3988,8 @@ Similar procedure to before:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-91-1.pdf}
-\caption{plot of chunk unnamed-chunk-91}
+\includegraphics{figure/unnamed-chunk-95-1.pdf}
+\caption{plot of chunk unnamed-chunk-95}
 \end{figure}
 
 \end{frame}
@@ -3897,6 +4037,9 @@ Similar procedure to before:
 \item
   what is power for these sample sizes, and what sample size would be
   needed to get power up to 0.80?
+\item
+  SD in both groups has to be same in \texttt{power.t.test}, so take as
+  14.
 \end{itemize}
 
 \end{frame}
@@ -4084,6 +4227,33 @@ hypothesis tests}
 
 \end{frame}
 
+\begin{frame}[fragile]{Hypothesis test}
+\protect\hypertarget{hypothesis-test-1}{}
+
+Null difference in means is zero:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{t.test}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{group, }\DataTypeTok{data =}\NormalTok{ twogroups, }\DataTypeTok{mu=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  y by group
+## t = -2.0937, df = 8.7104, p-value = 0.0668
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.5625675  0.2292342
+## sample estimates:
+## mean in group 1 mean in group 2 
+##        13.00000        15.66667
+\end{verbatim}
+
+\end{frame}
+
 \begin{frame}{Comparing results}
 \protect\hypertarget{comparing-results}{}
 
@@ -4223,7 +4393,7 @@ Idea: ``Plausible'' parameter value inside CI, not rejected;
 ##  201.2333
 \end{verbatim}
 
-Reject null; mean greater than 160.
+Reject null; mean (for all people to complete form) greater than 160.
 
 \end{frame}
 
@@ -4238,8 +4408,8 @@ Reject null; mean greater than 160.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-99-1.pdf}
-\caption{plot of chunk unnamed-chunk-99}
+\includegraphics{figure/unnamed-chunk-104-1.pdf}
+\caption{plot of chunk unnamed-chunk-104}
 \end{figure}
 
 \end{frame}
@@ -5114,8 +5284,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-124-1.pdf}
-\caption{plot of chunk unnamed-chunk-124}
+\includegraphics{figure/unnamed-chunk-129-1.pdf}
+\caption{plot of chunk unnamed-chunk-129}
 \end{figure}
 
 \begin{itemize}
@@ -5161,8 +5331,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-125-1.pdf}
-\caption{plot of chunk unnamed-chunk-125}
+\includegraphics{figure/unnamed-chunk-130-1.pdf}
+\caption{plot of chunk unnamed-chunk-130}
 \end{figure}
 
 \end{frame}
@@ -5178,8 +5348,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-126-1.pdf}
-\caption{plot of chunk unnamed-chunk-126}
+\includegraphics{figure/unnamed-chunk-131-1.pdf}
+\caption{plot of chunk unnamed-chunk-131}
 \end{figure}
 
 \end{frame}
@@ -5222,8 +5392,8 @@ call this good:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-128-1.pdf}
-\caption{plot of chunk unnamed-chunk-128}
+\includegraphics{figure/unnamed-chunk-133-1.pdf}
+\caption{plot of chunk unnamed-chunk-133}
 \end{figure}
 
 \end{frame}
@@ -5242,8 +5412,8 @@ Somewhat skewed to right:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-129-1.pdf}
-\caption{plot of chunk unnamed-chunk-129}
+\includegraphics{figure/unnamed-chunk-134-1.pdf}
+\caption{plot of chunk unnamed-chunk-134}
 \end{figure}
 
 \end{frame}
@@ -5261,8 +5431,8 @@ Somewhat opening-up curve:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-130-1.pdf}
-\caption{plot of chunk unnamed-chunk-130}
+\includegraphics{figure/unnamed-chunk-135-1.pdf}
+\caption{plot of chunk unnamed-chunk-135}
 \end{figure}
 
 \end{frame}
@@ -5300,8 +5470,8 @@ Clear upward-opening curve:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-131-1.pdf}
-\caption{plot of chunk unnamed-chunk-131}
+\includegraphics{figure/unnamed-chunk-136-1.pdf}
+\caption{plot of chunk unnamed-chunk-136}
 \end{figure}
 
 \end{frame}
@@ -5339,8 +5509,8 @@ Low values too low and high values too high for normal.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-132-1.pdf}
-\caption{plot of chunk unnamed-chunk-132}
+\includegraphics{figure/unnamed-chunk-137-1.pdf}
+\caption{plot of chunk unnamed-chunk-137}
 \end{figure}
 
 \end{frame}
@@ -5489,8 +5659,8 @@ Low values too low and high values too high for normal.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-135-1.pdf}
-\caption{plot of chunk unnamed-chunk-135}
+\includegraphics{figure/unnamed-chunk-140-1.pdf}
+\caption{plot of chunk unnamed-chunk-140}
 \end{figure}
 
 \end{frame}
@@ -5509,8 +5679,8 @@ Done this way:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-136-1.pdf}
-\caption{plot of chunk unnamed-chunk-136}
+\includegraphics{figure/unnamed-chunk-141-1.pdf}
+\caption{plot of chunk unnamed-chunk-141}
 \end{figure}
 
 \end{frame}
@@ -5967,8 +6137,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-147-1.pdf}
-\caption{plot of chunk unnamed-chunk-147}
+\includegraphics{figure/unnamed-chunk-152-1.pdf}
+\caption{plot of chunk unnamed-chunk-152}
 \end{figure}
 
 \end{frame}
@@ -5985,8 +6155,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-148-1.pdf}
-\caption{plot of chunk unnamed-chunk-148}
+\includegraphics{figure/unnamed-chunk-153-1.pdf}
+\caption{plot of chunk unnamed-chunk-153}
 \end{figure}
 
 \end{frame}
@@ -6278,8 +6448,8 @@ Lowjump-Highjump 0.0298     0.0045
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-157-1.pdf}
-\caption{plot of chunk unnamed-chunk-157}
+\includegraphics{figure/unnamed-chunk-162-1.pdf}
+\caption{plot of chunk unnamed-chunk-162}
 \end{figure}
 
 Assumptions: - Normally distributed data within each group - with equal
@@ -6299,8 +6469,8 @@ group SDs.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-158-1.pdf}
-\caption{plot of chunk unnamed-chunk-158}
+\includegraphics{figure/unnamed-chunk-163-1.pdf}
+\caption{plot of chunk unnamed-chunk-163}
 \end{figure}
 
 \end{frame}
@@ -7184,8 +7354,8 @@ conclusion is so clear that I am OK with this.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-174-1.pdf}
-\caption{plot of chunk unnamed-chunk-174}
+\includegraphics{figure/unnamed-chunk-179-1.pdf}
+\caption{plot of chunk unnamed-chunk-179}
 \end{figure}
 
 \end{frame}
@@ -7832,8 +8002,8 @@ to distinguish max and min on graph.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-196-1.pdf}
-\caption{plot of chunk unnamed-chunk-196}
+\includegraphics{figure/unnamed-chunk-201-1.pdf}
+\caption{plot of chunk unnamed-chunk-201}
 \end{figure}
 
 \end{frame}
@@ -8801,16 +8971,16 @@ Matching a variable in one data frame to one in another is called a
 ## # A tibble: 213 x 2
 ##    Country               cases
 ##    <chr>                 <dbl>
-##  1 <NA>                  58581
-##  2 Andorra                  64
-##  3 United Arab Emirates    487
-##  4 Afghanistan           80005
-##  5 Antigua and Barbuda      21
-##  6 Anguilla                  1
-##  7 Albania                2467
-##  8 Armenia                6757
-##  9 Netherlands Antilles     81
-## 10 Angola               195512
+##  1 Andorra                  64
+##  2 United Arab Emirates    487
+##  3 Afghanistan           80005
+##  4 Antigua and Barbuda      21
+##  5 Anguilla                  1
+##  6 Albania                2467
+##  7 Armenia                6757
+##  8 Netherlands Antilles     81
+##  9 Angola               195512
+## 10 Argentina             64894
 ## # … with 203 more rows
 \end{verbatim}
 
@@ -9032,8 +9202,8 @@ data}\label{case-study-1-the-windmill-data}}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-232-1.pdf}
-\caption{plot of chunk unnamed-chunk-232}
+\includegraphics{figure/unnamed-chunk-237-1.pdf}
+\caption{plot of chunk unnamed-chunk-237}
 \end{figure}
 
 \end{frame}
@@ -9188,8 +9358,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-238-1.pdf}
-\caption{plot of chunk unnamed-chunk-238}
+\includegraphics{figure/unnamed-chunk-243-1.pdf}
+\caption{plot of chunk unnamed-chunk-243}
 \end{figure}
 
 \end{frame}
@@ -9329,8 +9499,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-242-1.pdf}
-\caption{plot of chunk unnamed-chunk-242}
+\includegraphics{figure/unnamed-chunk-247-1.pdf}
+\caption{plot of chunk unnamed-chunk-247}
 \end{figure}
 
 \end{frame}
@@ -9390,8 +9560,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-243-1.pdf}
-\caption{plot of chunk unnamed-chunk-243}
+\includegraphics{figure/unnamed-chunk-248-1.pdf}
+\caption{plot of chunk unnamed-chunk-248}
 \end{figure}
 
 Curve clearly fits better than line.
@@ -9486,8 +9656,8 @@ Pretty straight. Blue actually smooth curve not line:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-244-1.pdf}
-\caption{plot of chunk unnamed-chunk-244}
+\includegraphics{figure/unnamed-chunk-249-1.pdf}
+\caption{plot of chunk unnamed-chunk-249}
 \end{figure}
 
 \end{frame}
@@ -9652,8 +9822,8 @@ Pretty straight. Blue actually smooth curve not line:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-248-1.pdf}
-\caption{plot of chunk unnamed-chunk-248}
+\includegraphics{figure/unnamed-chunk-253-1.pdf}
+\caption{plot of chunk unnamed-chunk-253}
 \end{figure}
 
 \end{frame}
@@ -9982,8 +10152,8 @@ Pretty straight. Blue actually smooth curve not line:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-258-1.pdf}
-\caption{plot of chunk unnamed-chunk-258}
+\includegraphics{figure/unnamed-chunk-263-1.pdf}
+\caption{plot of chunk unnamed-chunk-263}
 \end{figure}
 
 \end{frame}
@@ -10249,8 +10419,8 @@ I saved this graph to plot later (on the next page).
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-265-1.pdf}
-\caption{plot of chunk unnamed-chunk-265}
+\includegraphics{figure/unnamed-chunk-270-1.pdf}
+\caption{plot of chunk unnamed-chunk-270}
 \end{figure}
 
 \end{frame}
@@ -10327,8 +10497,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-267-1.pdf}
-\caption{plot of chunk unnamed-chunk-267}
+\includegraphics{figure/unnamed-chunk-272-1.pdf}
+\caption{plot of chunk unnamed-chunk-272}
 \end{figure}
 
 \end{frame}
@@ -10453,8 +10623,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-270-1.pdf}
-\caption{plot of chunk unnamed-chunk-270}
+\includegraphics{figure/unnamed-chunk-275-1.pdf}
+\caption{plot of chunk unnamed-chunk-275}
 \end{figure}
 
 \end{frame}
@@ -10545,8 +10715,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-274-1.pdf}
-\caption{plot of chunk unnamed-chunk-274}
+\includegraphics{figure/unnamed-chunk-279-1.pdf}
+\caption{plot of chunk unnamed-chunk-279}
 \end{figure}
 
 \end{frame}
@@ -10606,8 +10776,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-275-1.pdf}
-\caption{plot of chunk unnamed-chunk-275}
+\includegraphics{figure/unnamed-chunk-280-1.pdf}
+\caption{plot of chunk unnamed-chunk-280}
 \end{figure}
 
 \end{frame}
@@ -10685,8 +10855,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-278-1.pdf}
-\caption{plot of chunk unnamed-chunk-278}
+\includegraphics{figure/unnamed-chunk-283-1.pdf}
+\caption{plot of chunk unnamed-chunk-283}
 \end{figure}
 
 \end{frame}
@@ -11245,8 +11415,8 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-300-1.pdf}
-\caption{plot of chunk unnamed-chunk-300}
+\includegraphics{figure/unnamed-chunk-305-1.pdf}
+\caption{plot of chunk unnamed-chunk-305}
 \end{figure}
 
 \end{frame}
@@ -11285,8 +11455,8 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-302-1.pdf}
-\caption{plot of chunk unnamed-chunk-302}
+\includegraphics{figure/unnamed-chunk-307-1.pdf}
+\caption{plot of chunk unnamed-chunk-307}
 \end{figure}
 
 \end{frame}
@@ -11730,8 +11900,8 @@ Read the data:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-313-1.pdf}
-\caption{plot of chunk unnamed-chunk-313}
+\includegraphics{figure/unnamed-chunk-318-1.pdf}
+\caption{plot of chunk unnamed-chunk-318}
 \end{figure}
 
 \end{frame}
@@ -13948,8 +14118,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-387-1.pdf}
-\caption{plot of chunk unnamed-chunk-387}
+\includegraphics{figure/unnamed-chunk-392-1.pdf}
+\caption{plot of chunk unnamed-chunk-392}
 \end{figure}
 
 \end{frame}
@@ -14003,8 +14173,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-389-1.pdf}
-\caption{plot of chunk unnamed-chunk-389}
+\includegraphics{figure/unnamed-chunk-394-1.pdf}
+\caption{plot of chunk unnamed-chunk-394}
 \end{figure}
 
 \end{frame}
@@ -14021,8 +14191,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-390-1.pdf}
-\caption{plot of chunk unnamed-chunk-390}
+\includegraphics{figure/unnamed-chunk-395-1.pdf}
+\caption{plot of chunk unnamed-chunk-395}
 \end{figure}
 
 \end{frame}
@@ -14039,8 +14209,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-391-1.pdf}
-\caption{plot of chunk unnamed-chunk-391}
+\includegraphics{figure/unnamed-chunk-396-1.pdf}
+\caption{plot of chunk unnamed-chunk-396}
 \end{figure}
 
 \end{frame}
@@ -14098,8 +14268,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-393-1.pdf}
-\caption{plot of chunk unnamed-chunk-393}
+\includegraphics{figure/unnamed-chunk-398-1.pdf}
+\caption{plot of chunk unnamed-chunk-398}
 \end{figure}
 
 \end{frame}
@@ -14141,8 +14311,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-395-1.pdf}
-\caption{plot of chunk unnamed-chunk-395}
+\includegraphics{figure/unnamed-chunk-400-1.pdf}
+\caption{plot of chunk unnamed-chunk-400}
 \end{figure}
 
 \end{frame}
@@ -14184,8 +14354,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-397-1.pdf}
-\caption{plot of chunk unnamed-chunk-397}
+\includegraphics{figure/unnamed-chunk-402-1.pdf}
+\caption{plot of chunk unnamed-chunk-402}
 \end{figure}
 
 \end{frame}
@@ -14216,8 +14386,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-398-1.pdf}
-\caption{plot of chunk unnamed-chunk-398}
+\includegraphics{figure/unnamed-chunk-403-1.pdf}
+\caption{plot of chunk unnamed-chunk-403}
 \end{figure}
 
 \end{frame}
@@ -14233,8 +14403,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-399-1.pdf}
-\caption{plot of chunk unnamed-chunk-399}
+\includegraphics{figure/unnamed-chunk-404-1.pdf}
+\caption{plot of chunk unnamed-chunk-404}
 \end{figure}
 
 \end{frame}

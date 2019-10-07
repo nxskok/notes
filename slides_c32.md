@@ -1442,7 +1442,7 @@ jays
 ## #   runs <dbl>, Oppruns <dbl>, innings <dbl>,
 ## #   wl <chr>, position <dbl>, gb <chr>,
 ## #   winner <chr>, loser <chr>, save <chr>, `game
-## #   time` <drtn>, Daynight <chr>, attendance <dbl>,
+## #   time` <time>, Daynight <chr>, attendance <dbl>,
 ## #   streak <chr>
 ```
 \normalsize
@@ -1475,7 +1475,7 @@ glimpse(jays)
 ## $ winner      <chr> "Odorizzi", "Geltz", "Buehrle…
 ## $ loser       <chr> "Dickey", "Castro", "Ramirez"…
 ## $ save        <chr> "Boxberger", "Jepsen", NA, "B…
-## $ `game time` <drtn> 02:30:00, 03:06:00, 03:02:00…
+## $ `game time` <time> 02:30:00, 03:06:00, 03:02:00…
 ## $ Daynight    <chr> "N", "N", "N", "N", "N", "D",…
 ## $ attendance  <dbl> 48414, 17264, 15086, 14433, 2…
 ## $ streak      <chr> "-", "--", "+", "-", "--", "+…
@@ -5872,16 +5872,16 @@ tb3 %>%
 ## # A tibble: 213 x 2
 ##    Country               cases
 ##    <chr>                 <dbl>
-##  1 <NA>                  58581
-##  2 Andorra                  64
-##  3 United Arab Emirates    487
-##  4 Afghanistan           80005
-##  5 Antigua and Barbuda      21
-##  6 Anguilla                  1
-##  7 Albania                2467
-##  8 Armenia                6757
-##  9 Netherlands Antilles     81
-## 10 Angola               195512
+##  1 Andorra                  64
+##  2 United Arab Emirates    487
+##  3 Afghanistan           80005
+##  4 Antigua and Barbuda      21
+##  5 Anguilla                  1
+##  6 Albania                2467
+##  7 Armenia                6757
+##  8 Netherlands Antilles     81
+##  9 Angola               195512
+## 10 Argentina             64894
 ## # … with 203 more rows
 ```
 

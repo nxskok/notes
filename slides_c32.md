@@ -4526,6 +4526,42 @@ pigs2
 ## 20 feed4   90.3
 ```
 
+## Another way to do this:
+
+
+```r
+pigs1 %>% 
+  pivot_longer(feed1:feed4, names_to = "feed", 
+               values_to="weight")
+```
+
+```
+## # A tibble: 20 x 2
+##    feed  weight
+##    <chr>  <dbl>
+##  1 feed1   60.8
+##  2 feed2   68.7
+##  3 feed3   92.6
+##  4 feed4   87.9
+##  5 feed1   57  
+##  6 feed2   67.7
+##  7 feed3   92.1
+##  8 feed4   84.2
+##  9 feed1   65  
+## 10 feed2   74  
+## 11 feed3   90.2
+## 12 feed4   83.1
+## 13 feed1   58.6
+## 14 feed2   66.3
+## 15 feed3   96.5
+## 16 feed4   85.7
+## 17 feed1   61.7
+## 18 feed2   69.8
+## 19 feed3   99.1
+## 20 feed4   90.3
+```
+
+
 ## ...and finally, the analysis
 - which is just what we saw before:
 
@@ -4607,7 +4643,7 @@ conclusion is so clear that I am OK with this.
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-179](figure/unnamed-chunk-179-1.pdf)
+![plot of chunk unnamed-chunk-180](figure/unnamed-chunk-180-1.pdf)
 
 
 
@@ -4681,10 +4717,19 @@ glimpse(tb)
 tb %>% gather(genage, freq, m04:fu, na.rm = T) -> tb2
 ```
 
-- what makes the columns-to-be-gathered different, then
-- what makes them the same, then
-- the columns to gather, then (optionally)
-- get rid of the missing values.
+or
+
+
+```r
+tb %>% 
+  pivot_longer(m04:fu, names_to = "genage", 
+               values_to = "freq", values_drop_na = T) -> tb2
+```
+
+- columns to make longer
+- column to contain the names
+- column to contain the values
+- (optional) drop missings in the values
 
 ## Results (some)
 
@@ -4697,16 +4742,16 @@ tb2
 ## # A tibble: 35,750 x 4
 ##    iso2   year genage  freq
 ##    <chr> <dbl> <chr>  <dbl>
-##  1 AD     2005 m04        0
-##  2 AD     2006 m04        0
-##  3 AD     2008 m04        0
-##  4 AE     2006 m04        0
-##  5 AE     2007 m04        0
-##  6 AE     2008 m04        0
-##  7 AG     2007 m04        0
-##  8 AL     2005 m04        0
-##  9 AL     2006 m04        1
-## 10 AL     2007 m04        0
+##  1 AD     1996 m014       0
+##  2 AD     1996 m1524      0
+##  3 AD     1996 m2534      0
+##  4 AD     1996 m3544      4
+##  5 AD     1996 m4554      1
+##  6 AD     1996 m5564      0
+##  7 AD     1996 m65        0
+##  8 AD     1996 f014       0
+##  9 AD     1996 f1524      1
+## 10 AD     1996 f2534      1
 ## # … with 35,740 more rows
 ```
 
@@ -4734,16 +4779,16 @@ tb3
 ## # A tibble: 35,750 x 5
 ##    iso2   year gender age    freq
 ##    <chr> <dbl> <chr>  <chr> <dbl>
-##  1 AD     2005 m      04        0
-##  2 AD     2006 m      04        0
-##  3 AD     2008 m      04        0
-##  4 AE     2006 m      04        0
-##  5 AE     2007 m      04        0
-##  6 AE     2008 m      04        0
-##  7 AG     2007 m      04        0
-##  8 AL     2005 m      04        0
-##  9 AL     2006 m      04        1
-## 10 AL     2007 m      04        0
+##  1 AD     1996 m      014       0
+##  2 AD     1996 m      1524      0
+##  3 AD     1996 m      2534      0
+##  4 AD     1996 m      3544      4
+##  5 AD     1996 m      4554      1
+##  6 AD     1996 m      5564      0
+##  7 AD     1996 m      65        0
+##  8 AD     1996 f      014       0
+##  9 AD     1996 f      1524      1
+## 10 AD     1996 f      2534      1
 ## # … with 35,740 more rows
 ```
 
@@ -4755,7 +4800,8 @@ output as input to the next step, thus:
 
 ```r
 tb %>%
-  gather(genage, freq, m04:fu, na.rm = T) %>%
+  pivot_longer(m04:fu, names_to = "genage", 
+               values_to = "freq", values_drop_na = T) %>% 
   separate(genage, c("gender", "age"), 1) -> tb3
 ```
 
@@ -4768,14 +4814,13 @@ each line is incomplete, so that R knows more is to come.
 
 ```r
 tb3 %>%
-  group_by(year) %>%
-  summarize(cases = sum(freq)) %>%
-  filter(between(year, 1991, 1998))
+  filter(between(year, 1991, 1998)) %>% 
+  count(year, wt=freq) 
 ```
 
 ```
 ## # A tibble: 8 x 2
-##    year  cases
+##    year      n
 ##   <dbl>  <dbl>
 ## 1  1991    544
 ## 2  1992    512
@@ -4789,11 +4834,99 @@ tb3 %>%
 
 - Something very interesting happened between 1994 and 1995.
 
-## Some weather data
+## To find out what
+
+- try counting up total cases by country:
 
 
 ```r
-my_url <- "http://www.utsc.utoronto.ca/~butler/c32/weather.csv"
+tb3 %>% 
+  count(iso2, wt=freq) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 213 x 2
+##    iso2        n
+##    <chr>   <dbl>
+##  1 CN    4065174
+##  2 IN    3966169
+##  3 ID    1129015
+##  4 ZA     900349
+##  5 BD     758008
+##  6 VN     709695
+##  7 CD     603095
+##  8 PH     490040
+##  9 BR     440609
+## 10 KE     431523
+## # … with 203 more rows
+```
+
+## what years do I have for China?
+
+China started recording in 1995, which is at least part of the problem:
+
+
+```r
+tb3 %>% filter(iso2=="CN") %>% 
+  count(year, wt=freq)
+```
+
+```
+## # A tibble: 14 x 2
+##     year      n
+##    <dbl>  <dbl>
+##  1  1995 131194
+##  2  1996 168270
+##  3  1997 195895
+##  4  1998 214404
+##  5  1999 212258
+##  6  2000 213766
+##  7  2001 212766
+##  8  2002 194972
+##  9  2003 267280
+## 10  2004 384886
+## 11  2005 472719
+## 12  2006 468291
+## 13  2007 465877
+## 14  2008 462596
+```
+
+## first year of recording for each country?
+
+- A lot of countries started recording in about 1995:
+
+
+```r
+tb3 %>% group_by(iso2) %>% 
+  summarize(first_year=min(year)) %>% 
+  arrange(first_year)
+```
+
+```
+## # A tibble: 213 x 2
+##    iso2  first_year
+##    <chr>      <dbl>
+##  1 CA          1980
+##  2 CK          1980
+##  3 FJ          1994
+##  4 MN          1994
+##  5 AL          1995
+##  6 AM          1995
+##  7 AO          1995
+##  8 AT          1995
+##  9 AZ          1995
+## 10 BA          1995
+## # … with 203 more rows
+```
+
+
+## Some Toronto weather data
+
+
+```r
+my_url <- 
+  "http://ritsokiguess.site/STAC32/toronto_weather.csv"
 weather <- read_csv(my_url)
 ```
 
@@ -4801,16 +4934,9 @@ weather <- read_csv(my_url)
 ## Parsed with column specification:
 ## cols(
 ##   .default = col_double(),
-##   id = col_character(),
-##   element = col_character(),
-##   d9 = col_logical(),
-##   d12 = col_logical(),
-##   d18 = col_logical(),
-##   d19 = col_logical(),
-##   d20 = col_logical(),
-##   d21 = col_logical(),
-##   d22 = col_logical(),
-##   d24 = col_logical()
+##   station = col_character(),
+##   Month = col_character(),
+##   element = col_character()
 ## )
 ```
 
@@ -4826,44 +4952,47 @@ weather
 ```
 
 ```
-## # A tibble: 22 x 35
-##    id     year month element    d1    d2    d3    d4
-##    <chr> <dbl> <dbl> <chr>   <dbl> <dbl> <dbl> <dbl>
-##  1 MX17…  2010     1 tmax       NA  NA    NA      NA
-##  2 MX17…  2010     1 tmin       NA  NA    NA      NA
-##  3 MX17…  2010     2 tmax       NA  27.3  24.1    NA
-##  4 MX17…  2010     2 tmin       NA  14.4  14.4    NA
-##  5 MX17…  2010     3 tmax       NA  NA    NA      NA
-##  6 MX17…  2010     3 tmin       NA  NA    NA      NA
-##  7 MX17…  2010     4 tmax       NA  NA    NA      NA
-##  8 MX17…  2010     4 tmin       NA  NA    NA      NA
-##  9 MX17…  2010     5 tmax       NA  NA    NA      NA
-## 10 MX17…  2010     5 tmin       NA  NA    NA      NA
-## # … with 12 more rows, and 27 more variables:
-## #   d5 <dbl>, d6 <dbl>, d7 <dbl>, d8 <dbl>,
-## #   d9 <lgl>, d10 <dbl>, d11 <dbl>, d12 <lgl>,
-## #   d13 <dbl>, d14 <dbl>, d15 <dbl>, d16 <dbl>,
-## #   d17 <dbl>, d18 <lgl>, d19 <lgl>, d20 <lgl>,
-## #   d21 <lgl>, d22 <lgl>, d23 <dbl>, d24 <lgl>,
-## #   d25 <dbl>, d26 <dbl>, d27 <dbl>, d28 <dbl>,
-## #   d29 <dbl>, d30 <dbl>, d31 <dbl>
+## # A tibble: 24 x 35
+##    station  Year Month element   d01   d02   d03
+##    <chr>   <dbl> <chr> <chr>   <dbl> <dbl> <dbl>
+##  1 TORONT…  2018 01    tmax     -7.9  -7.1  -5.3
+##  2 TORONT…  2018 01    tmin    -18.6 -12.5 -11.2
+##  3 TORONT…  2018 02    tmax      5.6  -8.6   0.4
+##  4 TORONT…  2018 02    tmin     -8.9 -15    -9.7
+##  5 TORONT…  2018 03    tmax     NA    NA    NA  
+##  6 TORONT…  2018 03    tmin     NA    -0.5  NA  
+##  7 TORONT…  2018 04    tmax      4.5   6.5   5  
+##  8 TORONT…  2018 04    tmin     -2.6  -1.2   2.4
+##  9 TORONT…  2018 05    tmax     23.5  26.3  23  
+## 10 TORONT…  2018 05    tmin      8.5  14.4  11.4
+## # … with 14 more rows, and 28 more variables:
+## #   d04 <dbl>, d05 <dbl>, d06 <dbl>, d07 <dbl>,
+## #   d08 <dbl>, d09 <dbl>, d10 <dbl>, d11 <dbl>,
+## #   d12 <dbl>, d13 <dbl>, d14 <dbl>, d15 <dbl>,
+## #   d16 <dbl>, d17 <dbl>, d18 <dbl>, d19 <dbl>,
+## #   d20 <dbl>, d21 <dbl>, d22 <dbl>, d23 <dbl>,
+## #   d24 <dbl>, d25 <dbl>, d26 <dbl>, d27 <dbl>,
+## #   d28 <dbl>, d29 <dbl>, d30 <dbl>, d31 <dbl>
 ```
 
 ## The columns
 
-- Daily weather records for a weather station in Mexico:
+- Daily weather records for "Toronto City" weather station in 2018:
 
-  - *id*: identifier for this weather station (always same here)
-  - *year*, *month*: obvious 
+  - *station*: identifier for this weather station (always same here)
+  - *Year*, *Month*: obvious 
   - *element*: whether temperature given was daily max or daily min
-  - *d1, d2*,...: day of the month from 1st to 31st.
+  - *d01, d02*,... *d31*: day of the month from 1st to 31st.
 
 - Numbers in data frame all temperatures (for different days of the month),
 so first step is
 
 
 ```r
-weather %>% gather(day, temperature, d1:d31, na.rm = T) -> d
+weather %>% 
+  pivot_longer(d01:d31, names_to="day", 
+               values_to="temperature", 
+               values_drop_na = T) -> d
 ```
 
 ## So far
@@ -4874,20 +5003,20 @@ d
 ```
 
 ```
-## # A tibble: 66 x 6
-##    id       year month element day   temperature
-##    <chr>   <dbl> <dbl> <chr>   <chr>       <dbl>
-##  1 MX17004  2010    12 tmax    d1           29.9
-##  2 MX17004  2010    12 tmin    d1           13.8
-##  3 MX17004  2010     2 tmax    d2           27.3
-##  4 MX17004  2010     2 tmin    d2           14.4
-##  5 MX17004  2010    11 tmax    d2           31.3
-##  6 MX17004  2010    11 tmin    d2           16.3
-##  7 MX17004  2010     2 tmax    d3           24.1
-##  8 MX17004  2010     2 tmin    d3           14.4
-##  9 MX17004  2010     7 tmax    d3           28.6
-## 10 MX17004  2010     7 tmin    d3           17.5
-## # … with 56 more rows
+## # A tibble: 703 x 6
+##    station      Year Month element day   temperature
+##    <chr>       <dbl> <chr> <chr>   <chr>       <dbl>
+##  1 TORONTO CI…  2018 01    tmax    d01          -7.9
+##  2 TORONTO CI…  2018 01    tmax    d02          -7.1
+##  3 TORONTO CI…  2018 01    tmax    d03          -5.3
+##  4 TORONTO CI…  2018 01    tmax    d04          -7.7
+##  5 TORONTO CI…  2018 01    tmax    d05         -14.7
+##  6 TORONTO CI…  2018 01    tmax    d06         -15.4
+##  7 TORONTO CI…  2018 01    tmax    d07          -1  
+##  8 TORONTO CI…  2018 01    tmax    d08           3  
+##  9 TORONTO CI…  2018 01    tmax    d09           1.6
+## 10 TORONTO CI…  2018 01    tmax    d10           5.9
+## # … with 693 more rows
 ```
 
 ## The days
@@ -4895,13 +5024,16 @@ d
 should each be in separate column.
 - Distinct from eg. `m1524` in tuberculosis data, that contained levels of
 two different factors, handled by separate.
-- Untangling names of variables handled by `spread`:
+- Untangling names of variables handled by `pivot_wider`:
 
 
 ```r
 weather %>%
-  gather(day, temperature, d1:d31, na.rm = T) %>%
-  spread(element, temperature) -> d
+  pivot_longer(d01:d31, names_to="day", 
+               values_to="temperature", 
+               values_drop_na = T) %>% 
+  pivot_wider(names_from=element, 
+                values_from=temperature) -> d
 ```
 
 ## So far
@@ -4912,41 +5044,42 @@ d
 ```
 
 ```
-## # A tibble: 33 x 6
-##    id       year month day    tmax  tmin
-##    <chr>   <dbl> <dbl> <chr> <dbl> <dbl>
-##  1 MX17004  2010     1 d30    27.8  14.5
-##  2 MX17004  2010     2 d11    29.7  13.4
-##  3 MX17004  2010     2 d2     27.3  14.4
-##  4 MX17004  2010     2 d23    29.9  10.7
-##  5 MX17004  2010     2 d3     24.1  14.4
-##  6 MX17004  2010     3 d10    34.5  16.8
-##  7 MX17004  2010     3 d16    31.1  17.6
-##  8 MX17004  2010     3 d5     32.1  14.2
-##  9 MX17004  2010     4 d27    36.3  16.7
-## 10 MX17004  2010     5 d27    33.2  18.2
-## # … with 23 more rows
+## # A tibble: 355 x 6
+##    station       Year Month day    tmax  tmin
+##    <chr>        <dbl> <chr> <chr> <dbl> <dbl>
+##  1 TORONTO CITY  2018 01    d01    -7.9 -18.6
+##  2 TORONTO CITY  2018 01    d02    -7.1 -12.5
+##  3 TORONTO CITY  2018 01    d03    -5.3 -11.2
+##  4 TORONTO CITY  2018 01    d04    -7.7 -19.7
+##  5 TORONTO CITY  2018 01    d05   -14.7 -20.6
+##  6 TORONTO CITY  2018 01    d06   -15.4 -22.3
+##  7 TORONTO CITY  2018 01    d07    -1   -17.5
+##  8 TORONTO CITY  2018 01    d08     3    -1.7
+##  9 TORONTO CITY  2018 01    d09     1.6  -0.6
+## 10 TORONTO CITY  2018 01    d10     5.9  -1.3
+## # … with 345 more rows
 ```
 
 ## Further improvements
 - We have tidy data now, but can improve things further.
 - `mutate` creates new columns from old (or assign back to change a
 variable).
-- Would like the numerical dates. `separate` works, but also produces
-column named `d` whose value is always `d`. Instead pull out number as
+- Would like numerical dates. `separate` works, or pull out number as
 below.
-- `select` keeps columns (or drops, with minus). Station `id` has no
+- `select` keeps columns (or drops, with minus). Station name has no
 value to us:
 
+\small
 
 ```r
 weather %>%
-  gather(day, temperature, d1:d31, na.rm = T) %>%
-  spread(element, temperature) %>%
-  mutate(day = parse_number(day)) %>%
-  select(-id) -> d
+  pivot_longer(d01:d31, names_to="day", 
+               values_to="temperature", values_drop_na = T) %>% 
+  pivot_wider(names_from=element, values_from=temperature) %>% 
+  mutate(Day = parse_number(day)) %>%
+  select(-station) -> d
 ```
-
+\normalsize
 ## So far
 
 
@@ -4955,36 +5088,39 @@ d
 ```
 
 ```
-## # A tibble: 33 x 5
-##     year month   day  tmax  tmin
-##    <dbl> <dbl> <dbl> <dbl> <dbl>
-##  1  2010     1    30  27.8  14.5
-##  2  2010     2    11  29.7  13.4
-##  3  2010     2     2  27.3  14.4
-##  4  2010     2    23  29.9  10.7
-##  5  2010     2     3  24.1  14.4
-##  6  2010     3    10  34.5  16.8
-##  7  2010     3    16  31.1  17.6
-##  8  2010     3     5  32.1  14.2
-##  9  2010     4    27  36.3  16.7
-## 10  2010     5    27  33.2  18.2
-## # … with 23 more rows
+## # A tibble: 355 x 6
+##     Year Month day    tmax  tmin   Day
+##    <dbl> <chr> <chr> <dbl> <dbl> <dbl>
+##  1  2018 01    d01    -7.9 -18.6     1
+##  2  2018 01    d02    -7.1 -12.5     2
+##  3  2018 01    d03    -5.3 -11.2     3
+##  4  2018 01    d04    -7.7 -19.7     4
+##  5  2018 01    d05   -14.7 -20.6     5
+##  6  2018 01    d06   -15.4 -22.3     6
+##  7  2018 01    d07    -1   -17.5     7
+##  8  2018 01    d08     3    -1.7     8
+##  9  2018 01    d09     1.6  -0.6     9
+## 10  2018 01    d10     5.9  -1.3    10
+## # … with 345 more rows
 ```
 
 ## Final step(s)
 - Make year-month-day into proper date.
 - Keep only date, tmax, tmin:
+\small
 
 ```r
 weather %>%
-  gather(day, temperature, d1:d31, na.rm = T) %>%
-  spread(element, temperature) %>%
-  mutate(day = parse_number(day)) %>%
-  select(-id) %>%
-  unite(datestr, c(year, month, day), sep = "-") %>%
+  pivot_longer(d01:d31, names_to="day", 
+               values_to="temperature", values_drop_na = T) %>% 
+  pivot_wider(names_from=element, values_from=temperature) %>% 
+  mutate(Day = parse_number(day)) %>%
+  select(-station) %>% 
+  unite(datestr, c(Year, Month, Day), sep = "-") %>%
   mutate(date = as.Date(datestr)) %>%
   select(c(date, tmax, tmin)) -> weather_tidy
 ```
+\normalsize
 
 ## Our tidy data frame
 
@@ -4994,20 +5130,20 @@ weather_tidy
 ```
 
 ```
-## # A tibble: 33 x 3
+## # A tibble: 355 x 3
 ##    date        tmax  tmin
 ##    <date>     <dbl> <dbl>
-##  1 2010-01-30  27.8  14.5
-##  2 2010-02-11  29.7  13.4
-##  3 2010-02-02  27.3  14.4
-##  4 2010-02-23  29.9  10.7
-##  5 2010-02-03  24.1  14.4
-##  6 2010-03-10  34.5  16.8
-##  7 2010-03-16  31.1  17.6
-##  8 2010-03-05  32.1  14.2
-##  9 2010-04-27  36.3  16.7
-## 10 2010-05-27  33.2  18.2
-## # … with 23 more rows
+##  1 2018-01-01  -7.9 -18.6
+##  2 2018-01-02  -7.1 -12.5
+##  3 2018-01-03  -5.3 -11.2
+##  4 2018-01-04  -7.7 -19.7
+##  5 2018-01-05 -14.7 -20.6
+##  6 2018-01-06 -15.4 -22.3
+##  7 2018-01-07  -1   -17.5
+##  8 2018-01-08   3    -1.7
+##  9 2018-01-09   1.6  -0.6
+## 10 2018-01-10   5.9  -1.3
+## # … with 345 more rows
 ```
 
 ## Plotting the temperatures
@@ -5043,15 +5179,14 @@ to distinguish max and min on graph.
 ## Setting up plot
 - Since we only need data frame for plot, we can do the
 column-creation and plot in a pipeline.
-- The temperature columns are actually text (see printout of
-`weather_tidy`), but for graph they need to be numbers.
 - For a `ggplot` in a pipeline, the initial data frame is omitted, because it
 is whatever came out of the previous step.
-- To make those “one column”s: `gather`. I save the graph to show overleaf:
+- To make those “one column”s: `pivot_longer`. I save the graph to show overleaf:
 
 ```r
 weather_tidy %>%
-  gather(maxmin, temperature, tmax:tmin) %>%
+  pivot_longer(tmax:tmin, names_to="maxmin", 
+               values_to="temperature") %>%
   mutate(temperature = as.numeric(temperature)) %>%
   ggplot(aes(x = date, y = temperature, colour = maxmin)) +
   geom_line() -> g
@@ -5064,15 +5199,15 @@ weather_tidy %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-201](figure/unnamed-chunk-201-1.pdf)
+![plot of chunk unnamed-chunk-206](figure/unnamed-chunk-206-1.pdf)
 
 ## Summary of tidying “verbs”
 
-  \begin{tabular}{lp{0.7\textwidth}}
+  \begin{tabular}{lp{0.55\textwidth}}
     Verb & Purpose\\
     \hline
-    \texttt{gather}& Combine columns that measure same thing into one\\
-    \texttt{spread}& Take column that measures one thing under
+    \texttt{pivot\_longer} (\texttt{gather}) & Combine columns that measure same thing into one\\
+    \texttt{pivot\_wider} (\texttt{spread}) & Take column that measures one thing under
                      different conditions and put into multiple columns\\
     \texttt{separate} & Turn a column that encodes
                         several variables into
@@ -5082,7 +5217,7 @@ g
     \hline
   \end{tabular}
   
-  \texttt{gather} and \texttt{spread} are opposites; \texttt{separate}
+  \texttt{pivot\_longer} (\textt{gather}) and \texttt{pivot\_wider} (\texttt{spread}) are opposites; \texttt{separate}
   and \texttt{unite} are opposites.
 
 ## Doing things with data frames
@@ -5772,16 +5907,16 @@ tb3
 ## # A tibble: 35,750 x 5
 ##    iso2   year gender age    freq
 ##    <chr> <dbl> <chr>  <chr> <dbl>
-##  1 AD     2005 m      04        0
-##  2 AD     2006 m      04        0
-##  3 AD     2008 m      04        0
-##  4 AE     2006 m      04        0
-##  5 AE     2007 m      04        0
-##  6 AE     2008 m      04        0
-##  7 AG     2007 m      04        0
-##  8 AL     2005 m      04        0
-##  9 AL     2006 m      04        1
-## 10 AL     2007 m      04        0
+##  1 AD     1996 m      014       0
+##  2 AD     1996 m      1524      0
+##  3 AD     1996 m      2534      0
+##  4 AD     1996 m      3544      4
+##  5 AD     1996 m      4554      1
+##  6 AD     1996 m      5564      0
+##  7 AD     1996 m      65        0
+##  8 AD     1996 f      014       0
+##  9 AD     1996 f      1524      1
+## 10 AD     1996 f      2534      1
 ## # … with 35,740 more rows
 ```
 
@@ -5841,18 +5976,18 @@ tb3 %>% left_join(country_names, by = c("iso2" = "Code_UC"))
 
 ```
 ## # A tibble: 35,750 x 7
-##    iso2   year gender age    freq Code  Country     
-##    <chr> <dbl> <chr>  <chr> <dbl> <chr> <chr>       
-##  1 AD     2005 m      04        0 ad    Andorra     
-##  2 AD     2006 m      04        0 ad    Andorra     
-##  3 AD     2008 m      04        0 ad    Andorra     
-##  4 AE     2006 m      04        0 ae    United Arab…
-##  5 AE     2007 m      04        0 ae    United Arab…
-##  6 AE     2008 m      04        0 ae    United Arab…
-##  7 AG     2007 m      04        0 ag    Antigua and…
-##  8 AL     2005 m      04        0 al    Albania     
-##  9 AL     2006 m      04        1 al    Albania     
-## 10 AL     2007 m      04        0 al    Albania     
+##    iso2   year gender age    freq Code  Country
+##    <chr> <dbl> <chr>  <chr> <dbl> <chr> <chr>  
+##  1 AD     1996 m      014       0 ad    Andorra
+##  2 AD     1996 m      1524      0 ad    Andorra
+##  3 AD     1996 m      2534      0 ad    Andorra
+##  4 AD     1996 m      3544      4 ad    Andorra
+##  5 AD     1996 m      4554      1 ad    Andorra
+##  6 AD     1996 m      5564      0 ad    Andorra
+##  7 AD     1996 m      65        0 ad    Andorra
+##  8 AD     1996 f      014       0 ad    Andorra
+##  9 AD     1996 f      1524      1 ad    Andorra
+## 10 AD     1996 f      2534      1 ad    Andorra
 ## # … with 35,740 more rows
 ```
 
@@ -5932,11 +6067,11 @@ tb3 %>%
 ## # A tibble: 6 x 1
 ##   iso2 
 ##   <chr>
-## 1 ME   
-## 2 PS   
-## 3 RS   
-## 4 CD   
-## 5 <NA> 
+## 1 CD   
+## 2 ME   
+## 3 <NA> 
+## 4 PS   
+## 5 RS   
 ## 6 TL
 ```
 \normalsize
@@ -6032,7 +6167,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-237-1.pdf)
+![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -6142,7 +6277,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243-1.pdf)
+![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -6222,7 +6357,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-247-1.pdf)
+![plot of chunk unnamed-chunk-252](figure/unnamed-chunk-252-1.pdf)
 
 ## Scatterplot with fitted line and curve 
 
@@ -6251,7 +6386,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
+![plot of chunk unnamed-chunk-253](figure/unnamed-chunk-253-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6302,7 +6437,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 Pretty straight. Blue actually smooth curve not line:
 
-![plot of chunk unnamed-chunk-249](figure/unnamed-chunk-249-1.pdf)
+![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.pdf)
 
 
 
@@ -6415,7 +6550,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-253](figure/unnamed-chunk-253-1.pdf)
+![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-258-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6610,7 +6745,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-263](figure/unnamed-chunk-263-1.pdf)
+![plot of chunk unnamed-chunk-268](figure/unnamed-chunk-268-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6781,7 +6916,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-270](figure/unnamed-chunk-270-1.pdf)
+![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6825,7 +6960,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
+![plot of chunk unnamed-chunk-277](figure/unnamed-chunk-277-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -6895,7 +7030,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
+![plot of chunk unnamed-chunk-280](figure/unnamed-chunk-280-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -6960,7 +7095,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-279](figure/unnamed-chunk-279-1.pdf)
+![plot of chunk unnamed-chunk-284](figure/unnamed-chunk-284-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -6991,7 +7126,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-280](figure/unnamed-chunk-280-1.pdf)
+![plot of chunk unnamed-chunk-285](figure/unnamed-chunk-285-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -7033,7 +7168,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-283](figure/unnamed-chunk-283-1.pdf)
+![plot of chunk unnamed-chunk-288](figure/unnamed-chunk-288-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7410,7 +7545,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-305](figure/unnamed-chunk-305-1.pdf)
+![plot of chunk unnamed-chunk-310](figure/unnamed-chunk-310-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7433,7 +7568,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-307](figure/unnamed-chunk-307-1.pdf)
+![plot of chunk unnamed-chunk-312](figure/unnamed-chunk-312-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7737,7 +7872,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-318](figure/unnamed-chunk-318-1.pdf)
+![plot of chunk unnamed-chunk-323](figure/unnamed-chunk-323-1.pdf)
 
 
 # Functions
@@ -9199,7 +9334,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-392](figure/unnamed-chunk-392-1.pdf)
+![plot of chunk unnamed-chunk-397](figure/unnamed-chunk-397-1.pdf)
 
 ## Labelling points on a plot
 
@@ -9234,7 +9369,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-394](figure/unnamed-chunk-394-1.pdf)
+![plot of chunk unnamed-chunk-399](figure/unnamed-chunk-399-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -9244,7 +9379,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-395](figure/unnamed-chunk-395-1.pdf)
+![plot of chunk unnamed-chunk-400](figure/unnamed-chunk-400-1.pdf)
 
 ## Make labels smaller
 
@@ -9254,7 +9389,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-396](figure/unnamed-chunk-396-1.pdf)
+![plot of chunk unnamed-chunk-401](figure/unnamed-chunk-401-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9280,7 +9415,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-398](figure/unnamed-chunk-398-1.pdf)
+![plot of chunk unnamed-chunk-403](figure/unnamed-chunk-403-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9304,7 +9439,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-400](figure/unnamed-chunk-400-1.pdf)
+![plot of chunk unnamed-chunk-405](figure/unnamed-chunk-405-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9329,7 +9464,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-402](figure/unnamed-chunk-402-1.pdf)
+![plot of chunk unnamed-chunk-407](figure/unnamed-chunk-407-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9342,7 +9477,7 @@ g
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-403](figure/unnamed-chunk-403-1.pdf)
+![plot of chunk unnamed-chunk-408](figure/unnamed-chunk-408-1.pdf)
 
 ## Axis labels
 
@@ -9351,7 +9486,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-404](figure/unnamed-chunk-404-1.pdf)
+![plot of chunk unnamed-chunk-409](figure/unnamed-chunk-409-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your

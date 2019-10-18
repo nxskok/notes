@@ -734,17 +734,10 @@ t.test(y ~ group, data = twogroups, conf.level = 0.90)
 
 ## Hypothesis test
 
-<<<<<<< HEAD
 Null is that difference in means is zero:
 
 ```{r}
 t.test(y ~ group, mu=0, data = twogroups)
-=======
-Null difference in means is zero:
-
-```{r}
-t.test(y ~ group, data = twogroups, mu=0)
->>>>>>> baa9c54a4402383e3112e75f7f3d53d05d826a42
 ```
 
 

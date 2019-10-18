@@ -1383,7 +1383,7 @@ Certainly not. Actual attendance depends on many things, eg.:
 
 ```r
 library(tidyverse)
-# library(smmr)
+library(smmr)
 # library(PMCMRplus)
 ```
 
@@ -2444,6 +2444,27 @@ g
 
 
 ```r
+kids
+```
+
+```
+## # A tibble: 44 x 2
+##    group score
+##    <chr> <dbl>
+##  1 t        24
+##  2 t        61
+##  3 t        59
+##  4 t        46
+##  5 t        43
+##  6 t        44
+##  7 t        52
+##  8 t        43
+##  9 t        58
+## 10 t        67
+## # … with 34 more rows
+```
+
+```r
 kids %>% group_by(group) %>% 
   summarize(n=n(), s=sd(score))
 ```
@@ -2604,25 +2625,33 @@ t.test(y ~ group, data = twogroups, conf.level = 0.90)
 
 ## Hypothesis test
 
-Null difference in means is zero:
+<<<<<<< HEAD
+Null is that difference in means is zero:
 
 
 ```r
-t.test(y ~ group, data = twogroups, mu=0)
+t.test(y ~ group, mu=0, data = twogroups)
+=======
+Null difference in means is zero:
 ```
 
 ```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  y by group
-## t = -2.0937, df = 8.7104, p-value = 0.0668
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -5.5625675  0.2292342
-## sample estimates:
-## mean in group 1 mean in group 2 
-##        13.00000        15.66667
+## Error: <text>:2:1: unexpected '=='
+## 1: t.test(y ~ group, mu=0, data = twogroups)
+## 2: ==
+##    ^
+```
+
+```r
+t.test(y ~ group, data = twogroups, mu=0)
+>>>>>>> baa9c54a4402383e3112e75f7f3d53d05d826a42
+```
+
+```
+## Error: <text>:2:1: unexpected '>'
+## 1: t.test(y ~ group, data = twogroups, mu=0)
+## 2: >
+##    ^
 ```
 
 
@@ -2722,7 +2751,7 @@ Reject null; mean (for all people to complete form) greater than 160.
 ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
 ```
 
-![plot of chunk unnamed-chunk-104](figure/unnamed-chunk-104-1.pdf)
+![plot of chunk unnamed-chunk-105](figure/unnamed-chunk-105-1.pdf)
 
 ## Comments
 
@@ -3272,7 +3301,7 @@ line.
 ggplot(pain,aes(sample=diff))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129-1.pdf)
+![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
 
 - Points should follow the straight line. Bottom left one way off, so
 normality questionable here: outlier.
@@ -3299,7 +3328,7 @@ d=tibble(x=rnorm(200))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130-1.pdf)
+![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
 
 ## The normal quantile plot
 
@@ -3308,7 +3337,7 @@ ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131-1.pdf)
+![plot of chunk unnamed-chunk-132](figure/unnamed-chunk-132-1.pdf)
 
 ## Normal data, small sample
 
@@ -3337,7 +3366,7 @@ this good:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133-1.pdf)
+![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.pdf)
 
 ## Chi-squared data, *df* = 10
 
@@ -3349,7 +3378,7 @@ d=tibble(x=rchisq(100,10))
 ggplot(d,aes(x=x))+geom_histogram(bins=10)
 ```
 
-![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134-1.pdf)
+![plot of chunk unnamed-chunk-135](figure/unnamed-chunk-135-1.pdf)
 
 
 
@@ -3362,7 +3391,7 @@ Somewhat opening-up curve:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-135](figure/unnamed-chunk-135-1.pdf)
+![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.pdf)
 
 
 ## Chi-squared data, df = 3
@@ -3388,7 +3417,7 @@ Clear upward-opening curve:
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-136](figure/unnamed-chunk-136-1.pdf)
+![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.pdf)
 
 
 
@@ -3415,7 +3444,7 @@ Low values too low and high values too high for normal.
 ggplot(d,aes(sample=x))+stat_qq()+stat_qq_line()
 ```
 
-![plot of chunk unnamed-chunk-137](figure/unnamed-chunk-137-1.pdf)
+![plot of chunk unnamed-chunk-138](figure/unnamed-chunk-138-1.pdf)
 
 
 ## Our pain-relief data
@@ -3507,7 +3536,7 @@ standard reading method.
 ggplot(kids,aes(x=group,y=score))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-140](figure/unnamed-chunk-140-1.pdf)
+![plot of chunk unnamed-chunk-141](figure/unnamed-chunk-141-1.pdf)
 
 ## Facetted normal quantile plots
 Done this way:
@@ -3518,7 +3547,7 @@ ggplot(kids,aes(sample=score))+stat_qq()+stat_qq_line()+
 facet_wrap(~group)
 ```
 
-![plot of chunk unnamed-chunk-141](figure/unnamed-chunk-141-1.pdf)
+![plot of chunk unnamed-chunk-142](figure/unnamed-chunk-142-1.pdf)
 
 ## Comments
 - These plots show no problems with normality. Both groups are more
@@ -3801,7 +3830,7 @@ rats %>% sample_n(12)
 ggplot(rats,aes(y=density,x=group))+geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-152](figure/unnamed-chunk-152-1.pdf)
+![plot of chunk unnamed-chunk-153](figure/unnamed-chunk-153-1.pdf)
 
 ## Or, arranging groups in data (logical) order
 
@@ -3811,7 +3840,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-153](figure/unnamed-chunk-153-1.pdf)
+![plot of chunk unnamed-chunk-154](figure/unnamed-chunk-154-1.pdf)
 
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
@@ -4016,7 +4045,7 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-162](figure/unnamed-chunk-162-1.pdf)
+![plot of chunk unnamed-chunk-163](figure/unnamed-chunk-163-1.pdf)
 
 Assumptions:
 - Normally distributed data within each group
@@ -4030,7 +4059,7 @@ ggplot(rats, aes(sample = density)) + stat_qq() +
   stat_qq_line() + facet_wrap( ~ group)
 ```
 
-![plot of chunk unnamed-chunk-163](figure/unnamed-chunk-163-1.pdf)
+![plot of chunk unnamed-chunk-164](figure/unnamed-chunk-164-1.pdf)
 
 ## The assumptions
 - Normally-distributed data within each group
@@ -4643,7 +4672,7 @@ conclusion is so clear that I am OK with this.
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
-![plot of chunk unnamed-chunk-180](figure/unnamed-chunk-180-1.pdf)
+![plot of chunk unnamed-chunk-181](figure/unnamed-chunk-181-1.pdf)
 
 
 
@@ -5199,7 +5228,7 @@ weather_tidy %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-206](figure/unnamed-chunk-206-1.pdf)
+![plot of chunk unnamed-chunk-207](figure/unnamed-chunk-207-1.pdf)
 
 ## Summary of tidying “verbs”
 
@@ -6167,7 +6196,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243-1.pdf)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -6277,7 +6306,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
+![plot of chunk unnamed-chunk-249](figure/unnamed-chunk-249-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -6357,7 +6386,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-252](figure/unnamed-chunk-252-1.pdf)
+![plot of chunk unnamed-chunk-253](figure/unnamed-chunk-253-1.pdf)
 
 ## Scatterplot with fitted line and curve 
 
@@ -6386,7 +6415,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-253](figure/unnamed-chunk-253-1.pdf)
+![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6437,7 +6466,7 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 
 Pretty straight. Blue actually smooth curve not line:
 
-![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.pdf)
+![plot of chunk unnamed-chunk-255](figure/unnamed-chunk-255-1.pdf)
 
 
 
@@ -6550,7 +6579,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-258-1.pdf)
+![plot of chunk unnamed-chunk-259](figure/unnamed-chunk-259-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6745,7 +6774,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-268](figure/unnamed-chunk-268-1.pdf)
+![plot of chunk unnamed-chunk-269](figure/unnamed-chunk-269-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6916,7 +6945,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
+![plot of chunk unnamed-chunk-276](figure/unnamed-chunk-276-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6960,7 +6989,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-277](figure/unnamed-chunk-277-1.pdf)
+![plot of chunk unnamed-chunk-278](figure/unnamed-chunk-278-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -7030,7 +7059,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-280](figure/unnamed-chunk-280-1.pdf)
+![plot of chunk unnamed-chunk-281](figure/unnamed-chunk-281-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -7095,7 +7124,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-284](figure/unnamed-chunk-284-1.pdf)
+![plot of chunk unnamed-chunk-285](figure/unnamed-chunk-285-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -7126,7 +7155,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-285](figure/unnamed-chunk-285-1.pdf)
+![plot of chunk unnamed-chunk-286](figure/unnamed-chunk-286-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -7168,7 +7197,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-288](figure/unnamed-chunk-288-1.pdf)
+![plot of chunk unnamed-chunk-289](figure/unnamed-chunk-289-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7545,7 +7574,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-310](figure/unnamed-chunk-310-1.pdf)
+![plot of chunk unnamed-chunk-311](figure/unnamed-chunk-311-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7568,7 +7597,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-312](figure/unnamed-chunk-312-1.pdf)
+![plot of chunk unnamed-chunk-313](figure/unnamed-chunk-313-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7872,7 +7901,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-323](figure/unnamed-chunk-323-1.pdf)
+![plot of chunk unnamed-chunk-324](figure/unnamed-chunk-324-1.pdf)
 
 
 # Functions
@@ -9334,7 +9363,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-397](figure/unnamed-chunk-397-1.pdf)
+![plot of chunk unnamed-chunk-398](figure/unnamed-chunk-398-1.pdf)
 
 ## Labelling points on a plot
 
@@ -9369,7 +9398,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-399](figure/unnamed-chunk-399-1.pdf)
+![plot of chunk unnamed-chunk-400](figure/unnamed-chunk-400-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -9379,7 +9408,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-400](figure/unnamed-chunk-400-1.pdf)
+![plot of chunk unnamed-chunk-401](figure/unnamed-chunk-401-1.pdf)
 
 ## Make labels smaller
 
@@ -9389,7 +9418,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-401](figure/unnamed-chunk-401-1.pdf)
+![plot of chunk unnamed-chunk-402](figure/unnamed-chunk-402-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9415,7 +9444,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-403](figure/unnamed-chunk-403-1.pdf)
+![plot of chunk unnamed-chunk-404](figure/unnamed-chunk-404-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9439,7 +9468,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-405](figure/unnamed-chunk-405-1.pdf)
+![plot of chunk unnamed-chunk-406](figure/unnamed-chunk-406-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9464,7 +9493,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-407](figure/unnamed-chunk-407-1.pdf)
+![plot of chunk unnamed-chunk-408](figure/unnamed-chunk-408-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9477,7 +9506,7 @@ g
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-408](figure/unnamed-chunk-408-1.pdf)
+![plot of chunk unnamed-chunk-409](figure/unnamed-chunk-409-1.pdf)
 
 ## Axis labels
 
@@ -9486,7 +9515,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-409](figure/unnamed-chunk-409-1.pdf)
+![plot of chunk unnamed-chunk-410](figure/unnamed-chunk-410-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your

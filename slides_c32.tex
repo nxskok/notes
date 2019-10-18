@@ -4253,36 +4253,26 @@ hypothesis tests}
 \begin{frame}[fragile]{Hypothesis test}
 \protect\hypertarget{hypothesis-test-1}{}
 
-\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
-HEAD Null is that difference in means is zero:
+Null is that difference in means is zero:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{t.test}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{group, }\DataTypeTok{mu=}\DecValTok{0}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ twogroups)}
-\OperatorTok{==}\ErrorTok{=====}
-\NormalTok{Null difference }\ControlFlowTok{in}\NormalTok{ means is zero}\OperatorTok{:}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Error: <text>:2:1: unexpected '=='
-## 1: t.test(y ~ group, mu=0, data = twogroups)
-## 2: ==
-##    ^
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{t.test}\NormalTok{(y }\OperatorTok{~}\StringTok{ }\NormalTok{group, }\DataTypeTok{data =}\NormalTok{ twogroups, }\DataTypeTok{mu=}\DecValTok{0}\NormalTok{)}
-\OperatorTok{>}\ErrorTok{>>>>>>}\StringTok{ }\NormalTok{baa9c54a4402383e3112e75f7f3d53d05d826a42}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Error: <text>:2:1: unexpected '>'
-## 1: t.test(y ~ group, data = twogroups, mu=0)
-## 2: >
-##    ^
+## 
+##  Welch Two Sample t-test
+## 
+## data:  y by group
+## t = -2.0937, df = 8.7104, p-value = 0.0668
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.5625675  0.2292342
+## sample estimates:
+## mean in group 1 mean in group 2 
+##        13.00000        15.66667
 \end{verbatim}
 
 \end{frame}
@@ -4441,8 +4431,8 @@ Reject null; mean (for all people to complete form) greater than 160.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-105-1.pdf}
-\caption{plot of chunk unnamed-chunk-105}
+\includegraphics{figure/unnamed-chunk-104-1.pdf}
+\caption{plot of chunk unnamed-chunk-104}
 \end{figure}
 
 \end{frame}
@@ -5317,8 +5307,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-130-1.pdf}
-\caption{plot of chunk unnamed-chunk-130}
+\includegraphics{figure/unnamed-chunk-129-1.pdf}
+\caption{plot of chunk unnamed-chunk-129}
 \end{figure}
 
 \begin{itemize}
@@ -5364,8 +5354,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-131-1.pdf}
-\caption{plot of chunk unnamed-chunk-131}
+\includegraphics{figure/unnamed-chunk-130-1.pdf}
+\caption{plot of chunk unnamed-chunk-130}
 \end{figure}
 
 \end{frame}
@@ -5381,8 +5371,8 @@ and do a 1-sample t-test on them, over:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-132-1.pdf}
-\caption{plot of chunk unnamed-chunk-132}
+\includegraphics{figure/unnamed-chunk-131-1.pdf}
+\caption{plot of chunk unnamed-chunk-131}
 \end{figure}
 
 \end{frame}
@@ -5425,8 +5415,8 @@ call this good:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-134-1.pdf}
-\caption{plot of chunk unnamed-chunk-134}
+\includegraphics{figure/unnamed-chunk-133-1.pdf}
+\caption{plot of chunk unnamed-chunk-133}
 \end{figure}
 
 \end{frame}
@@ -5445,8 +5435,8 @@ Somewhat skewed to right:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-135-1.pdf}
-\caption{plot of chunk unnamed-chunk-135}
+\includegraphics{figure/unnamed-chunk-134-1.pdf}
+\caption{plot of chunk unnamed-chunk-134}
 \end{figure}
 
 \end{frame}
@@ -5464,8 +5454,8 @@ Somewhat opening-up curve:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-136-1.pdf}
-\caption{plot of chunk unnamed-chunk-136}
+\includegraphics{figure/unnamed-chunk-135-1.pdf}
+\caption{plot of chunk unnamed-chunk-135}
 \end{figure}
 
 \end{frame}
@@ -5503,8 +5493,8 @@ Clear upward-opening curve:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-137-1.pdf}
-\caption{plot of chunk unnamed-chunk-137}
+\includegraphics{figure/unnamed-chunk-136-1.pdf}
+\caption{plot of chunk unnamed-chunk-136}
 \end{figure}
 
 \end{frame}
@@ -5542,8 +5532,8 @@ Low values too low and high values too high for normal.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-138-1.pdf}
-\caption{plot of chunk unnamed-chunk-138}
+\includegraphics{figure/unnamed-chunk-137-1.pdf}
+\caption{plot of chunk unnamed-chunk-137}
 \end{figure}
 
 \end{frame}
@@ -5692,8 +5682,8 @@ Low values too low and high values too high for normal.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-141-1.pdf}
-\caption{plot of chunk unnamed-chunk-141}
+\includegraphics{figure/unnamed-chunk-140-1.pdf}
+\caption{plot of chunk unnamed-chunk-140}
 \end{figure}
 
 \end{frame}
@@ -5712,8 +5702,8 @@ Done this way:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-142-1.pdf}
-\caption{plot of chunk unnamed-chunk-142}
+\includegraphics{figure/unnamed-chunk-141-1.pdf}
+\caption{plot of chunk unnamed-chunk-141}
 \end{figure}
 
 \end{frame}
@@ -6170,8 +6160,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-153-1.pdf}
-\caption{plot of chunk unnamed-chunk-153}
+\includegraphics{figure/unnamed-chunk-152-1.pdf}
+\caption{plot of chunk unnamed-chunk-152}
 \end{figure}
 
 \end{frame}
@@ -6188,8 +6178,8 @@ Values separated by spaces:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-154-1.pdf}
-\caption{plot of chunk unnamed-chunk-154}
+\includegraphics{figure/unnamed-chunk-153-1.pdf}
+\caption{plot of chunk unnamed-chunk-153}
 \end{figure}
 
 \end{frame}
@@ -6481,8 +6471,8 @@ Lowjump-Highjump 0.0298     0.0045
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-163-1.pdf}
-\caption{plot of chunk unnamed-chunk-163}
+\includegraphics{figure/unnamed-chunk-162-1.pdf}
+\caption{plot of chunk unnamed-chunk-162}
 \end{figure}
 
 Assumptions: - Normally distributed data within each group - with equal
@@ -6502,8 +6492,8 @@ group SDs.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-164-1.pdf}
-\caption{plot of chunk unnamed-chunk-164}
+\includegraphics{figure/unnamed-chunk-163-1.pdf}
+\caption{plot of chunk unnamed-chunk-163}
 \end{figure}
 
 \end{frame}
@@ -7426,8 +7416,8 @@ conclusion is so clear that I am OK with this.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-181-1.pdf}
-\caption{plot of chunk unnamed-chunk-181}
+\includegraphics{figure/unnamed-chunk-180-1.pdf}
+\caption{plot of chunk unnamed-chunk-180}
 \end{figure}
 
 \end{frame}
@@ -8197,8 +8187,8 @@ to distinguish max and min on graph.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-207-1.pdf}
-\caption{plot of chunk unnamed-chunk-207}
+\includegraphics{figure/unnamed-chunk-206-1.pdf}
+\caption{plot of chunk unnamed-chunk-206}
 \end{figure}
 
 \end{frame}
@@ -9398,8 +9388,8 @@ data}\label{case-study-1-the-windmill-data}}
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-243-1.pdf}
-\caption{plot of chunk unnamed-chunk-243}
+\includegraphics{figure/unnamed-chunk-242-1.pdf}
+\caption{plot of chunk unnamed-chunk-242}
 \end{figure}
 
 \end{frame}
@@ -9554,8 +9544,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-249-1.pdf}
-\caption{plot of chunk unnamed-chunk-249}
+\includegraphics{figure/unnamed-chunk-248-1.pdf}
+\caption{plot of chunk unnamed-chunk-248}
 \end{figure}
 
 \end{frame}
@@ -9695,8 +9685,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-253-1.pdf}
-\caption{plot of chunk unnamed-chunk-253}
+\includegraphics{figure/unnamed-chunk-252-1.pdf}
+\caption{plot of chunk unnamed-chunk-252}
 \end{figure}
 
 \end{frame}
@@ -9756,8 +9746,8 @@ showing the intercept and slope and their significance.
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-254-1.pdf}
-\caption{plot of chunk unnamed-chunk-254}
+\includegraphics{figure/unnamed-chunk-253-1.pdf}
+\caption{plot of chunk unnamed-chunk-253}
 \end{figure}
 
 Curve clearly fits better than line.
@@ -9852,8 +9842,8 @@ Pretty straight. Blue actually smooth curve not line:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-255-1.pdf}
-\caption{plot of chunk unnamed-chunk-255}
+\includegraphics{figure/unnamed-chunk-254-1.pdf}
+\caption{plot of chunk unnamed-chunk-254}
 \end{figure}
 
 \end{frame}
@@ -10018,8 +10008,8 @@ Pretty straight. Blue actually smooth curve not line:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-259-1.pdf}
-\caption{plot of chunk unnamed-chunk-259}
+\includegraphics{figure/unnamed-chunk-258-1.pdf}
+\caption{plot of chunk unnamed-chunk-258}
 \end{figure}
 
 \end{frame}
@@ -10348,8 +10338,8 @@ Pretty straight. Blue actually smooth curve not line:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-269-1.pdf}
-\caption{plot of chunk unnamed-chunk-269}
+\includegraphics{figure/unnamed-chunk-268-1.pdf}
+\caption{plot of chunk unnamed-chunk-268}
 \end{figure}
 
 \end{frame}
@@ -10615,8 +10605,8 @@ I saved this graph to plot later (on the next page).
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-276-1.pdf}
-\caption{plot of chunk unnamed-chunk-276}
+\includegraphics{figure/unnamed-chunk-275-1.pdf}
+\caption{plot of chunk unnamed-chunk-275}
 \end{figure}
 
 \end{frame}
@@ -10693,8 +10683,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-278-1.pdf}
-\caption{plot of chunk unnamed-chunk-278}
+\includegraphics{figure/unnamed-chunk-277-1.pdf}
+\caption{plot of chunk unnamed-chunk-277}
 \end{figure}
 
 \end{frame}
@@ -10819,8 +10809,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-281-1.pdf}
-\caption{plot of chunk unnamed-chunk-281}
+\includegraphics{figure/unnamed-chunk-280-1.pdf}
+\caption{plot of chunk unnamed-chunk-280}
 \end{figure}
 
 \end{frame}
@@ -10911,8 +10901,8 @@ from here on, eg.:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-285-1.pdf}
-\caption{plot of chunk unnamed-chunk-285}
+\includegraphics{figure/unnamed-chunk-284-1.pdf}
+\caption{plot of chunk unnamed-chunk-284}
 \end{figure}
 
 \end{frame}
@@ -10972,8 +10962,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-286-1.pdf}
-\caption{plot of chunk unnamed-chunk-286}
+\includegraphics{figure/unnamed-chunk-285-1.pdf}
+\caption{plot of chunk unnamed-chunk-285}
 \end{figure}
 
 \end{frame}
@@ -11051,8 +11041,8 @@ From package \texttt{MASS}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-289-1.pdf}
-\caption{plot of chunk unnamed-chunk-289}
+\includegraphics{figure/unnamed-chunk-288-1.pdf}
+\caption{plot of chunk unnamed-chunk-288}
 \end{figure}
 
 \end{frame}
@@ -11611,8 +11601,8 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-311-1.pdf}
-\caption{plot of chunk unnamed-chunk-311}
+\includegraphics{figure/unnamed-chunk-310-1.pdf}
+\caption{plot of chunk unnamed-chunk-310}
 \end{figure}
 
 \end{frame}
@@ -11651,8 +11641,8 @@ Uses package \texttt{leaps}:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-313-1.pdf}
-\caption{plot of chunk unnamed-chunk-313}
+\includegraphics{figure/unnamed-chunk-312-1.pdf}
+\caption{plot of chunk unnamed-chunk-312}
 \end{figure}
 
 \end{frame}
@@ -12096,8 +12086,8 @@ Read the data:
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-324-1.pdf}
-\caption{plot of chunk unnamed-chunk-324}
+\includegraphics{figure/unnamed-chunk-323-1.pdf}
+\caption{plot of chunk unnamed-chunk-323}
 \end{figure}
 
 \end{frame}
@@ -14314,8 +14304,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-398-1.pdf}
-\caption{plot of chunk unnamed-chunk-398}
+\includegraphics{figure/unnamed-chunk-397-1.pdf}
+\caption{plot of chunk unnamed-chunk-397}
 \end{figure}
 
 \end{frame}
@@ -14369,8 +14359,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-400-1.pdf}
-\caption{plot of chunk unnamed-chunk-400}
+\includegraphics{figure/unnamed-chunk-399-1.pdf}
+\caption{plot of chunk unnamed-chunk-399}
 \end{figure}
 
 \end{frame}
@@ -14387,8 +14377,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-401-1.pdf}
-\caption{plot of chunk unnamed-chunk-401}
+\includegraphics{figure/unnamed-chunk-400-1.pdf}
+\caption{plot of chunk unnamed-chunk-400}
 \end{figure}
 
 \end{frame}
@@ -14405,8 +14395,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-402-1.pdf}
-\caption{plot of chunk unnamed-chunk-402}
+\includegraphics{figure/unnamed-chunk-401-1.pdf}
+\caption{plot of chunk unnamed-chunk-401}
 \end{figure}
 
 \end{frame}
@@ -14464,8 +14454,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-404-1.pdf}
-\caption{plot of chunk unnamed-chunk-404}
+\includegraphics{figure/unnamed-chunk-403-1.pdf}
+\caption{plot of chunk unnamed-chunk-403}
 \end{figure}
 
 \end{frame}
@@ -14507,8 +14497,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-406-1.pdf}
-\caption{plot of chunk unnamed-chunk-406}
+\includegraphics{figure/unnamed-chunk-405-1.pdf}
+\caption{plot of chunk unnamed-chunk-405}
 \end{figure}
 
 \end{frame}
@@ -14550,8 +14540,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-408-1.pdf}
-\caption{plot of chunk unnamed-chunk-408}
+\includegraphics{figure/unnamed-chunk-407-1.pdf}
+\caption{plot of chunk unnamed-chunk-407}
 \end{figure}
 
 \end{frame}
@@ -14582,8 +14572,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-409-1.pdf}
-\caption{plot of chunk unnamed-chunk-409}
+\includegraphics{figure/unnamed-chunk-408-1.pdf}
+\caption{plot of chunk unnamed-chunk-408}
 \end{figure}
 
 \end{frame}
@@ -14599,8 +14589,8 @@ rat5T12
 
 \begin{figure}
 \centering
-\includegraphics{figure/unnamed-chunk-410-1.pdf}
-\caption{plot of chunk unnamed-chunk-410}
+\includegraphics{figure/unnamed-chunk-409-1.pdf}
+\caption{plot of chunk unnamed-chunk-409}
 \end{figure}
 
 \end{frame}

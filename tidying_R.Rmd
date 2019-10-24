@@ -481,6 +481,13 @@ either uppercase or lowercase:
 athletes %>% select(ends_with("c"))
 ```
 
+## Case-sensitive
+
+```{r}
+athletes %>% select(ends_with("C", ignore.case=F))
+```
+
+
 ## Column names containing letter R
 
 ```{r}
@@ -515,23 +522,31 @@ equally likely to be anything 0–9 (without replacement):
 ## Just display x2 and x3:
 ```{r}
 d %>% select(num_range("x", 2:3))
+d %>% select(x2:x3)
 ```
 
 ## Choosing rows by number 
 
-```{r, paged.print=F}
+```{r}
 athletes %>% slice(16:25)
 ```
 
+```{r}
+athletes %>% mutate(row=row_number()) %>% select(Sex, Sport, row) %>% 
+  slice(16:25)
+```
+
+
 ## Non-consecutive rows 
 
-```{r, paged.print=F}
-athletes %>% slice(c(10, 13, 17, 42))
+```{r}
+athletes %>% 
+  slice(10,13,17,42)
 ```
 
 ## A random sample of rows
 
-```{r, paged.print=F}
+```{r}
 athletes %>% sample_n(8)
 ```
 
@@ -548,6 +563,14 @@ athletes %>% filter(Sport == "Tennis")
 ```{r}
 athletes %>% filter(Sport == "Tennis", RCC < 5)
 ```
+
+## Another way to do "and"
+
+```{r}
+athletes %>% filter(Sport == "Tennis") %>% 
+  filter(RCC < 5)
+```
+
 
 ## Either/Or
 
@@ -588,7 +611,8 @@ athletes %>%
 ```{r new-from-old}
 athletes %>%
   mutate(wt_lb = Wt * 2.2) %>%
-  select(Sport, Wt, wt_lb)
+  select(Sport, Sex, Wt, wt_lb) %>% 
+  arrange(Wt)
 ```
 
 ## Turning the result into a number

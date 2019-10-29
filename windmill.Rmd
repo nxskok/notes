@@ -158,11 +158,11 @@ something different (to do with interactions in ANOVA).
 
 ## Parabola model output
 
-```{r, paged.print=F}
+```{r}
 tidy(DC.2)
 ```
 
-```{r, paged.print=F}
+```{r}
 glance(DC.2)
 ```
 
@@ -268,7 +268,7 @@ Pretty straight. Blue actually smooth curve not line:
 
 ## Regression output
 
-```{r, paged.print=F}
+```{r}
 glance(DC.3)
 tidy(DC.3)
 ```
@@ -309,7 +309,7 @@ w2 <- tibble(
 
 ## What’s in `w2`
 
-```{r, paged.print=F}
+```{r}
 w2
 ```
 
@@ -342,7 +342,7 @@ w2 %>%
 
 ## Asymptote model summary
 
-```{r, paged.print=F}
+```{r}
 tidy(DC.3)
 ```
 
@@ -481,7 +481,7 @@ parabola model does not.
 
 - For parabola model:
 
-```{r paged.print=F}
+```{r}
 tidy(DC.2)
 ```
 
@@ -491,7 +491,7 @@ zero.
 ## Comments (3): asymptote model
 
 \small
-```{r, paged.print=F}
+```{r}
 tidy(DC.3)
 ```
 \normalsize

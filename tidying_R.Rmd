@@ -483,6 +483,8 @@ athletes %>% select(ends_with("c"))
 
 ## Case-sensitive
 
+This works with any of the select-helpers:
+
 ```{r}
 athletes %>% select(ends_with("C", ignore.case=F))
 ```

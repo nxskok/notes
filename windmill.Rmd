@@ -63,7 +63,7 @@ line not so good here.
 ## Fit a straight line (and see what happens)
 
 ```{r, echo=F}
-wid=getOption("width")
+wid <- getOption("width")
 options(width=60)
 ```
 
@@ -76,7 +76,7 @@ summary(DC.1)
 \normalsize
 
 ```{r, echo=F}
-options(wid)
+options(width=wid)
 ```
 
 
@@ -238,7 +238,7 @@ take 12 minutes to walk 1 km, called your pace. So 1 over
 ```{r straightness, fig.keep="none"}
 windmill %>% mutate(wind_pace = 1 / wind_velocity) -> windmill
 ggplot(windmill, aes(y = DC_output, x = wind_pace)) +
-  geom_point() + geom_smooth(method = "lm", se = F)
+  geom_point() + geom_smooth(se = F)
 ```
 
 - and run regression like this (output page after):
@@ -310,11 +310,11 @@ w2
 $y$’s, with another column for distinguishing things.
 - But we have three columns of fitted values, that need to be combined
 into one.
-- `gather`, then plot:
+- `pivot_longer`, then plot:
 
 ```{r allcurves, eval=F}
 w2 %>%
-  gather(model, fit, linear:asymptote) %>%
+  pivot_longer(linear:asymptote, names_to="model", values_to="fit") %>%
   ggplot(aes(x = wind_velocity, y = DC_output)) +
   geom_point() +
   geom_line(aes(y = fit, colour = model))
@@ -428,9 +428,10 @@ predictions on a plot with a legend (saving result to add to later):
 
 ```{r}
 my_fits %>%
-  gather(
-    model, fit,
-    linear:asymptote
+    pivot_longer(
+    linear:asymptote,
+    names_to="model", 
+    values_to="fit"
   ) %>%
   ggplot(aes(
     y = fit, x = wind_velocity,

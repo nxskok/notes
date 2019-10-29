@@ -45,15 +45,15 @@ Same idea as for plotting separate predictions on one plot:
 
 ```{r}
 asphalt %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, viscosity:run)
+  pivot_longer(
+    c(pct.a.surf:voids, viscosity:run),
+    names_to="xname", values_to="x"
   ) %>%
   ggplot(aes(x = x, y = rut.depth)) + geom_point() +
   facet_wrap(~xname, scales = "free") -> g
 ```
 
-“gather all the x-variables together into one column called x, with another
+“collect all the x-variables together into one column called x, with another
 column xname saying which x they were, then plot these x’s against
 rut.depth, a separate facet for each x-variable.”
 
@@ -164,9 +164,9 @@ glimpse(rut.1a)
 
 ```{r}
 rut.1a %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, run, log.viscosity)
+  pivot_longer(
+    c(pct.a.surf:voids, run, log.viscosity),
+    names_to="xname", values_to="x"
   ) %>%
   ggplot(aes(x = x, y = .resid)) +
   geom_point() + facet_wrap(~xname, scales = "free") -> g
@@ -229,9 +229,9 @@ explanatory variables, all in one shot:
 
 ```{r}
 asphalt_2 %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, run:log.viscosity)
+  pivot_longer(
+    c(pct.a.surf:voids, run:log.viscosity),
+    names_to="xname", values_to="x"
   ) %>%
   ggplot(aes(y = log.rut.depth, x = x)) + geom_point() +
   facet_wrap(~xname, scales = "free") -> g3
@@ -467,9 +467,9 @@ g
 
 ```{r}
 augment(rut.6, asphalt_2) %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, run:log.viscosity)
+  pivot_longer(
+    c(pct.a.surf:voids, run:log.viscosity),
+    names_to="xname", values_to="x",
   ) %>%
   ggplot(aes(y = .resid, x = x)) + geom_point() +
   facet_wrap(~xname, scales = "free") -> g2

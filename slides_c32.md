@@ -6444,7 +6444,11 @@ take 12 minutes to walk 1 km, called your pace. So 1 over
 ```r
 windmill %>% mutate(wind_pace = 1 / wind_velocity) -> windmill
 ggplot(windmill, aes(y = DC_output, x = wind_pace)) +
-  geom_point() + geom_smooth(method = "lm", se = F)
+  geom_point() + geom_smooth(se = F)
+```
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
 - and run regression like this (output page after):
@@ -6457,6 +6461,11 @@ DC.3 <- lm(DC_output ~ wind_pace, data = windmill)
 ## Scatterplot for wind_pace
 
 Pretty straight. Blue actually smooth curve not line:
+
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
 
 ![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.pdf)
 

@@ -9817,9 +9817,13 @@ velocity, the more electricity generated.
 \begin{Highlighting}[]
 \NormalTok{windmill }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{wind_pace =} \DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{wind_velocity) ->}\StringTok{ }\NormalTok{windmill}
 \KeywordTok{ggplot}\NormalTok{(windmill, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ DC_output, }\DataTypeTok{x =}\NormalTok{ wind_pace)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{, }\DataTypeTok{se =}\NormalTok{ F)}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =}\NormalTok{ F)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
 
 \begin{itemize}
 \tightlist
@@ -9835,10 +9839,14 @@ velocity, the more electricity generated.
 
 \end{frame}
 
-\begin{frame}{Scatterplot for wind\_pace}
+\begin{frame}[fragile]{Scatterplot for wind\_pace}
 \protect\hypertarget{scatterplot-for-wind_pace}{}
 
 Pretty straight. Blue actually smooth curve not line:
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
 
 \begin{figure}
 \centering

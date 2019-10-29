@@ -85,7 +85,7 @@ options(width=wid)
 - The standard output tends to go off the bottom of the page rather easily. Package `broom` has these:
 
 \footnotesize
-```{r, paged.print=F}
+```{r}
 glance(DC.1)
 ```
 \normalsize
@@ -93,7 +93,7 @@ glance(DC.1)
 showing that the R-squared is 87%, and
 
 \footnotesize
-```{r, paged.print=F}
+```{r}
 tidy(DC.1)
 ```
 \normalsize
@@ -111,6 +111,14 @@ R-squared (87%) high.
 - How to check whether regression is appropriate? Look at the
 residuals, observed minus predicted, plotted against fitted (predicted).
 - Plot using the regression object as “data frame” (see over).
+
+## back to scatterplot, but this time add line
+
+```{r, fig.height=3.5}
+ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
+  geom_point() + geom_smooth(method="lm", se = F)
+```
+
 
 ## Plot of residuals against fitted values
 

@@ -102,7 +102,7 @@ feed group. I borrowed an idea from later to put the means in descending order:
 ```{r}
 pigs2 %>%
   group_by(feed) %>%
-  summarize(mean_weight = mean(weight)) %>%
+  summarize(mean_weight = mean(weight))%>%
   arrange(desc(mean_weight))
 ```
 
@@ -127,6 +127,7 @@ various diseases, eg. tuberculosis.
 
 ```{r}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/tb.csv"
+tb
 tb <- read_csv(my_url)
 ```
 
@@ -138,6 +139,7 @@ Also `mu` and `fu`, where age is unknown.
 ## The data
 
 ```{r}
+tb
 glimpse(tb)
 ```
 
@@ -193,7 +195,7 @@ output as input to the next step, thus:
 tb %>%
   pivot_longer(m04:fu, names_to = "genage", 
                values_to = "freq", values_drop_na = T) %>% 
-  separate(genage, c("gender", "age"), 1) -> tb3
+  separate(genage, c("gender", "age"), 1) 
 ```
 
 - You can split the R code over as many lines as you like, as long as
@@ -292,7 +294,7 @@ weather %>%
                values_to="temperature", 
                values_drop_na = T) %>% 
   pivot_wider(names_from=element, 
-                values_from=temperature) -> d
+                values_from=temperature)
 ```
 
 ## So far
@@ -387,9 +389,8 @@ is whatever came out of the previous step.
 weather_tidy %>%
   pivot_longer(tmax:tmin, names_to="maxmin", 
                values_to="temperature") %>%
-  mutate(temperature = as.numeric(temperature)) %>%
   ggplot(aes(x = date, y = temperature, colour = maxmin)) +
-  geom_line() -> g
+      geom_line() -> g
 ```
 
 ## The plot
@@ -457,7 +458,7 @@ athletes %>% select(-(RCC:LBM))
 ```
 
 ## Select-helpers
-Other ways to select columns: 
+Other ways to select columns: those whose name:
 
 - `starts_with` something
 - `ends_with` something
@@ -479,6 +480,13 @@ either uppercase or lowercase:
 ```{r}
 athletes %>% select(ends_with("c"))
 ```
+
+## Case-sensitive
+
+```{r}
+athletes %>% select(ends_with("C", ignore.case=F))
+```
+
 
 ## Column names containing letter R
 
@@ -514,23 +522,31 @@ equally likely to be anything 0–9 (without replacement):
 ## Just display x2 and x3:
 ```{r}
 d %>% select(num_range("x", 2:3))
+d %>% select(x2:x3)
 ```
 
 ## Choosing rows by number 
 
-```{r, paged.print=F}
+```{r}
 athletes %>% slice(16:25)
 ```
 
+```{r}
+athletes %>% mutate(row=row_number()) %>% select(Sex, Sport, row) %>% 
+  slice(16:25)
+```
+
+
 ## Non-consecutive rows 
 
-```{r, paged.print=F}
-athletes %>% slice(c(10, 13, 17, 42))
+```{r}
+athletes %>% 
+  slice(10,13,17,42)
 ```
 
 ## A random sample of rows
 
-```{r, paged.print=F}
+```{r}
 athletes %>% sample_n(8)
 ```
 
@@ -547,6 +563,14 @@ athletes %>% filter(Sport == "Tennis")
 ```{r}
 athletes %>% filter(Sport == "Tennis", RCC < 5)
 ```
+
+## Another way to do "and"
+
+```{r}
+athletes %>% filter(Sport == "Tennis") %>% 
+  filter(RCC < 5)
+```
+
 
 ## Either/Or
 
@@ -587,7 +611,8 @@ athletes %>%
 ```{r new-from-old}
 athletes %>%
   mutate(wt_lb = Wt * 2.2) %>%
-  select(Sport, Wt, wt_lb)
+  select(Sport, Sex, Wt, wt_lb) %>% 
+  arrange(Wt)
 ```
 
 ## Turning the result into a number

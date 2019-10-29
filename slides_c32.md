@@ -4638,7 +4638,7 @@ feed group. I borrowed an idea from later to put the means in descending order:
 ```r
 pigs2 %>%
   group_by(feed) %>%
-  summarize(mean_weight = mean(weight)) %>%
+  summarize(mean_weight = mean(weight))%>%
   arrange(desc(mean_weight))
 ```
 
@@ -4677,6 +4677,14 @@ various diseases, eg. tuberculosis.
 
 ```r
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/tb.csv"
+tb
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'tb' not found
+```
+
+```r
 tb <- read_csv(my_url)
 ```
 
@@ -4699,6 +4707,31 @@ Also `mu` and `fu`, where age is unknown.
 
 ## The data
 
+
+```r
+tb
+```
+
+```
+## # A tibble: 5,769 x 22
+##    iso2   year   m04  m514  m014 m1524 m2534 m3544
+##    <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1 AD     1989    NA    NA    NA    NA    NA    NA
+##  2 AD     1990    NA    NA    NA    NA    NA    NA
+##  3 AD     1991    NA    NA    NA    NA    NA    NA
+##  4 AD     1992    NA    NA    NA    NA    NA    NA
+##  5 AD     1993    NA    NA    NA    NA    NA    NA
+##  6 AD     1994    NA    NA    NA    NA    NA    NA
+##  7 AD     1996    NA    NA     0     0     0     4
+##  8 AD     1997    NA    NA     0     0     1     2
+##  9 AD     1998    NA    NA     0     0     0     1
+## 10 AD     1999    NA    NA     0     0     0     1
+## # … with 5,759 more rows, and 14 more variables:
+## #   m4554 <dbl>, m5564 <dbl>, m65 <dbl>, mu <dbl>,
+## #   f04 <dbl>, f514 <dbl>, f014 <dbl>, f1524 <dbl>,
+## #   f2534 <dbl>, f3544 <dbl>, f4554 <dbl>,
+## #   f5564 <dbl>, f65 <dbl>, fu <dbl>
+```
 
 ```r
 glimpse(tb)
@@ -4823,7 +4856,24 @@ output as input to the next step, thus:
 tb %>%
   pivot_longer(m04:fu, names_to = "genage", 
                values_to = "freq", values_drop_na = T) %>% 
-  separate(genage, c("gender", "age"), 1) -> tb3
+  separate(genage, c("gender", "age"), 1) 
+```
+
+```
+## # A tibble: 35,750 x 5
+##    iso2   year gender age    freq
+##    <chr> <dbl> <chr>  <chr> <dbl>
+##  1 AD     1996 m      014       0
+##  2 AD     1996 m      1524      0
+##  3 AD     1996 m      2534      0
+##  4 AD     1996 m      3544      4
+##  5 AD     1996 m      4554      1
+##  6 AD     1996 m      5564      0
+##  7 AD     1996 m      65        0
+##  8 AD     1996 f      014       0
+##  9 AD     1996 f      1524      1
+## 10 AD     1996 f      2534      1
+## # … with 35,740 more rows
 ```
 
 - You can split the R code over as many lines as you like, as long as
@@ -5054,14 +5104,7 @@ weather %>%
                values_to="temperature", 
                values_drop_na = T) %>% 
   pivot_wider(names_from=element, 
-                values_from=temperature) -> d
-```
-
-## So far
-
-
-```r
-d
+                values_from=temperature)
 ```
 
 ```
@@ -5079,6 +5122,30 @@ d
 ##  9 TORONTO CITY  2018 01    d09     1.6  -0.6
 ## 10 TORONTO CITY  2018 01    d10     5.9  -1.3
 ## # … with 345 more rows
+```
+
+## So far
+
+
+```r
+d
+```
+
+```
+## # A tibble: 703 x 6
+##    station      Year Month element day   temperature
+##    <chr>       <dbl> <chr> <chr>   <chr>       <dbl>
+##  1 TORONTO CI…  2018 01    tmax    d01          -7.9
+##  2 TORONTO CI…  2018 01    tmax    d02          -7.1
+##  3 TORONTO CI…  2018 01    tmax    d03          -5.3
+##  4 TORONTO CI…  2018 01    tmax    d04          -7.7
+##  5 TORONTO CI…  2018 01    tmax    d05         -14.7
+##  6 TORONTO CI…  2018 01    tmax    d06         -15.4
+##  7 TORONTO CI…  2018 01    tmax    d07          -1  
+##  8 TORONTO CI…  2018 01    tmax    d08           3  
+##  9 TORONTO CI…  2018 01    tmax    d09           1.6
+## 10 TORONTO CI…  2018 01    tmax    d10           5.9
+## # … with 693 more rows
 ```
 
 ## Further improvements
@@ -5208,9 +5275,8 @@ is whatever came out of the previous step.
 weather_tidy %>%
   pivot_longer(tmax:tmin, names_to="maxmin", 
                values_to="temperature") %>%
-  mutate(temperature = as.numeric(temperature)) %>%
   ggplot(aes(x = date, y = temperature, colour = maxmin)) +
-  geom_line() -> g
+      geom_line() -> g
 ```
 
 ## The plot
@@ -5388,7 +5454,7 @@ athletes %>% select(-(RCC:LBM))
 ```
 
 ## Select-helpers
-Other ways to select columns: 
+Other ways to select columns: those whose name:
 
 - `starts_with` something
 - `ends_with` something
@@ -5446,6 +5512,31 @@ athletes %>% select(ends_with("c"))
 ## 10  4.44   9.7  41.4
 ## # … with 192 more rows
 ```
+
+## Case-sensitive
+
+
+```r
+athletes %>% select(ends_with("C", ignore.case=F))
+```
+
+```
+## # A tibble: 202 x 2
+##      RCC   WCC
+##    <dbl> <dbl>
+##  1  4.56  13.3
+##  2  4.15   6  
+##  3  4.16   7.6
+##  4  4.32   6.4
+##  5  4.06   5.8
+##  6  4.12   6.1
+##  7  4.17   5  
+##  8  3.8    6.6
+##  9  3.96   5.5
+## 10  4.44   9.7
+## # … with 192 more rows
+```
+
 
 ## Column names containing letter R
 
@@ -5543,6 +5634,21 @@ d %>% select(num_range("x", 2:3))
 ## 5     7     1
 ```
 
+```r
+d %>% select(x2:x3)
+```
+
+```
+## # A tibble: 5 x 2
+##      x2    x3
+##   <int> <int>
+## 1     9     9
+## 2     4     0
+## 3     2     6
+## 4     0     3
+## 5     7     1
+```
+
 ## Choosing rows by number 
 
 
@@ -5568,11 +5674,35 @@ athletes %>% slice(16:25)
 ## #   `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>, Wt <dbl>
 ```
 
+
+```r
+athletes %>% mutate(row=row_number()) %>% select(Sex, Sport, row) %>% 
+  slice(16:25)
+```
+
+```
+## # A tibble: 10 x 3
+##    Sex    Sport     row
+##    <chr>  <chr>   <int>
+##  1 female Netball    16
+##  2 female Netball    17
+##  3 female Netball    18
+##  4 female Netball    19
+##  5 female Netball    20
+##  6 female Netball    21
+##  7 female Netball    22
+##  8 female Netball    23
+##  9 female BBall      24
+## 10 female BBall      25
+```
+
+
 ## Non-consecutive rows 
 
 
 ```r
-athletes %>% slice(c(10, 13, 17, 42))
+athletes %>% 
+  slice(10,13,17,42)
 ```
 
 ```
@@ -5659,6 +5789,30 @@ athletes %>% filter(Sport == "Tennis", RCC < 5)
 ## # … with 5 more variables: SSF <dbl>,
 ## #   `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>, Wt <dbl>
 ```
+
+## Another way to do "and"
+
+
+```r
+athletes %>% filter(Sport == "Tennis") %>% 
+  filter(RCC < 5)
+```
+
+```
+## # A tibble: 7 x 13
+##   Sex    Sport    RCC   WCC    Hc    Hg  Ferr   BMI
+##   <chr>  <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 female Tennis  4      4.2  36.6  12      57  25.4
+## 2 female Tennis  4.4    4    40.8  13.9    73  22.1
+## 3 female Tennis  4.38   7.9  39.8  13.5    88  21.2
+## 4 female Tennis  4.08   6.6  37.8  12.1   182  20.5
+## 5 female Tennis  4.98   6.4  44.8  14.8    80  17.1
+## 6 female Tennis  4.66   6.4  40.9  13.9   109  18.4
+## 7 male   Tennis  4.97   8.8  43    14.9   233  22.3
+## # … with 5 more variables: SSF <dbl>,
+## #   `%Bfat` <dbl>, LBM <dbl>, Ht <dbl>, Wt <dbl>
+```
+
 
 ## Either/Or
 
@@ -5794,23 +5948,24 @@ athletes %>%
 ```r
 athletes %>%
   mutate(wt_lb = Wt * 2.2) %>%
-  select(Sport, Wt, wt_lb)
+  select(Sport, Sex, Wt, wt_lb) %>% 
+  arrange(Wt)
 ```
 
 ```
-## # A tibble: 202 x 3
-##    Sport      Wt wt_lb
-##    <chr>   <dbl> <dbl>
-##  1 Netball  59.9  132.
-##  2 Netball  63    139.
-##  3 Netball  66.3  146.
-##  4 Netball  60.7  134.
-##  5 Netball  72.9  160.
-##  6 Netball  67.9  149.
-##  7 Netball  67.5  148.
-##  8 Netball  74.1  163.
-##  9 Netball  68.2  150.
-## 10 Netball  68.8  151.
+## # A tibble: 202 x 4
+##    Sport   Sex       Wt wt_lb
+##    <chr>   <chr>  <dbl> <dbl>
+##  1 Gym     female  37.8  83.2
+##  2 Gym     female  43.8  96.4
+##  3 Gym     female  45.1  99.2
+##  4 Tennis  female  45.8 101. 
+##  5 Tennis  female  47.4 104. 
+##  6 Gym     female  47.8 105. 
+##  7 T400m   female  49.2 108. 
+##  8 Row     female  49.8 110. 
+##  9 T400m   female  50.9 112. 
+## 10 Netball female  51.9 114. 
 ## # … with 192 more rows
 ```
 
@@ -6188,7 +6343,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242-1.pdf)
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245-1.pdf)
 
 ## Comments
 - Definitely a relationship: as wind velocity increases, so does DC
@@ -6235,9 +6390,6 @@ summary(DC.1)
 \normalsize
 
 
-```
-## Error in options(wid): invalid argument
-```
 
 
 ## Another way of looking at the output
@@ -6252,11 +6404,12 @@ glance(DC.1)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value    df
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
-## 1     0.874         0.869 0.236      160. 7.55e-12     2
-## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
-## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
+## 1     0.874         0.869 0.236      160. 7.55e-12
+## # … with 6 more variables: df <int>, logLik <dbl>,
+## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
+## #   df.residual <int>
 ```
 \normalsize
 
@@ -6270,10 +6423,10 @@ tidy(DC.1)
 
 ```
 ## # A tibble: 2 x 5
-##   term          estimate std.error statistic  p.value
-##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)      0.131    0.126       1.04 3.10e- 1
-## 2 wind_velocity    0.241    0.0190     12.7  7.55e-12
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)     0.131    0.126       1.04 3.10e- 1
+## 2 wind_veloci…    0.241    0.0190     12.7  7.55e-12
 ```
 \normalsize
 
@@ -6291,6 +6444,17 @@ R-squared (87%) high.
 residuals, observed minus predicted, plotted against fitted (predicted).
 - Plot using the regression object as “data frame” (see over).
 
+## back to scatterplot, but this time add line
+
+
+```r
+ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
+  geom_point() + geom_smooth(method="lm", se = F)
+```
+
+![plot of chunk unnamed-chunk-251](figure/unnamed-chunk-251-1.pdf)
+
+
 ## Plot of residuals against fitted values
 
 
@@ -6298,7 +6462,7 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248-1.pdf)
+![plot of chunk unnamed-chunk-252](figure/unnamed-chunk-252-1.pdf)
 
 ## Comments on residual plot
 - Residual plot should be a random scatter of points.
@@ -6340,11 +6504,11 @@ tidy(DC.2)
 
 ```
 ## # A tibble: 3 x 5
-##   term               estimate std.error statistic  p.value
-##   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)         -1.16     0.175       -6.62 1.18e- 6
-## 2 wind_velocity        0.723    0.0614      11.8  5.77e-11
-## 3 I(wind_velocity^2)  -0.0381   0.00480     -7.95 6.59e- 8
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)   -1.16     0.175       -6.62 1.18e- 6
+## 2 wind_veloci…   0.723    0.0614      11.8  5.77e-11
+## 3 I(wind_velo…  -0.0381   0.00480     -7.95 6.59e- 8
 ```
 
 
@@ -6354,11 +6518,12 @@ glance(DC.2)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value    df
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
-## 1     0.968         0.965 0.123      328. 4.16e-17     3
-## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
-## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
+## 1     0.968         0.965 0.123      328. 4.16e-17
+## # … with 6 more variables: df <int>, logLik <dbl>,
+## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
+## #   df.residual <int>
 ```
 
 ## Comments on output
@@ -6378,7 +6543,7 @@ ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-252](figure/unnamed-chunk-252-1.pdf)
+![plot of chunk unnamed-chunk-256](figure/unnamed-chunk-256-1.pdf)
 
 ## Scatterplot with fitted line and curve 
 
@@ -6407,7 +6572,7 @@ by lines.
 
 ## Scatterplot with fitted line and curve
 
-![plot of chunk unnamed-chunk-253](figure/unnamed-chunk-253-1.pdf)
+![plot of chunk unnamed-chunk-257](figure/unnamed-chunk-257-1.pdf)
 
 Curve clearly fits better than line. 
 
@@ -6467,7 +6632,7 @@ Pretty straight. Blue actually smooth curve not line:
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-254](figure/unnamed-chunk-254-1.pdf)
+![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-258-1.pdf)
 
 
 
@@ -6481,11 +6646,12 @@ glance(DC.3)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared  sigma statistic  p.value    df
-##       <dbl>         <dbl>  <dbl>     <dbl>    <dbl> <int>
-## 1     0.980         0.979 0.0942     1128. 4.74e-21     2
-## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
-## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared  sigma statistic  p.value
+##       <dbl>         <dbl>  <dbl>     <dbl>    <dbl>
+## 1     0.980         0.979 0.0942     1128. 4.74e-21
+## # … with 6 more variables: df <int>, logLik <dbl>,
+## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
+## #   df.residual <int>
 ```
 
 ```r
@@ -6567,12 +6733,12 @@ w2
 $y$’s, with another column for distinguishing things.
 - But we have three columns of fitted values, that need to be combined
 into one.
-- `gather`, then plot:
+- `pivot_longer`, then plot:
 
 
 ```r
 w2 %>%
-  gather(model, fit, linear:asymptote) %>%
+  pivot_longer(linear:asymptote, names_to="model", values_to="fit") %>%
   ggplot(aes(x = wind_velocity, y = DC_output)) +
   geom_point() +
   geom_line(aes(y = fit, colour = model))
@@ -6580,7 +6746,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-258-1.pdf)
+![plot of chunk unnamed-chunk-262](figure/unnamed-chunk-262-1.pdf)
 
 ## Comments
 - Predictions from curves are very similar.
@@ -6641,9 +6807,10 @@ wv
 ```
 
 ```
-##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0
-## [12]  6.5  7.0  7.5  8.0  8.5  9.0  9.5 10.0 10.5 11.0 11.5
-## [23] 12.0 12.5 13.0 13.5 14.0 14.5 15.0 15.5 16.0
+##  [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0
+## [10]  5.5  6.0  6.5  7.0  7.5  8.0  8.5  9.0  9.5
+## [19] 10.0 10.5 11.0 11.5 12.0 12.5 13.0 13.5 14.0
+## [28] 14.5 15.0 15.5 16.0
 ```
 
 - R has `predict`, which requires what to predict for, as data frame.
@@ -6740,9 +6907,10 @@ predictions on a plot with a legend (saving result to add to later):
 
 ```r
 my_fits %>%
-  gather(
-    model, fit,
-    linear:asymptote
+    pivot_longer(
+    linear:asymptote,
+    names_to="model", 
+    values_to="fit"
   ) %>%
   ggplot(aes(
     y = fit, x = wind_velocity,
@@ -6775,7 +6943,7 @@ g + geom_rect(
 
 ## The plot
 
-![plot of chunk unnamed-chunk-268](figure/unnamed-chunk-268-1.pdf)
+![plot of chunk unnamed-chunk-272](figure/unnamed-chunk-272-1.pdf)
 
 ## Comments (1)
 - Over range of data, two models agree with each other well.
@@ -6796,11 +6964,11 @@ tidy(DC.2)
 
 ```
 ## # A tibble: 3 x 5
-##   term               estimate std.error statistic  p.value
-##   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)         -1.16     0.175       -6.62 1.18e- 6
-## 2 wind_velocity        0.723    0.0614      11.8  5.77e-11
-## 3 I(wind_velocity^2)  -0.0381   0.00480     -7.95 6.59e- 8
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)   -1.16     0.175       -6.62 1.18e- 6
+## 2 wind_veloci…   0.723    0.0614      11.8  5.77e-11
+## 3 I(wind_velo…  -0.0381   0.00480     -7.95 6.59e- 8
 ```
 
 - Nope, goes to −1.16 (intercept), actually significantly different from
@@ -6902,19 +7070,20 @@ asphalt
 
 ```
 ## # A tibble: 31 x 7
-##    pct.a.surf pct.a.base fines voids rut.depth viscosity
-##         <dbl>      <dbl> <dbl> <dbl>     <dbl>     <dbl>
-##  1       4.68       4.87   8.4  4.92      6.75      2.8 
-##  2       5.19       4.5    6.5  4.56     13         1.4 
-##  3       4.82       4.73   7.9  5.32     14.8       1.4 
-##  4       4.85       4.76   8.3  4.86     12.6       3.3 
-##  5       4.86       4.95   8.4  3.78      8.25      1.7 
-##  6       5.16       4.45   7.4  4.40     10.7       2.9 
-##  7       4.82       5.05   6.8  4.87      7.28      3.7 
-##  8       4.86       4.7    8.6  4.83     12.7       1.7 
-##  9       4.78       4.84   6.7  4.86     12.6       0.92
-## 10       5.16       4.76   7.7  4.03     20.6       0.68
-## # … with 21 more rows, and 1 more variable: run <dbl>
+##    pct.a.surf pct.a.base fines voids rut.depth
+##         <dbl>      <dbl> <dbl> <dbl>     <dbl>
+##  1       4.68       4.87   8.4  4.92      6.75
+##  2       5.19       4.5    6.5  4.56     13   
+##  3       4.82       4.73   7.9  5.32     14.8 
+##  4       4.85       4.76   8.3  4.86     12.6 
+##  5       4.86       4.95   8.4  3.78      8.25
+##  6       5.16       4.45   7.4  4.40     10.7 
+##  7       4.82       5.05   6.8  4.87      7.28
+##  8       4.86       4.7    8.6  4.83     12.7 
+##  9       4.78       4.84   6.7  4.86     12.6 
+## 10       5.16       4.76   7.7  4.03     20.6 
+## # … with 21 more rows, and 2 more variables:
+## #   viscosity <dbl>, run <dbl>
 ```
 
 ## Plotting response “rut depth” against everything else
@@ -6925,15 +7094,15 @@ Same idea as for plotting separate predictions on one plot:
 
 ```r
 asphalt %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, viscosity:run)
+  pivot_longer(
+    c(pct.a.surf:voids, viscosity:run),
+    names_to="xname", values_to="x"
   ) %>%
   ggplot(aes(x = x, y = rut.depth)) + geom_point() +
   facet_wrap(~xname, scales = "free") -> g
 ```
 
-“gather all the x-variables together into one column called x, with another
+“collect all the x-variables together into one column called x, with another
 column xname saying which x they were, then plot these x’s against
 rut.depth, a separate facet for each x-variable.”
 
@@ -6946,7 +7115,7 @@ I saved this graph to plot later (on the next page).
 g
 ```
 
-![plot of chunk unnamed-chunk-275](figure/unnamed-chunk-275-1.pdf)
+![plot of chunk unnamed-chunk-279](figure/unnamed-chunk-279-1.pdf)
 
 ## Interpreting the plots
 - One plot of rut depth against each of the six other variables.
@@ -6990,7 +7159,7 @@ ggplot(asphalt_lv, aes(y = rut.depth, x = log.viscosity)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![plot of chunk unnamed-chunk-277](figure/unnamed-chunk-277-1.pdf)
+![plot of chunk unnamed-chunk-281](figure/unnamed-chunk-281-1.pdf)
 
 ## Comments and next steps
 - Not very linear, but better than before.
@@ -7015,11 +7184,12 @@ glance(rut.1)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df
-##       <dbl>         <dbl> <dbl>     <dbl>   <dbl> <int>
-## 1     0.806         0.758  3.32      16.6 1.74e-7     7
-## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
-## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared sigma statistic p.value
+##       <dbl>         <dbl> <dbl>     <dbl>   <dbl>
+## 1     0.806         0.758  3.32      16.6 1.74e-7
+## # … with 6 more variables: df <int>, logLik <dbl>,
+## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
+## #   df.residual <int>
 ```
 
 ```r
@@ -7060,7 +7230,7 @@ clearer picture of what is helpful.
 ggplot(rut.1, aes(x = .fitted, y = .resid)) + geom_point()
 ```
 
-![plot of chunk unnamed-chunk-280](figure/unnamed-chunk-280-1.pdf)
+![plot of chunk unnamed-chunk-284](figure/unnamed-chunk-284-1.pdf)
 
 ## Plotting residuals against $x$ variables
 - Problem here is that residuals are in the fitted model, and the
@@ -7086,21 +7256,21 @@ glimpse(rut.1a)
 ```
 ## Observations: 31
 ## Variables: 15
-## $ pct.a.surf    <dbl> 4.68, 5.19, 4.82, 4.85, 4.86, 5.16,…
-## $ pct.a.base    <dbl> 4.87, 4.50, 4.73, 4.76, 4.95, 4.45,…
-## $ fines         <dbl> 8.4, 6.5, 7.9, 8.3, 8.4, 7.4, 6.8, …
-## $ voids         <dbl> 4.916, 4.563, 5.321, 4.865, 3.776, …
-## $ rut.depth     <dbl> 6.75, 13.00, 14.75, 12.60, 8.25, 10…
-## $ viscosity     <dbl> 2.80, 1.40, 1.40, 3.30, 1.70, 2.90,…
-## $ run           <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ log.viscosity <dbl> 1.02961942, 0.33647224, 0.33647224,…
-## $ .fitted       <dbl> 10.4046631, 13.7175010, 13.1485937,…
-## $ .se.fit       <dbl> 1.262454, 1.617838, 1.342073, 1.260…
-## $ .resid        <dbl> -3.6546631, -0.7175010, 1.6014063, …
-## $ .hat          <dbl> 0.1442888, 0.2369584, 0.1630624, 0.…
-## $ .sigma        <dbl> 3.293545, 3.390685, 3.375330, 3.357…
-## $ .cooksd       <dbl> 0.0340389900, 0.0027097205, 0.00772…
-## $ .std.resid    <dbl> -1.18873388, -0.24714358, 0.5266910…
+## $ pct.a.surf    <dbl> 4.68, 5.19, 4.82, 4.85, 4.8…
+## $ pct.a.base    <dbl> 4.87, 4.50, 4.73, 4.76, 4.9…
+## $ fines         <dbl> 8.4, 6.5, 7.9, 8.3, 8.4, 7.…
+## $ voids         <dbl> 4.916, 4.563, 5.321, 4.865,…
+## $ rut.depth     <dbl> 6.75, 13.00, 14.75, 12.60, …
+## $ viscosity     <dbl> 2.80, 1.40, 1.40, 3.30, 1.7…
+## $ run           <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ log.viscosity <dbl> 1.02961942, 0.33647224, 0.3…
+## $ .fitted       <dbl> 10.404663, 13.717501, 13.14…
+## $ .se.fit       <dbl> 1.262454, 1.617838, 1.34207…
+## $ .resid        <dbl> -3.6546631, -0.7175010, 1.6…
+## $ .hat          <dbl> 0.1442888, 0.2369584, 0.163…
+## $ .sigma        <dbl> 3.293545, 3.390685, 3.37533…
+## $ .cooksd       <dbl> 0.0340389900, 0.0027097205,…
+## $ .std.resid    <dbl> -1.18873388, -0.24714358, 0…
 ```
 \normalsize
 
@@ -7110,9 +7280,9 @@ glimpse(rut.1a)
 
 ```r
 rut.1a %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, run, log.viscosity)
+  pivot_longer(
+    c(pct.a.surf:voids, run, log.viscosity),
+    names_to="xname", values_to="x"
   ) %>%
   ggplot(aes(x = x, y = .resid)) +
   geom_point() + facet_wrap(~xname, scales = "free") -> g
@@ -7125,7 +7295,7 @@ rut.1a %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-284](figure/unnamed-chunk-284-1.pdf)
+![plot of chunk unnamed-chunk-288](figure/unnamed-chunk-288-1.pdf)
 
 ## Comments
 - There is serious curve in plot of residuals vs. fitted values. Suggests a
@@ -7156,7 +7326,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_lv)
 ```
 
-![plot of chunk unnamed-chunk-285](figure/unnamed-chunk-285-1.pdf)
+![plot of chunk unnamed-chunk-289](figure/unnamed-chunk-289-1.pdf)
 
 ## Comments on Box-Cox plot
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
@@ -7183,9 +7353,9 @@ explanatory variables, all in one shot:
 
 ```r
 asphalt_2 %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, run:log.viscosity)
+  pivot_longer(
+    c(pct.a.surf:voids, run:log.viscosity),
+    names_to="xname", values_to="x"
   ) %>%
   ggplot(aes(y = log.rut.depth, x = x)) + geom_point() +
   facet_wrap(~xname, scales = "free") -> g3
@@ -7198,7 +7368,7 @@ asphalt_2 %>%
 g3
 ```
 
-![plot of chunk unnamed-chunk-288](figure/unnamed-chunk-288-1.pdf)
+![plot of chunk unnamed-chunk-292](figure/unnamed-chunk-292-1.pdf)
 
 ## Modelling with transformed response
 - These trends look pretty straight, especially with `log.viscosity`.
@@ -7223,15 +7393,15 @@ tidy(rut.2)
 
 ```
 ## # A tibble: 7 x 5
-##   term          estimate std.error statistic     p.value
-##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
-## 1 (Intercept)    -1.57      2.44      -0.646 0.525      
-## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
-## 3 pct.a.base     -0.103     0.369     -0.280 0.782      
-## 4 fines           0.0978    0.0941     1.04  0.309      
-## 5 voids           0.199     0.123      1.62  0.119      
-## 6 log.viscosity  -0.558     0.0854    -6.53  0.000000945
-## 7 run             0.340     0.339      1.00  0.326
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 (Intercept)  -1.57      2.44      -0.646   5.25e-1
+## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
+## 3 pct.a.base   -0.103     0.369     -0.280   7.82e-1
+## 4 fines         0.0978    0.0941     1.04    3.09e-1
+## 5 voids         0.199     0.123      1.62    1.19e-1
+## 6 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
+## 7 run           0.340     0.339      1.00    3.26e-1
 ```
 
 ## Taking out everything non-significant
@@ -7277,15 +7447,15 @@ tidy(rut.2)
 
 ```
 ## # A tibble: 7 x 5
-##   term          estimate std.error statistic     p.value
-##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
-## 1 (Intercept)    -1.57      2.44      -0.646 0.525      
-## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
-## 3 pct.a.base     -0.103     0.369     -0.280 0.782      
-## 4 fines           0.0978    0.0941     1.04  0.309      
-## 5 voids           0.199     0.123      1.62  0.119      
-## 6 log.viscosity  -0.558     0.0854    -6.53  0.000000945
-## 7 run             0.340     0.339      1.00  0.326
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 (Intercept)  -1.57      2.44      -0.646   5.25e-1
+## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
+## 3 pct.a.base   -0.103     0.369     -0.280   7.82e-1
+## 4 fines         0.0978    0.0941     1.04    3.09e-1
+## 5 voids         0.199     0.123      1.62    1.19e-1
+## 6 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
+## 7 run           0.340     0.339      1.00    3.26e-1
 ```
 
 - Largest P-value is 0.78 for `pct.a.base`, not significant.
@@ -7303,15 +7473,15 @@ tidy(rut.2) %>% arrange(p.value)
 
 ```
 ## # A tibble: 7 x 5
-##   term          estimate std.error statistic     p.value
-##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
-## 1 log.viscosity  -0.558     0.0854    -6.53  0.000000945
-## 2 pct.a.surf      0.584     0.232      2.52  0.0190     
-## 3 voids           0.199     0.123      1.62  0.119      
-## 4 fines           0.0978    0.0941     1.04  0.309      
-## 5 run             0.340     0.339      1.00  0.326      
-## 6 (Intercept)    -1.57      2.44      -0.646 0.525      
-## 7 pct.a.base     -0.103     0.369     -0.280 0.782
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 log.viscos…  -0.558     0.0854    -6.53    9.45e-7
+## 2 pct.a.surf    0.584     0.232      2.52    1.90e-2
+## 3 voids         0.199     0.123      1.62    1.19e-1
+## 4 fines         0.0978    0.0941     1.04    3.09e-1
+## 5 run           0.340     0.339      1.00    3.26e-1
+## 6 (Intercept)  -1.57      2.44      -0.646   5.25e-1
+## 7 pct.a.base   -0.103     0.369     -0.280   7.82e-1
 ```
 
 - Largest P-value at the bottom.
@@ -7331,14 +7501,14 @@ tidy(rut.4) %>% arrange(p.value)
 
 ```
 ## # A tibble: 6 x 5
-##   term          estimate std.error statistic     p.value
-##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
-## 1 log.viscosity  -0.552     0.0818     -6.75 0.000000448
-## 2 pct.a.surf      0.593     0.225       2.63 0.0143     
-## 3 voids           0.200     0.121       1.66 0.109      
-## 4 (Intercept)    -2.08      1.61       -1.29 0.208      
-## 5 run             0.360     0.325       1.11 0.279      
-## 6 fines           0.0889    0.0870      1.02 0.316
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 log.viscos…  -0.552     0.0818     -6.75   4.48e-7
+## 2 pct.a.surf    0.593     0.225       2.63   1.43e-2
+## 3 voids         0.200     0.121       1.66   1.09e-1
+## 4 (Intercept)  -2.08      1.61       -1.29   2.08e-1
+## 5 run           0.360     0.325       1.11   2.79e-1
+## 6 fines         0.0889    0.0870      1.02   3.16e-1
 ```
 \normalsize
 
@@ -7355,14 +7525,14 @@ tidy(rut.4) %>% arrange(p.value)
 
 ```
 ## # A tibble: 6 x 5
-##   term          estimate std.error statistic     p.value
-##   <chr>            <dbl>     <dbl>     <dbl>       <dbl>
-## 1 log.viscosity  -0.552     0.0818     -6.75 0.000000448
-## 2 pct.a.surf      0.593     0.225       2.63 0.0143     
-## 3 voids           0.200     0.121       1.66 0.109      
-## 4 (Intercept)    -2.08      1.61       -1.29 0.208      
-## 5 run             0.360     0.325       1.11 0.279      
-## 6 fines           0.0889    0.0870      1.02 0.316
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 log.viscos…  -0.552     0.0818     -6.75   4.48e-7
+## 2 pct.a.surf    0.593     0.225       2.63   1.43e-2
+## 3 voids         0.200     0.121       1.66   1.09e-1
+## 4 (Intercept)  -2.08      1.61       -1.29   2.08e-1
+## 5 run           0.360     0.325       1.11   2.79e-1
+## 6 fines         0.0889    0.0870      1.02   3.16e-1
 ```
 
 - Again, fines is the one to go. (Output identical as it should be.)
@@ -7377,13 +7547,13 @@ tidy(rut.5) %>% arrange(p.value)
 
 ```
 ## # A tibble: 5 x 5
-##   term          estimate std.error statistic      p.value
-##   <chr>            <dbl>     <dbl>     <dbl>        <dbl>
-## 1 log.viscosity   -0.580    0.0772    -7.52  0.0000000559
-## 2 pct.a.surf       0.548    0.221      2.48  0.0200      
-## 3 voids            0.232    0.117      1.99  0.0577      
-## 4 run              0.295    0.319      0.923 0.365       
-## 5 (Intercept)     -1.26     1.39      -0.902 0.375
+##   term       estimate std.error statistic    p.value
+##   <chr>         <dbl>     <dbl>     <dbl>      <dbl>
+## 1 log.visco…   -0.580    0.0772    -7.52     5.59e-8
+## 2 pct.a.surf    0.548    0.221      2.48     2.00e-2
+## 3 voids         0.232    0.117      1.99     5.77e-2
+## 4 run           0.295    0.319      0.923    3.65e-1
+## 5 (Intercep…   -1.26     1.39      -0.902    3.75e-1
 ```
 
 Can’t take out intercept, so `run`, with P-value 0.36, goes next.
@@ -7399,12 +7569,12 @@ tidy(rut.6) %>% arrange(p.value)
 
 ```
 ## # A tibble: 4 x 5
-##   term          estimate std.error statistic  p.value
-##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-## 1 log.viscosity   -0.646    0.0288   -22.5   5.29e-19
-## 2 pct.a.surf       0.555    0.220      2.52  1.80e- 2
-## 3 voids            0.245    0.116      2.12  4.36e- 2
-## 4 (Intercept)     -1.02     1.36      -0.748 4.61e- 1
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 log.viscosi…   -0.646    0.0288   -22.5   5.29e-19
+## 2 pct.a.surf      0.555    0.220      2.52  1.80e- 2
+## 3 voids           0.245    0.116      2.12  4.36e- 2
+## 4 (Intercept)    -1.02     1.36      -0.748 4.61e- 1
 ```
 
 Again, can’t take out intercept, so largest P-value is for `voids`, 0.044. But
@@ -7422,8 +7592,10 @@ coef(rut.6)
 ```
 
 ```
-##   (Intercept)    pct.a.surf         voids log.viscosity 
-##    -1.0207945     0.5554686     0.2447934    -0.6464911
+##   (Intercept)    pct.a.surf         voids 
+##    -1.0207945     0.5554686     0.2447934 
+## log.viscosity 
+##    -0.6464911
 ```
 
 ```r
@@ -7546,12 +7718,12 @@ tidy(rut.6)
 
 ```
 ## # A tibble: 4 x 5
-##   term          estimate std.error statistic  p.value
-##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)     -1.02     1.36      -0.748 4.61e- 1
-## 2 pct.a.surf       0.555    0.220      2.52  1.80e- 2
-## 3 voids            0.245    0.116      2.12  4.36e- 2
-## 4 log.viscosity   -0.646    0.0288   -22.5   5.29e-19
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)    -1.02     1.36      -0.748 4.61e- 1
+## 2 pct.a.surf      0.555    0.220      2.52  1.80e- 2
+## 3 voids           0.245    0.116      2.12  4.36e- 2
+## 4 log.viscosi…   -0.646    0.0288   -22.5   5.29e-19
 ```
 
 ## Revisiting (2)
@@ -7575,7 +7747,7 @@ geom_point()
 g
 ```
 
-![plot of chunk unnamed-chunk-310](figure/unnamed-chunk-310-1.pdf)
+![plot of chunk unnamed-chunk-314](figure/unnamed-chunk-314-1.pdf)
 
 ## Plotting residuals against x’s
 - Do our trick again to put them all on one plot:
@@ -7583,9 +7755,9 @@ g
 
 ```r
 augment(rut.6, asphalt_2) %>%
-  gather(
-    xname, x,
-    c(pct.a.surf:voids, run:log.viscosity)
+  pivot_longer(
+    c(pct.a.surf:voids, run:log.viscosity),
+    names_to="xname", values_to="x",
   ) %>%
   ggplot(aes(y = .resid, x = x)) + geom_point() +
   facet_wrap(~xname, scales = "free") -> g2
@@ -7598,7 +7770,7 @@ augment(rut.6, asphalt_2) %>%
 g2
 ```
 
-![plot of chunk unnamed-chunk-312](figure/unnamed-chunk-312-1.pdf)
+![plot of chunk unnamed-chunk-316](figure/unnamed-chunk-316-1.pdf)
 
 ## Comments
 - None of the plots show any sort of pattern. The points all look
@@ -7741,11 +7913,12 @@ glance(pigs.2)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value    df
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
-## 1     0.957         0.949  3.14      119. 3.72e-11     4
-## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
-## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
+## 1     0.957         0.949  3.14      119. 3.72e-11
+## # … with 6 more variables: df <int>, logLik <dbl>,
+## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
+## #   df.residual <int>
 ```
 \normalsize
 
@@ -7864,11 +8037,12 @@ glance(crickets.1)
 
 ```
 ## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic  p.value    df
-##       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>
-## 1     0.990         0.989  1.79     1331. 1.76e-28     3
-## # … with 5 more variables: logLik <dbl>, AIC <dbl>,
-## #   BIC <dbl>, deviance <dbl>, df.residual <int>
+##   r.squared adj.r.squared sigma statistic  p.value
+##       <dbl>         <dbl> <dbl>     <dbl>    <dbl>
+## 1     0.990         0.989  1.79     1331. 1.76e-28
+## # … with 6 more variables: df <int>, logLik <dbl>,
+## #   AIC <dbl>, BIC <dbl>, deviance <dbl>,
+## #   df.residual <int>
 ```
 
 ```r
@@ -7877,11 +8051,11 @@ tidy(crickets.1)
 
 ```
 ## # A tibble: 3 x 5
-##   term          estimate std.error statistic  p.value
-##   <chr>            <dbl>     <dbl>     <dbl>    <dbl>
-## 1 (Intercept)      -7.21    2.55       -2.83 8.58e- 3
-## 2 temperature       3.60    0.0973     37.0  2.49e-25
-## 3 speciesniveus   -10.1     0.735     -13.7  6.27e-14
+##   term         estimate std.error statistic  p.value
+##   <chr>           <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)     -7.21    2.55       -2.83 8.58e- 3
+## 2 temperature      3.60    0.0973     37.0  2.49e-25
+## 3 speciesnive…   -10.1     0.735     -13.7  6.27e-14
 ```
 
 ## Conclusions
@@ -7902,7 +8076,7 @@ ggplot(crickets, aes(x = temperature, y = pulse_rate,
   geom_point() + geom_smooth(method = "lm", se = F)
 ```
 
-![plot of chunk unnamed-chunk-323](figure/unnamed-chunk-323-1.pdf)
+![plot of chunk unnamed-chunk-327](figure/unnamed-chunk-327-1.pdf)
 
 
 # Functions
@@ -8384,8 +8558,8 @@ map_dbl(1:10, ~ sqrt(.))
 ```
 
 ```
-##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490
-##  [7] 2.645751 2.828427 3.000000 3.162278
+##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068
+##  [6] 2.449490 2.645751 2.828427 3.000000 3.162278
 ```
 
 ## Summarizing all columns of a data frame, two ways
@@ -8664,17 +8838,19 @@ hotpo_seq(27)
 ```
 
 ```
-##   [1]   27   82   41  124   62   31   94   47  142   71  214
-##  [12]  107  322  161  484  242  121  364  182   91  274  137
-##  [23]  412  206  103  310  155  466  233  700  350  175  526
-##  [34]  263  790  395 1186  593 1780  890  445 1336  668  334
-##  [45]  167  502  251  754  377 1132  566  283  850  425 1276
-##  [56]  638  319  958  479 1438  719 2158 1079 3238 1619 4858
-##  [67] 2429 7288 3644 1822  911 2734 1367 4102 2051 6154 3077
-##  [78] 9232 4616 2308 1154  577 1732  866  433 1300  650  325
-##  [89]  976  488  244  122   61  184   92   46   23   70   35
-## [100]  106   53  160   80   40   20   10    5   16    8    4
-## [111]    2    1
+##   [1]   27   82   41  124   62   31   94   47  142
+##  [10]   71  214  107  322  161  484  242  121  364
+##  [19]  182   91  274  137  412  206  103  310  155
+##  [28]  466  233  700  350  175  526  263  790  395
+##  [37] 1186  593 1780  890  445 1336  668  334  167
+##  [46]  502  251  754  377 1132  566  283  850  425
+##  [55] 1276  638  319  958  479 1438  719 2158 1079
+##  [64] 3238 1619 4858 2429 7288 3644 1822  911 2734
+##  [73] 1367 4102 2051 6154 3077 9232 4616 2308 1154
+##  [82]  577 1732  866  433 1300  650  325  976  488
+##  [91]  244  122   61  184   92   46   23   70   35
+## [100]  106   53  160   80   40   20   10    5   16
+## [109]    8    4    2    1
 ```
 \normalsize
 
@@ -8782,11 +8958,11 @@ somedates %>% mutate(plus30 = d + 30, diffs = d[2] - d)
 
 ```
 ## # A tibble: 3 x 5
-##   text       d          numbers plus30     diffs     
-##   <chr>      <date>       <dbl> <date>     <drtn>    
-## 1 1970-01-01 1970-01-01       0 1970-01-31 13760 days
-## 2 2007-09-04 2007-09-04   13760 2007-10-04     0 days
-## 3 1931-08-05 1931-08-05  -14029 1931-09-04 27789 days
+##   text       d          numbers plus30     diffs    
+##   <chr>      <date>       <dbl> <date>     <drtn>   
+## 1 1970-01-01 1970-01-01       0 1970-01-31 13760 da…
+## 2 2007-09-04 2007-09-04   13760 2007-10-04     0 da…
+## 3 1931-08-05 1931-08-05  -14029 1931-09-04 27789 da…
 ```
 
 ## Reading in dates from a file
@@ -8928,11 +9104,11 @@ d4 %>% mutate(equal = identical(date, date2))
 
 ```
 ## # A tibble: 3 x 5
-##   date       status     dunno            date2      equal
-##   <date>     <chr>      <chr>            <date>     <lgl>
-## 1 2011-08-03 hello      August 3 2011    2011-08-03 TRUE 
-## 2 2011-11-15 still here November 15 2011 2011-11-15 TRUE 
-## 3 2012-02-01 goodbye    February 1 2012  2012-02-01 TRUE
+##   date       status    dunno        date2      equal
+##   <date>     <chr>     <chr>        <date>     <lgl>
+## 1 2011-08-03 hello     August 3 20… 2011-08-03 TRUE 
+## 2 2011-11-15 still he… November 15… 2011-11-15 TRUE 
+## 3 2012-02-01 goodbye   February 1 … 2012-02-01 TRUE
 ```
 
 - The two columns of dates are all the same.
@@ -9083,12 +9259,12 @@ dd %>% mutate(zone = tz(dt))
 
 ```
 ## # A tibble: 4 x 3
-##   text                dt                  zone           
-##   <chr>               <dttm>              <chr>          
-## 1 1970-01-01 07:50:01 1970-01-01 07:50:01 America/Toronto
-## 2 2007-09-04 15:30:00 2007-09-04 15:30:00 America/Toronto
-## 3 1940-04-15 06:45:10 1940-04-15 06:45:10 America/Toronto
-## 4 2016-02-10 12:26:40 2016-02-10 12:26:40 America/Toronto
+##   text              dt                  zone        
+##   <chr>             <dttm>              <chr>       
+## 1 1970-01-01 07:50… 1970-01-01 07:50:01 America/Tor…
+## 2 2007-09-04 15:30… 2007-09-04 15:30:00 America/Tor…
+## 3 1940-04-15 06:45… 1940-04-15 06:45:10 America/Tor…
+## 4 2016-02-10 12:26… 2016-02-10 12:26:40 America/Tor…
 ```
 
 ## Extracting time parts
@@ -9107,12 +9283,12 @@ dd %>%
 
 ```
 ## # A tibble: 4 x 5
-##   dt                      h   sec   min zone           
-##   <dttm>              <int> <dbl> <int> <chr>          
-## 1 1970-01-01 07:50:01     7     1    50 America/Toronto
-## 2 2007-09-04 15:30:00    15     0    30 America/Toronto
-## 3 1940-04-15 06:45:10     6    10    45 America/Toronto
-## 4 2016-02-10 12:26:40    12    40    26 America/Toronto
+##   dt                      h   sec   min zone        
+##   <dttm>              <int> <dbl> <int> <chr>       
+## 1 1970-01-01 07:50:01     7     1    50 America/Tor…
+## 2 2007-09-04 15:30:00    15     0    30 America/Tor…
+## 3 1940-04-15 06:45:10     6    10    45 America/Tor…
+## 4 2016-02-10 12:26:40    12    40    26 America/Tor…
 ```
 
 ## Same times, but different time zone: 
@@ -9138,8 +9314,10 @@ In more detail:
 
 
 ```
-## [1] "1970-01-01 22:50:01 AEST" "2007-09-05 05:30:00 AEST"
-## [3] "1940-04-15 21:45:10 AEST" "2016-02-11 04:26:40 AEDT"
+## [1] "1970-01-01 22:50:01 AEST"
+## [2] "2007-09-05 05:30:00 AEST"
+## [3] "1940-04-15 21:45:10 AEST"
+## [4] "2016-02-11 04:26:40 AEDT"
 ```
 
 
@@ -9185,11 +9363,11 @@ stays %>% mutate(stay = discharge - admit)
 
 ```
 ## # A tibble: 3 x 3
-##   admit               discharge           stay       
-##   <dttm>              <dttm>              <drtn>     
-## 1 1981-12-10 22:00:00 1982-01-03 14:00:00 568.0 hours
-## 2 2014-03-07 14:00:00 2014-03-08 09:30:00  19.5 hours
-## 3 2016-08-31 21:00:00 2016-09-02 17:00:00  44.0 hours
+##   admit               discharge           stay      
+##   <dttm>              <dttm>              <drtn>    
+## 1 1981-12-10 22:00:00 1982-01-03 14:00:00 568.0 hou…
+## 2 2014-03-07 14:00:00 2014-03-08 09:30:00  19.5 hou…
+## 3 2016-08-31 21:00:00 2016-09-02 17:00:00  44.0 hou…
 ```
 
 - Number of hours; hard to interpret. 
@@ -9364,7 +9542,7 @@ g <- oranges %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-397](figure/unnamed-chunk-397-1.pdf)
+![plot of chunk unnamed-chunk-401](figure/unnamed-chunk-401-1.pdf)
 
 ## Labelling points on a plot
 
@@ -9399,7 +9577,7 @@ ggplot(cars, aes(x = weight, y = MPG)) +
   geom_point()
 ```
 
-![plot of chunk unnamed-chunk-399](figure/unnamed-chunk-399-1.pdf)
+![plot of chunk unnamed-chunk-403](figure/unnamed-chunk-403-1.pdf)
 
 ## Label points with name of car they belong to
 
@@ -9409,7 +9587,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel()
 ```
 
-![plot of chunk unnamed-chunk-400](figure/unnamed-chunk-400-1.pdf)
+![plot of chunk unnamed-chunk-404](figure/unnamed-chunk-404-1.pdf)
 
 ## Make labels smaller
 
@@ -9419,7 +9597,7 @@ ggplot(cars, aes(x = weight, y = MPG, label = car)) +
   geom_point() + geom_text_repel(size = 2)
 ```
 
-![plot of chunk unnamed-chunk-401](figure/unnamed-chunk-401-1.pdf)
+![plot of chunk unnamed-chunk-405](figure/unnamed-chunk-405-1.pdf)
 
 ## Labelling some of the cars
 - Maybe you want to draw attention only to some of the individuals
@@ -9445,7 +9623,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-403](figure/unnamed-chunk-403-1.pdf)
+![plot of chunk unnamed-chunk-407](figure/unnamed-chunk-407-1.pdf)
 
 ## Labelling cars by row number
 - Suppose we knew that the cars we wanted to label were in rows 4 and
@@ -9469,7 +9647,7 @@ g <- cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-405](figure/unnamed-chunk-405-1.pdf)
+![plot of chunk unnamed-chunk-409](figure/unnamed-chunk-409-1.pdf)
 
 
 ## Lightest weight and worst gas-mileage cars
@@ -9494,7 +9672,7 @@ cars %>%
 g
 ```
 
-![plot of chunk unnamed-chunk-407](figure/unnamed-chunk-407-1.pdf)
+![plot of chunk unnamed-chunk-411](figure/unnamed-chunk-411-1.pdf)
 
 ## Miscellaneous graph things
 - Title for graph
@@ -9507,7 +9685,7 @@ g
 g + ggtitle("Gas mileage against weight")
 ```
 
-![plot of chunk unnamed-chunk-408](figure/unnamed-chunk-408-1.pdf)
+![plot of chunk unnamed-chunk-412](figure/unnamed-chunk-412-1.pdf)
 
 ## Axis labels
 
@@ -9516,7 +9694,7 @@ g + ggtitle("Gas mileage against weight")
 g + xlab("Weight (tons)") + ylab("MPG (miles per US gallon)")
 ```
 
-![plot of chunk unnamed-chunk-409](figure/unnamed-chunk-409-1.pdf)
+![plot of chunk unnamed-chunk-413](figure/unnamed-chunk-413-1.pdf)
 
 ## Permanence
 - When you close R Studio, you are offered the option to “save your

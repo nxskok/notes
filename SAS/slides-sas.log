@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.30)  17 JUN 2019 16:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.30)  11 NOV 2019 12:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1693,7 +1693,17 @@ Overfull \vbox (7.5269pt too high) detected at line 1682
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-) [40
+
+Overfull \hbox (30.27475pt too wide) in paragraph at lines 16--16
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/coffee.txt";
+[] 
+ []
+
+)
+Overfull \vbox (1.85616pt too high) detected at line 1707
+ []
+
+[40
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -1704,7 +1714,7 @@ File: lst/rcc.lst  (verbatim)
 Package statrep Info: Processing output lst/rcc.lst on input line 10.
 Package statrep Info: Processing output  on input line 10.
 )
-Overfull \vbox (0.42686pt too high) detected at line 1719
+Overfull \vbox (0.42686pt too high) detected at line 1721
  []
 
 [41
@@ -1778,8 +1788,14 @@ Package statrep Info: Processing output  on input line 11.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (13.02869pt too wide) in paragraph at lines 24--24
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";[] 
+
+ []
+
 )
-Overfull \vbox (6.527pt too high) detected at line 2024
+Overfull \vbox (33.727pt too high) detected at line 2028
  []
 
 [50
@@ -1793,7 +1809,7 @@ File: lst/gaa.lst  (verbatim)
 Package statrep Info: Processing output lst/gaa.lst on input line 7.
 Package statrep Info: Processing output  on input line 7.
 )
-Overfull \vbox (126.41576pt too high) detected at line 2034
+Overfull \vbox (126.41576pt too high) detected at line 2038
  []
 
 [51
@@ -1879,7 +1895,7 @@ Package pdftex.def Info: png/ggg.png  used on input line 10.
 Package statrep Info: Processing graphic png/ggg.png on input line 10.
 Package statrep Info: Processing graphic  on input line 10.
 )
-Overfull \vbox (10.0815pt too high) detected at line 2157
+Overfull \vbox (10.0815pt too high) detected at line 2161
  []
 
 [58
@@ -1911,7 +1927,7 @@ Package pdftex.def Info: png/gjj.png  used on input line 9.
 Package statrep Info: Processing graphic png/gjj.png on input line 9.
 Package statrep Info: Processing graphic  on input line 9.
 )
-Overfull \vbox (3.2815pt too high) detected at line 2197
+Overfull \vbox (3.2815pt too high) detected at line 2201
  []
 
 [60
@@ -1981,7 +1997,7 @@ Package pdftex.def Info: png/gll4.png  used on input line 11.
 Package statrep Info: Processing graphic png/gll4.png on input line 11.
 Package statrep Info: Processing graphic  on input line 11.
 )
-Overfull \vbox (762.69987pt too high) detected at line 2260
+Overfull \vbox (762.69987pt too high) detected at line 2264
  []
 
 [63
@@ -2042,7 +2058,7 @@ File: lst/scc.lst  (verbatim)
 Package statrep Info: Processing output lst/scc.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
 )
-Overfull \vbox (30.01575pt too high) detected at line 2504
+Overfull \vbox (30.01575pt too high) detected at line 2508
  []
 
 [70
@@ -2066,7 +2082,7 @@ File: lst/see.lst  (verbatim)
 Package statrep Info: Processing output lst/see.lst on input line 10.
 Package statrep Info: Processing output  on input line 10.
 )
-Overfull \vbox (29.61864pt too high) detected at line 2530
+Overfull \vbox (29.61864pt too high) detected at line 2534
  []
 
 [72
@@ -2080,6 +2096,12 @@ Overfull \vbox (29.61864pt too high) detected at line 2530
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (37.11813pt too wide) in paragraph at lines 14--14
+[]   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/jays15-home.c
+sv";[] 
+ []
+
 ) [74
 
 ]
@@ -2106,15 +2128,15 @@ Package statrep Info: Processing output lst/iaa1.lst on input line 11.
 File: lst/iaa2.lst  (verbatim)
 Package statrep Info: Processing output lst/iaa2.lst on input line 11.
 Package statrep Info: Processing output  on input line 11.
-)
-[76
+) [76
 
 ]
 \openout4 = `slides-sas.vrb'.
 
  (./slides-sas.vrb
 Package statrep Info: Processing Sascode block id on input line 6.
-) [77
+)
+[77
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2132,7 +2154,8 @@ Package statrep Info: Processing graphic  on input line 3.
  <./png/idd.png (PNG copy)>]
 \openout4 = `slides-sas.vrb'.
 
-(./slides-sas.vrb) [79
+ (./slides-sas.vrb)
+[79
 
 ] [80
 
@@ -2143,7 +2166,7 @@ Package statrep Info: Processing graphic  on input line 3.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block ix on input line 18.
+Package statrep Info: Processing Sascode block ix on input line 20.
 ) [81
 
 ]
@@ -2154,7 +2177,7 @@ File: lst/ixx.lst  (verbatim)
 Package statrep Info: Processing output lst/ixx.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
 )
-Overfull \vbox (96.79352pt too high) detected at line 3015
+Overfull \vbox (96.79352pt too high) detected at line 3023
  []
 
 [82
@@ -2247,7 +2270,7 @@ File: lst/pcc1.lst  (verbatim)
 Package statrep Info: Processing output lst/pcc1.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
 )
-Overfull \vbox (7.456pt too high) detected at line 3529
+Overfull \vbox (7.456pt too high) detected at line 3537
  []
 
 [94
@@ -2396,7 +2419,13 @@ Package statrep Info: Processing output  on input line 5.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block it on input line 14.
+
+Overfull \hbox (14.12338pt too wide) in paragraph at lines 15--15
+[]   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/duality.txt";
+[] 
+ []
+
+Package statrep Info: Processing Sascode block it on input line 16.
 ) [111
 
 ]
@@ -2406,8 +2435,7 @@ Package statrep Info: Processing Sascode block it on input line 14.
 File: lst/itt.lst  (verbatim)
 Package statrep Info: Processing output lst/itt.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
-)
-[112
+) [112
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2420,7 +2448,7 @@ File: lst/iuu1.lst  (verbatim)
 Package statrep Info: Processing output lst/iuu1.lst on input line 9.
 Package statrep Info: Processing output  on input line 9.
 )
-Overfull \vbox (11.931pt too high) detected at line 4040
+Overfull \vbox (11.931pt too high) detected at line 4050
  []
 
 [113
@@ -2436,7 +2464,7 @@ File: lst/ivaa1.lst  (verbatim)
 Package statrep Info: Processing output lst/ivaa1.lst on input line 9.
 Package statrep Info: Processing output  on input line 9.
 )
-Overfull \vbox (11.931pt too high) detected at line 4055
+Overfull \vbox (11.931pt too high) detected at line 4065
  []
 
 [114
@@ -2470,7 +2498,7 @@ File: lst/ijj.lst  (verbatim)
 Package statrep Info: Processing output lst/ijj.lst on input line 7.
 Package statrep Info: Processing output  on input line 7.
 )
-Overfull \vbox (19.19353pt too high) detected at line 4114
+Overfull \vbox (19.19353pt too high) detected at line 4126
  []
 
 [118
@@ -2574,7 +2602,7 @@ File: lst/pevayy.lst  (verbatim)
 Package statrep Info: Processing output lst/pevayy.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
 )
-Overfull \vbox (20.29352pt too high) detected at line 4269
+Overfull \vbox (20.29352pt too high) detected at line 4281
  []
 
 [129
@@ -2602,6 +2630,12 @@ Overfull \vbox (20.29352pt too high) detected at line 4269
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (25.62076pt too wide) in paragraph at lines 14--14
+[]   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt
+";[] 
+ []
+
 ) [133
 
 ]
@@ -2626,13 +2660,13 @@ Package statrep Info: Processing output lst/icc1.lst on input line 8.
 File: lst/icc2.lst  (verbatim)
 Package statrep Info: Processing output lst/icc2.lst on input line 8.
 Package statrep Info: Processing output  on input line 8.
-)
-[135
+) [135
 
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb) [136
+ (./slides-sas.vrb)
+[136
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2651,8 +2685,7 @@ Package statrep Info: Processing Sascode block iy on input line 2.
 File: lst/iyy.lst  (verbatim)
 Package statrep Info: Processing output lst/iyy.lst on input line 6.
 Package statrep Info: Processing output  on input line 6.
-)
-[138
+) [138
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2666,7 +2699,8 @@ Package statrep Info: Processing output lst/idd1.lst on input line 13.
 File: lst/idd2.lst  (verbatim)
 Package statrep Info: Processing output lst/idd2.lst on input line 13.
 Package statrep Info: Processing output  on input line 13.
-) [139
+)
+[139
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2685,8 +2719,7 @@ Package pdftex.def Info: png/iee.png  used on input line 8.
 (pdftex.def)             Requested size: 240.8994pt x 180.67456pt.
 Package statrep Info: Processing graphic png/iee.png on input line 8.
 Package statrep Info: Processing graphic  on input line 8.
-)
-[141
+) [141
 
  <./png/iee.png (PNG copy)>]
 \openout4 = `slides-sas.vrb'.
@@ -2705,8 +2738,7 @@ Package pdftex.def Info: png/iff.png  used on input line 8.
 (pdftex.def)             Requested size: 240.8994pt x 180.67456pt.
 Package statrep Info: Processing graphic png/iff.png on input line 8.
 Package statrep Info: Processing graphic  on input line 8.
-)
-[143
+) [143
 
  <./png/iff.png (PNG copy)>]
 \openout4 = `slides-sas.vrb'.
@@ -2725,13 +2757,13 @@ Package pdftex.def Info: png/igg.png  used on input line 8.
 (pdftex.def)             Requested size: 240.8994pt x 180.67456pt.
 Package statrep Info: Processing graphic png/igg.png on input line 8.
 Package statrep Info: Processing graphic  on input line 8.
-)
-[145
+) [145
 
  <./png/igg.png (PNG copy)>]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb
+
+(./slides-sas.vrb
 Package statrep Info: Processing Sascode block ihx on input line 9.
 File: lst/ihxx.lst  (verbatim)
 Package statrep Info: Processing output lst/ihxx.lst on input line 14.
@@ -2741,8 +2773,7 @@ Package statrep Info: Processing output  on input line 14.
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb)
-[147
+ (./slides-sas.vrb) [147
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2752,11 +2783,12 @@ Package statrep Info: Processing output  on input line 14.
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb
+
+(./slides-sas.vrb
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block iw on input line 12.
+Package statrep Info: Processing Sascode block iw on input line 14.
 ) [149
 
 ]
@@ -2767,7 +2799,7 @@ File: lst/iww.lst  (verbatim)
 Package statrep Info: Processing output lst/iww.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
 )
-Overfull \vbox (96.79352pt too high) detected at line 5568
+Overfull \vbox (96.79352pt too high) detected at line 5584
  []
 
 [150
@@ -2797,7 +2829,7 @@ Package statrep Info: Processing output  on input line 3.
 \openout4 = `slides-sas.vrb'.
 
  (./slides-sas.vrb)
-Overfull \vbox (6.92697pt too high) detected at line 5789
+Overfull \vbox (6.92697pt too high) detected at line 5805
  []
 
 [153
@@ -2809,7 +2841,13 @@ Overfull \vbox (6.92697pt too high) detected at line 5789
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block ih on input line 17.
+
+Overfull \hbox (14.12338pt too wide) in paragraph at lines 15--15
+[]   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt";
+[] 
+ []
+
+Package statrep Info: Processing Sascode block ih on input line 19.
 ) [154
 
 ]
@@ -2828,8 +2866,7 @@ Package statrep Info: Processing output  on input line 3.
 
  (./slides-sas.vrb
 Package statrep Info: Processing Sascode block ii on input line 5.
-)
-[156
+) [156
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2838,7 +2875,8 @@ Package statrep Info: Processing Sascode block ii on input line 5.
 File: lst/iii.lst  (verbatim)
 Package statrep Info: Processing output lst/iii.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
-) [157
+)
+[157
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -2849,7 +2887,7 @@ File: lst/jaa.lst  (verbatim)
 Package statrep Info: Processing output lst/jaa.lst on input line 12.
 Package statrep Info: Processing output  on input line 12.
 )
-Overfull \vbox (1.35605pt too high) detected at line 6177
+Overfull \vbox (1.35605pt too high) detected at line 6195
  []
 
 [158
@@ -2907,6 +2945,12 @@ Package statrep Info: Processing output  on input line 3.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (13.02869pt too wide) in paragraph at lines 22--22
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";[] 
+
+ []
+
 ) [165
 
 ]
@@ -2918,7 +2962,7 @@ File: lst/taa.lst  (verbatim)
 Package statrep Info: Processing output lst/taa.lst on input line 7.
 Package statrep Info: Processing output  on input line 7.
 )
-Overfull \vbox (61.19353pt too high) detected at line 7320
+Overfull \vbox (61.19353pt too high) detected at line 7340
  []
 
 [166
@@ -2935,7 +2979,7 @@ File: lst/tbb.lst  (verbatim)
 Package statrep Info: Processing output lst/tbb.lst on input line 15.
 Package statrep Info: Processing output  on input line 15.
 )
-Overfull \vbox (9.21863pt too high) detected at line 7338
+Overfull \vbox (9.21863pt too high) detected at line 7358
  []
 
 [167
@@ -2952,7 +2996,7 @@ File: lst/tcc.lst  (verbatim)
 Package statrep Info: Processing output lst/tcc.lst on input line 16.
 Package statrep Info: Processing output  on input line 16.
 )
-Overfull \vbox (7.83803pt too high) detected at line 7358
+Overfull \vbox (7.83803pt too high) detected at line 7378
  []
 
 [168
@@ -2974,7 +3018,7 @@ File: lst/tdd.lst  (verbatim)
 Package statrep Info: Processing output lst/tdd.lst on input line 17.
 Package statrep Info: Processing output  on input line 17.
 )
-Overfull \vbox (9.43803pt too high) detected at line 7395
+Overfull \vbox (9.43803pt too high) detected at line 7415
  []
 
 [170
@@ -2991,7 +3035,7 @@ File: lst/tee.lst  (verbatim)
 Package statrep Info: Processing output lst/tee.lst on input line 16.
 Package statrep Info: Processing output  on input line 16.
 )
-Overfull \vbox (289.42688pt too high) detected at line 7415
+Overfull \vbox (289.42688pt too high) detected at line 7435
  []
 
 [171
@@ -3008,7 +3052,7 @@ File: lst/tff.lst  (verbatim)
 Package statrep Info: Processing output lst/tff.lst on input line 13.
 Package statrep Info: Processing output  on input line 13.
 )
-Overfull \vbox (74.22688pt too high) detected at line 7430
+Overfull \vbox (74.22688pt too high) detected at line 7450
  []
 
 [172
@@ -3025,7 +3069,7 @@ File: lst/tgg.lst  (verbatim)
 Package statrep Info: Processing output lst/tgg.lst on input line 15.
 Package statrep Info: Processing output  on input line 15.
 )
-Overfull \vbox (278.6158pt too high) detected at line 7448
+Overfull \vbox (278.6158pt too high) detected at line 7468
  []
 
 [173
@@ -3042,7 +3086,7 @@ File: lst/thh.lst  (verbatim)
 Package statrep Info: Processing output lst/thh.lst on input line 16.
 Package statrep Info: Processing output  on input line 16.
 )
-Overfull \vbox (9.21863pt too high) detected at line 7467
+Overfull \vbox (9.21863pt too high) detected at line 7487
  []
 
 [174
@@ -3059,7 +3103,7 @@ File: lst/tii.lst  (verbatim)
 Package statrep Info: Processing output lst/tii.lst on input line 14.
 Package statrep Info: Processing output  on input line 14.
 )
-Overfull \vbox (345.99356pt too high) detected at line 7483
+Overfull \vbox (345.99356pt too high) detected at line 7503
  []
 
 [175
@@ -3089,7 +3133,7 @@ File: lst/tjj.lst  (verbatim)
 Package statrep Info: Processing output lst/tjj.lst on input line 14.
 Package statrep Info: Processing output  on input line 14.
 )
-Overfull \vbox (2127.4269pt too high) detected at line 7525
+Overfull \vbox (2127.4269pt too high) detected at line 7545
  []
 
 [178
@@ -3103,7 +3147,7 @@ File: lst/tkk.lst  (verbatim)
 Package statrep Info: Processing output lst/tkk.lst on input line 12.
 Package statrep Info: Processing output  on input line 12.
 )
-Overfull \vbox (2093.42688pt too high) detected at line 7540
+Overfull \vbox (2093.42688pt too high) detected at line 7560
  []
 
 [179
@@ -3117,7 +3161,7 @@ File: lst/tll.lst  (verbatim)
 Package statrep Info: Processing output lst/tll.lst on input line 12.
 Package statrep Info: Processing output  on input line 12.
 )
-Overfull \vbox (2091.42688pt too high) detected at line 7555
+Overfull \vbox (2091.42688pt too high) detected at line 7575
  []
 
 [180
@@ -3131,7 +3175,7 @@ File: lst/tmm.lst  (verbatim)
 Package statrep Info: Processing output lst/tmm.lst on input line 15.
 Package statrep Info: Processing output  on input line 15.
 )
-Overfull \vbox (0.8269pt too high) detected at line 7573
+Overfull \vbox (0.8269pt too high) detected at line 7593
  []
 
 [181
@@ -3155,12 +3199,18 @@ No file /home/ken/teaching/c32/notes/2017/pigs1.txt.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block tn on input line 17.
+
+Overfull \hbox (24.52606pt too wide) in paragraph at lines 17--17
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";[
+] 
+ []
+
+Package statrep Info: Processing Sascode block tn on input line 19.
 File: lst/tnn.lst  (verbatim)
-Package statrep Info: Processing output lst/tnn.lst on input line 21.
-Package statrep Info: Processing output  on input line 21.
+Package statrep Info: Processing output lst/tnn.lst on input line 23.
+Package statrep Info: Processing output  on input line 23.
 )
-Overfull \vbox (3.21582pt too high) detected at line 7645
+Overfull \vbox (30.41583pt too high) detected at line 7667
  []
 
 [184
@@ -3183,7 +3233,7 @@ File: lst/too.lst  (verbatim)
 Package statrep Info: Processing output lst/too.lst on input line 7.
 Package statrep Info: Processing output  on input line 7.
 )
-Overfull \vbox (2.91576pt too high) detected at line 7677
+Overfull \vbox (2.91576pt too high) detected at line 7699
  []
 
 [186
@@ -3206,7 +3256,7 @@ File: lst/tpp.lst  (verbatim)
 Package statrep Info: Processing output lst/tpp.lst on input line 7.
 Package statrep Info: Processing output  on input line 7.
 )
-Overfull \vbox (2.91576pt too high) detected at line 7714
+Overfull \vbox (2.91576pt too high) detected at line 7736
  []
 
 [188
@@ -3222,7 +3272,7 @@ File: lst/trs1.lst  (verbatim)
 Package statrep Info: Processing output lst/trs1.lst on input line 10.
 Package statrep Info: Processing output  on input line 10.
 )
-Overfull \vbox (1.93382pt too high) detected at line 7729
+Overfull \vbox (1.93382pt too high) detected at line 7751
  []
 
 [189
@@ -3245,7 +3295,17 @@ Package statrep Info: Processing output  on input line 3.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-) [192
+
+Overfull \hbox (30.27475pt too wide) in paragraph at lines 21--21
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/global.csv";
+[] 
+ []
+
+)
+Overfull \vbox (6.527pt too high) detected at line 8497
+ []
+
+[192
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -3257,7 +3317,7 @@ Package statrep Info: Processing output lst/caa.lst on input line 8.
 Package statrep Info: Processing output  on input line 8.
 Package statrep Info: Processing Sascode block dda on input line 12.
 )
-Overfull \vbox (2.41862pt too high) detected at line 8491
+Overfull \vbox (2.41862pt too high) detected at line 8516
  []
 
 [193
@@ -3311,7 +3371,7 @@ Package pdftex.def Info: png/ddbd.png  used on input line 3.
 Package statrep Info: Processing graphic png/ddbd.png on input line 3.
 Package statrep Info: Processing graphic  on input line 3.
 )
-Overfull \vbox (15.90631pt too high) detected at line 8543
+Overfull \vbox (15.90631pt too high) detected at line 8568
  []
 
 [198
@@ -3320,7 +3380,7 @@ Overfull \vbox (15.90631pt too high) detected at line 8543
 \openout4 = `slides-sas.vrb'.
 
  (./slides-sas.vrb)
-Overfull \vbox (9.26448pt too high) detected at line 8565
+Overfull \vbox (9.26448pt too high) detected at line 8590
  []
 
 [199
@@ -3430,7 +3490,7 @@ Package pdftex.def Info: png/ddhh.png  used on input line 3.
 Package statrep Info: Processing graphic png/ddhh.png on input line 3.
 Package statrep Info: Processing graphic  on input line 3.
 )
-Overfull \vbox (15.90631pt too high) detected at line 8708
+Overfull \vbox (15.90631pt too high) detected at line 8733
  []
 
 [210
@@ -3472,6 +3532,12 @@ Package statrep Info: Processing graphic  on input line 3.
 
  (./slides-sas.vrb
 Package statrep Info: Processing Sascode block muber on input line 6.
+
+Overfull \hbox (18.77737pt too wide) in paragraph at lines 8--8
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/pigs.txt";[]
+ 
+ []
+
 ) [216
 
 ]
@@ -3482,7 +3548,7 @@ File: lst/muberr.lst  (verbatim)
 Package statrep Info: Processing output lst/muberr.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
 )
-Overfull \vbox (14.62685pt too high) detected at line 9584
+Overfull \vbox (14.62685pt too high) detected at line 9611
  []
 
 [217
@@ -3523,6 +3589,12 @@ Package statrep Info: Processing output  on input line 4.
 
  (./slides-sas.vrb
 Package statrep Info: Processing Sascode block siqet on input line 6.
+
+Overfull \hbox (47.52081pt too wide) in paragraph at lines 8--8
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/crickets2.cs
+v";[] 
+ []
+
 ) [222
 
 ]
@@ -3532,8 +3604,7 @@ Package statrep Info: Processing Sascode block siqet on input line 6.
 File: lst/siqett.lst  (verbatim)
 Package statrep Info: Processing output lst/siqett.lst on input line 3.
 Package statrep Info: Processing output  on input line 3.
-)
-[223
+) [223
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -3587,7 +3658,7 @@ Package pdftex.def Info: png/zereqs.png  used on input line 5.
 Package statrep Info: Processing graphic png/zereqs.png on input line 5.
 Package statrep Info: Processing graphic  on input line 5.
 )
-Overfull \vbox (14.65193pt too high) detected at line 9714
+Overfull \vbox (14.65193pt too high) detected at line 9743
  []
 
 [228
@@ -3608,8 +3679,18 @@ File: /home/ken/mydates.csv  (verbatim)
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block da on input line 20.
-) [231
+
+Overfull \hbox (36.02344pt too wide) in paragraph at lines 20--20
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/mydates.csv"
+;[] 
+ []
+
+Package statrep Info: Processing Sascode block da on input line 22.
+)
+Overfull \vbox (20.127pt too high) detected at line 9958
+ []
+
+[231
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -3619,7 +3700,7 @@ File: lst/daa.lst  (verbatim)
 Package statrep Info: Processing output lst/daa.lst on input line 4.
 Package statrep Info: Processing output  on input line 4.
 )
-Overfull \vbox (2.1811pt too high) detected at line 9960
+Overfull \vbox (2.1811pt too high) detected at line 9991
  []
 
 [232
@@ -3641,7 +3722,17 @@ Package statrep Info: Processing output  on input line 12.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-) [234
+
+Overfull \hbox (30.27475pt too wide) in paragraph at lines 22--22
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/pieces.txt";
+[] 
+ []
+
+)
+Overfull \vbox (6.527pt too high) detected at line 10039
+ []
+
+[234
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -3656,7 +3747,7 @@ File: lst/ddda.lst  (verbatim)
 Package statrep Info: Processing output lst/ddda.lst on input line 16.
 Package statrep Info: Processing output  on input line 16.
 )
-Overfull \vbox (6.87828pt too high) detected at line 10028
+Overfull \vbox (6.87828pt too high) detected at line 10061
  []
 
 [235
@@ -3673,11 +3764,17 @@ File: /home/ken/monthly.csv  (verbatim)
 
  (./slides-sas.vrb
 Package statrep Info: Processing Sascode block jahaq on input line 6.
+
+Overfull \hbox (36.02344pt too wide) in paragraph at lines 8--8
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/monthly.csv"
+;[] 
+ []
+
 File: lst/jahaqq.lst  (verbatim)
-Package statrep Info: Processing output lst/jahaqq.lst on input line 19.
-Package statrep Info: Processing output  on input line 19.
+Package statrep Info: Processing output lst/jahaqq.lst on input line 21.
+Package statrep Info: Processing output  on input line 21.
 )
-Overfull \vbox (8.15608pt too high) detected at line 10066
+Overfull \vbox (35.3561pt too high) detected at line 10101
  []
 
 [237
@@ -3696,7 +3793,7 @@ File: lst/nubivv.lst  (verbatim)
 Package statrep Info: Processing output lst/nubivv.lst on input line 22.
 Package statrep Info: Processing output  on input line 22.
 )
-Overfull \vbox (5.22687pt too high) detected at line 10105
+Overfull \vbox (5.22687pt too high) detected at line 10140
  []
 
 [239
@@ -3714,7 +3811,7 @@ Package pdftex.def Info: png/komavv.png  used on input line 12.
 Package statrep Info: Processing graphic png/komavv.png on input line 12.
 Package statrep Info: Processing graphic  on input line 12.
 )
-Overfull \vbox (23.6815pt too high) detected at line 10120
+Overfull \vbox (23.6815pt too high) detected at line 10155
  []
 
 [240
@@ -3750,6 +3847,11 @@ No file dt.csv.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (7.28pt too wide) in paragraph at lines 21--21
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/dt.csv";[] 
+ []
+
 ) [243
 
 ]
@@ -3770,6 +3872,12 @@ No file manypieces.txt.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (53.2695pt too wide) in paragraph at lines 22--22
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/manypieces.t
+xt";[] 
+ []
+
 ) [245
 
 ]
@@ -3803,7 +3911,16 @@ File: /home/ken/hospital.csv  (verbatim)
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (10.35182pt too wide) in paragraph at lines 24--24
+ []   \OT1/cmtt/m/n/10 "http://www.utsc.utoronto.ca/~butler/c32/hospital.csv";[
+] 
+ []
+
 )
+Overfull \vbox (16.34918pt too high) detected at line 10525
+ []
+
 [248
 
 ]
@@ -3894,7 +4011,16 @@ Package statrep Info: Processing output  on input line 11.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (24.52606pt too wide) in paragraph at lines 18--18
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";[
+] 
+ []
+
 )
+Overfull \vbox (6.527pt too high) detected at line 10730
+ []
+
 [258
 
 ]
@@ -3924,7 +4050,7 @@ Package statrep Info: Processing output  on input line 13.
 
 File: sr.tmp  (verbatim)
 )
-Overfull \vbox (10.62688pt too high) detected at line 10753
+Overfull \vbox (10.62688pt too high) detected at line 10798
  []
 
 [261
@@ -4034,11 +4160,20 @@ Package statrep Info: Processing graphic  on input line 3.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-Package statrep Info: Processing Sascode block ng on input line 15.
+
+Overfull \hbox (41.77213pt too wide) in paragraph at lines 15--15
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/windmill.csv
+";[] 
+ []
+
+Package statrep Info: Processing Sascode block ng on input line 17.
 File: lst/ngg.lst  (verbatim)
-Package statrep Info: Processing output lst/ngg.lst on input line 19.
-Package statrep Info: Processing output  on input line 19.
+Package statrep Info: Processing output lst/ngg.lst on input line 21.
+Package statrep Info: Processing output  on input line 21.
 )
+Overfull \vbox (10.01582pt too high) detected at line 10974
+ []
+
 [273
 
 ]
@@ -4075,6 +4210,12 @@ File: /home/ken/oranges.txt  (verbatim)
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (14.12338pt too wide) in paragraph at lines 13--13
+[]   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/oranges.txt";
+[] 
+ []
+
 ) [277
 
 ]
@@ -4085,8 +4226,7 @@ Package statrep Info: Processing Sascode block ora on input line 3.
 File: lst/oraa.lst  (verbatim)
 Package statrep Info: Processing output lst/oraa.lst on input line 7.
 Package statrep Info: Processing output  on input line 7.
-)
-[278
+) [278
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -4106,7 +4246,8 @@ Package pdftex.def Info: png/mjdd.png  used on input line 3.
 (pdftex.def)             Requested size: 289.08221pt x 216.81168pt.
 Package statrep Info: Processing graphic png/mjdd.png on input line 3.
 Package statrep Info: Processing graphic  on input line 3.
-) [280
+)
+[280
 
  <./png/mjdd.png (PNG copy)>]
 \openout4 = `slides-sas.vrb'.
@@ -4116,7 +4257,8 @@ Package statrep Info: Processing graphic  on input line 3.
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb) [282
+ (./slides-sas.vrb)
+[282
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -4125,8 +4267,7 @@ Package statrep Info: Processing graphic  on input line 3.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
-)
-[283
+) [283
 
 ]
 \openout4 = `slides-sas.vrb'.
@@ -4146,7 +4287,8 @@ Package pdftex.def Info: png/mugginss.png  used on input line 3.
 (pdftex.def)             Requested size: 289.08221pt x 216.81168pt.
 Package statrep Info: Processing graphic png/mugginss.png on input line 3.
 Package statrep Info: Processing graphic  on input line 3.
-) [285
+)
+[285
 
  <./png/mugginss.png (PNG copy)>]
 \openout4 = `slides-sas.vrb'.
@@ -4156,7 +4298,8 @@ Package statrep Info: Processing graphic  on input line 3.
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb
+
+(./slides-sas.vrb
 Package statrep Info: Processing Sascode block mka on input line 5.
 ) [287
 
@@ -4172,7 +4315,7 @@ Package pdftex.def Info: png/mkaa.png  used on input line 3.
 Package statrep Info: Processing graphic png/mkaa.png on input line 3.
 Package statrep Info: Processing graphic  on input line 3.
 )
-Overfull \vbox (27.95018pt too high) detected at line 11109
+Overfull \vbox (27.95018pt too high) detected at line 11162
  []
 
 [288
@@ -4186,7 +4329,7 @@ Overfull \vbox (27.95018pt too high) detected at line 11109
 File: sr.tmp  (verbatim)
 Package statrep Info: Processing Sascode block mwa on input line 23.
 )
-Overfull \vbox (0.92693pt too high) detected at line 11140
+Overfull \vbox (0.92693pt too high) detected at line 11193
  []
 
 [289
@@ -4219,10 +4362,10 @@ Package statrep Info: Processing Sascode block mjk on input line 11.
 <png/mjkk.png, id=1678, 481.8pt x 361.35pt>
 File: png/mjkk.png Graphic file (type png)
 <use png/mjkk.png>
-Package pdftex.def Info: png/mjkk.png  used on input line 11171.
+Package pdftex.def Info: png/mjkk.png  used on input line 11224.
 (pdftex.def)             Requested size: 289.08221pt x 216.81168pt.
-Package statrep Info: Processing graphic png/mjkk.png on input line 11171.
-Package statrep Info: Processing graphic  on input line 11171.
+Package statrep Info: Processing graphic png/mjkk.png on input line 11224.
+Package statrep Info: Processing graphic  on input line 11224.
  [292
 
  <./png/mjkk.png (PNG copy)>] [293
@@ -4230,16 +4373,13 @@ Package statrep Info: Processing graphic  on input line 11171.
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb)
-Overfull \vbox (49.65201pt too high) detected at line 11963
- []
-
-[294
+ (./slides-sas.vrb) [294
 
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb
+
+(./slides-sas.vrb
 Package statrep Info: Processing Sascode block ima on input line 9.
 File: lst/imaa.lst  (verbatim)
 Package statrep Info: Processing output lst/imaa.lst on input line 17.
@@ -4264,13 +4404,13 @@ Package statrep Info: Processing Sascode block imc on input line 8.
 File: lst/imcc.lst  (verbatim)
 Package statrep Info: Processing output lst/imcc.lst on input line 16.
 Package statrep Info: Processing output  on input line 16.
-)
-[297
+) [297
 
 ]
 \openout4 = `slides-sas.vrb'.
 
- (./slides-sas.vrb
+
+(./slides-sas.vrb
 Package statrep Info: Processing Sascode block imea on input line 7.
 File: lst/imeaa.lst  (verbatim)
 Package statrep Info: Processing output lst/imeaa.lst on input line 15.
@@ -4290,7 +4430,7 @@ File: lst/imee1.lst  (verbatim)
 Package statrep Info: Processing output lst/imee1.lst on input line 17.
 Package statrep Info: Processing output  on input line 17.
 )
-Overfull \vbox (15.91028pt too high) detected at line 12237
+Overfull \vbox (15.91028pt too high) detected at line 12271
  []
 
 [299
@@ -4303,6 +4443,11 @@ No file m.txt.
 \openout6 = `sr.tmp'.
 
 File: sr.tmp  (verbatim)
+
+Overfull \hbox (1.53131pt too wide) in paragraph at lines 19--19
+ []   \OT1/cmtt/m/n/10.95 "http://www.utsc.utoronto.ca/~butler/c32/m.txt";[] 
+ []
+
 ) [300
 
 ]
@@ -4331,7 +4476,7 @@ File: lst/imgg1.lst  (verbatim)
 Package statrep Info: Processing output lst/imgg1.lst on input line 13.
 Package statrep Info: Processing output  on input line 13.
 )
-Overfull \vbox (2.46234pt too high) detected at line 12396
+Overfull \vbox (2.46234pt too high) detected at line 12432
  []
 
 [303
@@ -4368,12 +4513,12 @@ Package statrep Info: Processing output  on input line 15.
 \tf@snm=\write10
 \openout10 = `slides-sas.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 12459.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 12459.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 12495.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 12495.
  (./slides-sas.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 12459.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 12495.
 
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 12459
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 12495
 .
 Package rerunfilecheck Info: File `slides-sas.out' has not changed.
 (rerunfilecheck)             Checksum: 22D7A8C475FFBAC3BF5D36F851C5CE59;671.
@@ -4402,7 +4547,7 @@ nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on slides-sas.pdf (305 pages, 4846743 bytes).
+Output written on slides-sas.pdf (305 pages, 4848035 bytes).
 PDF statistics:
  1951 PDF objects out of 2073 (max. 8388607)
  1535 compressed objects within 16 object streams

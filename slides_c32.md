@@ -7329,6 +7329,7 @@ boxcox(rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
 ![plot of chunk unnamed-chunk-289](figure/unnamed-chunk-289-1.pdf)
 
 ## Comments on Box-Cox plot
+- $\lambda$ represents power to transform $y$ with.
 - Best single choice of transformation parameter $\lambda$ is peak of curve,
 close to 0.
 - Vertical dotted lines give CI for $\lambda$, about (−0.05, 0.2).

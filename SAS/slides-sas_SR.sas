@@ -54,8 +54,10 @@ proc print;
 
 %write(uaa,store=ua,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/coffee.txt";
 proc import
-  datafile='/home/ken/coffee.txt'
+  datafile=myurl
   dbms=dlm
   out=coffee
   replace;
@@ -106,8 +108,10 @@ proc print;
 
 %write(ree,store=re,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -249,8 +253,10 @@ proc means stddev;
 
 %write(see,store=se,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/jays15-home.csv";
 proc import
-  datafile='/home/ken/jays15-home.csv'
+  datafile=myurl
     dbms=csv
     out=jays
     replace;
@@ -280,8 +286,10 @@ proc ttest h0=29327;
 
 %write(idd,store=id,type=graphic) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/drp.txt";
 proc import
-  datafile='/home/ken/drp.txt'
+  datafile=myurl
   dbms=dlm
   out=reading
   replace;
@@ -431,8 +439,10 @@ proc means;
 
 %write(imm,store=im,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/duality.txt";
 proc import
-  datafile='/home/ken/duality.txt'
+  datafile=myurl
     dbms=dlm
     out=duality
     replace;
@@ -465,8 +475,10 @@ proc print;
 
 %write(ivaa,store=iva,objects=conflimits ttests,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/irs.txt";
 proc import
-  datafile='/home/ken/irs.txt'
+  datafile=myurl
     dbms=csv
     out=irs
     replace;
@@ -520,8 +532,10 @@ proc univariate cipctldf;
 
 %write(pevayy,store=pevay,objects=quantiles,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt";
 proc import
-  datafile='/home/ken/analgesic.txt'
+  datafile=myurl
     dbms=dlm
     out=pain
     replace;
@@ -594,8 +608,10 @@ proc univariate;
 
 %write(ihxx,store=ihx,objects=TestsforLocation,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/drp.txt";
 proc import
-  datafile='/home/ken/drp.txt'
+  datafile=myurl
   dbms=dlm
   out=reading
   replace;
@@ -620,8 +636,10 @@ proc npar1way median;
 
 %write(ivv,store=iv,objects=medianTest medianAnalysis,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt";
 proc import
-  datafile='/home/ken/jumping.txt'
+  datafile=myurl
     dbms=dlm
     out=rats
     replace;
@@ -679,8 +697,10 @@ proc mixed;
 
 %write(rugapp,store=rugap,objects=diffs,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -851,8 +871,10 @@ proc print;
 
 %write(tmm,store=tm,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";
 proc import
-  datafile='/home/ken/pigs1.txt'
+  datafile=myurl
   dbms=dlm out=pigs replace;
   delimiter=' ';
   getnames=yes;
@@ -919,13 +941,15 @@ proc anova;
 
 %write(trr,store=tr,objects=mclines,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/global.csv";
 proc import
-  datafile='/home/ken/utility.txt'
+    datafile=myurl
     dbms=dlm
     out=util
     replace;
-  delimiter=' ';
-  getnames=yes;
+    delimiter=' ';
+    getnames=yes;
 
 
 %output(ca)
@@ -988,8 +1012,10 @@ proc reg;
 %write(ddii,store=ddg,objects=fitplot,type=graphic) 
 
 %output(muber)
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs.txt";
 proc import
-  datafile='/home/ken/pigs2.txt'
+  datafile=myurl
   out=pigs
   dbms=dlm
   replace;
@@ -1012,8 +1038,10 @@ proc glm;
 %write(kogepp,store=kogep,objects=overallanova modelanova#2 parameterestimates,type=listing) 
 
 %output(siqet)
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/crickets2.csv";
 proc import
-  datafile='/home/ken/crickets2.csv'
+  datafile=myurl
   out=crickets
   dbms=csv
   replace;
@@ -1040,8 +1068,10 @@ proc glm;
 
 %write(zereqs,store=zereq,objects=ancovaplot,type=graphic) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/mydates.csv";
 proc import
-  datafile='/home/ken/mydates.csv'
+  datafile=myurl
     dbms=csv
     out=dates
     replace;
@@ -1063,8 +1093,10 @@ proc print;
 
 %write(dbb,store=db,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/pieces.txt";
 proc import
-  datafile='/home/ken/pieces.txt'
+  datafile=myurl
     dbms=dlm
     out=pieces
     replace;
@@ -1092,8 +1124,10 @@ proc print;
 %write(ddda,store=dda,type=listing) 
 
 %output(jahaq)
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/monthly.csv";
 proc import
-  datafile='/home/ken/monthly.csv'
+  datafile=myurl
   out=sales1
   dbms=csv
   replace;
@@ -1148,8 +1182,10 @@ proc print;
 
 %write(dnn,store=dn,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/dt.csv";
 proc import
-  datafile='/home/ken/dt.csv'
+  datafile=myurl
     dbms=csv
     out=dt
     replace;
@@ -1162,8 +1198,10 @@ proc print;
 
 %write(doo,store=do,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/manypieces.txt";
 proc import
-  datafile='/home/ken/manypieces.txt'
+  datafile=myurl
     dbms=dlm
     out=many
     replace;
@@ -1194,8 +1232,10 @@ format thedate yymmdd10. thetime time8.
 
 %write(qabb,store=qab,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/hospital.csv";
 proc import
-  datafile='/home/ken/hospital.csv'
+  datafile=myurl
     dbms=csv
     out=stays
     replace;
@@ -1213,8 +1253,10 @@ proc print;
 
 %write(dqq,store=dq,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/many.txt";
 proc import
-  datafile='/home/ken/many.txt'
+  datafile=myurl
     dbms=dlm out=many replace;
   delimiter=' ';
   getnames=no;
@@ -1262,9 +1304,11 @@ proc print;
 
 %write(mcc,store=mc,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";
 libname mydata V9 '/home/ken';
 proc import
-  datafile='/home/ken/pigs1.txt'
+  datafile=myurl
     dbms=dlm
     out=mydata.pigs1
     replace;
@@ -1298,8 +1342,10 @@ proc print data='/home/ken/three';
 
 %write(mee,store=me,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -1334,8 +1380,10 @@ proc sgplot;
 
 %write(mjcc,store=mjc,type=graphic) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/windmill.csv";
 proc import
-  datafile='/home/ken/windmill.csv'
+  datafile=myurl
     dbms=csv
     out=windmill
     replace;
@@ -1358,8 +1406,10 @@ proc sgplot;
 
 %write(mjee,store=mje,type=graphic) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/oranges.txt";
 proc import
-  datafile='/home/ken/oranges.txt'
+  datafile=myurl
     dbms=dlm
     out=trees
     replace;
@@ -1386,8 +1436,10 @@ proc sgplot;
 
 %write(mjdd,store=mjd,type=graphic) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/cars.csv";
 proc import
-  datafile='/home/ken/cars.csv'
+  datafile=myurl
   dbms=csv
   out=cars
   replace;
@@ -1498,8 +1550,10 @@ proc iml;
 
 %write(imee,store=ime,type=listing) 
 
+filename myurl url
+  "http://www.utsc.utoronto.ca/~butler/c32/m.txt";
 proc import
-  datafile='/home/ken/m.txt'
+  datafile=myurl
     dbms=dlm
     out=mymatrix
     replace;

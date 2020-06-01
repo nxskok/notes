@@ -101,8 +101,10 @@
   \item Read in pig feed data (after tidying):
     
     \begin{Sascode}[store=muber]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs.txt";
 proc import
-  datafile='/home/ken/pigs2.txt'
+  datafile=myurl
   out=pigs
   dbms=dlm
   replace;
@@ -176,8 +178,10 @@ proc glm;
   \item I saved the tidied data set from Assignment 8.5:
     
     \begin{Sascode}[store=siqet]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/crickets2.csv";      
 proc import
-  datafile='/home/ken/crickets2.csv'
+  datafile=myurl
   out=crickets
   dbms=csv
   replace;

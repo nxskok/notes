@@ -699,7 +699,8 @@
 %%   
 %% \end{frame}
 
-\section{Case study 2: Electricity, peak hour demand and total energy usage}
+\section{Case study 2: Electricity, peak hour demand and total energy
+  usage}
 
 \frame{\sectionpage}
 
@@ -715,13 +716,15 @@
   \item Data from 53 residential customers from August.
   \item Read in data and draw scatterplot:
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/global.csv";
 proc import
-  datafile='/home/ken/utility.txt'
+    datafile=myurl
     dbms=dlm
     out=util
     replace;
-  delimiter=' ';
-  getnames=yes;
+    delimiter=' ';
+    getnames=yes;
     \end{Datastep}
     
 

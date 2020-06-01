@@ -50,9 +50,10 @@ pigs1
 
 ## Gathering up the columns
 - This is a very common reorganization, and the magic “verb” is
-`gather`:
+`pivot_longer`:
 ```{r}
-pigs1 %>% gather(feed, weight, feed1:feed4) -> pigs2
+pigs1 %>% pivot_longer(feed1:feed4, names_to="feed", 
+                       values_to="weight") -> pigs2
 ```
 
 - `pigs2` is now in “long” format, ready for analysis. See next page.
@@ -64,14 +65,6 @@ combine.
 
 ```{r}
 pigs2
-```
-
-## Another way to do this:
-
-```{r}
-pigs1 %>% 
-  pivot_longer(feed1:feed4, names_to = "feed", 
-               values_to="weight")
 ```
 
 
@@ -110,13 +103,17 @@ Feed 3 is best, feed 1 worst.
 
 ## Should we have any concerns about the ANOVA?
 
-Feed 2 has an outlier, but there are only 5 pigs in each group, and the
-conclusion is so clear that I am OK with this.
 
-```{r, fig.height=3.2}
+```{r pigfeedplot}
 ggplot(pigs2, aes(x = feed, y = weight)) + geom_boxplot()
 ```
 
+## Comments
+
+- Feed 2 has an outlier
+- But there are only 5 pigs in each group
+- The
+conclusion is so clear that I am OK with this.
 
 
 ## Tuberculosis
@@ -127,29 +124,27 @@ various diseases, eg. tuberculosis.
 
 ```{r}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/tb.csv"
-tb
 tb <- read_csv(my_url)
 ```
 
-- Variables (see over): country (abbreviated), year. Then number of
+
+## The data
+
+```{r glimpsetb}
+glimpse(tb)
+```
+
+## What we have
+
+- Variables:  country (abbreviated), year. Then number of
 cases for each gender and age group, eg. `m1524` is males aged 15–24.
 Also `mu` and `fu`, where age is unknown.
 - Lots of missings. Want to get rid of.
 
-## The data
 
-```{r}
-tb
-glimpse(tb)
-```
 
-## Gather the gender-age group columns
 
-```{r}
-tb %>% gather(genage, freq, m04:fu, na.rm = T) -> tb2
-```
-
-or
+## All frequencies in one column
 
 ```{r}
 tb %>% 
@@ -261,7 +256,7 @@ weather
 - Daily weather records for "Toronto City" weather station in 2018:
 
   - *station*: identifier for this weather station (always same here)
-  - *Year*, *Month*: obvious 
+  - *Year*, *Month*
   - *element*: whether temperature given was daily max or daily min
   - *d01, d02*,... *d31*: day of the month from 1st to 31st.
 
@@ -294,7 +289,7 @@ weather %>%
                values_to="temperature", 
                values_drop_na = T) %>% 
   pivot_wider(names_from=element, 
-                values_from=temperature)
+                values_from=temperature) -> d
 ```
 
 ## So far
@@ -395,17 +390,17 @@ weather_tidy %>%
 
 ## The plot
 
-```{r, fig.height=3.9}
+```{r temp-plot}
 g
 ```
 
 ## Summary of tidying “verbs”
 
-  \begin{tabular}{lp{0.55\textwidth}}
+  \begin{tabular}{lp{0.65\textwidth}}
     Verb & Purpose\\
     \hline
-    \texttt{pivot\_longer} (\texttt{gather}) & Combine columns that measure same thing into one\\
-    \texttt{pivot\_wider} (\texttt{spread}) & Take column that measures one thing under
+    \texttt{pivot\_longer} & Combine columns that measure same thing into one\\
+    \texttt{pivot\_wider} & Take column that measures one thing under
                      different conditions and put into multiple columns\\
     \texttt{separate} & Turn a column that encodes
                         several variables into
@@ -415,8 +410,10 @@ g
     \hline
   \end{tabular}
   
-  \texttt{pivot\_longer} (\textt{gather}) and \texttt{pivot\_wider} (\texttt{spread}) are opposites; \texttt{separate}
-  and \texttt{unite} are opposites.
+  `pivot_longer` and `pivot_wider` are opposites; `separate` and
+  `unite` are opposites.
+  
+
 
 ## Doing things with data frames
 Let’s go back to our Australian athletes: 
@@ -505,25 +502,6 @@ In regular expression terms, this is `^.t$`:
 athletes %>% select(matches("^.t$"))
 ```
 
-## Displaying some numbered columns
-
-Make up a data frame to illustrate. This `sample` generates 5 random values
-equally likely to be anything 0–9 (without replacement): 
-
-```{r}
-(d <- tibble(
-  y = sample(0:9, 5),
-  x1 = sample(0:9, 5),
-  x2 = sample(0:9, 5),
-  x3 = sample(0:9, 5)
-))
-```
-
-## Just display x2 and x3:
-```{r}
-d %>% select(num_range("x", 2:3))
-d %>% select(x2:x3)
-```
 
 ## Choosing rows by number 
 
@@ -531,10 +509,7 @@ d %>% select(x2:x3)
 athletes %>% slice(16:25)
 ```
 
-```{r}
-athletes %>% mutate(row=row_number()) %>% select(Sex, Sport, row) %>% 
-  slice(16:25)
-```
+
 
 
 ## Non-consecutive rows 
@@ -547,7 +522,7 @@ athletes %>%
 ## A random sample of rows
 
 ```{r}
-athletes %>% sample_n(8)
+athletes %>% slice_sample(n=8)
 ```
 
 ## Rows for which something is true
@@ -605,6 +580,15 @@ athletes %>%
   slice(1:7) %>%
   select(Sport, Wt)
 ```
+
+## Another way
+
+```{r}
+athletes %>% 
+  slice_max(order_by = Wt, n=7) %>% 
+  select(Sport, Wt)
+```
+
 
 ## Create new variables from old ones
 
@@ -699,11 +683,18 @@ my_url <-
 
 \normalsize
 
+Note trick for reading in `.xlsx` from URL:
+
 ```{r country-codes}
 f <- tempfile()
 download.file(my_url, f)
 country_names <- read_excel(f)
 ```
+
+- set up temporary file
+- download spreadsheet to there
+- read it from temporary file (which is "local")
+
 
 ## The country names
 
@@ -720,6 +711,11 @@ tb3 %>% left_join(country_names, by = c("iso2" = "Code_UC"))
 ```
 
 ## Total cases by country
+
+```{r}
+options(dplyr.summarise.inform=FALSE)
+```
+
 
 
 ```{r}

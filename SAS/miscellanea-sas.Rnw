@@ -22,8 +22,10 @@ there are 12 values altogether).
 
   \begin{footnotesize}
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/many.txt";
 proc import
-  datafile='/home/ken/many.txt'
+  datafile=myurl
     dbms=dlm out=many replace;
   delimiter=' ';
   getnames=no;
@@ -146,9 +148,11 @@ proc print;
     example pigs data:
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";  
 libname mydata V9 '/home/ken';
 proc import
-  datafile='/home/ken/pigs1.txt'
+  datafile=myurl
     dbms=dlm 
     out=mydata.pigs1
     replace;
@@ -300,8 +304,10 @@ Does permanent data set count as ``most recently created''? No,
 \begin{frame}[fragile]{Use Australian athletes data}
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";      
 proc import 
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -387,8 +393,10 @@ proc sgplot;
   \item Read into SAS thus:
     
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/windmill.csv";    
 proc import
-  datafile='/home/ken/windmill.csv'
+  datafile=myurl
     dbms=csv
     out=windmill
     replace;
@@ -444,8 +452,10 @@ proc sgplot;
 \begin{frame}[fragile]{Reading the data}
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/oranges.txt";      
 proc import
-  datafile='/home/ken/oranges.txt'
+  datafile=myurl
     dbms=dlm
     out=trees
     replace;
@@ -523,8 +533,10 @@ proc sgplot;
   \texttt{.csv} file, so:
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/cars.csv";      
 proc import 
-  datafile='/home/ken/cars.csv'
+  datafile=myurl
   dbms=csv
   out=cars
   replace;

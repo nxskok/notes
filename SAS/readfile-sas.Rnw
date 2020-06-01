@@ -426,8 +426,10 @@ proc print;
   \item Change the \texttt{proc import}:
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/coffee.txt";      
 proc import 
-  datafile='/home/ken/coffee.txt'
+  datafile=myurl
   dbms=dlm
   out=coffee
   replace;

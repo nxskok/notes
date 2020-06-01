@@ -116,8 +116,10 @@
     \emph{as long as it is consistently formatted}:
     
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/mydates.csv";
 proc import
-  datafile='/home/ken/mydates.csv'
+  datafile=myurl
     dbms=csv
     out=dates
     replace;
@@ -194,8 +196,10 @@ proc print;
   \item Strategy (both R and SAS): glue them together into something
     that can be recognized as date:
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pieces.txt";
 proc import
-  datafile='/home/ken/pieces.txt'
+  datafile=myurl
     dbms=dlm
     out=pieces
     replace;
@@ -254,8 +258,10 @@ you get \emph{days since Jan 1, 1960}.
     \item Try it:
     
     \begin{Sascode}[store=jahaq]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/monthly.csv";
 proc import
-  datafile='/home/ken/monthly.csv'
+  datafile=myurl
   out=sales1
   dbms=csv
   replace;
@@ -428,8 +434,10 @@ proc print;
   than space!
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/dt.csv";  
 proc import
-  datafile='/home/ken/dt.csv'
+  datafile=myurl
     dbms=csv
     out=dt
     replace;
@@ -466,8 +474,10 @@ proc print;
   \item which we read in the usual way:
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/manypieces.txt";      
 proc import
-  datafile='/home/ken/manypieces.txt'
+  datafile=myurl
     dbms=dlm
     out=many
     replace;
@@ -674,8 +684,10 @@ format thedate yymmdd10. thetime time8.
     
     \begin{small}
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/hospital.csv";  
 proc import
-  datafile='/home/ken/hospital.csv'
+  datafile=myurl
     dbms=csv
     out=stays
     replace;

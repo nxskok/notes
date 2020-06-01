@@ -1,0 +1,42 @@
+\frametitle{Comments}
+\protect\hypertarget{comments-1}{}
+\begin{itemize}
+\tightlist
+\item
+  This is probably not quite right because of:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the 1994-1995 thing
+  \item
+    there is at least one country in \texttt{tb3} that was not in
+    \texttt{country\_names} (the NA above). Which?
+  \end{itemize}
+\end{itemize}
+
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tb3 }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{anti\_join}\NormalTok{(country\_names, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"iso2"}\NormalTok{ =}\StringTok{ "Code\_UC"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{distinct}\NormalTok{(iso2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+iso2\tabularnewline
+\midrule
+\endhead
+CD\tabularnewline
+ME\tabularnewline
+NA\tabularnewline
+PS\tabularnewline
+RS\tabularnewline
+TL\tabularnewline
+\bottomrule
+\end{longtable}
+
+\normalsize

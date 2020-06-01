@@ -114,7 +114,7 @@ rut.1 <- lm(rut.depth ~ pct.a.surf + pct.a.base + fines +
 ## Regression output: `summary(rut.1)` or:
 
 \footnotesize
-```{r, paged.print=F}
+```{r}
 glance(rut.1)
 tidy(rut.1)
 ```
@@ -384,7 +384,7 @@ cutoff like 0.20 or even bigger.
 
 Uses package `leaps`: 
 
-```{r,paged.print=F}
+```{r}
 leaps <- regsubsets(log.rut.depth ~ pct.a.surf + pct.a.base + fines + voids +
   log.viscosity + run, data = asphalt_2, nbest = 2)
 s <- summary(leaps)
@@ -428,8 +428,10 @@ options(width=80)
 ```
 
 \scriptsize
-```{r, paged.print=F}
-with(s, data.frame(adjr2, outmat))
+```{r}
+with(s, data.frame(adjr2, outmat)) %>% 
+  rownames_to_column("model") %>% 
+  arrange(desc(adjr2))
 ```
 \normalsize
 

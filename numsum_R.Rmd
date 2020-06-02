@@ -24,11 +24,6 @@ my_url="http://www.utsc.utoronto.ca/~butler/c32/ais.txt"
 athletes=read_tsv(my_url)
 ```
 
-```{r}
-View(athletes)
-```
-
-
 ## Summarizing one column
 - Mean height: 
 
@@ -47,11 +42,11 @@ athletes %>% summarize(m=mean(BMI),s=sd(BMI))
 - `quantile` calculates percentiles ("fractiles"), so we want the 25th and 75th
 percentiles:
 
-
 ```{r}
-athletes %>% summarize( Q1=quantile(Wt, 0.25),
-                        Q3=quantile(Wt, 0.75))
+v <- c(0.25, 0.75)
+athletes %>% summarize(q=quantile(Wt, v), prob=v)
 ```
+
 
 ## Creating new columns
 
@@ -61,14 +56,19 @@ weights in pounds.
 - Create new column and summarize that: 
 
 ```{r}
+v
 athletes %>% mutate(wt_lb=Wt*2.2) %>%
-  summarize(Q1_lb=quantile(wt_lb, 0.25),
-            Q3_lb=quantile(wt_lb, 0.75))
+  summarize(Q_lb=quantile(wt_lb, v), prob=v)
 ```
 
 ## Counting how many
 for example, number of athletes in
 each sport: 
+
+```{r, echo=FALSE}
+options(dplyr.summarise.inform=FALSE) 
+```
+
 
 ```{r}
 athletes %>% count(Sport)
@@ -96,6 +96,8 @@ athletes %>% group_by(Sex) %>%
   summarize(m=mean(Ht), s=sd(Ht))
 ```
 
+## Count plus stats
+
 If you want number of observations per group plus some stats, you need to go the `n()` way:
 
 ```{r}
@@ -113,7 +115,7 @@ sport, how many athletes were there?”
 
 \small
 ```{r}
-athletes %>% summarize_if(is.numeric, sd)
+athletes %>% summarize(across(where(is.numeric), ~sd(.)))
 ```
 \normalsize
 
@@ -121,7 +123,7 @@ athletes %>% summarize_if(is.numeric, sd)
 
 \small
 ```{r}
-athletes %>% summarize_at(vars(starts_with("H")),
-                          list(med=median, iqr=IQR))
+athletes %>% summarize(across(starts_with("H"),
+                       list(med=~median(.), iqr=~IQR(.))))
 ```
 \normalsize

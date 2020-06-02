@@ -19,6 +19,12 @@ library(tidyverse)
 
 ![](spreadsheet.png)
 
+## Grab the spreadsheet
+
+- from [this link](https://raw.githubusercontent.com/nxskok/notes/master/test1.xlsx)
+- open in Excel or other spreadsheet software (if it doesn't already open)
+
+
 ## Save as `.csv`
 
 - `.csv` or “comma-separated values” is a way of turning spreadsheet
@@ -73,24 +79,28 @@ mydata <- read_csv("test1.csv")
 
 ## More on the above
 
-- read_csv guesses what kind of thing is in each column. Here it
-correctly guesses that:
-- id and group are text (categorical variables). id is actually “identifier
+- `read_csv` guesses what kind of thing is in each column. 
+- Here it correctly guesses that:
+    - `id` and `group` are text (categorical variables). `id` is actually “identifier
 variable”: identifies individuals.
-- x and y are integers (quantitative variables that here have no decimal
-point). Decimal numbers would be labelled num or double.
+    - `x` and `y` are possibly decimal numbers. 
 
 ## R Studio on your own computer
 
 - Put the .csv file in the same folder as your project. Then read it in
 as above like `read_csv("test1.csv")`.
 - Or, use
-`f=file.choose()`
-which brings up a file selector (as if you were going to find a file to
-load or save it). Find your `.csv` file, the address of which will be
-saved in `f`, and then:
+
+```{r, eval=FALSE}
+f <- file.choose()
 ```
-mydata=read_csv(f)
+
+which brings up a file selector (as if you were going to find a file to
+load or save it). Find your `.csv` file, the location of which will be
+saved in `f`, and then:
+
+```{r, eval=FALSE}
+mydata <- read_csv(f)
 ```
 
 - When you have selected the file, comment out the `file.choose` line
@@ -147,12 +157,21 @@ individuals and variables).
 low, so the min and/or max will be unreasonable.
 - Five-number summary:
 
+```{r, echo=FALSE}
+options(width = 80)
+```
+
+
+\footnotesize
+
 ```{r}
 summary(mydata)
 ```
 
+\normalsize
+
 - Quantitative, five-number summary plus mean.
-- Categorical, how many rows.
+- Categorical, how many rows. 
 
 ## Reading from a URL
 - Any data file on the Web can be read directly.
@@ -207,8 +226,9 @@ CUPPS 10
 
 ## Reading the coffee data
 
-- This file was on my computer so I uploaded it to <http://rstudio.cloud>
-first.
+- Get the file yourself from [here](https://raw.githubusercontent.com/nxskok/notes/master/coffee.txt).
+- This file was on my computer so I uploaded it to `rstudio.cloud`
+ first.
 - This time, `read_delim`, and we also have to say what the thing is
 separating the values:
 
@@ -267,7 +287,7 @@ drugs
 
 ## Reading an Excel sheet directly
 
-- Here is my spreadsheet from before, but tarted up a bit:
+- Here is [my spreadsheet](https://raw.githubusercontent.com/nxskok/notes/master/test2.xlsx) from before, but tarted up a bit:
 
 ![](excel.png){height=180px}
 

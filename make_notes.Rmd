@@ -29,9 +29,9 @@ parts
 knit a file
 
 ```{r}
-fname <- parts$full_part[12]
+fname <- parts$full_part[5]
 fname
-options(tinytex.verbose = TRUE)
+# options(tinytex.verbose = TRUE)
 rmarkdown::render(fname)
 ```
 

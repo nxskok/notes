@@ -1,5 +1,5 @@
 ---
-title: "STAC32: Course outline"
+title: "Course outline"
 author: ""
 header-includes:
    - \usepackage{multicol}
@@ -16,7 +16,6 @@ output:
 
 ```{r child="preliminaries.Rmd", echo=F}
 ```
-
 
 
 ```{r, child="outline_c32.Rmd"}

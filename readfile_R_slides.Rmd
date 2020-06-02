@@ -1,6 +1,6 @@
 ---
-title: "STAC32: Applications of Statistical Methods"
-author: "Lecture notes"
+title: "Reading in data"
+author: ""
 header-includes:
    - \usepackage{multicol}
 output: 
@@ -17,9 +17,6 @@ output:
 ```{r child="preliminaries.Rmd", echo=F}
 ```
 
-
-
-## Reading in data
 
 ```{r child="readfile_R.Rmd"}
 ```

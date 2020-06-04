@@ -29,7 +29,7 @@ parts
 knit a file
 
 ```{r}
-fname <- parts$full_part[5]
+fname <- parts$full_part[7]
 fname
 # options(tinytex.verbose = TRUE)
 rmarkdown::render(fname)

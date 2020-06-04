@@ -39,9 +39,9 @@ library(smmr)
 jays = read_csv("jays15-home.csv")
 ```
 
-## Taking a look
+## Taking a look (tiny)
 
-\scriptsize
+\tiny
 ```{r}
 jays
 ```
@@ -50,6 +50,12 @@ jays
 ## Another way
 
 \tiny
+
+```{r, echo=FALSE}
+options(width=100)
+```
+
+
 ```{r}
 glimpse(jays)
 ```
@@ -58,7 +64,7 @@ glimpse(jays)
 ## Attendance histogram
 
 ```{r, fig.height=3.8}
-ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
+ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 6)
 ```
 
 
@@ -219,7 +225,7 @@ it is normal enough, given the sample size.
 in which case you don’t trust the $t$-test result:
 
 ```{r, fig.height=3}
-ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 10)
+ggplot(jays, aes(x = attendance)) + geom_histogram(bins = 6)
 ```
 
 
@@ -263,17 +269,17 @@ ggplot(kids, aes(x = group, y = score)) + geom_boxplot()
 ## Two kinds of two-sample t-test
 
 - Do the two groups have same spread (SD, variance)?
-- If yes (shaky assumption here), can use pooled t-test.
-- If not, use Welch-Satterthwaite t-test (safe).
+    - If yes (shaky assumption here), can use pooled t-test.
+    - If not, use Welch-Satterthwaite t-test (safe).
 - Pooled test derived in STAB57 (easier to derive).
 - Welch-Satterthwaite is test used in STAB22 and is generally safe.
 - Assess (approx) equality of spreads using boxplot.
 
 ## The (Welch-Satterthwaite) t-test
-- c (control) before t (treatment) alphabetically, so proper alternative
+- `c` (control) before `t` (treatment) alphabetically, so proper alternative
 is “less”.
 - R does Welch-Satterthwaite test by default 
-- new reading program really helps?
+- Answer to "does the new reading program really help?"
 - (in a moment) how to get R to do pooled test?
 
 ## Welch-Satterthwaite 
@@ -336,3 +342,4 @@ conclude that new reading program is effective.
 - Nothing here about what happens if null hypothesis is false. This is power
 and type II error probability.
 
+## Extra on bootstrapping?

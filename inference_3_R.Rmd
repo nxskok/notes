@@ -44,7 +44,7 @@ Recall null here is $H_0 : \mu_1 - \mu_2 = 0$. P-value 0.0668.
 - 95% CI from $-5.6$ to 0.2, contains 0.
 - 90% CI from $-5.0$ to $-0.3$, does not contain 0.
 - At $\alpha = 0.05$, would not reject $H_0$ since P-value > 0.05.
-- At $\alpha = 0.10$, would reject $H_0$ since P-value < 0.10.
+- At $\alpha = 0.10$, *would* reject $H_0$ since P-value < 0.10.
 
 Not just coincidence. Let $C = 100(1 - \alpha)$, so C% gives corresponding CI
 to level-$\alpha$ test. Then following always true.
@@ -82,22 +82,27 @@ than that on average.
 by anything.
   
 ## Read in data 
-```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/irs.txt"
-irs = read_csv(my_url)
-irs %>% glimpse()
+```{r, message=FALSE}
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/irs.txt"
+irs <- read_csv(my_url)
+irs
 ```
 
+
 ## Test whether mean is 160 or greater
+
 ```{r}
-t.test(irs$Time, mu = 160, alternative = "greater")
+with(irs, t.test(irs$Time, mu = 160, 
+                 alternative = "greater"))
 ```
 
 Reject null; mean (for all people to complete form) greater than 160.
 
+
+
 ## But, look at a graph
 ```{r, fig.height=3.5}
-ggplot(irs, aes(x = Time)) + geom_histogram(bins = 10)
+ggplot(irs, aes(x = Time)) + geom_histogram(bins = 6)
 ```
 
 ## Comments
@@ -112,6 +117,9 @@ the population are equally likely to be above or below 160.
 - If the population median is greater than 160, there will be a lot of
 sample values greater than 160, not so many less. Idea: test statistic
 is number of sample values greater than hypothesized median.
+
+## Getting a P-value for sign test 1/3
+
 - How to decide whether “unusually many” sample values are greater
 than 160? Need a sampling distribution.
 - If $H_0$ true, pop. median is 160, then each sample value independently
@@ -120,7 +128,7 @@ equally likely to be above or below 160.
 with $n = 30$ (number of data values) and $p = 0.5$ (160 is
 hypothesized to be *median*).
 
-## Obtaining P-value for sign test 1/2
+## Getting P-value for sign test 2/3
 
 - Count values above/below 160:
 ```{r}
@@ -129,7 +137,7 @@ irs %>% count(Time > 160)
 
 - 17 above, 13 below. How unusual is that? Need a *binomial table*.
 
-## Obtaining P-value for sign test 2/2
+## Getting P-value for sign test 3/3
 - R function `dbinom` gives the probability of eg. exactly 17 successes in
 a binomial with $n = 30$ and $p = 0.5$:
 ```{r}
@@ -165,6 +173,7 @@ column and a null median:
 sign_test(irs, Time, 160)
 ```
 
+
 ## Comments (1/3)
 
 - Testing whether population median *greater than* 160, so want
@@ -186,9 +195,11 @@ sign_test(irs, Time, 160)
 - These are very different: we reject a mean of 160 (in favour of the
 mean being bigger), but clearly *fail* to reject a median of 160 in
 favour of a bigger one.
-- Why is that? Obtain mean and median: 
+- Why is that? Obtain mean and median:
+
 ```{r}
-irs %>% summarize(mean = mean(Time), median = median(Time))
+irs %>% summarize(mean_time = mean(Time), 
+                  median_time = median(Time))
 ```
 
 ## Comments (3/3)
@@ -342,3 +353,33 @@ ci_median(irs,Time,conf.level=0.90)
 
 - 90% CI is shorter, as it should be.
 
+## Bootstrap (optional)
+
+- but, was the sample size (30) big enough to overcome the skewness?
+- Bootstrap, again:
+
+```{r, echo=FALSE}
+set.seed(457299)
+```
+
+
+```{r}
+rerun(1000, sample(irs$Time, replace = TRUE)) %>% 
+  map_dbl(~mean(.)) %>% 
+  enframe() %>% 
+  ggplot(aes(x=value)) + geom_histogram(bins=10) -> g
+```
+
+
+## The sampling distribution
+
+```{r}
+g
+```
+
+## Comments
+
+- A little skewed to right, but not nearly as much as I was expecting.
+- The $t$-test for the mean might actually be OK for these data, *if the mean is what you want*.
+- In actual data, mean and median very different; we chose to make inference about the median. 
+- Thus for us it was right to use the sign test.

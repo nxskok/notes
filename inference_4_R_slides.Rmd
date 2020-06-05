@@ -17,8 +17,6 @@ output:
 ```{r child="preliminaries.Rmd", echo=F}
 ```
 
-
-
 ```{r, child="inference_4_R.Rmd"}
 ```
 

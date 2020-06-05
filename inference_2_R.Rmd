@@ -111,17 +111,21 @@ t.test(x, mu = 10)$p.value
 
 ## In code
 
+```{r, echo=FALSE}
+set.seed(457299)
+```
 
 ```{r}
-rerun(10000, rnorm(15, 8, 4)) %>%
+rerun(1000, rnorm(15, 8, 4)) %>%
   map( ~ t.test(., mu = 10)) %>%
-  map_dbl("p.value") ->
-  pvals
-tibble(pvals) %>% count(pvals <= 0.05)
+  map_dbl("p.value") %>% 
+  enframe(value="pvals") %>% 
+  count(pvals <= 0.05)
 ```
 
 We correctly rejected 422 times out of 1000, so the estimated power is
 0.422.
+
 
 ## Calculating power
 
@@ -209,12 +213,14 @@ ans$power
 
 
 
-## Building a plot
+## Building a plot (1/2)
 - Make a data frame out of the values to plot:
 ```{r}
 d=tibble(n=ns, power=ans$power)
 d
 ```
+
+## Building a plot (2/2)
 
 - Plot these as points joined by lines, and add horizontal line at 1
 (maximum power): 
@@ -225,11 +231,11 @@ g = ggplot(d, aes(x = n, y = power)) + geom_point() +
 ```
 
 ## The power curve
-```{r, fig.height=3.8}
+```{r}
 g
 ```
 
-Another way to do it:
+## Another way to do it:
 
 ```{r}
 tibble(n=ns) %>% 
@@ -264,22 +270,32 @@ combos
 ## Calculate and plot
 
 - Calculate the powers, carefully:
+
+
 ```{r}
 ans=with(combos, power.t.test(n=n, delta=mean-10, sd=4, 
                               type="one.sample"))
 ans
+```
+
+ 
+## More of what's in the output
+
+```{r}
 names(ans)
 ans$power
 ```
 
-- Make a data frame to plot, pulling things from the right places:
+##  Make a data frame to plot, pulling things from the right places:
+
 ```{r}
 d=tibble(n=factor(combos$n), mean=combos$mean, 
          power=ans$power)
 d
 ```
 
-- then make the plot:
+##  then make the plot:
+
 ```{r}
 g = ggplot(d, aes(x = mean, y = power, colour = n)) +
   geom_point() + geom_line() +

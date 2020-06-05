@@ -10,16 +10,20 @@ Some data:
 
 ## Matched pairs data
 - Data are comparison of 2 drugs for effectiveness at reducing pain.
-- 12 subjects (cases) were arthritis sufferers
-- Response is #hours of pain relief from each drug.
+
+     - 12 subjects (cases) were arthritis sufferers
+     - Response is #hours of pain relief from each drug.
+      
 - In reading example, each child tried only one reading method.
 - But here, each subject tried out both drugs, giving us two
 measurements.
-- Possible because, if you wait long enough, one drug has no influence
+
+    - Possible because, if you wait long enough, one drug has no influence
 over effect of other.
-- Advantage: focused comparison of drugs. Compare one drug with
+    - Advantage: focused comparison of drugs. Compare one drug with
 another on same person, removes a lot of variability due to differences between people. 
-- Matched pairs, requires different analysis. 
+    - Matched pairs, requires different analysis.
+      
 - Design: randomly choose 6 of 12 subjects to get drug A first, other 6
 get drug B first.
 
@@ -39,18 +43,30 @@ pain
 
 ## Paired *t*-test 
 
+\small
+
 ```{r}
 with(pain, t.test(druga, drugb, paired = T))
 ```
 
-P-value is 0.053. Likewise, you can calculate the differences yourself and
-do a 1-sample t-test on them, over:
+\normalsize
+
+- P-value is 0.053. 
+- Not quite evidence of difference between drugs.
 
 ## t-testing the differences
-- First calculate a column of differences (in data frame):
+
+- Likewise, you can calculate the differences yourself and
+do a 1-sample t-test on them.
+- First calculate a column of differences:
+
+\footnotesize
+
 ```{r}
 (pain %>% mutate(diff=druga-drugb) -> pain)
 ```
+
+\normalsize
 
 ## t-test on the differences
 - then throw them into t.test, testing that the mean is zero, with
@@ -229,10 +245,10 @@ sign_test(mydiff,0)
 ## (Some of) the kids’ reading data, again
 
 ```{r}
-kids %>% sample_n(12)
+kids %>% slice_sample(n=12)
 ```
 
-## Where we are at 
+## Where we were at 
 
 - 21 kids in “treatment”, new reading method; 23 in “control”,
 standard reading method.

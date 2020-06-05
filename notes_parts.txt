@@ -9,7 +9,7 @@ bootstrap_R.Rmd
 inference_2_R.Rmd
 inference_3_R.Rmd
 inference_4_R.Rmd
-inference_5_R.Rmd
+inference_5_R.Rmd # done to here
 reports_R.Rmd
 tidying_R.Rmd
 windmill.Rmd

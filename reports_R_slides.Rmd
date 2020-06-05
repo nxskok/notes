@@ -1,6 +1,6 @@
 ---
-title: "STAC32: Applications of Statistical Methods"
-author: "Lecture notes"
+title: "Writing reports"
+author: ""
 header-includes:
    - \usepackage{multicol}
 output: 
@@ -16,9 +16,6 @@ output:
 
 ```{r child="preliminaries.Rmd", echo=F}
 ```
-
-
-# Writing reports
 
 ```{r, child="reports_R.Rmd"}
 ```

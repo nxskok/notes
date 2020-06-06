@@ -1,5 +1,5 @@
 ---
-title: "Tidying and organizing data"
+title: "Doing things with data frames"
 author: ""
 header-includes:
    - \usepackage{multicol}
@@ -20,6 +20,6 @@ urlcolor: blue
 
 
 
-```{r, child="tidying_R.Rmd"}
+```{r, child="choosing_R.Rmd"}
 ```
 

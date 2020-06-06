@@ -193,6 +193,11 @@ tb2 %>% separate(genage, c("gender", "age"), 1) -> tb3
 tb3
 ```
 
+```{r, echo=FALSE}
+write_rds(tb3, "tb3.rds")
+```
+
+
 ## In practice...
 
 - instead of doing the pipe one step at a time, you *debug* it one step at

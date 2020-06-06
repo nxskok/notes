@@ -11,8 +11,8 @@ inference_3_R.Rmd
 inference_4_R.Rmd
 inference_5_R.Rmd 
 reports_R.Rmd 
-tidying_R.Rmd *done*
-choosing_R.Rmd
+tidying_R.Rmd
+choosing_R.Rmd  *done*
 windmill.Rmd
 asphalt.Rmd
 with_categ_R.Rmd

@@ -1,6 +1,6 @@
 ---
-title: "STAC32: Applications of Statistical Methods"
-author: "Lecture notes"
+title: "Regression with categorical variables"
+author: ""
 header-includes:
    - \usepackage{multicol}
 output: 
@@ -10,6 +10,7 @@ output:
     df_print: kable
     theme: "AnnArbor"
     colortheme: "dove"
+urlcolor: blue
 ---
 
 
@@ -17,8 +18,6 @@ output:
 ```{r child="preliminaries.Rmd", echo=F}
 ```
 
-
-# Regression with categorical variables
 
 ```{r, child="with_categ_R.Rmd"}
 ```

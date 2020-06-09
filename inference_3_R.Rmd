@@ -5,8 +5,8 @@ way. They are both telling you something about a parameter, and
 they use same things about data.
 - To illustrate, some data (two groups):
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/duality.txt"
-twogroups=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/duality.txt"
+twogroups <- read_delim(my_url," ")
 ```
 
 

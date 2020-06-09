@@ -250,8 +250,8 @@ reading method (t) or standard one (c).
 - Read in thus:
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/drp.txt"
-kids=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/drp.txt"
+kids <- read_delim(my_url," ")
 ```
 
 ## The data (some) 

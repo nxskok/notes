@@ -31,8 +31,8 @@ get drug B first.
 Values aligned in columns:  
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt"
-pain=read_table(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt"
+pain <- read_table(my_url)
 ```
 
 ## The data
@@ -243,6 +243,11 @@ sign_test(mydiff,0)
 
 
 ## (Some of) the kids’ reading data, again
+
+```{r, echo=FALSE}
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/drp.txt"
+kids <- read_delim(my_url," ")
+```
 
 ```{r}
 kids %>% slice_sample(n=12)

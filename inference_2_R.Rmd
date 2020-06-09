@@ -347,6 +347,12 @@ g
 
 ## Two-sample power
 
+```{r, echo=FALSE}
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/drp.txt"
+kids <- read_delim(my_url," ")
+```
+
+
 - For kids learning to read, had sample sizes of 22 (approx) in each group
 - and these group SDs:
 

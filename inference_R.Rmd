@@ -5,8 +5,8 @@ way. They are both telling you something about a parameter, and
 they use same things about data.
 - To illustrate, some data (two groups):
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/duality.txt"
-twogroups=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/duality.txt"
+twogroups <- read_delim(my_url," ")
 ```
 
 
@@ -83,8 +83,8 @@ by anything.
   
 ## Read in data 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/irs.txt"
-irs = read_csv(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/irs.txt"
+irs <- read_csv(my_url)
 irs %>% glimpse()
 ```
 
@@ -370,8 +370,8 @@ get drug B first.
 Values aligned in columns:  
 
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt"
-pain=read_table(my_url)
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt"
+pain <- read_table(my_url)
 ```
 
 ## The data
@@ -636,8 +636,8 @@ whether they each agree with having DST all year round (“yes”) or
 not (“no”). Some of the data: 
 
 ```{r, message=F}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/dst.txt"
-dst=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/dst.txt"
+dst <- read_delim(my_url," ")
 dst %>% sample_n(5) # randomly sample 5 rows
 ```
 
@@ -754,8 +754,8 @@ bone density.
 ## Reading the data
 Values separated by spaces:
 ```{r}
-my_url="http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
-rats=read_delim(my_url," ")
+my_url <- "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
+rats <- read_delim(my_url," ")
 ```
 
 ## The data (some random rows) 

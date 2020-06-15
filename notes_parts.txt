@@ -4,9 +4,8 @@ running_R.Rmd
 readfile_R.Rmd
 graphs_R.Rmd
 numsum_R.Rmd
-inference_R.Rmd
-bootstrap_R.Rmd
 inference_1_R.Rmd
+bootstrap_R.Rmd
 inference_2_R.Rmd
 inference_3_R.Rmd
 inference_4_R.Rmd

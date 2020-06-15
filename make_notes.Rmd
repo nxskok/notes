@@ -29,9 +29,9 @@ parts
 knit a file
 
 ```{r}
-fname <- parts$full_part[16]
+fname <- parts$full_part[18]
 fname
-# options(tinytex.verbose = TRUE)
+options(tinytex.verbose = TRUE)
 rmarkdown::render(fname)
 ```
 
@@ -41,4 +41,12 @@ works
 parts %>% 
   mutate(done=walk(full_part, ~rmarkdown::render(.)))
 ```
+
+next:
+
+make an "all" lecture notes?
+make web page with all of these
+repeat for c33
+
+sas?
 

@@ -1,0 +1,16 @@
+Package: c32.notes
+Title: Lecture notes for STAC32
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Ken",
+           family = "Butler",
+           role = c("aut", "cre"),
+           email = "butler@utsc.utoronto.ca",
+           comment = c(ORCID = "https://orcid.org/0000-0001-7821-6811"))
+Description: All the files for my lecture notes, for following along with
+License: use_mit_license()
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends: MASS, tidyverse, broom, readxl, devtools, smmr, PMCMRplus, leaps, lubridate, ggrepel, rstan, loo, bootstrap, conflicted

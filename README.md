@@ -1,5 +1,7 @@
 
-<!-- badges: start --> [![Launch Rstudio
+<!-- badges: start -->
+
+[![Launch Rstudio
 Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nxskok/notes/master?urlpath=rstudio)
 <!-- badges: end -->
 

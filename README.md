@@ -1,4 +1,8 @@
 
+<!-- badges: start --> [![Launch Rstudio
+Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nxskok/notes/master?urlpath=rstudio)
+<!-- badges: end -->
+
 ## STAC32/C33 lecture notes:
 
   - [STAC32 lecture

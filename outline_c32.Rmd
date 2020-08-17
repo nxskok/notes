@@ -1,4 +1,4 @@
-# Course information
+
 
 ## This course
 
@@ -26,7 +26,7 @@
 - STAB57 is *not* suitable preparation for this course. If you have that, you should take STAC33.
 
 - Note that you may not combine the Applied Minor Program in Statistics with any other Statistics, Mathematics or Computer Science program.
-- I check preprequisites.
+- I check prerequisites.
 
 ## STAC53
 
@@ -46,7 +46,7 @@
 - Use a suitable subject, eg "STAC32" or "Applied Minor Program"
 - Begin with "Dear Dr Butler"
 - State *clearly* how I can help you. (The quicker I can figure this out, the better your chances of a quick reply.)
-- Include your name *and* student number
+- Include your name (as U of T knows it) *and* student number
 - I aim to reply within one working day.
 
 ## Course objectives
@@ -59,8 +59,10 @@
 
 ## Course materials
 
+The blue things are all links:
+
 - [Quercus](https://q.utoronto.ca/): lecture videos, hand in assignments/projects, receive grades.
-- [Course website](http://ritsokiguess.site/STAC32/): course news, reminders, assignment solutions, other stuff I want to share with you
+- [Course website](http://ritsokiguess.site/STAC32/): course news, reminders, lecture notes and code, assignment solutions, other stuff I want to share with you
 - [Computer requirements](https://www.viceprovoststudents.utoronto.ca/covid-19/tech-requirements-online-learning/)
   - to get the most out of tutorials, you will want a working camera and microphone
   - can use `rstudio.cloud` (needs only web browser) or install R and R Studio on your computer
@@ -68,7 +70,7 @@
 
 ## Assessment
 
-- Assignments: 10 total, due in weeks 2 through 10 and in the final exam period. Best 8 count, total 80%.
+- Assignments: 10 total, due in weeks 2 through 10 and in the final exam period. Best 8 count, total 80% (10% each.
 - Project: can be done in groups (chosen by you) of up to 5 people. Due the last day of classes. Worth 20%.
 
 ## Grading
@@ -108,8 +110,6 @@ In R:
 - Miscellaneous tasks
 
 If time permits, we will also do some of this in SAS.
-
-## Course calendar
 
 ## Accessibility statement
 

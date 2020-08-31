@@ -33,15 +33,20 @@
 - Check your Degree Explorer.
 - This might have STAC50 as a requirement (for which you don't now have the prereq)
 - If you have not already taken C50, you need to take *STAC53*.
-- To get this reflected in your Degree Explorer: email as on next page
+- To get this reflected in your Degree Explorer: email (instructions below)
    - with your name and student number
    - and explaining that you would like me to make this change.
 
+## Getting help
 
+- First: look at the Quercus discussion board (Forum 2). Your question might have an answer there.
+- If you see a question there that you can answer, go ahead and answer it.
+- If you don't see an answer to your question, post your question on Forum 2.
+- If you don't get an answer to your question (from me or anyone else) in Forum 2, post it to Forum 3 and I will answer.
+- For an issue that is more personal, email me (below).
   
-## Communication
+## E-mail
 
-- E-mail preferred
 - Use a U of T email (so that I know who you are)
 - Use a suitable subject, eg "STAC32" or "Applied Minor Program"
 - Begin with "Dear Dr Butler"
@@ -70,7 +75,7 @@ The blue things are all links:
 
 ## Assessment
 
-- Assignments: 10 total, due in weeks 2 through 10 and in the final exam period. Best 8 count, total 80% (10% each.
+- Assignments: 10 total, due in weeks 2 through 10 and in the final exam period. Best 8 count, total 80% (10% each).
 - Project: can be done in groups (chosen by you) of up to 5 people. Due the last day of classes. Worth 20%.
 
 ## Grading
@@ -131,11 +136,19 @@ If time permits, we will also do some of this in SAS.
 - All the ideas you need to succeed in this course are contained in the lecture notes, with a few exceptions that I will tell you about. Seeking help from outside the course may confuse you more than it helps.
 - You may freely use anything that you learn from the lecture notes or from conversation with the TAs or me. Anything else, for example, material you find on the Internet, **must be cited**. You can do this by giving the URL that it came from, for example "according to `https://r4ds.had.co.nz/data-import.html`", and then say whatever it is you learned from there. Citation is a way of making sure that people get credit for ideas that are theirs; not citing when you should is a way of erasing someone's point of view.
 
-## Expectations 2/2
+## Expectations 2/3
+
+- You may freely use anything that you learn from the lecture notes, PASIAS, solutions to previous assignments, or from conversation with the TAs or me. 
+- Anything else, for example, material you find on the Internet, **must be cited**. You can do this by giving the URL that it came from, for example "according to `https://r4ds.had.co.nz/data-import.html`", and then say whatever it is you learned from there. 
+- If you want credit for any ideas that come from outside the course materials, you must say where they came from.
+- Citation is a way of making sure that people get credit for ideas that are theirs; not citing when you should is a way of erasing someone's point of view.
+
+
+## Expectations 3/3
 
 - I expect you to learn how to do things *as they are done in this course*. You will also make STAD29 much easier if you do that.
 - If you tell me you’re having trouble, I will not judge you or think less of you. I hope you’ll extend me the same grace. (From [here](https://econf20.classes.andrewheiss.com/syllabus/).)
-- [This](https://twitter.com/i/status/1293543531496308736).
+- [This (video)](https://twitter.com/i/status/1293543531496308736).
 - I am doing my best to give you an opportunity to learn something that will help you in your future. I would like you to take that opportunity.
 
 

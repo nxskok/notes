@@ -48,7 +48,7 @@ urlcolor: blue
 ```{r, child="inference_1_R.Rmd"}
 ```
 
-# The bootstrap for assessing sampling distributions (optional)
+# The bootstrap for assessing sampling distributions (for extra insight)
 
 ```{r, child="bootstrap_R.Rmd"}
 ```

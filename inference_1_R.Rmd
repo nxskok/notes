@@ -342,4 +342,3 @@ conclude that new reading program is effective.
 - Nothing here about what happens if null hypothesis is false. This is power
 and type II error probability.
 
-## Extra on bootstrapping?

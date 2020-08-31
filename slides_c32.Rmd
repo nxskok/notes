@@ -43,10 +43,36 @@ output:
 ```{r, child="numsum_R.Rmd"}
 ```
 
-# Statistical Inference
+# Statistical Inference part 1
 
-```{r, child="inference_R.Rmd"}
+```{r, child="inference_1_R.Rmd"}
 ```
+
+# The Bootstrap
+
+```{r, child="bootstrap_R.Rmd"}
+```
+
+# Inference part 2
+
+```{r, child="inference_2_R.Rmd"}
+```
+
+# Inference part 3
+
+```{r, child="inference_3_R.Rmd"}
+```
+
+# Inference part 4
+
+```{r, child="inference_4_R.Rmd"}
+```
+
+# Inference part 5
+
+```{r, child="inference_5_R.Rmd"}
+```
+
 
 # Writing reports
 

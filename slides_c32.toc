@@ -1,15 +1,20 @@
 \beamer@sectionintoc {1}{Course outline}{2}{0}{1}
-\beamer@sectionintoc {2}{Running R}{17}{0}{2}
-\beamer@sectionintoc {3}{Reading in data}{42}{0}{3}
-\beamer@sectionintoc {4}{Making graphs}{68}{0}{4}
-\beamer@sectionintoc {5}{Numerical summaries: more detailed}{85}{0}{5}
-\beamer@sectionintoc {6}{Statistical Inference}{95}{0}{6}
-\beamer@sectionintoc {7}{Writing reports}{253}{0}{7}
-\beamer@sectionintoc {8}{Tidying and organizing data}{271}{0}{8}
-\beamer@sectionintoc {9}{Case study 1: the windmill data}{344}{0}{9}
-\beamer@sectionintoc {10}{Case study 3: Asphalt}{391}{0}{10}
-\beamer@sectionintoc {11}{Regression with categorical variables}{437}{0}{11}
-\beamer@sectionintoc {12}{Functions}{451}{0}{12}
-\beamer@sectionintoc {13}{Dates and times}{490}{0}{13}
-\beamer@sectionintoc {14}{Miscellanea}{515}{0}{14}
-\beamer@sectionintoc {15}{the end of the notes}{539}{0}{15}
+\beamer@sectionintoc {2}{Running R}{18}{0}{2}
+\beamer@sectionintoc {3}{Reading in data}{43}{0}{3}
+\beamer@sectionintoc {4}{Making graphs}{70}{0}{4}
+\beamer@sectionintoc {5}{Numerical summaries: more detailed}{87}{0}{5}
+\beamer@sectionintoc {6}{Statistical Inference part 1}{98}{0}{6}
+\beamer@sectionintoc {7}{The Bootstrap}{131}{0}{7}
+\beamer@sectionintoc {8}{Inference part 2}{149}{0}{8}
+\beamer@sectionintoc {9}{Inference part 3}{184}{0}{9}
+\beamer@sectionintoc {10}{Inference part 4}{220}{0}{10}
+\beamer@sectionintoc {11}{Inference part 5}{251}{0}{11}
+\beamer@sectionintoc {12}{Writing reports}{288}{0}{12}
+\beamer@sectionintoc {13}{Tidying and organizing data}{306}{0}{13}
+\beamer@sectionintoc {14}{Case study 1: the windmill data}{345}{0}{14}
+\beamer@sectionintoc {15}{Case study 3: Asphalt}{393}{0}{15}
+\beamer@sectionintoc {16}{Regression with categorical variables}{438}{0}{16}
+\beamer@sectionintoc {17}{Functions}{453}{0}{17}
+\beamer@sectionintoc {18}{Dates and times}{492}{0}{18}
+\beamer@sectionintoc {19}{Miscellanea}{517}{0}{19}
+\beamer@sectionintoc {20}{the end of the notes}{541}{0}{20}

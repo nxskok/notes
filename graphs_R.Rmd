@@ -7,7 +7,7 @@ Sport.
   - quantitative: height (cm), weight (kg), lean body mass, red and white
   blood cell counts, haematocrit and haemoglobin (blood), ferritin
   concentration, body mass index, percent body fat.
-- Values separated by tabs (which impacts reading in).
+- Values separated by *tabs* (which impacts reading in).
 
 ## Packages for this section
 
@@ -58,7 +58,7 @@ With more variables, might want *separate plots by groups*. This is called
 
 ## `ggplot`
 
-- R has a standard graphing procedure ggplot, that we use for all our
+- R has a standard graphing procedure `ggplot`, that we use for all our
 graphs.
 - Use in different ways to get precise graph we want.
 - Let’s start with bar chart of the sports played by the athletes.

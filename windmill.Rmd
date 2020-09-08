@@ -42,13 +42,18 @@ methods.
   - 2 variables, `DC_output` and `wind_velocity`.
   - First is output/response, other is input/explanatory.
   - Put `DC_output` on vertical scale.
-- Add trend, but don’t want to assume linear.
+- Add trend, but don’t want to assume linear:
+
+```{r, eval=FALSE}
+ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
+  geom_point() + geom_smooth(se = F) 
+```
 
 ## Scatterplot
 
-```{r, fig.height=3.1}
+```{r, echo=FALSE, message=FALSE}
 ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
-  geom_point() + geom_smooth(se = F)
+  geom_point() + geom_smooth(se = F) 
 ```
 
 ## Comments
@@ -103,7 +108,7 @@ showing the intercept and slope and their significance.
 ## Comments
 - Strategy: `lm` actually fits the regression. Store results in a variable.
 Then look at the results, eg. via `summary` or `glance`/`tidy`. 
-- My strategy for model names: base on response variable and a number.
+- My strategy for model names: base on response variable (or data frame name) and a number.
 Allows me to fit several models to same data and keep track of which
 is which.
 - Results actually pretty good: `wind.velocity` strongly significant,
@@ -114,7 +119,14 @@ residuals, observed minus predicted, plotted against fitted (predicted).
 
 ## back to scatterplot, but this time add line
 
-```{r, fig.height=3.5}
+```{r, eval=FALSE}
+ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
+  geom_point() + geom_smooth(method="lm", se = F)
+```
+
+## The plot
+
+```{r, echo=FALSE, message=FALSE}
 ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_point() + geom_smooth(method="lm", se = F)
 ```
@@ -122,7 +134,7 @@ ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
 
 ## Plot of residuals against fitted values
 
-```{r, fig.height=3.8}
+```{r}
 ggplot(DC.1, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
@@ -177,18 +189,18 @@ glance(DC.2)
 
 ## Residual plot from parabola model
 
-```{r, fig.height=3.5}
+```{r}
 ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
 ggplot(DC.2, aes(sample=.resid)) +stat_qq() + stat_qq_line()
 ```
 
-## Scatterplot with fitted line and curve 
+## Make scatterplot with fitted line and curve 
 
 - Residual plot basically random. Good.
 - Scatterplot with fitted line and curve like this:
 
-```{r fitcurve, eval=F, fig.height=3.5}
+```{r fitcurve, eval=F}
 ggplot(windmill, aes(y = DC_output, x = wind_velocity)) +
   geom_point() + geom_smooth(method = "lm", se = F) +
   geom_line(data = DC.2, aes(y = .fitted))
@@ -210,7 +222,6 @@ by lines.
 ## Scatterplot with fitted line and curve
 
 ```{r, ref.label="fitcurve", echo=F}
-
 ```
 
 Curve clearly fits better than line. 
@@ -221,10 +232,8 @@ Curve clearly fits better than line.
 - Go back to engineer with findings so far. Ask, “what should happen
 as wind velocity increases?”:
 
- 
-
-> Upper limit on electricity generated, but otherwise, the larger the
-> wind velocity, the more electricity generated.
+    - Upper limit on electricity generated, but otherwise, the larger the
+       wind velocity, the more electricity generated.
 
 - Mathematically, sounds like asymptote. Straight lines and parabolas
 don’t have them, but eg. $y = 1/x$ does: as $x$ gets bigger, $y$
@@ -261,8 +270,9 @@ summary(DC.3)
 
 Pretty straight. Blue actually smooth curve not line:
 
-```{r, ref.label="straightness", echo=F, fig.height=3.7}
-
+```{r, ref.label="straightness", echo=F}
+ggplot(windmill, aes(y = DC_output, x = wind_pace)) +
+  geom_point() + geom_smooth(se = F)
 ```
 
 
@@ -285,7 +295,7 @@ parabola model (`wind.velocity` and its square).
 
 ## Residual plot for asymptote model
 
-```{r resida, fig.height=3.6}
+```{r resida}
 ggplot(DC.3, aes(y = .resid, x = .fitted)) + geom_point()
 ```
 
@@ -332,7 +342,7 @@ w2 %>%
 
 ## Scatterplot with fitted curves
 
-```{r, ref.label= "allcurves", echo=F, fig.height=4}
+```{r, ref.label= "allcurves", echo=F}
 
 ```
 
@@ -469,7 +479,7 @@ g + geom_rect(
 
 ## The plot
 
-```{r, ref.label="rectangle", echo=F, fig.height=4}
+```{r, ref.label="rectangle", echo=F}
 ```
 
 ## Comments (1)

@@ -1,8 +1,0 @@
-                                             Standard
-   Parameter               Estimate             Error    t Value    Pr > |t|
- 
-   Intercept            86.24000000 B      1.40356688      61.44      <.0001
-   feed      feed1     -25.62000000 B      1.98494332     -12.91      <.0001
-   feed      feed2     -16.94000000 B      1.98494332      -8.53      <.0001
-   feed      feed3       7.86000000 B      1.98494332       3.96      0.0011
-   feed      feed4       0.00000000 B       .                .         .

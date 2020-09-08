@@ -314,8 +314,10 @@
   Blue Jays data again:
   
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/jays15-home.csv";
 proc import
-  datafile='/home/ken/jays15-home.csv'
+  datafile=myurl
     dbms=csv
     out=jays
     replace;
@@ -457,8 +459,10 @@ proc ttest h0=29327;
   \end{itemize}
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/drp.txt";  
 proc import
-  datafile='/home/ken/drp.txt'
+  datafile=myurl
   dbms=dlm
   out=reading
   replace;
@@ -1467,8 +1471,10 @@ Unequal sample sizes bring power down to 22.5\%.
     The data:
     
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/duality.txt";    
 proc import
-  datafile='/home/ken/duality.txt'
+  datafile=myurl
     dbms=dlm
     out=duality
     replace;
@@ -1558,8 +1564,10 @@ proc print;
 \begin{frame}[fragile]{Reading in data}
   
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/irs.txt";    
 proc import
-  datafile='/home/ken/irs.txt'
+  datafile=myurl
     dbms=csv
     out=irs
     replace;
@@ -2007,8 +2015,10 @@ Case Drug A Drug B
 
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt";  
 proc import
-  datafile='/home/ken/analgesic.txt'
+  datafile=myurl
     dbms=dlm
     out=pain
     replace;
@@ -3003,8 +3013,10 @@ proc univariate;
 
 \begin{frame}[fragile]{Mood's median test for kids' reading data}
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/drp.txt";    
 proc import
-  datafile='/home/ken/drp.txt'
+  datafile=myurl
   dbms=dlm
   out=reading
   replace;
@@ -3299,8 +3311,10 @@ proc npar1way median;
 Read in data and do ANOVA. R equivalent: \texttt{aov}.
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt";  
 proc import
-  datafile='/home/ken/jumping.txt'
+  datafile=myurl
     dbms=dlm
     out=rats
     replace;

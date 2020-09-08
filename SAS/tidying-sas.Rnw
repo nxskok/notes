@@ -877,8 +877,10 @@
   \item Read Australian athletes data again:
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import 
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -1209,8 +1211,10 @@ proc print;
     of the long data set. 
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";      
 proc import 
-  datafile='/home/ken/pigs1.txt'
+  datafile=myurl
   dbms=dlm out=pigs replace;
   delimiter=' ';
   getnames=yes;

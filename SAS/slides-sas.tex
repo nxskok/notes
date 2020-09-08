@@ -1687,8 +1687,10 @@ proc print;
   \item Change the \texttt{proc import}:
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/coffee.txt";      
 proc import 
-  datafile='/home/ken/coffee.txt'
+  datafile=myurl
   dbms=dlm
   out=coffee
   replace;
@@ -2010,8 +2012,10 @@ proc print;
     special code \texttt{'09'x} (ASCII code \texttt{09} in hex):
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import 
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -2849,8 +2853,10 @@ proc means stddev;
   Blue Jays data again:
   
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/jays15-home.csv";
 proc import
-  datafile='/home/ken/jays15-home.csv'
+  datafile=myurl
     dbms=csv
     out=jays
     replace;
@@ -2992,8 +2998,10 @@ proc ttest h0=29327;
   \end{itemize}
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/drp.txt";  
 proc import
-  datafile='/home/ken/drp.txt'
+  datafile=myurl
   dbms=dlm
   out=reading
   replace;
@@ -4002,8 +4010,10 @@ Unequal sample sizes bring power down to 22.5\%.
     The data:
     
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/duality.txt";    
 proc import
-  datafile='/home/ken/duality.txt'
+  datafile=myurl
     dbms=dlm
     out=duality
     replace;
@@ -4093,8 +4103,10 @@ proc print;
 \begin{frame}[fragile]{Reading in data}
   
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/irs.txt";    
 proc import
-  datafile='/home/ken/irs.txt'
+  datafile=myurl
     dbms=csv
     out=irs
     replace;
@@ -4542,8 +4554,10 @@ Case Drug A Drug B
 
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/analgesic.txt";  
 proc import
-  datafile='/home/ken/analgesic.txt'
+  datafile=myurl
     dbms=dlm
     out=pain
     replace;
@@ -5546,8 +5560,10 @@ proc univariate;
 
 \begin{frame}[fragile]{Mood's median test for kids' reading data}
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/drp.txt";    
 proc import
-  datafile='/home/ken/drp.txt'
+  datafile=myurl
   dbms=dlm
   out=reading
   replace;
@@ -5842,8 +5858,10 @@ proc npar1way median;
 Read in data and do ANOVA. R equivalent: \texttt{aov}.
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt";  
 proc import
-  datafile='/home/ken/jumping.txt'
+  datafile=myurl
     dbms=dlm
     out=rats
     replace;
@@ -7295,8 +7313,10 @@ proc mixed;
   \item Read Australian athletes data again:
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import 
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -7627,8 +7647,10 @@ proc print;
     of the long data set. 
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";      
 proc import 
-  datafile='/home/ken/pigs1.txt'
+  datafile=myurl
   dbms=dlm out=pigs replace;
   delimiter=' ';
   getnames=yes;
@@ -8441,7 +8463,8 @@ being the best and feed 1 the worst.
 %%   
 %% \end{frame}
 
-\section{Case study 2: Electricity, peak hour demand and total energy usage}
+\section{Case study 2: Electricity, peak hour demand and total energy
+  usage}
 
 \frame{\sectionpage}
 
@@ -8457,13 +8480,15 @@ being the best and feed 1 the worst.
   \item Data from 53 residential customers from August.
   \item Read in data and draw scatterplot:
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/global.csv";
 proc import
-  datafile='/home/ken/utility.txt'
+    datafile=myurl
     dbms=dlm
     out=util
     replace;
-  delimiter=' ';
-  getnames=yes;
+    delimiter=' ';
+    getnames=yes;
     \end{Datastep}
     
 
@@ -9564,8 +9589,10 @@ proc reg;
   \item Read in pig feed data (after tidying):
     
     \begin{Sascode}[store=muber]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs.txt";
 proc import
-  datafile='/home/ken/pigs2.txt'
+  datafile=myurl
   out=pigs
   dbms=dlm
   replace;
@@ -9639,8 +9666,10 @@ proc glm;
   \item I saved the tidied data set from Assignment 8.5:
     
     \begin{Sascode}[store=siqet]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/crickets2.csv";      
 proc import
-  datafile='/home/ken/crickets2.csv'
+  datafile=myurl
   out=crickets
   dbms=csv
   replace;
@@ -9910,8 +9939,10 @@ proc glm;
     \emph{as long as it is consistently formatted}:
     
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/mydates.csv";
 proc import
-  datafile='/home/ken/mydates.csv'
+  datafile=myurl
     dbms=csv
     out=dates
     replace;
@@ -9988,8 +10019,10 @@ proc print;
   \item Strategy (both R and SAS): glue them together into something
     that can be recognized as date:
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pieces.txt";
 proc import
-  datafile='/home/ken/pieces.txt'
+  datafile=myurl
     dbms=dlm
     out=pieces
     replace;
@@ -10048,8 +10081,10 @@ you get \emph{days since Jan 1, 1960}.
     \item Try it:
     
     \begin{Sascode}[store=jahaq]
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/monthly.csv";
 proc import
-  datafile='/home/ken/monthly.csv'
+  datafile=myurl
   out=sales1
   dbms=csv
   replace;
@@ -10222,8 +10257,10 @@ proc print;
   than space!
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/dt.csv";  
 proc import
-  datafile='/home/ken/dt.csv'
+  datafile=myurl
     dbms=csv
     out=dt
     replace;
@@ -10260,8 +10297,10 @@ proc print;
   \item which we read in the usual way:
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/manypieces.txt";      
 proc import
-  datafile='/home/ken/manypieces.txt'
+  datafile=myurl
     dbms=dlm
     out=many
     replace;
@@ -10468,8 +10507,10 @@ format thedate yymmdd10. thetime time8.
     
     \begin{small}
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/hospital.csv";  
 proc import
-  datafile='/home/ken/hospital.csv'
+  datafile=myurl
     dbms=csv
     out=stays
     replace;
@@ -10541,8 +10582,10 @@ there are 12 values altogether).
 
   \begin{footnotesize}
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/many.txt";
 proc import
-  datafile='/home/ken/many.txt'
+  datafile=myurl
     dbms=dlm out=many replace;
   delimiter=' ';
   getnames=no;
@@ -10665,9 +10708,11 @@ proc print;
     example pigs data:
 
 \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/pigs1.txt";  
 libname mydata V9 '/home/ken';
 proc import
-  datafile='/home/ken/pigs1.txt'
+  datafile=myurl
     dbms=dlm 
     out=mydata.pigs1
     replace;
@@ -10819,8 +10864,10 @@ Does permanent data set count as ``most recently created''? No,
 \begin{frame}[fragile]{Use Australian athletes data}
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";      
 proc import 
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;
@@ -10906,8 +10953,10 @@ proc sgplot;
   \item Read into SAS thus:
     
   \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/windmill.csv";    
 proc import
-  datafile='/home/ken/windmill.csv'
+  datafile=myurl
     dbms=csv
     out=windmill
     replace;
@@ -10963,8 +11012,10 @@ proc sgplot;
 \begin{frame}[fragile]{Reading the data}
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/oranges.txt";      
 proc import
-  datafile='/home/ken/oranges.txt'
+  datafile=myurl
     dbms=dlm
     out=trees
     replace;
@@ -11042,8 +11093,10 @@ proc sgplot;
   \texttt{.csv} file, so:
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/cars.csv";      
 proc import 
-  datafile='/home/ken/cars.csv'
+  datafile=myurl
   dbms=csv
   out=cars
   replace;
@@ -11934,26 +11987,7 @@ proc sgplot;
 
 \begin{frame}[fragile]{Vector and matrix algebra in SAS}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'ggplot2' was built under R version 3.5.3}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'tibble' was built under R version 3.5.3}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'tidyr' was built under R version 3.5.3}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'readr' was built under R version 3.5.2}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'purrr' was built under R version 3.5.3}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'dplyr' was built under R version 3.5.2}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'stringr' was built under R version 3.5.2}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'forcats' was built under R version 3.5.1}}\end{kframe}
-\end{knitrout}
 
   \begin{itemize}
   \item SAS has this through \texttt{proc iml}, which we have to learn
@@ -12245,8 +12279,10 @@ proc iml;
 \item read into data set as usual:
   
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/m.txt";
 proc import
-  datafile='/home/ken/m.txt'
+  datafile=myurl
     dbms=dlm
     out=mymatrix
     replace;

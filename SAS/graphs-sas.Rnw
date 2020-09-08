@@ -61,8 +61,10 @@
     special code \texttt{'09'x} (ASCII code \texttt{09} in hex):
     
     \begin{Datastep}
+filename myurl url 
+  "http://www.utsc.utoronto.ca/~butler/c32/ais.txt";
 proc import 
-  datafile='/home/ken/ais.txt'
+  datafile=myurl
   dbms=dlm
   out=sports
   replace;

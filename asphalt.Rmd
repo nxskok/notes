@@ -81,6 +81,7 @@ us.
 
 ```{r}
 asphalt %>% mutate(log.viscosity = log(viscosity)) -> asphalt_lv
+asphalt_lv
 ```
 
 Now we have to remember to use `asphalt_lv` as our data frame
@@ -109,6 +110,7 @@ joined by plusses:
 ```{r}
 rut.1 <- lm(rut.depth ~ pct.a.surf + pct.a.base + fines +
   voids + log.viscosity + run, data = asphalt_lv)
+summary(rut.1)
 ```
 
 ## Regression output: `summary(rut.1)` or:
@@ -148,6 +150,7 @@ data frame:
 
 ```{r}
 rut.1 %>% augment(asphalt_lv) -> rut.1a
+rut.1a
 ```
 
 

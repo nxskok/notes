@@ -308,7 +308,5 @@ mydata2 <- read_excel("test2.xlsx", sheet = "data")
 mydata2
 ```
 
-```{r}
-list.files("*.Rmd")
-```
+
 

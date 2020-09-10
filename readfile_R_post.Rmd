@@ -74,7 +74,7 @@ file in something, here called `mydata`. Make a new code chunk for
 this:
 
 ```{r}
-mydata <- read_csv("test1.csv")
+mydata <- read_csv("test1 (1)..csv")
 ```
 
 ## More on the above
@@ -93,7 +93,6 @@ as above like `read_csv("test1.csv")`.
 
 ```{r, eval=FALSE}
 f <- file.choose()
-f
 ```
 
 which brings up a file selector (as if you were going to find a file to
@@ -296,6 +295,11 @@ drugs
 don’t want).
 - Install package `readxl` first.
 
+```{r}
+install.packages("readxl")
+```
+
+
 ## Reading it in
 
 - Read into R, saying that we only want the sheet “data”. Upload
@@ -309,5 +313,17 @@ mydata2 <- read_excel("test2.xlsx", sheet = "data")
 mydata2
 ```
 
+extra
 
+```{r}
+tmp <- tempfile()
+tmp
+```
+
+```{r}
+download.file("http://www.utsc.utoronto.ca/~butler/c32/test2.xlsx", tmp)
+```
+```{r}
+read_excel(tmp, sheet = "data")
+```
 

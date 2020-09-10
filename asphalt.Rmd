@@ -74,7 +74,19 @@ g
 - Weak but downward trend for `voids`.
 - Non-linearity of `rut.depth`-`viscosity` relationship should concern
 us.
+<<<<<<< HEAD
+- Take this back to asphalt engineer: suggests log of `viscosity`.
+
+## Log of `viscosity`: more nearly linear?
+- Create new variable in data frame to hold log of `viscosity`:
+
+```{r}
+asphalt %>% mutate(log.viscosity = log(viscosity)) -> asphalt_lv
+asphalt_lv
+```
+=======
 - Take this back to asphalt engineer: suggests log of `viscosity`:
+>>>>>>> 176123881ee42ed070ac9f57cb1176fc1be6b552
 
 
 ```{r logvisplot, fig.keep="none", warning=F, message=F}
@@ -99,7 +111,12 @@ joined by plusses:
 
 ```{r}
 rut.1 <- lm(rut.depth ~ pct.a.surf + pct.a.base + fines +
+<<<<<<< HEAD
+  voids + log.viscosity + run, data = asphalt_lv)
+summary(rut.1)
+=======
   voids + log(viscosity) + run, data = asphalt)
+>>>>>>> 176123881ee42ed070ac9f57cb1176fc1be6b552
 ```
 
 ## Regression output: `summary(rut.1)` or:
@@ -139,7 +156,12 @@ together so that they can later be plotted: start with a model first, and then a
 data frame:
 
 ```{r}
+<<<<<<< HEAD
+rut.1 %>% augment(asphalt_lv) -> rut.1a
+rut.1a
+=======
 rut.1 %>% augment(asphalt) -> rut.1a
+>>>>>>> 176123881ee42ed070ac9f57cb1176fc1be6b552
 ```
 
 

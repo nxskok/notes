@@ -93,6 +93,7 @@ as above like `read_csv("test1.csv")`.
 
 ```{r, eval=FALSE}
 f <- file.choose()
+f
 ```
 
 which brings up a file selector (as if you were going to find a file to

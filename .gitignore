@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 cache
+c32.notes.Rcheck/
+c32.notes*.tar.gz
+c32.notes*.tgz

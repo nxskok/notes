@@ -35,7 +35,7 @@ athletes
 ```
 \normalsize
 
-## Types of graph (73)
+## Types of graph
 
 Depends on number and type of variables:
 

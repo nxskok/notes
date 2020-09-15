@@ -36,7 +36,8 @@ library(tidyverse)
 ...as a `.csv` file:
 
 ```{r}
-jays = read_csv("jays15-home.csv")
+my_url <- "http://ritsokiguess.site/STAC32/jays15-home.csv"
+jays <- read_csv(my_url)
 ```
 
 ## Taking a look (tiny)
@@ -292,7 +293,7 @@ t.test(score ~ group, data = kids, alternative = "less")
 
 ```{r}
 t.test(score ~ group, data = kids, 
-       alternative = "less", var.equal = T)
+       alternative = "less", var.equal = TRUE)
 ```
 
 ## Two-sided test; CI

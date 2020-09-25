@@ -372,7 +372,7 @@ set.seed(457299)
 rerun(1000, sample(irs$Time, replace = TRUE)) %>% 
   map_dbl(~mean(.)) %>% 
   enframe() %>% 
-  ggplot(aes(x=value)) + geom_histogram(bins=10) 
+  ggplot(aes(x=value)) + geom_histogram(bins=10) -> g
 ```
 
 

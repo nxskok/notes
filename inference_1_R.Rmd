@@ -36,7 +36,7 @@ library(tidyverse)
 ...as a `.csv` file:
 
 ```{r}
-jays = read_csv("jays15-home.csv")
+jays <- read_csv("jays15-home.csv")
 ```
 
 ## Taking a look (tiny)

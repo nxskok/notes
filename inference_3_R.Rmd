@@ -92,7 +92,7 @@ irs
 ## Test whether mean is 160 or greater
 
 ```{r}
-with(irs, t.test(irs$Time, mu = 160, 
+with(irs, t.test(Time, mu = 160, 
                  alternative = "greater"))
 ```
 

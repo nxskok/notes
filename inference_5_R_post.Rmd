@@ -143,7 +143,7 @@ normality for this data set is fine, so two-sample t-test is also fine.
   - Low-jump treatment (30 cm)
   - High-jump treatment (60 cm)
 - 8 weeks, 10 jumps/day, 5 days/week.
-- Bone density of rats (mg/cm 3 ) measured at end.
+- Bone density of rats (mg/cm$^3$ ) measured at end.
 - See whether larger amount of exercise (jumping) went with higher
 bone density.
 - Random assignment: rats in each group similar in all important ways.

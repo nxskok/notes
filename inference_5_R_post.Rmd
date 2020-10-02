@@ -160,6 +160,7 @@ rats <- read_delim(my_url," ")
 
 \small
 ```{r}
+rats
 rats %>% slice_sample(n=12)
 ```
 \normalsize
@@ -177,6 +178,15 @@ ggplot(rats,aes(y=density,x=fct_inorder(group)))+
 geom_boxplot()
 ```
 
+or
+
+```{r}
+rats %>% 
+  mutate(group1=fct_inorder(group)) %>% 
+  ggplot(aes(x=group1, y=density)) + geom_boxplot()
+```
+
+
 ## Analysis of Variance
 - Comparing > 2 groups of independent observations (each rat only
 does one amount of jumping).
@@ -188,7 +198,7 @@ others.
 ## Testing: ANOVA in R
 
 ```{r}
-rats.aov=aov(density~group,data=rats)
+rats.aov <- aov(density~group, data=rats)
 summary(rats.aov)
 ```
 
@@ -277,7 +287,8 @@ options(width=60)
 
 \small
 ```{r}
-rats.aov=aov(density~group,data=rats)
+rats.aov <- aov(density~group,data=rats)
+summary(rats.aov)
 TukeyHSD(rats.aov)
 ```
 \normalsize

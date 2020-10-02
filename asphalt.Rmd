@@ -111,12 +111,7 @@ joined by plusses:
 
 ```{r}
 rut.1 <- lm(rut.depth ~ pct.a.surf + pct.a.base + fines +
-<<<<<<< HEAD
-  voids + log.viscosity + run, data = asphalt_lv)
-summary(rut.1)
-=======
   voids + log(viscosity) + run, data = asphalt)
->>>>>>> 176123881ee42ed070ac9f57cb1176fc1be6b552
 ```
 
 ## Regression output: `summary(rut.1)` or:

@@ -131,7 +131,7 @@ be trusted).
   - Low-jump treatment (30 cm)
   - High-jump treatment (60 cm)
 - 8 weeks, 10 jumps/day, 5 days/week.
-- Bone density of rats (mg/cm$^3$ ) measured at end.
+- Bone density of rats (mg/cm$^3$) measured at end.
 - See whether larger amount of exercise (jumping) went with higher
 bone density.
 - Random assignment: rats in each group similar in all important ways.
@@ -139,10 +139,15 @@ bone density.
 
 ## Reading the data
 Values separated by spaces:
+
+\small
+
 ```{r}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/jumping.txt"
 rats <- read_delim(my_url," ")
 ```
+
+\normalsize
 
 ## The data (some random rows)
 

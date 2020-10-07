@@ -7,7 +7,8 @@ library(tidyverse)
 ## The pig feed data again
 
 ```{r, message=F}
-pigs <- read_table("pigs1.txt")
+my_url <- "http://ritsokiguess.site/STAC32/pigs1.txt"
+pigs <- read_table(my_url)
 pigs
 ```
 
@@ -57,7 +58,8 @@ This has two rows of headers, so I rewrote the data file:
 Read into data frame called `prevalence`.
 
 ```{r, echo=F, message=F}
-prevalence <- read_table("disease.txt")
+my_url <- "http://ritsokiguess.site/STAC32/disease.txt"
+prevalence <- read_table(my_url)
 prevalence
 ```
 
@@ -145,7 +147,8 @@ pigs_longer %>%
 18 people receive one of three treatments. At 3 different times (pre, post, followup) two variables `y` and `z` are measured on each person:
 
 ```{r, echo=F, message=F}
-repmes0 <- read_table2("repmes.txt")
+my_url <- "http://ritsokiguess.site/STAC32/repmes.txt"
+repmes0 <- read_table2(my_url)
 repmes0 %>% mutate(id=str_c(treatment, ".", rep)) %>% 
   select(-rep) %>% 
   select(id, everything()) -> repmes
@@ -184,9 +187,11 @@ ggplot(repmes3, aes(x=fct_inorder(time), y=y,
 ```{r}
 repmes3 %>% group_by(treatment, ftime=fct_inorder(time)) %>% 
   summarize(mean_y=mean(y)) %>% 
-  ggplot(aes(x=ftime, y=mean_y, colour=treatment, group=treatment)) + 
+  ggplot(aes(x=ftime, y=mean_y, colour=treatment, 
+             group=treatment)) + 
     geom_point() + geom_line() -> g
 ```
+
 ## the plot
 
 ```{r}

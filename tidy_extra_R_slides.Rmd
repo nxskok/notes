@@ -1,5 +1,5 @@
 ---
-title: "Tidying and organizing data"
+title: "Tidying and organizing data: extras"
 author: ""
 header-includes:
    - \usepackage{multicol}

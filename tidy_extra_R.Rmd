@@ -1,61 +1,17 @@
----
-title: "From Longer and Wider, We Stand on Guard for Thee"
-author: Ken Butler, Department of Computer and Mathematical Sciences, UTSC (Scarborough),
-  butler@utsc.utoronto.ca, `@kenbutler12`, `https://github.com/nxskok/rmeetup` 
-output:
-  ioslides_presentation: default
-  beamer_presentation: default
----
-
 ## Packages
 
 ```{r}
 library(tidyverse)
 ```
 
-
-## Pig feed
-
-20 pigs are randomly assigned to one of four pig feeds, and the weight gain of each pig is measured:
-
-```
-pig feed1 feed2 feed3 feed4
- 1   60.8  68.7  92.6  87.9
- 2   57.0  67.7  92.1  84.2
- 3   65.0  74.0  90.2  83.1
- 4   58.6  66.3  96.5  85.7
- 5   61.7  69.8  99.1  90.3
-```
-
-Say we want graphs of weight gain for each feed.
-
-## Read in:
-
+## The pig feed data again
 
 ```{r, message=F}
 pigs <- read_table("pigs1.txt")
 pigs
 ```
 
-
-## and then we have to do this 4 times...
-
-```{r}
-ggplot(pigs, aes(x=1, y=feed1)) + geom_boxplot()
-```
-
-## The problem
-
-- The data frame is the *wrong shape*.
-- Need all the weight gains in *one* column, with another column saying what feed that weight gain was from
-- Make data frame longer.
-- Old tools:
-  - `reshape`
-  - `reshape2`
-  - `gather` (from `tidyr`)
-- New tool: `pivot_longer`
-
-## On the pig feed data
+## Make longer (as before)
 
 ```{r}
 pigs
@@ -63,20 +19,7 @@ pigs %>% pivot_longer(-pig, names_to="feed",
                       values_to="weight") -> pigs_longer
 ```
 
-## The results (some)
-
-```{r}
-pigs_longer 
-```
-
-
-## Now we can make all 4 graphs at once
-
-```{r, fig.width=8, fig.height=6}
-ggplot(pigs_longer, aes(x=feed, y=weight)) + geom_boxplot()
-```
-
-## Making wider
+## Make wider two ways 1/2
 
 `pivot_wider` is inverse of `pivot_longer`:
 
@@ -87,6 +30,8 @@ pigs_longer %>%
 
 we are back where we started.
 
+## Make wider 2/2
+
 Or
 
 ```{r}
@@ -94,46 +39,38 @@ pigs_longer %>%
   pivot_wider(names_from=pig, values_from=weight)
 ```
 
-
-
 ## Disease presence and absence at two locations
 
 Frequencies of plants observed with and without disease at two locations:
 
-```
-Species     Disease present         Disease absent
-       Location X Location Y  Location X Location Y
-A            44         12          38        10
-B            28         22          20        18
-```
+    Species     Disease present         Disease absent
+           Location X Location Y  Location X Location Y
+    A            44         12          38        10
+    B            28         22          20        18
 
 This has two rows of headers, so I rewrote the data file:
 
-```
-Species  present_x present_y    absent_x  absent_y
-A            44         12          38        10
-B            28         22          20        18
-```
+    Species  present_x present_y    absent_x  absent_y
+    A            44         12          38        10
+    B            28         22          20        18
 
 Read into data frame called `prevalence`.
-
-## Gather
 
 ```{r, echo=F, message=F}
 prevalence <- read_table("disease.txt")
 prevalence
 ```
 
-needs to take two steps:
+## Lengthen and separate
 
 ```{r}
 prevalence %>% 
-  gather(disloc, freq, -Species) %>% 
-  separate(disloc, into=c("disease", "location"))
+  pivot_longer(-Species, names_to = "column", 
+               values_to = "freq") %>% 
+  separate(column, into = c("disease", "location"))
 ```
 
-
-## Making longer, the new way
+## Making longer, the better way
 
 ```{r}
 prevalence %>% 
@@ -155,7 +92,6 @@ prevalence_longer %>%
   pivot_wider(names_from=location, values_from=frequency)
 ```
 
-
 ## Interlude
 
 ```{r}
@@ -175,14 +111,15 @@ pigs_longer %>%
   summarize(r=quantile(weight, c(0.25, 0.75)))
 ```
 
-## the right way to do it
+## this also works
 
-```{r}
+```{r, error=T}
 pigs_longer %>% 
   group_by(feed) %>% 
   summarize(r=list(quantile(weight, c(0.25, 0.75)))) %>% 
   unnest(r)
 ```
+
 
 
 ## or, even better, use `enframe`:
@@ -192,8 +129,8 @@ quantile(pigs_longer$weight, c(0.25, 0.75))
 enframe(quantile(pigs_longer$weight, c(0.25, 0.75)))
 ```
 
-
 ## A nice look
+
 
 ```{r, warning=FALSE}
 pigs_longer %>% 
@@ -202,7 +139,6 @@ pigs_longer %>%
   unnest(r) %>% 
   pivot_wider(names_from=name, values_from=value) 
 ```
-
 
 ## A hairy one
 
@@ -217,7 +153,6 @@ repmes
 ```
 
 ## Attempt 1
-
 
 ```{r}
 repmes %>% pivot_longer(contains("_"),
@@ -238,7 +173,7 @@ repmes3
 
 ## make a graph
 
-```{r, fig.height=8, fig.width=10}
+```{r}
 ggplot(repmes3, aes(x=fct_inorder(time), y=y, 
                     colour=treatment, group=id)) +
   geom_point() + geom_line()
@@ -246,11 +181,15 @@ ggplot(repmes3, aes(x=fct_inorder(time), y=y,
 
 ## or do the plot with means
 
-```{r, echo=F, fig.height=8, fig.width=10}
+```{r}
 repmes3 %>% group_by(treatment, ftime=fct_inorder(time)) %>% 
   summarize(mean_y=mean(y)) %>% 
   ggplot(aes(x=ftime, y=mean_y, colour=treatment, group=treatment)) + 
-    geom_point() + geom_line()
+    geom_point() + geom_line() -> g
 ```
+## the plot
 
+```{r}
+g
+```
 

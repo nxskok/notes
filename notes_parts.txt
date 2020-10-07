@@ -12,6 +12,7 @@ inference_4_R.Rmd
 inference_5_R.Rmd 
 reports_R.Rmd 
 tidying_R.Rmd
+tidy_extra_R.Rmd
 choosing_R.Rmd
 windmill.Rmd
 asphalt.Rmd

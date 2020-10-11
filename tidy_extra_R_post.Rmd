@@ -15,6 +15,7 @@ pigs
 ## Make longer (as before)
 
 ```{r}
+pigs
 pigs %>% pivot_longer(-pig, names_to="feed", 
                       values_to="weight") -> pigs_longer
 pigs_longer

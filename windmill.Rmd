@@ -22,7 +22,8 @@ library(broom)
 ## Reading in the data
 
 ```{r}
-my_url <- "http://www.utsc.utoronto.ca/~butler/c32/windmill.csv"
+my_url <- 
+  "http://www.utsc.utoronto.ca/~butler/c32/windmill.csv"
 windmill <- read_csv(my_url)
 ```
 
@@ -73,7 +74,7 @@ options(width=60)
 ```
 
 
-\footnotesize
+\scriptsize
 ```{r}
 DC.1 <- lm(DC_output ~ wind_velocity, data = windmill)
 summary(DC.1)
@@ -89,7 +90,7 @@ options(width=wid)
 
 - The standard output tends to go off the bottom of the page rather easily. Package `broom` has these:
 
-\footnotesize
+\scriptsize
 ```{r}
 glance(DC.1)
 ```
@@ -174,9 +175,11 @@ something different (to do with interactions in ANOVA).
 tidy(DC.2)
 ```
 
+\scriptsize
 ```{r}
 glance(DC.2)
 ```
+\normalsize
 
 ## Comments on output
 
@@ -192,7 +195,6 @@ glance(DC.2)
 ```{r}
 ggplot(DC.2, aes(y = .resid, x = .fitted)) +
   geom_point()
-ggplot(DC.2, aes(sample=.resid)) +stat_qq() + stat_qq_line()
 ```
 
 ## Make scatterplot with fitted line and curve 
@@ -229,20 +231,20 @@ Curve clearly fits better than line.
 
 ## Another approach to a curve
 - There is a problem with parabolas, which we’ll see later.
-- Go back to engineer with findings so far. Ask, “what should happen
+- Ask engineer,  “what should happen
 as wind velocity increases?”:
 
     - Upper limit on electricity generated, but otherwise, the larger the
        wind velocity, the more electricity generated.
 
-- Mathematically, sounds like asymptote. Straight lines and parabolas
+- Mathematically, *asymptote*. Straight lines and parabolas
 don’t have them, but eg. $y = 1/x$ does: as $x$ gets bigger, $y$
 approaches zero without reaching it.
 - What happens to $y = a + b(1/x)$ as $x$ gets large?
   - $y$ gets closer and closer to $a$: that is, $a$ is asymptote.
 - Fit this, call it asymptote model.
 - Fitting the model here because we have math to justify it.
-- Alternative, $y = a + be^{−x}$ , approaches asymptote faster.
+  - Alternative, $y = a + be^{−x}$ , approaches asymptote faster.
 
 ## How to fit asymptote model?
 - Define new explanatory variable to be $1/x$,
@@ -280,8 +282,15 @@ ggplot(windmill, aes(y = DC_output, x = wind_pace)) +
 
 ## Regression output
 
+\scriptsize
+
 ```{r}
 glance(DC.3)
+```
+
+\normalsize
+
+```{r}
 tidy(DC.3)
 ```
 
@@ -334,7 +343,8 @@ into one.
 
 ```{r allcurves, eval=F}
 w2 %>%
-  pivot_longer(linear:asymptote, names_to="model", values_to="fit") %>%
+  pivot_longer(linear:asymptote, names_to="model", 
+               values_to="fit") %>%
   ggplot(aes(x = wind_velocity, y = DC_output)) +
   geom_point() +
   geom_line(aes(y = fit, colour = model))
@@ -463,7 +473,6 @@ my_fits %>%
 
 - The observed wind velocities were in this range:
 ```{r}
-g
 (vels <- range(windmill$wind_velocity))
 ```
 

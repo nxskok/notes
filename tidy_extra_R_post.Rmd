@@ -18,6 +18,7 @@ pigs
 pigs
 pigs %>% pivot_longer(-pig, names_to="feed", 
                       values_to="weight") -> pigs_longer
+pigs_longer
 ```
 
 ## Make wider two ways 1/2
@@ -77,7 +78,7 @@ prevalence %>%
 ```{r}
 prevalence %>% 
   pivot_longer(-Species, names_to=c("disease", "location"),
-               names_sep="_", values_to="frequency")%>% 
+               names_sep="_", values_to="frequency") %>% 
   arrange(Species, location, disease) -> prevalence_longer
 prevalence_longer
 ```
@@ -149,6 +150,7 @@ pigs_longer %>%
 ```{r, echo=F, message=F}
 my_url <- "http://ritsokiguess.site/STAC32/repmes.txt"
 repmes0 <- read_table2(my_url)
+repmes0
 repmes0 %>% mutate(id=str_c(treatment, ".", rep)) %>% 
   select(-rep) %>% 
   select(id, everything()) -> repmes

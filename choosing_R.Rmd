@@ -86,6 +86,16 @@ In regular expression terms, this is `^.t$`:
 athletes %>% select(matches("^.t$"))
 ```
 
+## Choosing columns by property
+
+- Use `where` as with summarizing several columns
+- eg, to choose text columns:
+
+```{r}
+athletes %>% select(where(is.character))
+```
+
+
 ## Choosing rows by number 
 
 ```{r}

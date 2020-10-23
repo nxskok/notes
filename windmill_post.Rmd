@@ -13,7 +13,7 @@ generalize to “this windmill at all times”.
   
 ## Packages for this section
 
-```{r, eval=F}
+```{r}
 library(tidyverse)
 library(broom)
 ```
@@ -255,6 +255,7 @@ take 12 minutes to walk 1 km, called your pace. So 1 over
 
 ```{r straightness, fig.keep="none"}
 windmill %>% mutate(wind_pace = 1 / wind_velocity) -> windmill
+# windmill
 ggplot(windmill, aes(y = DC_output, x = wind_pace)) +
   geom_point() + geom_smooth(se = F)
 ```
@@ -297,6 +298,10 @@ parabola model (`wind.velocity` and its square).
 
 ```{r resida}
 ggplot(DC.3, aes(y = .resid, x = .fitted)) + geom_point()
+```
+
+```{r}
+ggplot(DC.3, aes(sample=.resid)) + stat_qq() + stat_qq_line()
 ```
 
 

@@ -367,8 +367,13 @@ them should be important.
 - Do not learn about “stepwise regression”! [**eg. here**](https://towardsdatascience.com/stopping-stepwise-why-stepwise-selection-is-bad-and-what-you-should-use-instead-90818b3f52df)
 - R has function `step` that does backward selection, like this:
 ```{r, eval=F}
-step(rut.2, direction = "backward", test = "F")
+rut.7 <- step(rut.2, direction = "backward", test = "F")
 ```
+
+```{r}
+summary(rut.7)
+```
+
 
 Gets same answer as we did (by removing least significant x). 
 
@@ -464,6 +469,11 @@ geom_point()
 
 ```{r}
 g
+```
+
+
+```{r}
+ggplot(rut.6, aes(sample = .resid)) + stat_qq() + stat_qq_line()
 ```
 
 ## Plotting residuals against x’s

@@ -24,11 +24,7 @@ library(leaps)
 ## Getting set up 
 
 ```{r}
-<<<<<<< HEAD
-my_url <- "../web/asphalt.txt"
-=======
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/asphalt.txt"
->>>>>>> 2547edf5e09930c49280144c866374e5e5401bfa
 asphalt <- read_delim(my_url, " ")
 ```
 
@@ -147,10 +143,7 @@ data frame:
 
 ```{r}
 rut.1 %>% augment(asphalt) -> rut.1a
-<<<<<<< HEAD
-=======
 rut.1a
->>>>>>> 2547edf5e09930c49280144c866374e5e5401bfa
 ```
 
 

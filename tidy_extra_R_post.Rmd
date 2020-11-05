@@ -21,6 +21,7 @@ pigs %>% pivot_longer(-pig, names_to="feed",
 pigs_longer
 ```
 
+
 ## Make wider two ways 1/2
 
 `pivot_wider` is inverse of `pivot_longer`:

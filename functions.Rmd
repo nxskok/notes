@@ -201,19 +201,19 @@ tidy(my_df.1) %>% pluck("estimate", 2)
 
 ## Making this into a function
 - First step: make sure you have it working without a function (we do)
-- Inputs: one, a data frame, that contains columns called `x` and `y`.
-- Output: just the slope (we throw away intercept). Thus:
+- Inputs: two, an `x` and a `y`.
+- Output: just the slope, a number. Thus:
 
 ```{r}
-slope <- function(d) {
-  y.1 <- lm(y ~ x, data = d)
+slope <- function(xx, yy) {
+  y.1 <- lm(yy ~ xx)
   tidy(y.1) %>% pluck("estimate", 2)
 }
 ```
 
 - Check using our data from before: correct:
 ```{r}
-slope(my_df)
+with(my_df, slope(x, y))
 ```
 
 ## Passing things on
@@ -221,8 +221,8 @@ slope(my_df)
 Instead of intercepting all the possibilities and passing them on, we
 can do this:
 ```{r}
-slope <- function(d, ...) {
-  y.1 <- lm(y ~ x, data = d, ...)
+slope <- function(xx, yy, ...) {
+  y.1 <- lm(yy ~ xx, ...)
   tidy(y.1) %>% pluck("estimate", 2)
 }
 ```
@@ -239,42 +239,13 @@ the list of observations to include in the regression.
 
 ```{r}
 my_df
-slope(my_df, subset = 3:4)
+with(my_df, slope(x, y, subset = 3:4))
 ```
 
 
 - Just uses the last two observations in xx and yy, so the slope should
 be $(14 − 10)/(4 − 3) = 4$ and is.
 
-## What if the columns are not called `x` and `y`?
-
-- Requiring dataframe columns to be called `x` and `y` limiting: they could easily be called something else and then our function would not work.
-- Use device known as "curly-curly":
-
-```{r}
-slope <- function(d, yname, xname, ...) {
-  y.1 <- lm({{yname}} ~ {{xname}}, data = d, ...)
-  tidy(y.1) %>% pluck("estimate", 2)
-}
-```
-
-- Have *names* of columns to play roles of `y` and `x` as *inputs*
-- In code, where we use those columns, wrap them in *two* curly brackets.
-
-## Testing this
-
-Make up another example where columns have different names:
-
-```{r}
-d <- tibble(u = 1:3, v = c(10, 11, 13))
-d.1 <- lm(v ~ u, data = d)
-summary(d.1)
-```
-Right answer is 1.5. Then:
-
-```{r}
-with(d, slope(d, yname = v, xname = u))
-```
 
 
 ## Running a function for each of several inputs
@@ -282,7 +253,7 @@ with(d, slope(d, yname = v, xname = u))
 in regressions, along with the `y` we had before:
 
 ```{r}
-(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), x3 = c(2, 4, 6, 9), y = my_df$y))
+(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), x3 = c(2, 4, 6, 9)))
 ```
 
 - Want to use these as different x’s for a regression with `y` from `my_df` as the
@@ -297,8 +268,8 @@ response, and collect together the three different slopes.
 ```{r}
 slopes <- numeric(3)
 for (i in 1:3) {
-  col_name <- names(d)[i]
-  slopes[i] <- with(d, slope(d, yname = y, xname = col_name))
+  d %>% pull(i) -> xx
+  slopes[i] <- slope(xx, my_df$y)
 }
 slopes
 ```
@@ -312,10 +283,13 @@ it and `yy`), and collect together the answers”.
 function-running function is `map_dbl`:
 
 ```{r}
-map_dbl(d, ~ slope(., yy))
+map_dbl(d, ~slope(., my_df$y))
 ```
 
 - Same as loop, with a lot less coding.
+
+## Square roots
+
 - “Find the square roots of each of the numbers 1 through 10”:
 
 ```{r}
@@ -328,7 +302,7 @@ map_dbl(1:10, ~ sqrt(.))
 
 ```{r}
 map_dbl(d, ~ mean(.))
-d %>% summarize_all(~ mean(.))
+d %>% summarize(across(everything(), ~ mean(.)))
 ```
 
 The mean of each column, with the columns labelled. 
@@ -494,7 +468,7 @@ tibble(start = 1:7) %>%
 ![](Screenshot_2019-05-07_13-45-12.png){height=200px}
 
 
-- Each entry in sequence is itself a vector. sequence is called a
+- Each entry in `sequence` is itself a vector. sequence is called a
 “list-column”.
 
 ## Using the whole sequence to find its length and its max 

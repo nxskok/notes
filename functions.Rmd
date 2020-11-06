@@ -183,37 +183,37 @@ even any functions that you defined before.
 you don’t have to do this from scratch: you can use R’s regression
 calculations, like this:
 
+
 ```{r}
-xx <- 1:4
-yy <- c(10, 11, 10, 14)
-yy.1 <- lm(yy ~ xx)
-coef(yy.1)
+my_df <- tibble(x = 1:4, y = c(10, 11, 10, 14))
+my_df.1 <- lm(y ~ x, data = my_df)
+tidy(my_df.1)
 ```
 
-- These are the intercept and the slope, in that order.
+## Pulling out just the slope
 
-## Is this the right thing?
-Check by looking at the summary output from the regression:
+Use `pluck`:
+
 ```{r}
-tidy(yy.1)
+tidy(my_df.1) %>% pluck("estimate", 2)
 ```
+
 
 ## Making this into a function
-- First step: make sure you have it working without a function.
-- We do: fit an `lm` and take the second thing out of `coef`.
-- Two inputs, the `x` and the `y`, which I take in that order.
+- First step: make sure you have it working without a function (we do)
+- Inputs: one, a data frame, that contains columns called `x` and `y`.
 - Output: just the slope (we throw away intercept). Thus:
+
 ```{r}
-slope <- function(x, y) {
-  y.1 <- lm(y ~ x)
-  ans <- coef(y.1)
-  ans[2]
+slope <- function(d) {
+  y.1 <- lm(y ~ x, data = d)
+  tidy(y.1) %>% pluck("estimate", 2)
 }
 ```
 
 - Check using our data from before: correct:
 ```{r}
-slope(xx, yy)
+slope(my_df)
 ```
 
 ## Passing things on
@@ -221,10 +221,9 @@ slope(xx, yy)
 Instead of intercepting all the possibilities and passing them on, we
 can do this:
 ```{r}
-slope <- function(x, y, ...) {
-  y.1 <- lm(y ~ x, ...)
-  ans <- coef(y.1)
-  ans[2]
+slope <- function(d, ...) {
+  y.1 <- lm(y ~ x, data = d, ...)
+  tidy(y.1) %>% pluck("estimate", 2)
 }
 ```
 
@@ -239,24 +238,54 @@ the list of observations to include in the regression.
 - So we should be able to do this:
 
 ```{r}
-xx
-yy
-slope(xx, yy, subset = 1:2)
+my_df
+slope(my_df, subset = 3:4)
 ```
 
 
-- Just uses the first two observations in xx and yy, so the slope should
-be $(11 − 10)/(2 − 1) = 1$ and is.
+- Just uses the last two observations in xx and yy, so the slope should
+be $(14 − 10)/(4 − 3) = 4$ and is.
+
+## What if the columns are not called `x` and `y`?
+
+- Requiring dataframe columns to be called `x` and `y` limiting: they could easily be called something else and then our function would not work.
+- Use device known as "curly-curly":
+
+```{r}
+slope <- function(d, yname, xname, ...) {
+  y.1 <- lm({{yname}} ~ {{xname}}, data = d, ...)
+  tidy(y.1) %>% pluck("estimate", 2)
+}
+```
+
+- Have *names* of columns to play roles of `y` and `x` as *inputs*
+- In code, where we use those columns, wrap them in *two* curly brackets.
+
+## Testing this
+
+Make up another example where columns have different names:
+
+```{r}
+d <- tibble(u = 1:3, v = c(10, 11, 13))
+d.1 <- lm(v ~ u, data = d)
+summary(d.1)
+```
+Right answer is 1.5. Then:
+
+```{r}
+with(d, slope(d, yname = v, xname = u))
+```
+
 
 ## Running a function for each of several inputs
 - Suppose we have a data frame containing several different `x`’s to use
-in regressions:
+in regressions, along with the `y` we had before:
 
 ```{r}
-(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), x3 = c(2, 4, 6, 9)))
+(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), x3 = c(2, 4, 6, 9), y = my_df$y))
 ```
 
-- Want to use these as different x’s for a regression with our yy as the
+- Want to use these as different x’s for a regression with `y` from `my_df` as the
 response, and collect together the three different slopes.
 - Python-like way: a `for` loop.
 - R-like way: `map_dbl`: less coding, but more thinking.
@@ -268,8 +297,8 @@ response, and collect together the three different slopes.
 ```{r}
 slopes <- numeric(3)
 for (i in 1:3) {
-  xx <- d %>% pull(i)
-  slopes[i] <- slope(xx, yy)
+  col_name <- names(d)[i]
+  slopes[i] <- with(d, slope(d, yname = y, xname = col_name))
 }
 slopes
 ```

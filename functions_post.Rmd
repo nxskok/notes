@@ -253,6 +253,7 @@ with(my_df, slope(x, y, hair="spiky"))
 
 ```{r}
 my_df %>% slice(3:4)
+my_df
 ```
 
 
@@ -306,6 +307,11 @@ map_dbl(d, ~slope(., my_df$y))
 - “Find the square roots of each of the numbers 1 through 10”:
 
 ```{r}
+sqrt(1:10)
+```
+
+
+```{r}
 map_dbl(1:10, ~ sqrt(.))
 ```
 
@@ -314,6 +320,7 @@ map_dbl(1:10, ~ sqrt(.))
 - use my `d` from above: 
 
 ```{r}
+d
 map_dbl(d, ~ mean(.))
 d %>% summarize(across(everything(), ~ mean(.)))
 ```
@@ -416,7 +423,7 @@ hotpo(4.5)
 - Use a data frame of numbers 1 through 10 again:
 
 ```{r}
-tibble(x = 1:10) %>% mutate(y = map_int(x, ~hotpo(.)))
+tibble(x = 1:20) %>% mutate(y = map_int(x, ~hotpo(.)))
 ```
 
 ## Until I get to 1 (if I ever do)
@@ -444,7 +451,7 @@ out of the `while` and return the whole `ans`.
 - Start at 6:
 
 ```{r}
-hotpo_seq(6)
+hotpo_seq(3)
 ```
 
 ## Trying it 2/2 

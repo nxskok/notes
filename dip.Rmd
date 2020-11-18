@@ -47,22 +47,43 @@ stays %>% mutate(stay = as.period(admit %--% discharge)) %>%
   mutate(days_of_stay = day(stay))
 ```
 
-## Completed hours
+## Completed hours 1/2
 
 - Not quite what you think:
+
+\small
 
 ```{r}
 stays %>% mutate(stay = as.period(admit %--% discharge)) %>% 
   mutate(hours_of_stay = hour(stay))
 ```
 
+\normalsize
+
 - These are completed hours *within* days. 
+
+## Completed hours 2/2
+
 - To get total hours, count each day as 24 hours also:
+
+\small
 
 ```{r}
 stays %>% mutate(stay = as.period(admit %--% discharge)) %>% 
   mutate(hours_of_stay = hour(stay) + 24*day(stay))
 ```
+
+\normalsize
+
+## Durations
+
+- What's the difference between `duration` and `period`?
+
+```{r}
+stays %>% mutate(stay = as.duration(admit %--% discharge)) 
+```
+
+- A duration is always a number of *seconds*. 
 
 ## Sometimes it matters
 
@@ -70,28 +91,61 @@ stays %>% mutate(stay = as.period(admit %--% discharge)) %>%
 - Months and years are not always the same length:
   - months have different numbers of days
   - years can be leap years or not
-  - the actual length of 2 months depends which 2 months you are looking at:
+  - the actual length of 2 months depends *which* 2 months:
   
+\small
+
 ```{r}
 tribble(
   ~start, ~end,
   ymd("2020-01-15"), ymd("2020-03-15"),
   ymd("2020-07-15"), ymd("2020-09-15")
-) %>% mutate(per = as.period(start %--% end)) %>% 
-  mutate(secs = (end - start)/ dseconds(1))
+) %>% mutate(period = as.period(start %--% end)) %>% 
+  mutate(duration = as.duration(start %--% end))
 ```
 
-- so dividing by eg `dyears` could be problematic.
+\normalsize
 
 ## Manchester United
 
 Sometime in December 2019 or January 2020, I downloaded some information about the players that were then in the squad of the famous Manchester United Football (soccer) Club. We are going to use the players' ages (as given) to figure out exactly when the download happened.
 
+\small
+
 ```{r}
 my_url <- "http://ritsokiguess.site/STAD29/manu.csv"
-read_csv(my_url) %>% select(name, date_of_birth, age) -> man_united
+read_csv(my_url) %>% 
+  select(name, date_of_birth, age) -> man_united
+```
+
+\normalsize
+
+## The data
+
+```{r}
 man_united
 ```
+
+## Ages
+
+- A player's age is the number of *completed* years since their birth
+- This suggests:
+  - guessing a download date
+  - working out time since birth as *period*
+  - extracting number of years
+  
+- After that, see if our calculations of age match actual ages
+
+
+## Guess download date
+
+Guess January 10, 2020 as download date (just to pick a date):
+
+```{r}
+guess <- ymd("2020-01-10")
+man_united
+```
+
 
 ## Fractional years
 

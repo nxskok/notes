@@ -143,7 +143,11 @@ Guess January 10, 2020 as download date (just to pick a date):
 
 ```{r}
 guess <- ymd("2020-01-10")
-man_united
+man_united %>% 
+  mutate(dob = dmy(date_of_birth)) %>% 
+  mutate(per = as.period(dob %--% guess)) %>% 
+  mutate(calc_age = year(per)) %>% 
+  select(name, age, calc_age)
 ```
 
 

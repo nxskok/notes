@@ -8,11 +8,15 @@ library(lubridate)
 
 We previously got fractional days (of stays in hospital):
 
-```{r}
+\small
+
+```{r, message=FALSE}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/hospital.csv"
 stays <- read_csv(my_url)
 stays %>% mutate(stay_days = (discharge - admit) / ddays(1))
 ```
+
+\normalsize
 
 but what if we wanted days, hours and minutes?
 
@@ -42,10 +46,14 @@ A period is exact as long as it has a start and an end (accounting for daylight 
 
 Take `day` of the periods:
 
+\small
+
 ```{r}
 stays %>% mutate(stay = as.period(admit %--% discharge)) %>% 
   mutate(days_of_stay = day(stay))
 ```
+
+\normalsize
 
 ## Completed hours 1/2
 
@@ -84,6 +92,7 @@ stays %>% mutate(stay = as.duration(admit %--% discharge))
 ```
 
 - A duration is always a number of *seconds*. 
+- Also shown is an approx equivalent on a more human scale (calculated from seconds).
 
 ## Sometimes it matters
 
@@ -106,10 +115,17 @@ tribble(
 
 \normalsize
 
+## Comments
+
+- Both periods are exactly two months
+- but they have a different duration in seconds
+- the first two-month period is shorter because it contains the short month February
+- the second two-month period is longer because both July and August have 31 days.
+
 ## Manchester United
 
 Sometime in December 2019 or January 2020, I downloaded some information about the players that were then in the squad of the famous Manchester United Football (soccer) Club. We are going to use the players' ages (as given) to figure out exactly when the download happened.
-
+  
 \small
 
 ```{r}
@@ -137,7 +153,7 @@ man_united
 - After that, see if our calculations of age match actual ages
 
 
-## Guess download date
+## Guess download date and work out ages
 
 Guess January 10, 2020 as download date (just to pick a date):
 
@@ -145,60 +161,54 @@ Guess January 10, 2020 as download date (just to pick a date):
 guess <- ymd("2020-01-10")
 man_united %>% 
   mutate(dob = dmy(date_of_birth)) %>% 
-  mutate(per = as.period(dob %--% guess)) %>% 
-  mutate(calc_age = year(per)) %>% 
-  select(name, age, calc_age)
+  mutate(age_period = as.period(dob %--% guess)) %>% 
+  mutate(age_years = year(age_period)) -> d
 ```
 
+## Results (just the ages)
 
-## Fractional years
-
-- guess a date for when I downloaded this,
-- turn date of birth into a date, 
-- work out fractional years:
+\scriptsize
 
 ```{r}
-dl_date <- ymd("2020-01-05")
-man_united %>% 
-  mutate(date_of_birth = dmy(date_of_birth)) %>% 
-  mutate(years = (dl_date - date_of_birth) / dyears(1))
+d %>% select(name, age, age_years)
 ```
 
-## See which ages were gotten wrong
+\normalsize
 
-`floor` gets the integer part of a decimal number:
+## Which ones are different?
 
 ```{r}
-man_united %>% 
-  mutate(date_of_birth = dmy(date_of_birth)) %>% 
-  mutate(years = (dl_date - date_of_birth) / dyears(1)) %>% 
-  filter(floor(years) != age)
+d %>% filter(age != age_years) %>% 
+  select(name, date_of_birth, age, age_years)
 ```
 
-- These three players had a birthday between the date I downloaded the data and the date I guessed.
+- these three players were calculated wrong: we got one year too many.
+- Our guessed date, January 10, was too *late*.
+- These three players had a birthday since the actual download date
+- actual download date must have been before Dec 15.
+
+## Try an earlier date
+
+- say Dec 5:
 
 ```{r}
+guess <- ymd("2019-12-05")
 man_united %>% 
-  mutate(date_of_birth = dmy(date_of_birth)) %>% 
-  mutate(calc_age = as.period(date_of_birth %--% dl_date)) %>% 
-  mutate(yrs = year(calc_age)) %>% 
-  filter(age != yrs)
+  mutate(dob = dmy(date_of_birth)) %>% 
+  mutate(age_period = as.period(dob %--% guess)) %>% 
+  mutate(age_years = year(age_period)) %>% 
+  filter(age != age_years) %>% 
+  select(name, date_of_birth, age, age_years) -> d2
 ```
 
-## going back
-
-- what if I go back to December 1?
+## Results
 
 ```{r}
-dl_date <- ymd("2019-12-01")
-man_united %>% 
-  mutate(date_of_birth = dmy(date_of_birth)) %>% 
-  mutate(calc_age = as.period(date_of_birth %--% dl_date)) %>% 
-  mutate(yrs = year(calc_age)) %>% 
-  filter(age != yrs)
+d2
 ```
 
-## notes
+- Dec 5 was too early for the download date
+- must have been later than Dec 8 (to get McTominay's age right)
+- so must have been between Dec 8 and Dec 15 (Lingard's birthday)
+- Actually I downloaded the data on Dec 10.
 
-- fractional years get all the ages right
-- so there is no advantage to using a period

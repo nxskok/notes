@@ -399,9 +399,10 @@ athletes %>% group_by(Sport) %>%
 - Break the data set into groups first:
 
 \small
-```{r, paged.print = TRUE}
+```{r}
 athletes %>% nest_by(Sport)
 ```
+\normalsize
 
 
 ## Comments
@@ -409,4 +410,89 @@ athletes %>% nest_by(Sport)
 - It looks as if all the other variables have disappeared, but they are all hiding in the column `data`.
 - each thing in `data` is a *dataframe* (inside a dataframe!)
 - when a column consists of things that are *not* single numbers, pieces of text, etc., it's called a **list-column** (see `list` in column header).
+- to use this, we work `rowwise` on each sport and the `data` that belongs to that sport.
+
+## The `rowwise` way
+
+\small
+```{r}
+athletes %>% nest_by(Sport) %>% 
+  mutate(correl = with(data, cor(Ht, Wt)))
+```
+\normalsize
+
+## Another use of list-columns
+
+- Let's find the five-number summary of heights for male and female athletes:
+
+\footnotesize
+```{r}
+athletes %>% 
+  group_by(Sex) %>% 
+  summarize(q = quantile(Ht))
+```
+\normalsize
+
+- Shows five-number summary for female athletes, then for male. But not which one is which.
+
+## Better
+
+```{r}
+athletes %>% group_by(Sex) %>% 
+  summarize(q = list(quantile(Ht)))
+```
+
+- each five-number summary is in a list-column, labelled by which `Sex` it belongs to.
+
+## To get this out
+
+- to look at it:
+
+\footnotesize
+```{r}
+athletes %>% group_by(Sex) %>% 
+  summarize(q = list(quantile(Ht))) %>% 
+  unnest(q)
+```
+\normalsize
+
+## Even better
+
+- `quantile` produces a "named vector" with the quantiles labelled:
+
+```{r}
+quantile(athletes$Ht)
+```
+
+- which we turn into dataframe thus:
+
+\small
+```{r}
+enframe(quantile(athletes$Ht))
+```
+\normalsize
+
+
+## for males and female athletes
+
+\footnotesize
+```{r}
+athletes %>% group_by(Sex) %>% 
+  summarize(q = list(enframe(quantile(Ht)))) %>% 
+  unnest(q) 
+```
+\normalsize
+
+## Showing off
+
+- we see `pivot_wider` later:
+
+
+
+```{r}
+athletes %>% group_by(Sex) %>% 
+  summarize(q = list(enframe(quantile(Ht)))) %>% 
+  unnest(q) %>% 
+  pivot_wider(names_from = name, values_from = value)
+```
 

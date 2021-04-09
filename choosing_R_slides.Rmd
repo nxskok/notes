@@ -7,13 +7,13 @@ output:
   beamer_presentation:
     latex_engine: lualatex
     slide_level: 2
-    df_print: kable
+    df_print: tibble
     theme: "AnnArbor"
     colortheme: "dove"
 urlcolor: blue
 ---
 
-
+`df_print` should be set back to kable etc
 
 ```{r child="preliminaries.Rmd", echo=F}
 ```

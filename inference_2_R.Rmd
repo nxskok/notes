@@ -104,9 +104,8 @@ t.test(x, mu = 10)$p.value
   - Generate a bunch of random samples
   - extract the P-value for the t-test from each
 - without a loop!
-- Use `rerun` to generate the random samples
-- Use `map` to run the test on each random sample
-- Use `map_dbl` to pull out the P-value for each test
+- use `rowwise` ideas
+- pull out P-values
 - Count up how many of the P-values are 0.05 or less.
 
 ## In code
@@ -116,12 +115,15 @@ set.seed(457299)
 ```
 
 ```{r}
-rerun(1000, rnorm(15, 8, 4)) %>%
-  map( ~ t.test(., mu = 10)) %>%
-  map_dbl("p.value") %>% 
-  enframe(value="pvals") %>% 
-  count(pvals <= 0.05)
+tibble(sim = 1:1000) %>% 
+  rowwise() %>% 
+  mutate(sample = list(rnorm(15, 8, 4))) %>% 
+  mutate(ttest = list(t.test(sample, mu = 10))) %>% 
+  mutate(pval = ttest$p.value) %>% 
+  count(pval <= 0.05)
 ```
+
+
 
 We correctly rejected 422 times out of 1000, so the estimated power is
 0.422.
@@ -237,7 +239,7 @@ g
 
 ## Another way to do it:
 
-```{r}
+```{r, fig.height=3.5}
 tibble(n=ns) %>% 
   mutate(power_output=map(n, ~power.t.test(n=., delta=10-8, sd=4, type="one.sample"))) %>% 
   mutate(power=map_dbl(power_output, "power")) %>% 
@@ -347,7 +349,7 @@ g
 
 ## Two-sample power
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 my_url <- "http://www.utsc.utoronto.ca/~butler/c32/drp.txt"
 kids <- read_delim(my_url," ")
 ```

@@ -526,4 +526,4 @@ ggplot(d, aes(x = sample_mean)) + geom_histogram(bins = 10)
 
 - sample means are closer to 100 than individual observations are
 - distribution of sample means is also normal
-
+- hello

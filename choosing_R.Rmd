@@ -496,3 +496,34 @@ athletes %>% group_by(Sex) %>%
   pivot_wider(names_from = name, values_from = value)
 ```
 
+## Simulation
+
+- if I take a sample of 16 observations from a normal distribution with mean 100 and SD 15, what will its mean look like?
+- one sample:
+
+```{r}
+rnorm(16, 100, 15)
+```
+
+- do it lots of times (say 1000).
+- set up dataframe with 1000 samples numbered, and do it rowwise.
+
+## The simulation
+
+```{r}
+tibble(sim = 1:1000) %>%
+  rowwise() %>% 
+  mutate(sample = list(rnorm(16, 100, 15))) %>% 
+  mutate(sample_mean = mean(sample)) -> d
+d
+```
+
+## A histogram of the sample means
+
+```{r, fig.height=3.5}
+ggplot(d, aes(x = sample_mean)) + geom_histogram(bins = 10)
+```
+
+- sample means are closer to 100 than individual observations are
+- distribution of sample means is also normal
+

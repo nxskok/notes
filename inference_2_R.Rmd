@@ -241,11 +241,20 @@ g
 
 ```{r, fig.height=3.5}
 tibble(n=ns) %>% 
-  mutate(power_output=map(n, ~power.t.test(n=., delta=10-8, sd=4, type="one.sample"))) %>% 
-  mutate(power=map_dbl(power_output, "power")) %>% 
-  ggplot(aes(x=n, y=power)) + geom_point() + geom_line() +
-    geom_hline(yintercept=1, linetype="dashed")
+  rowwise() %>% 
+  mutate(power_output = 
+           list(power.t.test(n=n, delta=10-8, sd=4,
+                             type="one.sample"))) %>% 
+  mutate(power=power_output$power) -> d
 ```
+
+## and plot
+
+```{r}
+ggplot(d, aes(x=n, y=power)) + geom_point() + geom_line() +
+  geom_hline(yintercept=1, linetype="dashed")
+```
+
 
 ## Power curves for means
 

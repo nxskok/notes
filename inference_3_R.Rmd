@@ -253,20 +253,21 @@ pval_sign(300, irs, Time)
 ## ... and then
 
 “for
-each null median, run the function `pval_sign` for that null median
+each null median, rowwise, run the function `pval_sign` for that null median
 and get the P-value”: 
 
 ```{r}
-d %>% mutate(p_value = map_dbl(null_median, 
-                               ~ pval_sign(., irs, Time)))
+d %>% 
+  rowwise() %>% 
+  mutate(p_value = pval_sign(null_median, irs, Time))
 ```
 
 ## Make it easier for ourselves 
 
 ```{r}
 d %>% 
-  mutate(p_value = map_dbl(null_median, 
-                           ~ pval_sign(., irs, Time))) %>%
+  rowwise() %>% 
+  mutate(p_value = pval_sign(null_median, irs, Time)) %>% 
   mutate(in_out = ifelse(p_value > 0.05, "inside", "outside"))
 ```
 
@@ -364,10 +365,12 @@ set.seed(457299)
 
 
 ```{r}
-rerun(1000, sample(irs$Time, replace = TRUE)) %>% 
-  map_dbl(~mean(.)) %>% 
-  enframe() %>% 
-  ggplot(aes(x=value)) + geom_histogram(bins=10) -> g
+tibble(sim = 1:1000) %>% 
+  rowwise() %>% 
+  mutate(boot_sample = 
+           list(sample(irs$Time, replace = TRUE))) %>% 
+  mutate(mean = mean(boot_sample)) %>% 
+  ggplot(aes(x=mean)) + geom_histogram(bins=10) -> g
 ```
 
 

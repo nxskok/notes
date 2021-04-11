@@ -53,61 +53,35 @@ mean(jays$attendance)
 
 ## Taking lots of bootstrap samples
 
-- `rerun` does something as many times as you say. We just do 2 times to get the idea:
-
-
-```{r, echo=FALSE, message=FALSE}
-set.seed(457299)
-```
-
-```{r}
-rerun(2, sample(jays$attendance, replace = TRUE))
-```
-
-## Mean of each bootstrap sample
-
-- Then take the mean of each of those:
+- This is the same idea as simulating power, using `rowwise`:
+  - set up dataframe with column `sim` to label the simulations
+  - generate a bootstrap sample from the data for each `sim`
+  - work out the mean of each sample
+  - (then) plot them.
 
 ```{r, echo=FALSE, message=FALSE}
 set.seed(457299)
 ```
 
 ```{r}
-rerun(2, sample(jays$attendance, replace = TRUE)) %>% 
-  map_dbl(~mean(.))
+tibble(sim = 1:1000) %>%
+  rowwise() %>% 
+  mutate(boot_sample = 
+           list(sample(jays$attendance, replace = TRUE))) %>% 
+  mutate(mean = mean(boot_sample)) -> boots
 ```
 
-- Last: make these into a dataframe:
-
-```{r, echo=FALSE, message=FALSE}
-set.seed(457299)
-```
+## The results
 
 ```{r}
-rerun(2, sample(jays$attendance, replace = TRUE)) %>% 
-  map_dbl(~mean(.)) %>% 
-  enframe()
+boots
 ```
 
-## Do it many times
-
-- Now that we know it works, replace 2 by 1000 (or larger) and save result:
-
-\footnotesize
-
-```{r}
-rerun(1000, sample(jays$attendance, replace = TRUE)) %>% 
-  map_dbl(~mean(.)) %>% 
-  enframe() -> d
-d
-```
-
-\normalsize
 
 ## Are these normal?
 
 ```{r}
-ggplot(d, aes(x=value)) + geom_histogram(bins=10)
+ggplot(boots, aes(x=mean)) + geom_histogram(bins=10)
 ```
 
 ## Comments
@@ -148,31 +122,34 @@ controls
 ## Bootstrap these
 
 ```{r}
-rerun(1000, sample(controls$score, replace = TRUE)) %>% 
-  map_dbl(~mean(.)) %>% 
-  enframe() -> d
+tibble(sim = 1:1000) %>% 
+  rowwise() %>% 
+  mutate(boot = 
+           list(sample(controls$score, replace = TRUE))) %>% 
+  mutate(mean = mean(boot)) -> boots
 ```
 
 ## Plot
 
 ```{r}
-ggplot(d, aes(x=value)) + geom_histogram(bins=10)
+ggplot(boots, aes(x = mean)) + geom_histogram(bins=10)
 ```
 
 ## ... and the treatment group:
 
 ```{r}
 kids %>% filter(group=="t") -> treats
-rerun(1000, sample(treats$score, replace = TRUE)) %>% 
-  map_dbl(~mean(.)) %>% 
-  enframe() %>% 
-  ggplot(aes(x=value)) + geom_histogram(bins=10) -> g
+tibble(sim = 1:1000) %>% 
+  rowwise() %>% 
+  mutate(boot = 
+           list(sample(treats$score, replace = TRUE))) %>% 
+  mutate(mean = mean(boot)) -> boots
 ```
 
 ## Histogram
 
 ```{r}
-g
+ggplot(boots, aes(x = mean)) + geom_histogram(bins = 10)
 ```
 
 ## Comments

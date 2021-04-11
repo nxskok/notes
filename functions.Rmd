@@ -258,14 +258,17 @@ be $(14 − 10)/(4 − 3) = 4$ and is.
 - Suppose we have a data frame containing several different `x`’s to use
 in regressions, along with the `y` we had before:
 
+\small
 ```{r}
-(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), x3 = c(2, 4, 6, 9)))
+(d <- tibble(x1 = 1:4, x2 = c(8, 7, 6, 5), 
+             x3 = c(2, 4, 6, 9), y = my_df$y))
 ```
+\normalsize
 
 - Want to use these as different x’s for a regression with `y` from `my_df` as the
 response, and collect together the three different slopes.
 - Python-like way: a `for` loop.
-- R-like way: `map_dbl`: less coding, but more thinking.
+- R-like way: pivot-longer and rowwise.
 
 ## The loop way
 - “Pull out” column `i` of data frame `d` as `d %>% pull(i)`.
@@ -282,32 +285,38 @@ slopes
 
 - Check this by doing the three `lm`s, one at a time.
 
-## The `map_dbl` way
-- In words: for each of these (columns of `d`), run function (`slope`) with inputs
-"it" and `y`), and collect together the answers.
-- Since slope returns a decimal number (a `dbl`), appropriate
-function-running function is `map_dbl`:
+## Get all the $x$-variables in one column
 
 ```{r}
-map_dbl(d, ~slope(., my_df$y))
+d %>% pivot_longer(starts_with("x"), 
+                   names_to = "xname", values_to = "x")
 ```
 
-- Same as loop, with a lot less coding.
-
-## Square roots
-
-- “Find the square roots of each of the numbers 1 through 10”:
+## nest 
 
 ```{r}
-map_dbl(1:10, ~ sqrt(.))
+d %>% pivot_longer(starts_with("x"), 
+                   names_to = "xname", values_to = "x") %>% 
+  nest_by(xname) 
 ```
 
-## Summarizing all columns of a data frame, two ways
+## work out the slopes
+
+```{r}
+d %>% pivot_longer(starts_with("x"),
+                   names_to = "xname", values_to = "x") %>%
+  nest_by(xname) %>%
+  rowwise() %>%
+  mutate(this_slope = with(data, slope(data$x, data$y)))
+```
+
+
+
+## Summarizing all columns of a data frame
 
 - use my `d` from above: 
 
 ```{r}
-map_dbl(d, ~ mean(.))
 d %>% summarize(across(everything(), ~ mean(.)))
 ```
 
@@ -322,48 +331,17 @@ quartiles <- function(x) {
 quartiles(1:5)
 ```
 
-- When function returns more than one thing, `map` (or `map_df`) instead
-of `map_dbl`.
-
-## map results
-- Try:
-```{r}
-map(d, ~ quartiles(.))
-```
-
-- A list. 
-
-## Or
-
-- Better: pretend output from quartiles is one-column data
-frame: 
+## Try it and see
 
 ```{r}
-map_df(d, ~ quartiles(.))
+d %>% summarize(across(everything(), ~ quartiles(.)))
 ```
 
-## Or even
-```{r}
-d %>% map_df(~ quartiles(.))
-```
 
-## Comments
 
-- This works because the implicit first thing in map is (the columns of) the
-data frame that came out of the previous step.
-- These are 1st and 3rd quartiles of each column of `d`, according to R’s
-default definition (see help for `quantile`).
+## Write a function first and then do it rowwise
 
-## `Map` in data frames with `mutate`
-- `map` can also be used within data frames to calculate new columns.
-Let’s do the square roots of 1 through 10 again:
-```{r}
-d <- tibble(x = 1:10)
-d %>% mutate(root = map_dbl(x, ~ sqrt(.)))
-```
-
-## Write a function first and then map it
-- If the “for each” part is simple, go ahead and use `map_`-whatever.
+- If the “for each” part is simple, go ahead and use `rowwise`.
 - If not, write a function to do the complicated thing first.
 - Example: “half or triple plus one”: if the input is an even number,
 halve it; if it is an odd number, multiply it by three and add one.
@@ -409,7 +387,9 @@ hotpo(4.5)
 - Use a data frame of numbers 1 through 10 again:
 
 ```{r}
-tibble(x = 1:10) %>% mutate(y = map_int(x, ~hotpo(.)))
+tibble(x = 1:10) %>% 
+  rowwise() %>% 
+  mutate(hotpo_of = hotpo(x))
 ```
 
 ## Until I get to 1 (if I ever do)
@@ -459,50 +439,36 @@ sequence?
 \small
 ```{r}
 tibble(start = 1:100) %>%
-  mutate(seq_length = map_int(start, ~ length(hotpo_seq(.)))) %>%
+  rowwise() %>% 
+  mutate(seq_length = length(hotpo_seq(start))) %>%
   arrange(desc(seq_length)) %>%
   slice(1:5)
 ```
 \normalsize
 ## What happens if we save the entire sequence? 
 
-```{r, results="hide"}
+```{r}
 tibble(start = 1:7) %>%
-  mutate(sequence = map(start, ~ hotpo_seq(.)))
+  rowwise() %>% 
+  mutate(sequence = list(hotpo_seq(start)))
 ```
 
-![](Screenshot_2019-05-07_13-45-12.png){height=200px}
 
 
-- Each entry in `sequence` is itself a vector. sequence is called a
+- Each entry in `sequence` is itself a vector. sequence is a
 “list-column”.
 
 ## Using the whole sequence to find its length and its max 
 
-```{r, results="hide"}
-tibble(start = 1:7) %>%
-  mutate(sequence = map(start, ~ hotpo_seq(.))) %>%
-  mutate(
-    seq_length = map_int(sequence, ~ length(.)),
-    seq_max = map_int(sequence, ~ max(.))
-  )
-```
-
-![](Screenshot_2019-05-07_13-47-08.png)
-
-## Does it work with `rowwise`?
-
-\scriptsize
-
 ```{r}
-tibble(start=1:7) %>% 
+tibble(start = 1:7) %>%
   rowwise() %>% 
   mutate(sequence = list(hotpo_seq(start))) %>% 
   mutate(seq_length = length(sequence)) %>% 
   mutate(seq_max = max(sequence))
 ```
 
-\normalsize
+
 
 ## Yet another way
 
